@@ -1,0 +1,30 @@
+{
+  "id": "925c466c-1729-4de5-a3f9-5ade5f50ba32",
+  "name": "DT SPY Integration",
+  "publisher": "Dynateam A/S",
+  "version": "1.0.44313.3",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "20.0.0.0",
+  "idRanges": [
+    {
+      "from": 73000,
+      "to": 73099
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": false
+  },
+  "features": ["TranslationFile"],
+  "runtime": "9.0"
+}
