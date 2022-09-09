@@ -9,6 +9,7 @@ page 73002 SpyCreateJournalLineAPI
     EntitySetName = 'journalLines';
     PageType = API;
     SourceTable = "Spy Create Journal Line";
+    ODataKeyFields = SystemId;
 
     layout
     {
@@ -52,9 +53,13 @@ page 73002 SpyCreateJournalLineAPI
                 {
                     Caption = 'Document No.';
                 }
-                field(documentType; Rec."Document Type")
+                field(documentType; gDocumentType)
                 {
                     Caption = 'Document Type';
+                    trigger OnValidate()
+                    begin
+                        ValidatePostingType(gDocumentType);
+                    end;
                 }
                 field(dueDate; Rec."Due Date")
                 {
@@ -68,13 +73,22 @@ page 73002 SpyCreateJournalLineAPI
                 {
                     Caption = 'External Document No.';
                 }
-                field(journalBatchName; Rec."Journal Batch Name")
+                field(journalName; gJournalBatchNameCode)
                 {
                     Caption = 'Journal Batch Name';
+                    trigger OnValidate()
+                    begin
+                        ValidateJournalBatchName(gJournalBatchNameCode);
+                    end;
+
                 }
                 field(journalTemplateName; Rec."Journal Template Name")
                 {
                     Caption = 'Journal Template Name';
+                    trigger OnValidate()
+                    begin
+
+                    end;
                 }
                 field(lineNo; Rec."Line No.")
                 {
@@ -88,14 +102,27 @@ page 73002 SpyCreateJournalLineAPI
                 {
                     Caption = 'Pmt. Discount Date';
                 }
-                field(postingDate; Rec."Posting Date")
+                field(postingDate; gPostingDate)
                 {
                     Caption = 'Posting Date';
+                    trigger OnValidate()
+                    var
+                        day: integer;
+                        month: Integer;
+                        year: Integer;
+                    begin
+                        evaluate(day, CopyStr(gpostingDate, 9, 2));
+                        evaluate(month, CopyStr(gpostingDate, 6, 2));
+                        Rec."Posting Date" := DMY2Date(day, month, year);
+                    end;
                 }
-                field(spyDimensions; Rec."SPY Dimensions")
+                part(spyDimensions; SpyJournalDimensionPart)
                 {
-                    Caption = 'SPY Dimensions';
+                    EntityName = 'spyDimension';
+                    EntitySetName = 'spyDimensions';
+                    SubPageLink = SystemId = field(SystemId);
                 }
+
                 field(stateUSTaxAccount; Rec."State US Tax Account")
                 {
                     Caption = 'State US Tax Account';
@@ -123,6 +150,11 @@ page 73002 SpyCreateJournalLineAPI
                 field(taxTitle; Rec."Tax Title")
                 {
                     Caption = 'TaxTitle';
+                    trigger OnValidate()
+                    begin
+                        Rec.ValidateTaxTitle(Rec."Tax Title");
+                    end;
+
                 }
                 field(vatCode; Rec."VAT Code")
                 {
@@ -140,13 +172,29 @@ page 73002 SpyCreateJournalLineAPI
                 {
                     Caption = 'documentTypeAsText';
                 }
-                field(entryType; Rec.entryType)
+                field(entryType; gPostingType)
                 {
                     Caption = 'entryType';
                 }
                 field(postType; Rec.postType)
                 {
                     Caption = 'postType';
+                    trigger OnValidate()
+                    var
+
+                    begin
+                        case Rec.postType of
+                            'tax':
+                                Rec."Account Type" := Rec."Account Type"::"G/L Account";
+                            'ledger':
+                                Rec."Account Type" := Rec."Account Type"::"G/L Account";
+                            'customer':
+                                Rec."Account Type" := Rec."Account Type"::Customer;
+                            'supplier':
+                                Rec."Account Type" := Rec."Account Type"::Vendor;
+                        end;
+                        Rec.Validate("Account No.");
+                    end;
                 }
                 field(taxPercentage; Rec."tax Percentage")
                 {
@@ -159,4 +207,113 @@ page 73002 SpyCreateJournalLineAPI
             }
         }
     }
+    var
+        TempDimensionBuffer: Record "Dimension Buffer" temporary;
+
+        gJournalBatchRec: Record "Gen. Journal Batch";
+
+        gJournalBatchNameCode: code[20];
+
+        gDocumentType: Text;
+        gPostingType: Text;
+        gPostingDate: Text;
+        gJournaltemplate: Text;
+        gStateTax: Text[20];
+
+        gtemplateName: code[20];
+        EntryNo: Integer;
+
+
+
+    procedure ValidateJournalBatchName(pJournalBatchName: Text[20])
+    var
+    begin
+        gJournalBatchNameCode := Rec."Journal Batch Name";
+        if gtemplateName = '' then
+            gtemplateName := 'KASSE';
+        gJournalBatchRec.SetFilter("Journal Template Name", gtemplateName);
+        gJournalBatchRec.SetFilter("Template Type", FORMAT(gJournalBatchRec."Template Type"::General));
+        gJournalBatchRec.SetFilter(Name, Rec."Journal Batch Name");
+        if not gJournalBatchRec.FindSet() then begin
+            gJournalBatchRec.Init();
+            gJournalBatchRec.Description := 'Spy Journal';
+            gJournalBatchRec.Name := Rec."Journal Batch Name";
+            gJournalBatchRec."Template Type" := gJournalBatchRec."Template Type"::General;
+            gJournalBatchRec."Journal Template Name" := CopyStr(gtemplateName, 1, MaxStrLen(gJournalBatchRec."Journal Template Name"));
+            gJournalBatchRec.Insert();
+        end;
+        Rec."Journal Template Name" := CopyStr(gtemplateName, 1, MaxStrLen(Rec."Journal Template Name"));
+    end;
+
+    /// <summary>
+    /// ValidatePostingType.
+    /// </summary>
+    /// <param name="postingType">Text[20].</param>
+    procedure ValidatePostingType(postingType: Text[20])
+    var
+    begin
+        gPostingType := '';
+        case gDocumentType of
+            'Sale':
+                begin
+                    Rec."Document Type" := Rec."Document Type"::Invoice;
+                    gPostingType := 'Sale';
+                end;
+            'SaleCredit':
+                begin
+                    Rec."Document Type" := Rec."Document Type"::"Credit Memo";
+                    gPostingType := 'Sale';
+                end;
+            'Purchase':
+                begin
+                    Rec."Document Type" := Rec."Document Type"::Invoice;
+                    gPostingType := 'Purchase';
+                end;
+            'PurchaseCredit':
+                begin
+                    Rec."Document Type" := Rec."Document Type"::"Credit Memo";
+                    gPostingType := 'Purchase';
+                end;
+        end;
+    end;
+
+    Procedure ValidateTaxTitle(pTaxTitle: Text[20])
+    begin
+        Rec."Tax Title" := DelChr(Rec."Tax Title", '=', '()');
+        if Rec."Tax Title" <> '' then
+            IF ((STRPOS(Rec."Tax Title", 'State Tax') <> 0) OR (STRPOS(Rec."Tax Title", 'County Tax') <> 0) OR (STRPOS(Rec."Tax Title", 'Municipal Tax') <> 0)) THEN
+                if STRPOS(Rec."Tax Title", 'State Tax') <> 0 then begin
+                    TempDimensionBuffer.Init();
+                    TempDimensionBuffer."Table ID" := 81;
+                    TempDimensionBuffer."Entry No." := EntryNo;
+                    EntryNo := EntryNo + 1;
+                    TempDimensionBuffer."Dimension Code" := 'STATETAX';
+                    TempDimensionBuffer."Dimension Value Code" := Rec."Tax Title";
+                    TempDimensionBuffer.Insert();
+                    gStateTax := Rec."Tax Title";
+                    Rec."Account No." := Rec."State US Tax Account";
+                end else begin
+                    if STRPOS(Rec."Tax Title", 'County Tax') <> 0 then
+                        Rec."Tax Title" := DELSTR(Rec."Tax Title", STRPOS(Rec."Tax Title", 'County Tax'));
+                    if STRPOS(Rec."Tax Title", 'Municipal Tax') <> 0 then
+                        Rec."Tax Title" := DelStr(Rec."Tax Title", STRPOS(Rec."Tax Title", ' Tax'));
+                    TempDimensionBuffer.Init();
+                    TempDimensionBuffer."Table ID" := 81;
+                    TempDimensionBuffer."Entry No." := EntryNo;
+                    EntryNo := EntryNo + 1;
+                    TempDimensionBuffer."Dimension Code" := 'STATETAX';
+                    TempDimensionBuffer."Dimension Value Code" := gStateTax;
+                    TempDimensionBuffer.Insert();
+                    TempDimensionBuffer.Init();
+                    TempDimensionBuffer."Table ID" := 81;
+                    TempDimensionBuffer."Entry No." := EntryNo;
+                    EntryNo := EntryNo + 1;
+                    TempDimensionBuffer."Dimension Code" := 'COUNTYTAX';
+                    TempDimensionBuffer."Dimension Value Code" := Rec."Tax Title";
+                    TempDimensionBuffer.Insert();
+                    Rec."Account No." := Rec."County US Tax Account";
+                    gStateTax := '';
+                END;
+        Rec."Tax Title" := '';
+    end;
 }
