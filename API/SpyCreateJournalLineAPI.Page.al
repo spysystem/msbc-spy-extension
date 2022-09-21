@@ -17,6 +17,22 @@ page 73002 SpyCreateJournalLineAPI
         {
             repeater(General)
             {
+
+                field(journalName; gJournalBatchNameCode)
+                {
+                    Caption = 'Journal Batch Name';
+                    trigger OnValidate()
+                    begin
+                    end;
+
+                }
+                field(journalTemplateName; Rec."Journal Template Name")
+                {
+                    Caption = 'Journal Template Name';
+                    trigger OnValidate()
+                    begin
+                    end;
+                }
                 field(accountNo; Rec."Account No.")
                 {
                     Caption = 'Account No.';
@@ -58,7 +74,6 @@ page 73002 SpyCreateJournalLineAPI
                     Caption = 'Document Type';
                     trigger OnValidate()
                     begin
-                        ValidatePostingType(gDocumentType);
                     end;
                 }
                 field(dueDate; Rec."Due Date")
@@ -73,23 +88,7 @@ page 73002 SpyCreateJournalLineAPI
                 {
                     Caption = 'External Document No.';
                 }
-                field(journalName; gJournalBatchNameCode)
-                {
-                    Caption = 'Journal Batch Name';
-                    trigger OnValidate()
-                    begin
-                        ValidateJournalBatchName(gJournalBatchNameCode);
-                    end;
 
-                }
-                field(journalTemplateName; Rec."Journal Template Name")
-                {
-                    Caption = 'Journal Template Name';
-                    trigger OnValidate()
-                    begin
-
-                    end;
-                }
                 field(lineNo; Rec."Line No.")
                 {
                     Caption = 'Line No.';
@@ -152,7 +151,7 @@ page 73002 SpyCreateJournalLineAPI
                     Caption = 'TaxTitle';
                     trigger OnValidate()
                     begin
-                        Rec.ValidateTaxTitle(Rec."Tax Title");
+
                     end;
 
                 }
@@ -219,37 +218,36 @@ page 73002 SpyCreateJournalLineAPI
         gPostingDate: Text;
         gJournaltemplate: Text;
         gStateTax: Text[20];
-
         gtemplateName: code[20];
+        ErrorList: List of [Text];
         EntryNo: Integer;
 
-
-
-    procedure ValidateJournalBatchName(pJournalBatchName: Text[20])
+    procedure ValidteAndPostJournal(): Text
     var
     begin
-        gJournalBatchNameCode := Rec."Journal Batch Name";
-        if gtemplateName = '' then
-            gtemplateName := 'KASSE';
-        gJournalBatchRec.SetFilter("Journal Template Name", gtemplateName);
-        gJournalBatchRec.SetFilter("Template Type", FORMAT(gJournalBatchRec."Template Type"::General));
-        gJournalBatchRec.SetFilter(Name, Rec."Journal Batch Name");
-        if not gJournalBatchRec.FindSet() then begin
-            gJournalBatchRec.Init();
-            gJournalBatchRec.Description := 'Spy Journal';
-            gJournalBatchRec.Name := Rec."Journal Batch Name";
-            gJournalBatchRec."Template Type" := gJournalBatchRec."Template Type"::General;
-            gJournalBatchRec."Journal Template Name" := CopyStr(gtemplateName, 1, MaxStrLen(gJournalBatchRec."Journal Template Name"));
-            gJournalBatchRec.Insert();
-        end;
-        Rec."Journal Template Name" := CopyStr(gtemplateName, 1, MaxStrLen(Rec."Journal Template Name"));
+        IF not Rec.ValidateJournalBatchName() Then
+            exit(Rec.GetErrors(ErrorList)) else
+            if not ValidatePostingType(gPostingType) then
+                exit(GetErrors(ErrorList)) else
+                if not ValidateTaxTitle(Rec."Tax Title") then
+                    exit(GetErrors(ErrorList)) else
+                    if Rec.PostJournal() then
+                        exit('Posted')
+                    else
+                        exit(Rec.GetErrors(ErrorList));
     end;
+
+    /// <summary>
+    /// GetErrors.
+    /// </summary>
+    /// <param name="pErrorList">list of Text[250].</param>
+    /// <returns>Return value of type Text.</returns>
 
     /// <summary>
     /// ValidatePostingType.
     /// </summary>
     /// <param name="postingType">Text[20].</param>
-    procedure ValidatePostingType(postingType: Text[20])
+    procedure ValidatePostingType(postingType: Text[20]): Boolean
     var
     begin
         gPostingType := '';
@@ -276,6 +274,7 @@ page 73002 SpyCreateJournalLineAPI
                 end;
         end;
     end;
+
 
     Procedure ValidateTaxTitle(pTaxTitle: Text[20])
     begin

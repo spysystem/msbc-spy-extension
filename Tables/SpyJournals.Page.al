@@ -12,6 +12,21 @@ page 73004 "Spy Journals"
         {
             repeater(General)
             {
+                field("Journal Batch Name"; Rec."Journal Batch Name")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Journal Batch Name field.';
+                }
+                field("Journal Template Name"; Rec."Journal Template Name")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Journal Template Name field.';
+                }
+                field("Line No."; Rec."Line No.")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Line No. field.';
+                }
                 field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = All;
@@ -77,21 +92,7 @@ page 73004 "Spy Journals"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the External Document No. field.';
                 }
-                field("Journal Batch Name"; Rec."Journal Batch Name")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Journal Batch Name field.';
-                }
-                field("Journal Template Name"; Rec."Journal Template Name")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Journal Template Name field.';
-                }
-                field("Line No."; Rec."Line No.")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Line No. field.';
-                }
+
                 field("Payment Terms Code"; Rec."Payment Terms Code")
                 {
                     ApplicationArea = All;

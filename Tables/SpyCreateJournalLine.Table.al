@@ -42,7 +42,6 @@ table 73090 "Spy Create Journal Line"
             Caption = 'documentTypeAsText';
             DataClassification = CustomerContent;
         }
-
         field(46; "Document Type"; Enum "Gen. Journal Document Type")
         {
             Caption = 'Document Type';
@@ -246,9 +245,6 @@ table 73090 "Spy Create Journal Line"
         SPYSetup.TestField("Gen. Bus. Posting Group");
         SPYSetup.TestField("Gen. Prod. Posting Group");
 
-
-
-
         EntryNo := 1;
         LockTable(true);
 
@@ -430,7 +426,7 @@ table 73090 "Spy Create Journal Line"
     /// ValidateTaxTitle.
     /// </summary>
     /// <param name="pTaxTitle">VAR Text[20].</param>
-    procedure ValidateTaxTitle(var pTaxTitle: Text[20])
+    procedure ValidateTaxTitle(var pTaxTitle: Text[20]): Boolean
     begin
         pTaxTitle := DelChr(pTaxTitle, '=', '()');
         if pTaxTitle <> '' then
@@ -470,7 +466,7 @@ table 73090 "Spy Create Journal Line"
         pTaxTitle := '';
     end;
 
-    local procedure ValidateJournalBatchName()
+    procedure ValidateJournalBatchName(): Boolean
     var
         SPYSetup: Record "Spy Setup";
     begin
@@ -485,9 +481,9 @@ table 73090 "Spy Create Journal Line"
             genJournalBatch.Name := "Journal Batch Name";
             genJournalBatch."Template Type" := SPYSetup."Template Type";
             genJournalBatch."Journal Template Name" := "Journal Template Name";
-            genJournalBatch.Insert();
+            if not genJournalBatch.Insert() then
+                ErrorList.Add('[Journal Batch Name Validation Error]');
         end;
-
     end;
 
     /// <summary>
@@ -521,13 +517,24 @@ table 73090 "Spy Create Journal Line"
     end;
 
 
+    procedure GetErrors(pErrorList: list of [Text]): Text;
+    var
+        ErrorText: Text;
+        ErrorTotal: Text;
+        i: Integer;
+    begin
+        foreach ErrorText in pErrorList do begin
+            i += 1;
+            ErrorTotal += pErrorList.Get(i);
+        end;
+    end;
+
     var
         BankAccount: record "Bank Account";
         GenJournalLine: Record "Gen. Journal Line";
         Customer: record Customer;
         genJournalBatch: Record "Gen. Journal Batch";
         DimensionSetEntry: Record "Dimension Set Entry";
-
         TempDimensionBuffer: Record "Dimension Buffer" temporary;
         TempDimensionBuffer2: Record "Dimension Buffer" temporary;
         TempDimensionBuffer3: Record "Dimension Buffer" temporary;
@@ -535,6 +542,7 @@ table 73090 "Spy Create Journal Line"
         DimensionManagement: Codeunit DimensionManagement;
         RecordRefBank: RecordRef;
         FieldRefBank: FieldRef;
+        ErrorList: List of [Text];
         StateTax: Text[20];
         PostingType: text;
         day: integer;

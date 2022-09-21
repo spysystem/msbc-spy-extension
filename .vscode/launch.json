@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Microsoft cloud sandbox",
+            "name": "Sandbox KS",
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
@@ -14,6 +14,21 @@
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true,
             "tenant": "fc2c4fd0-9650-4502-b64b-6564b0016b60"
+        },
+        {
+            "name": "Sandbox DT",
+            "request": "launch",
+            "type": "al",
+            "environmentType": "Sandbox",
+            "environmentName": "Trustpilot",
+            "startupObjectId": 73082,
+            "startupObjectType": "Page",
+            "breakOnError": true,
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true,
+            "tenant": "8c0f1a73-2264-4322-b9d1-88832927ace5",
+            "schemaUpdateMode": "Synchronize"
         }
     ]
 }
