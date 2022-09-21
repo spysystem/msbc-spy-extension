@@ -184,6 +184,11 @@ page 73002 SpyCreateJournalLineAPI
             }
         }
     }
+    /// <summary>
+    /// postJournalViaApi.
+    /// </summary>
+    /// <returns>Return variable Result of type Text.</returns>
+    [ServiceEnabled]
     procedure postJournalViaApi() Result: Text
     var
     begin
@@ -192,6 +197,16 @@ page 73002 SpyCreateJournalLineAPI
         else begin
             Exit(Rec.GetErrors());
         end;
+    end;
+
+    /// <summary>
+    /// ping. - For testing if service is alive.
+    /// </summary>
+    /// <returns>Return value of type Text.</returns>
+    procedure ping(): Text
+    var
+    begin
+        Exit('Pong');
     end;
 
     var

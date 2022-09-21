@@ -523,15 +523,19 @@ table 73090 "Spy Create Journal Line"
         exit(DMY2Date(day, month, year));
     end;
 
+    /// <summary>
+    /// GetErrors.
+    /// </summary>
+    /// <returns>Return value of type Text.</returns>
     procedure GetErrors(): Text
     var
         Error: Text;
         i: Integer;
     begin
         if ErrorList.Count > 0 Then begin
-
+            ErrorList.Get(i, Error);
         end;
-
+        Error := StrSubstNo('{"code": 400, \n "message": "%1"}', Error);
     end;
 
     var
