@@ -22,7 +22,7 @@ table 73090 "Spy Create Journal Line"
             TableRelation = "Gen. Journal Batch".Name WHERE("Journal Template Name" = FIELD("Journal Template Name"));
             trigger OnValidate()
             begin
-                ValidateJournalBatchName();
+                //ValidateJournalBatchName();
             end;
         }
 
@@ -49,7 +49,7 @@ table 73090 "Spy Create Journal Line"
             DataClassification = CustomerContent;
             trigger OnValidate()
             begin
-                ValidateDocumentType();
+                //ValidateDocumentType();
             end;
         }
 
@@ -96,20 +96,10 @@ table 73090 "Spy Create Journal Line"
             end;
         }
 
-        field(5; "Posting Date"; Date)
+        field(5; "Posting Date"; Text[10])
         {
             Caption = 'Posting Date';
-            ClosingDates = true;
             DataClassification = CustomerContent;
-
-
-            trigger OnValidate()
-            begin
-                evaluate(day, CopyStr(Format(Rec."Posting Date"), 9, 2));
-                evaluate(month, CopyStr(Format(Rec."Posting Date"), 6, 2));
-                evaluate(year, CopyStr(Format(Rec."Posting Date"), 1, 4));
-                "Posting Date" := DMY2Date(day, month, year);
-            end;
         }
 
         field(515; deliveryAccount; Text[20])
@@ -127,17 +117,17 @@ table 73090 "Spy Create Journal Line"
             trigger OnValidate()
             var
             begin
-                case postType of
-                    'tax':
-                        "Account Type" := "Account Type"::"G/L Account";
-                    'ledger':
-                        "Account Type" := "Account Type"::"G/L Account";
-                    'customer':
-                        "Account Type" := "Account Type"::Customer;
-                    'supplier':
-                        "Account Type" := "Account Type"::Vendor;
-                end;
-                Validate("Account No.");
+                // case postType of
+                //     'tax':
+                //         "Account Type" := "Account Type"::"G/L Account";
+                //     'ledger':
+                //         "Account Type" := "Account Type"::"G/L Account";
+                //     'customer':
+                //         "Account Type" := "Account Type"::Customer;
+                //     'supplier':
+                //         "Account Type" := "Account Type"::Vendor;
+                // end;
+                // Validate("Account No.");
             end;
 
         }
@@ -188,7 +178,7 @@ table 73090 "Spy Create Journal Line"
             Caption = 'TaxTitle';
             trigger OnValidate()
             begin
-                ValidateTaxTitle(Rec."Tax Title");
+                //ValidateTaxTitle(Rec."Tax Title");
             END;
         }
         field(888; "tax Percentage"; Decimal)
@@ -245,12 +235,10 @@ table 73090 "Spy Create Journal Line"
         SPYSetup.TestField("VAT Bus. Posting Group");
         SPYSetup.TestField("Gen. Bus. Posting Group");
         SPYSetup.TestField("Gen. Prod. Posting Group");
-
-
-
-
         EntryNo := 1;
         LockTable(true);
+
+        Rec.ValidateJournalBatchName();
 
 
         // Findes der en bankkonto
@@ -470,9 +458,10 @@ table 73090 "Spy Create Journal Line"
         pTaxTitle := '';
     end;
 
-    local procedure ValidateJournalBatchName()
+    procedure ValidateJournalBatchName(): Boolean
     var
         SPYSetup: Record "Spy Setup";
+        BatchNotCreatedLbl: label 'Failed to insert Journal Template Name %1', comment = 'DAN="Kladde blev ikke oprette %1"';
     begin
         if "Journal Template Name" = '' then
             "Journal Template Name" := SPYSetup."Default Journal Temp Name";
@@ -485,7 +474,9 @@ table 73090 "Spy Create Journal Line"
             genJournalBatch.Name := "Journal Batch Name";
             genJournalBatch."Template Type" := SPYSetup."Template Type";
             genJournalBatch."Journal Template Name" := "Journal Template Name";
-            genJournalBatch.Insert();
+            if not genJournalBatch.Insert() then
+                ErrorList.Add(StrSubstNo(BatchNotCreatedLbl, SPYSetup."Template Type".Names.Get(SPYSetup."Template Type".Ordinals.IndexOf(SPYSetup."Template Type".AsInteger())))) else
+                exit(true);
         end;
 
     end;
@@ -493,7 +484,7 @@ table 73090 "Spy Create Journal Line"
     /// <summary>
     /// ValidateDocumentType.
     /// </summary>
-    procedure ValidateDocumentType()
+    procedure ValidateDocumentType(): Boolean
     begin
         PostingType := '';
         case documentTypeAsText of
@@ -520,6 +511,28 @@ table 73090 "Spy Create Journal Line"
         end;
     end;
 
+    /// <summary>
+    /// ValidatePostingDate.
+    /// </summary>
+    procedure ValidatePostingDate(DateAsText: Text[10]): Date
+    var
+    begin
+        evaluate(day, CopyStr(Format(Rec."Posting Date"), 9, 2));
+        evaluate(month, CopyStr(Format(Rec."Posting Date"), 6, 2));
+        evaluate(year, CopyStr(Format(Rec."Posting Date"), 1, 4));
+        exit(DMY2Date(day, month, year));
+    end;
+
+    procedure GetErrors(): Text
+    var
+        Error: Text;
+        i: Integer;
+    begin
+        if ErrorList.Count > 0 Then begin
+
+        end;
+
+    end;
 
     var
         BankAccount: record "Bank Account";
@@ -542,5 +555,6 @@ table 73090 "Spy Create Journal Line"
         year: Integer;
         EntryNo: Integer;
         ExclVAT: Decimal;
+        ErrorList: List of [Text];
 
 }

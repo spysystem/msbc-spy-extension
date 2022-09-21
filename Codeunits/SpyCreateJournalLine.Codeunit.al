@@ -6,21 +6,15 @@ codeunit 73006 SpyCreateJournalLine
 
     end;
 
-    /// <summary>
-    /// CreateJournalLine.
-    /// </summary>
-    /// <param name="VAR journalLineList">XmlPort SpyXmlCreateJournalLine.</param>
-    /// <returns>Return variable Return of type Text[50].</returns>
-#pragma warning disable AA0072
-    procedure CreateJournalLine(VAR journalLineList: XmlPort SpyXmlCreateJournalLine) Return: Text[50]
-#pragma warning restore AA0072
+    procedure CreateJournalLine(VAR JournalLines: Record "Spy Create Journal Line") Return: Text[50]
+
     begin
-        journalLineList.Import();
-        EXIT(CopyStr(Database.CompanyName, 1, 50));
+        if JournalLines.PostJournal() then
+            EXIT(CopyStr(Database.CompanyName, 1, 50)) else begin
+            JournalLines.DeleteAll();
+            Exit('Error, SPY Journal is now blank');
+        end;
     end;
-
-
-
 
     /// <summary>
     /// ExportJournalLine.
