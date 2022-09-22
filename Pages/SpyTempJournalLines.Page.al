@@ -2,7 +2,7 @@ page 73083 SpyTempJournalLines
 {
     PageType = List;
     ApplicationArea = All;
-    UsageCategory = Administration;
+    UsageCategory = Lists;
     SourceTable = "Gen. Journal Line";
     SourceTableTemporary = true;
 
@@ -10,7 +10,7 @@ page 73083 SpyTempJournalLines
     {
         area(Content)
         {
-            group(General)
+            group(Repeater)
             {
                 field("Journal Batch Name"; Rec."Journal Batch Name")
                 {

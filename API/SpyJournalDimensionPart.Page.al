@@ -17,14 +17,15 @@ page 73003 SpyJournalDimensionPart
         {
             repeater(General)
             {
-                field(systemId; Rec.SystemId) { Caption = 'systemId'; }
-                field(dimensionName; Rec."Dimension Name") { Caption = 'dimensionName'; }
+                field(systemId; Rec.SystemId) { Caption = 'systemId'; ToolTip = ' '; }
+                field(dimensionName; Rec."Dimension Name") { Caption = 'dimensionName'; ToolTip = ' '; }
                 field(dimensionValue; Rec."Dimension Value Code")
                 {
                     Caption = 'dimensionValue';
+                    ToolTip = ' ';
                     trigger OnValidate()
                     begin
-                        ValidateDimension(Rec."Dimension Name", Rec."Dimension Value Code");
+                        ValidateDimension(CopyStr(Rec."Dimension Name", 1, 20), Rec."Dimension Value Code");
                     end;
                 }
             }

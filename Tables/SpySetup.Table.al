@@ -3,6 +3,7 @@ table 73001 "Spy Setup"
     Caption = 'SPY Setup';
     DataClassification = ToBeClassified;
 
+
     fields
     {
         field(1; "Entry No."; Integer)
@@ -41,9 +42,10 @@ table 73001 "Spy Setup"
             DataClassification = ToBeClassified;
         }
 
-        field(21; "Template Type"; Enum "Gen. Journal Template Type")
+        field(21; "Default Template Type"; Enum "Gen. Journal Template Type")
         {
-
+            Caption = 'Default Template Type';
+            DataClassification = ToBeClassified;
         }
     }
     keys

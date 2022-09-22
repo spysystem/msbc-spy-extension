@@ -16,7 +16,8 @@ table 73002 "Spy Dimensions"
 
         field(10; "Dimension Value Code"; Code[20])
         {
-            Caption = 'Dimension Code';
+            Caption = 'Dimension Value Code';
+            Description = 'Dimension Value Code';
 
         }
 

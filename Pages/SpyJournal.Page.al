@@ -3,14 +3,15 @@ page 73084 "Spy Journal"
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
-    AdditionalSearchTerms = 'spy';
+    Caption = 'Spy Journal Lines';
+    AdditionalSearchTerms = 'spy,spy journal';
     SourceTable = "Gen. Journal Line";
 
     layout
     {
         area(Content)
         {
-            group(GroupName)
+            Repeater("Spy Journal Lines")
             {
                 field("Posting Date"; Rec."Posting Date")
                 {

@@ -72,7 +72,7 @@ page 73002 SpyCreateJournalLineAPI
                 {
                     Caption = 'External Document No.';
                 }
-                field(journalName; gJournalBatchNameCode)
+                field(journalName; Rec."Journal Batch Name")
                 {
                     Caption = 'Journal Batch Name';
                     trigger OnValidate()
@@ -139,10 +139,6 @@ page 73002 SpyCreateJournalLineAPI
                 field(taxTitle; Rec."Tax Title")
                 {
                     Caption = 'TaxTitle';
-                    trigger OnValidate()
-                    begin
-                        //Rec.ValidateTaxTitle(Rec."Tax Title");
-                    end;
 
                 }
                 field(vatCode; Rec."VAT Code")
@@ -168,10 +164,6 @@ page 73002 SpyCreateJournalLineAPI
                 field(postType; Rec.postType)
                 {
                     Caption = 'postType';
-                    trigger OnValidate()
-                    var
-                    begin
-                    end;
                 }
                 field(taxPercentage; Rec."tax Percentage")
                 {
@@ -185,21 +177,6 @@ page 73002 SpyCreateJournalLineAPI
         }
     }
     /// <summary>
-    /// postJournalViaApi.
-    /// </summary>
-    /// <returns>Return variable Result of type Text.</returns>
-    [ServiceEnabled]
-    procedure postJournalViaApi() Result: Text
-    var
-    begin
-        if Rec.PostJournal() then
-            Exit('200')
-        else begin
-            Exit(Rec.GetErrors());
-        end;
-    end;
-
-    /// <summary>
     /// ping. - For testing if service is alive.
     /// </summary>
     /// <returns>Return value of type Text.</returns>
@@ -210,14 +187,6 @@ page 73002 SpyCreateJournalLineAPI
     end;
 
     var
-        TempDimensionBuffer: Record "Dimension Buffer" temporary;
-        gJournalBatchRec: Record "Gen. Journal Batch";
-        gJournalBatchNameCode: code[20];
         gDocumentType: Text;
-        gPostingType: Text;
-        gPostingDate: Text;
-        gJournaltemplate: Text;
-        gStateTax: Text[20];
-        gtemplateName: code[20];
-        EntryNo: Integer;
+
 }

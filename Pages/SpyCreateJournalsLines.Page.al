@@ -1,7 +1,8 @@
 page 73004 "Spy Journals"
 {
     ApplicationArea = All;
-    Caption = 'Spy Journals';
+    Caption = 'Spy Create Journal Lines';
+    AdditionalSearchTerms = 'spy,Spy Create Journal Lines,spy create';
     PageType = List;
     SourceTable = "Spy Create Journal Line";
     UsageCategory = Lists;
@@ -127,21 +128,7 @@ page 73004 "Spy Journals"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the SystemCreatedBy field.';
                 }
-                field(SystemId; Rec.SystemId)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the SystemId field.';
-                }
-                field(SystemModifiedAt; Rec.SystemModifiedAt)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the SystemModifiedAt field.';
-                }
-                field(SystemModifiedBy; Rec.SystemModifiedBy)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the SystemModifiedBy field.';
-                }
+
                 field("Tax Title"; Rec."Tax Title")
                 {
                     ApplicationArea = All;
@@ -189,6 +176,30 @@ page 73004 "Spy Journals"
                 }
             }
         }
+    }
+    actions
+    {
+        area(Creation)
+        {
+            action(Post)
+            {
+                ApplicationArea = All;
+                Caption = 'Post', comment = 'DAN="Bogfør"';
+                ToolTip = 'Post SPY Lines';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Image = CreateBins;
+
+                trigger OnAction()
+                var
+                    SpyCreateJournalLine: codeunit SpyCreateJournalLine;
+                begin
+                    SpyCreateJournalLine.commitToJournalLine();
+                end;
+            }
+        }
+
     }
 
 

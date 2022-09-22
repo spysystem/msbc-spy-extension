@@ -9,7 +9,7 @@ page 73086 "Spy Vendor Ledger Entry"
     {
         area(Content)
         {
-            group(GroupName)
+            group(Repeater)
             {
                 field("Posting Date"; Rec."Posting Date")
                 {
