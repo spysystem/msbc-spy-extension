@@ -13,7 +13,7 @@ page 73001 "Spy Setup"
         {
             group(General)
             {
-                field("Default Journal Temp Name"; Rec."Default Journal Temp Name")
+                field("Default Journal Temp Name"; Rec."Default Journal Template Name")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Default Journal Temp Name field.';
@@ -24,6 +24,14 @@ page 73001 "Spy Setup"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Default Journal Batch Name.';
                     TableRelation = "Gen. Journal Batch";
+
+                }
+
+                field("Default Jnl Batch Description"; Rec."Default Jnl Batch Description")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Default Jnl Batch Description';
+
 
                 }
                 field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")

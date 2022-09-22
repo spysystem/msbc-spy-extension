@@ -8,7 +8,8 @@ page 73003 SpyJournalDimensionPart
     PageType = ListPart;
     SourceTable = "Spy Dimensions";
     DelayedInsert = true;
-    AutoSplitKey = true;
+    //AutoSplitKey = true;
+    PopulateAllFields = true;
     ODataKeyFields = SystemId;
 
     layout
@@ -17,66 +18,83 @@ page 73003 SpyJournalDimensionPart
         {
             repeater(General)
             {
-                field(systemId; Rec.SystemId) { Caption = 'systemId'; ToolTip = ' '; }
-                field(dimensionName; Rec."Dimension Name") { Caption = 'dimensionName'; ToolTip = ' '; }
+                field(id; Format(Rec.SystemId, 0, 4).ToLower())
+                {
+                    Caption = 'SystemID', Locked = true;
+                    ToolTip = ' ';
+                }
+                field(entryNo; Rec."Entry No.")
+                {
+                    Caption = 'EntryNo';
+                    ToolTip = ' ';
+                }
+                field(spyJournalSystemId; Rec."Spy Journal System Id")
+                {
+                    Caption = 'spyJournalSystemId';
+                    ToolTip = ' ';
+                }
+
+                field(dimensionName; Rec."Dimension Name")
+                {
+                    Caption = 'dimensionName';
+                    ToolTip = ' ';
+                }
                 field(dimensionValue; Rec."Dimension Value Code")
                 {
                     Caption = 'dimensionValue';
                     ToolTip = ' ';
                     trigger OnValidate()
                     begin
-                        ValidateDimension(CopyStr(Rec."Dimension Name", 1, 20), Rec."Dimension Value Code");
+                        //ValidateDimension(CopyStr(Rec."Dimension Name", 1, 20), Rec."Dimension Value Code");
                     end;
                 }
             }
         }
     }
+
     var
-        DimensionSetEntry: Record "Dimension Set Entry";
-        TempDimensionBuffer: Record "Dimension Buffer" temporary;
+        IsDeepInsert: Boolean;
 
-        gDimensionValue: Record "Dimension Value";
-        gDimension: Record Dimension;
-        gCustomer: record Customer;
-        gDefaultDimension: record "Default Dimension";
-        EntryNo: Integer;
-
-
-    procedure ValidateDimension(pDimensionName: Code[20]; pdimensionValueCode: Code[20])
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     var
+    //SpyJournalLine: Record "Spy Create Journal Line";
+    //SpyDimensionLine: Record "Spy Dimensions";
     begin
-        if (pDimensionName <> '') and (pdimensionValueCode <> '') then begin
-            gDimension.SetFilter(Code, pDimensionName);
-            if not gDimension.FindSet() then begin
-                gDimension.Init();
-                gDimension.Code := pDimensionName;
-                gDimension.Name := pDimensionName;
-                gDimension.Insert(true);
-            end;
-            gDimensionValue.SetFilter("Dimension Code", pDimensionName);
-            gDimensionValue.SetFilter(Code, pdimensionValueCode);
-            if not gDimensionValue.FindSet() then begin
-                gDimensionValue.Init();
-                gDimensionValue."Dimension Code" := pDimensionName;
-                gDimensionValue.Code := pdimensionValueCode;
-                gDimensionValue.Insert(true);
-            end;
-            TempDimensionBuffer.Reset();
-            TempDimensionBuffer.SetFilter("Dimension Code", pDimensionName);
-            TempDimensionBuffer.SetFilter("Dimension Value Code", pdimensionValueCode);
-            TempDimensionBuffer.SetFilter("Table ID", '81');
-            if not TempDimensionBuffer.FindSet() then begin
-                TempDimensionBuffer.Reset();
-                TempDimensionBuffer.Init();
-                TempDimensionBuffer."Entry No." := EntryNo;
-                EntryNo := EntryNo + 1;
-                TempDimensionBuffer."Table ID" := 81;
-                TempDimensionBuffer."Dimension Code" := pDimensionName;
-                TempDimensionBuffer."Dimension Value Code" := pdimensionValueCode;
-                TempDimensionBuffer.Insert();
-            end;
-        end;
+        // if IsDeepInsert then begin
+        //     SpyJournalLine.GetBySystemId(Rec."Spy Journal System Id");
+        //     Rec."Spy Journal System Id" := SpyJournalLine.SystemId;
+        //     Rec."Entry No." := SpyJournalLine."Entry No.";
+        //     Rec."Journal Batch Name" := SpyJournalLine."Journal Batch Name";
+        //     Rec."Journal Template Name" := SpyJournalLine."Journal Template Name";
+
+        //     SpyDimensionLine.SetRange("Entry No.", Rec."Entry No.");
+        //     if SpyDimensionLine.FindLast() then
+        //         Rec."Line No." := SpyDimensionLine."Line No." + 1
+        //     else
+        //         Rec."Line No." := 1;
     end;
+
+    trigger OnNewRecord(BelowxRec: Boolean)
+    var
+        SpyCreateJournalLine: Record "Spy Create Journal Line";
+        SpyDimensionsRec: Record "Spy Dimensions";
+    begin
+        SpyCreateJournalLine.SetRange(SystemId, Rec."Spy Journal System Id");
+        if SpyCreateJournalLine.FindFirst() then begin
+            Rec."Entry No." := SpyCreateJournalLine."Entry No.";
+            if SpyDimensionsRec.FindLast() then
+                Rec."Line No." := SpyDimensionsRec."Line No." + 1
+            else
+                Rec."Line No." := 1;
+            Rec."Journal Template Name" := SpyCreateJournalLine."Journal Template Name";
+            Rec."Journal Batch Name" := SpyCreateJournalLine."Journal Batch Name";
+        end;
+        //IsDeepInsert := IsNullGuid(Rec."Spy Journal System Id");
+        //if not IsDeepInsert then begin
+        //   SpyCreateJournalLine.GetBySystemId(Rec."Spy Journal System Id");
+        //  Rec."Entry No." := Rec."Entry No.";
+    end;
+
 
 
 }

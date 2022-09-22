@@ -35,7 +35,7 @@ codeunit 73006 SpyCreateJournalLine
                         PostedCount += 1;
                 end;
 
-                if (CurrentCount <> TotalCount) Then
+                if (CurrentCount = TotalCount) Then
                     if (PostedCount <> TotalCount) then
                         Exit(CleanUp(SpyCreateJournalLine, SpyErrors)); //Delete current Spy Journal Lines and related GenJournalLines
             until SpyCreateJournalLine.Next() = 0;
@@ -58,9 +58,6 @@ codeunit 73006 SpyCreateJournalLine
         EXIT(CopyStr(Database.CompanyName, 1, 50));
     end;
 
-
-
-
     /// <summary>
     /// ping. - For testing if service is alive.
     /// </summary>
@@ -76,10 +73,11 @@ codeunit 73006 SpyCreateJournalLine
     /// </summary>
     /// <param name="SpyCreateJournalLine">VAR Record "Spy Create Journal Line".</param>
     /// <param name="Errors">VAR Text.</param>
-    procedure CleanUp(var SpyCreateJournalLine: Record "Spy Create Journal Line"; SpyError: Record "Spy Errors") Errors: Text
+    procedure CleanUp(var SpyCreateJournalLine: Record "Spy Create Journal Line"; var SpyErrors: Record "Spy Errors") Errors: Text
     var
         GenJournalLine: Record "Gen. Journal Line";
-        ErrorOutStream: OutStream;
+        SpyDim: Record "Spy Dimensions";
+        ErrorInStream: InStream;
     begin
         SpyCreateJournalLine.SetRange("Document No.");
         if SpyCreateJournalLine.FindSet() then
@@ -93,13 +91,24 @@ codeunit 73006 SpyCreateJournalLine
             repeat
                 GenJournalLine.Delete(true);
             until GenJournalLine.Next() = 0;
-        //Return Error Text from Blob    
-        SpyError.CalcFields("Error Description");
-        IF SpyError."Error Description".HasValue() then begin
-            SpyError."Error Description".CreateOutStream(ErrorOutStream);
-            ErrorOutStream.WriteText(Errors);
-            //Delete All Errors Alwyase
-            SpyError.DeleteAll();
+
+        //Delete Spy Dims
+        SpyDim.SetRange("Entry No.");
+        if SpyDim.FindSet() then
+            repeat
+                SpyDim.Delete();
+            until SpyDim.Next() = 0;
+
+        //Return Error Text from Blob  
+        SpyErrors.SetRange("Entry No.", SpyCreateJournalLine."Entry No.");
+        if SpyErrors.FindFirst() then begin
+            SpyErrors.CalcFields("Error Description");
+            IF SpyErrors."Error Description".HasValue() then begin
+                SpyErrors."Error Description".CreateInStream(ErrorInStream);
+                ErrorInStream.ReadText(Errors, SpyErrors."Error Description".Length());
+                //Delete All Errors Alwyase
+                SpyErrors.DeleteAll();
+            end;
         end;
         Exit(Errors);
     end;

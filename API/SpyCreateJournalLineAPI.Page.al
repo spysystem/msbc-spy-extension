@@ -17,6 +17,7 @@ page 73002 SpyCreateJournalLineAPI
         {
             repeater(General)
             {
+                field(id; Rec.SystemId) { Caption = 'Account No.'; }
                 field(accountNo; Rec."Account No.")
                 {
                     Caption = 'Account No.';
@@ -56,9 +57,6 @@ page 73002 SpyCreateJournalLineAPI
                 field(documentType; gDocumentType)
                 {
                     Caption = 'Document Type';
-                    trigger OnValidate()
-                    begin
-                    end;
                 }
                 field(dueDate; Rec."Due Date")
                 {
@@ -88,10 +86,7 @@ page 73002 SpyCreateJournalLineAPI
 
                     end;
                 }
-                field(lineNo; Rec."Line No.")
-                {
-                    Caption = 'Line No.';
-                }
+
                 field(paymentTermsCode; Rec."Payment Terms Code")
                 {
                     Caption = 'Payment Terms Code';
@@ -109,7 +104,7 @@ page 73002 SpyCreateJournalLineAPI
                 {
                     EntityName = 'spyDimension';
                     EntitySetName = 'spyDimensions';
-                    SubPageLink = SystemId = field(SystemId);
+                    SubPageLink = "Spy Journal System Id" = field(SystemId);
                 }
 
                 field(stateUSTaxAccount; Rec."State US Tax Account")

@@ -7,14 +7,35 @@ table 73002 "Spy Dimensions"
         field(1; "Entry No."; Integer)
         {
             Caption = 'Entry No.';
+            TableRelation = "Spy Create Journal Line"."Entry No.";
         }
-        field(5; "Code"; Code[20])
+        field(10; "Journal Template Name"; Code[10])
         {
-            Caption = 'Dimension Code';
-            DataClassification = ToBeClassified;
+            Caption = 'Journal Template Name';
+            ValidateTableRelation = false;
+            TableRelation = "Gen. Journal Template";
+            DataClassification = CustomerContent;
         }
 
-        field(10; "Dimension Value Code"; Code[20])
+        field(2; "Line No."; Integer)
+        {
+            Caption = 'Line No.';
+        }
+
+        field(30; "Journal Batch Name"; Code[10])
+        {
+            Caption = 'Journal Batch Name';
+            DataClassification = CustomerContent;
+            ValidateTableRelation = false;
+            TableRelation = "Gen. Journal Batch".Name WHERE("Journal Template Name" = FIELD("Journal Template Name"));
+        }
+
+        field(12; "Spy Journal System Id"; Guid)
+        {
+            TableRelation = "Spy Create Journal Line".SystemId;
+        }
+
+        field(14; "Dimension Value Code"; Code[20])
         {
             Caption = 'Dimension Value Code';
             Description = 'Dimension Value Code';
@@ -26,10 +47,9 @@ table 73002 "Spy Dimensions"
             Caption = 'Dimension Name';
         }
     }
-
     keys
     {
-        key(Key1; "Entry No.", "Code", "Dimension Value Code", "Dimension Name")
+        key(Key1; "Entry No.", "Line No.")
         {
             Clustered = true;
         }

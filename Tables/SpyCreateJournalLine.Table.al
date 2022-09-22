@@ -9,14 +9,15 @@ table 73090 "Spy Create Journal Line"
             Caption = 'Entry No.';
         }
 
-        field(10; "Journal Template Name"; Code[10])
+        field(2; "Journal Template Name"; Code[10])
         {
             Caption = 'Journal Template Name';
             ValidateTableRelation = false;
             TableRelation = "Gen. Journal Template";
             DataClassification = CustomerContent;
         }
-        field(20; "Journal Batch Name"; Code[10])
+
+        field(4; "Journal Batch Name"; Code[10])
         {
             Caption = 'Journal Batch Name';
             DataClassification = CustomerContent;
@@ -24,10 +25,6 @@ table 73090 "Spy Create Journal Line"
             TableRelation = "Gen. Journal Batch".Name WHERE("Journal Template Name" = FIELD("Journal Template Name"));
         }
 
-        field(30; "Line No."; Integer)
-        {
-            Caption = 'Line No.';
-        }
 
         field(37; "Document No."; Code[20])
         {
@@ -47,16 +44,8 @@ table 73090 "Spy Create Journal Line"
             DataClassification = CustomerContent;
         }
 
-        field(120; "Country/Region Code"; Code[10])
-        {
-            Caption = 'Country/Region Code';
-            TableRelation = "Country/Region";
-            ValidateTableRelation = false;
-            DataClassification = CustomerContent;
 
-
-        }
-        field(4; "Account No."; Code[20])
+        field(44; "Account No."; Code[20])
         {
             Caption = 'Account No.';
             DataClassification = CustomerContent;
@@ -79,22 +68,26 @@ table 73090 "Spy Create Journal Line"
         {
             Caption = 'entryType';
         }
-        field(3; "Account Type"; Enum "Gen. Journal Account Type")
+        field(33; "Account Type"; Enum "Gen. Journal Account Type")
         {
             Caption = 'Account Type';
             DataClassification = CustomerContent;
-
-
-            trigger OnValidate()
-            begin
-
-            end;
         }
 
-        field(5; "Posting Date"; Text[10])
+        field(55; "Posting Date"; Text[10])
         {
             Caption = 'Posting Date';
             DataClassification = CustomerContent;
+        }
+
+        field(120; "Country/Region Code"; Code[10])
+        {
+            Caption = 'Country/Region Code';
+            TableRelation = "Country/Region";
+            ValidateTableRelation = false;
+            DataClassification = CustomerContent;
+
+
         }
 
         field(515; deliveryAccount; Text[20])
@@ -200,6 +193,8 @@ table 73090 "Spy Create Journal Line"
 
     }
 
+
+
     keys
     {
         key(Key1; "Entry No.")
@@ -208,6 +203,15 @@ table 73090 "Spy Create Journal Line"
         }
 
     }
+
+    trigger OnInsert()
+    var
+        SpyCreateJournalLine: Record "Spy Create Journal Line";
+    begin
+        if SpyCreateJournalLine.FindLast() then
+            Rec."Entry No." := SpyCreateJournalLine."Entry No." + 1 else
+            Rec."Entry No." := 1;
+    end;
 
     /// <summary>
     /// PostJournal.
@@ -224,17 +228,15 @@ table 73090 "Spy Create Journal Line"
         // SPYSetup.TestField("VAT Bus. Posting Group");
         // SPYSetup.TestField("Gen. Bus. Posting Group");
         // SPYSetup.TestField("Gen. Prod. Posting Group");
-        SPYSetup.TestField("Default Journal Temp Name");
+        SPYSetup.TestField("Default Journal Template Name");
 
-        EntryNo := 1;
+        gDimEntryNo := 1;
         LockTable(true);
 
         GenJournalLine.Init();
         //GenJournalLine.SetCurrentKey(GenJournalLine."Journal Template Name", GenJournalLine."Journal Batch Name", GenJournalLine."Line No.");
         if Rec.ValidateJournalBatchName() then begin
-            GenJournalLine.Validate("Journal Batch Name", Rec."Journal Batch Name");
-            GenJournalLine.Validate("Journal Template Name", Rec."Journal Template Name");
-            GenJournalLine."Line No." := GenJournalLine.GetNewLineNo("Journal Template Name", Rec."Journal Batch Name");
+            GenJournalLine."Line No." := GenJournalLine.GetNewLineNo("Journal Template Name", Rec."Journal Batch Name"); //Validates Temp and Batch Name
             Rec.ValidateAccountType();
             Rec.ValidatePostingDate(Rec."Posting Date");
             Rec.ValidateDocumentType();
@@ -248,13 +250,13 @@ table 73090 "Spy Create Journal Line"
         end;
 
         if not GenJournalLine.Insert(true) then
-            ErrorList.Add(StrSubstNo('Failed to insert Gen. Journal Line', Rec."Document No." + ' ' + Format(Rec."Line No.")));
+            ErrorList.Add(StrSubstNo('Failed to insert Gen. Journal Line', Rec."Document No." + ' ' + Format(Rec."Entry No.")));
 
 
         //Set dimensionsId
         GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
         TempDimensionBuffer.DeleteAll();
-        EntryNo := 1;
+        gDimEntryNo := 1;
         GenJournalLine.Modify();
         Rec.SetSalesPurchExclVAT();
         Rec.CopyCustomerDimensions();
@@ -278,8 +280,8 @@ table 73090 "Spy Create Journal Line"
             if pTaxTitle.Contains('State Tax') then begin
                 TempDimensionBuffer.Init();
                 TempDimensionBuffer."Table ID" := 81;
-                TempDimensionBuffer."Entry No." := EntryNo;
-                EntryNo := EntryNo + 1;
+                TempDimensionBuffer."Entry No." := gDimEntryNo;
+                gDimEntryNo := gDimEntryNo + 1;
                 TempDimensionBuffer."Dimension Code" := 'STATETAX';
                 TempDimensionBuffer."Dimension Value Code" := pTaxTitle;
                 if not TempDimensionBuffer.Insert() then
@@ -294,8 +296,8 @@ table 73090 "Spy Create Journal Line"
                     pTaxTitle := DelStr(pTaxTitle, STRPOS(pTaxTitle, ' Tax'));
                 TempDimensionBuffer.Init();
                 TempDimensionBuffer."Table ID" := 81;
-                TempDimensionBuffer."Entry No." := EntryNo;
-                EntryNo := EntryNo + 1;
+                TempDimensionBuffer."Entry No." := gDimEntryNo;
+                gDimEntryNo := gDimEntryNo + 1;
                 TempDimensionBuffer."Dimension Code" := 'STATETAX';
                 TempDimensionBuffer."Dimension Value Code" := StateTax;
                 if not TempDimensionBuffer.Insert() then
@@ -303,8 +305,8 @@ table 73090 "Spy Create Journal Line"
 
                 TempDimensionBuffer.Init();
                 TempDimensionBuffer."Table ID" := 81;
-                TempDimensionBuffer."Entry No." := EntryNo;
-                EntryNo := EntryNo + 1;
+                TempDimensionBuffer."Entry No." := gDimEntryNo;
+                gDimEntryNo := gDimEntryNo + 1;
                 TempDimensionBuffer."Dimension Code" := 'COUNTYTAX';
                 TempDimensionBuffer."Dimension Value Code" := pTaxTitle;
                 if not TempDimensionBuffer.Insert() then
@@ -322,33 +324,39 @@ table 73090 "Spy Create Journal Line"
     procedure ValidateJournalBatchName(): Boolean
     var
         GenJournalTemplate: Record "Gen. Journal Template";
-        BatchNotCreatedLbl: label 'Failed to insert Journal Template Name %1', comment = 'DAN="Kladde blev ikke oprette %1"';
+        BatchNotCreatedLbl: label 'Failed to Create Journal Template Name %1', comment = 'DAN="Kladde blev ikke oprette %1"';
     begin
-        SPYSetup.TestField("Default Journal Temp Name");
+        SPYSetup.TestField("Default Journal Template Name");
         SPYSetup.TestField("Default Journal Batch Name");
-        if "Journal Template Name" = '' then
-            "Journal Template Name" := SPYSetup."Default Journal Temp Name";
+        if Rec."Journal Template Name" = '' then
+            Rec."Journal Template Name" := SPYSetup."Default Journal Template Name";
 
+        if Rec."Journal Batch Name" = '' then
+            Rec."Journal Batch Name" := SPYSetup."Default Journal Batch Name";
+        //IF missing, then create GenJnlTemplate
         if not GenJournalTemplate.Get(Rec."Journal Template Name") then begin
             GenJournalTemplate.Init();
             GenJournalTemplate.Name := Rec."Journal Template Name";
             if not GenJournalTemplate.Insert() then
                 ErrorList.Add(StrSubstNo(BatchNotCreatedLbl, Rec."Journal Template Name"));
         end;
-
+        //IF missing, then create GenJnlBatch
         genJournalBatch.SetFilter("Journal Template Name", Rec."Journal Template Name");
         genJournalBatch.SetFilter("Template Type", '%1', SPYSetup."Default Template Type");
-        genJournalBatch.SetFilter(Name, "Journal Batch Name");
+        genJournalBatch.SetFilter(Name, Rec."Journal Batch Name");
         if not genJournalBatch.FindSet() then begin
             genJournalBatch.Init();
             genJournalBatch.Description := SPYSetup."Default Journal Batch Name";
-            genJournalBatch.Name := "Journal Batch Name";
+            genJournalBatch.Name := Rec."Journal Batch Name";
             genJournalBatch."Template Type" := SPYSetup."Default Template Type";
-            genJournalBatch."Journal Template Name" := "Journal Template Name";
+            genJournalBatch."Journal Template Name" := SPYSetup."Default Journal Template Name";
             if not genJournalBatch.Insert() then
                 ErrorList.Add(StrSubstNo(BatchNotCreatedLbl, SPYSetup."Default Template Type")) else
                 exit(true);
         end;
+
+        if ErrorList.Count <= 0 then
+            exit(true);
     end;
 
     /// <summary>
@@ -386,9 +394,9 @@ table 73090 "Spy Create Journal Line"
     /// </summary>
     procedure ValidatePostingDate(DateAsText: Text[10]): Boolean
     var
-        DayConvFailedLbl: Label 'DateConvErr: Day convertion failed: %1', Comment = '%1 = Day sent from SPY';
-        MonthConvFailedLbl: Label 'DateConvErr:Month convertion failed: %1', Comment = '%1 = Month sent from SPY';
-        YearConvFailedLbl: Label 'DateConvErr:Year convertion failed: %1', Comment = '%1 = Year sent from SPY';
+        DayConvFailedLbl: Label '[DateConvErr] Day convertion failed: %1', Comment = '%1 = Day sent from SPY';
+        MonthConvFailedLbl: Label '[DateConvErr] Month convertion failed: %1', Comment = '%1 = Month sent from SPY';
+        YearConvFailedLbl: Label '[DateConvErr] Year convertion failed: %1', Comment = '%1 = Year sent from SPY';
         Error: Text;
 
     begin
@@ -401,7 +409,7 @@ table 73090 "Spy Create Journal Line"
             ErrorList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Posting Date"), 1, 4)));
         gPostingDate := DMY2Date(day, month, year);
         Error := Rec.GetErrorTextList();
-        If Error.Contains('DateConvErr:') then
+        If Error.Contains('[DateConvErr]') then
             exit(false) else
             exit(true);
     end;
@@ -412,16 +420,21 @@ table 73090 "Spy Create Journal Line"
     /// <returns>Return value of type Text.</returns>
     procedure GetErrorTextList(): Text
     var
-        ErrorsLbl: label '{"code": 400, \n "message": "%1"}', Comment = '%1 CollectedErrorMessages';
+        ErrorsLbl: label '{"code": 400, "message": "%2"}', Comment = '%1 = CollectedErrorMessages';
         ErrorText: Text;
         ErrorTotal: Text;
         i: Integer;
+    //NewLine: Text[2];
     begin
+        //NewLine := '';
+        //NewLine[1] := 10;
+        //NewLine[2] := 13;
+
         if ErrorList.Count > 0 Then
             foreach ErrorText in ErrorList do begin
                 i += 1;
-                ErrorTotal += ErrorList.Get(i);
-                ErrorTotal += '\n';
+                ErrorTotal += ErrorList.Get(i) + ' \ ';
+
             end;
         if ErrorTotal <> '' then begin
             ErrorTotal := StrSubstNo(ErrorsLbl, ErrorTotal);
@@ -432,12 +445,13 @@ table 73090 "Spy Create Journal Line"
     /// <summary>
     /// ValidateAccountType.
     /// </summary>
-    procedure ValidateAccountType()
+    procedure ValidateAccountType(): Boolean
     var
         GLAccount: Record "G/L Account";
         Customer: Record Customer;
         Vendor: Record Vendor;
-        AccountNoGetErrorLbl: Label '[Account No Err] does not exist %1', comment = '%1 = Account No';
+        AccountNoGetErrorLbl: Label '[postTypeErr] Account No does not exist %1', comment = '%1 = Account No';
+        InvalidPostTypeLbl: Label '[postTypeErr] %1 is an invalid postyingType', comment = '%1 = postType';
         Error: Text;
     begin
         case postType of
@@ -460,10 +474,15 @@ table 73090 "Spy Create Journal Line"
                         ErrorList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
                 end;
         end;
+        if not (postType in ['tax', 'ledger', 'customer', 'supplier']) then
+            ErrorList.Add(StrSubstNo(InvalidPostTypeLbl, postType));
 
         Error := Rec.GetErrorTextList();
-        if not Error.Contains('[Account No Err]') then
+        if not Error.Contains('[postTypeErr]') then begin
             GenJournalLine.Validate("Account No.");
+            exit(true)
+        end else
+            exit(false);
     end;
 
     /// <summary>
@@ -498,25 +517,36 @@ table 73090 "Spy Create Journal Line"
     procedure SetPostingGroups(var SPYSetup: Record "Spy Setup")
     var
         VATBusinessPostingGroup: Record "VAT Business Posting Group";
+        GENBusinessPostingGroup: Record "Gen. Business Posting Group";
+        InvalidVATCodeLbl: Label '[VATCode Err] %1 does not exist in BC', Comment = '%1 = VAT Code from SPY';
+        VATCodeBlankLbl: Label '[VATCode Err] VAT Code was empty';
     begin
         GenJournalLine."Gen. Bus. Posting Group" := '';
         GenJournalLine."Gen. Prod. Posting Group" := '';
         GenJournalLine."Gen. Posting Type" := GenJournalLine."Gen. Posting Type"::" ";
         GenJournalLine."VAT Prod. Posting Group" := '';
         GenJournalLine."VAT Bus. Posting Group" := '';
-        if "VAT Code" <> '' then begin
-            If not VATBusinessPostingGroup.Get("VAT Code") then
-                ErrorList.Add('Invalid VAT Code') else
+
+        if Rec."VAT Code" <> '' then begin
+            If not VATBusinessPostingGroup.Get(Rec."VAT Code") then
+                ErrorList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
                 GenJournalLine.Validate("VAT Bus. Posting Group", "VAT Code");
+
+            If not GENBusinessPostingGroup.Get(Rec."VAT Code") then
+                ErrorList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
+                GenJournalLine.Validate("Gen. Bus. Posting Group", "VAT Code");
+
             GenJournalLine.Validate("VAT Prod. Posting Group", SPYSetup."VAT Prod. Posting Group");
-            GenJournalLine.Validate("Gen. Bus. Posting Group", "VAT Code");
             GenJournalLine.Validate("Gen. Prod. Posting Group", SPYSetup."Gen. Prod. Posting Group");
 
             if (PostingType = 'Sale') then
                 GenJournalLine.Validate("Gen. Posting Type", GenJournalLine."Gen. Posting Type"::Sale);
             if PostingType = 'Purchase' then
                 GenJournalLine.Validate("Gen. Posting Type", GenJournalLine."Gen. Posting Type"::Purchase);
-        end;
+        end
+        else
+            ErrorList.Add(VATCodeBlankLbl);
+
     end;
 
     /// <summary>
@@ -566,7 +596,7 @@ table 73090 "Spy Create Journal Line"
             end;
             GenJournalLine."Sales/Purch. (LCY)" := ExclVAT;
             if not GenJournalLine.Modify() then
-                ErrorList.Add(StrSubstNo(SetSalesPurchExclVATErr, Rec."Line No."))
+                ErrorList.Add(StrSubstNo(SetSalesPurchExclVATErr, Rec."Entry No."))
         end;
     end;
 
@@ -586,7 +616,7 @@ table 73090 "Spy Create Journal Line"
                 gDefaultDimension.SetFilter("No.", "Account No.");
 
             if gDefaultDimension.FindSet() then begin
-                EntryNo := 1;
+                gDimEntryNo := 1;
                 repeat
                     IF (gDefaultDimension."Dimension Code" <> '') AND (gDefaultDimension."Dimension Value Code" <> '') then begin
                         TempDimensionBuffer3.Reset();
@@ -597,8 +627,8 @@ table 73090 "Spy Create Journal Line"
                             TempDimensionBuffer3.Reset();
                             TempDimensionBuffer3.Init();
                             TempDimensionBuffer3."Table ID" := 81;
-                            TempDimensionBuffer3."Entry No." := EntryNo;
-                            EntryNo := EntryNo + 1;
+                            TempDimensionBuffer3."Entry No." := gDimEntryNo;
+                            gDimEntryNo := gDimEntryNo + 1;
                             TempDimensionBuffer3."Dimension Code" := gDefaultDimension."Dimension Code";
                             TempDimensionBuffer3."Dimension Value Code" := gDefaultDimension."Dimension Value Code";
                             TempDimensionBuffer3.Insert();
@@ -611,7 +641,7 @@ table 73090 "Spy Create Journal Line"
                 GenJournalLine.SETRANGE("Journal Batch Name", "Journal Batch Name");
                 GenJournalLine.SETFILTER("Document No.", "Document No.");
                 if GenJournalLine.FindSet() then begin
-                    EntryNo := 1;
+                    gDimEntryNo := 1;
                     repeat
                         DimensionSetEntry.Reset();
                         DimensionSetEntry.SetFilter("Dimension Set ID", FORMAT(GenJournalLine."Dimension Set ID"));
@@ -619,8 +649,8 @@ table 73090 "Spy Create Journal Line"
                             repeat
                                 TempDimensionBuffer.Reset();
                                 TempDimensionBuffer.Init();
-                                TempDimensionBuffer."Entry No." := EntryNo;
-                                EntryNo := EntryNo + 1;
+                                TempDimensionBuffer."Entry No." := gDimEntryNo;
+                                gDimEntryNo := gDimEntryNo + 1;
                                 TempDimensionBuffer."Table ID" := 81;
                                 TempDimensionBuffer."Dimension Code" := DimensionSetEntry."Dimension Code";
                                 TempDimensionBuffer."Dimension Value Code" := DimensionSetEntry."Dimension Value Code";
@@ -633,8 +663,8 @@ table 73090 "Spy Create Journal Line"
                                 IF not TempDimensionBuffer2.FindSet() then begin
                                     TempDimensionBuffer.Reset();
                                     TempDimensionBuffer.Init();
-                                    TempDimensionBuffer."Entry No." := EntryNo;
-                                    EntryNo := EntryNo + 1;
+                                    TempDimensionBuffer."Entry No." := gDimEntryNo;
+                                    gDimEntryNo := gDimEntryNo + 1;
                                     TempDimensionBuffer."Table ID" := 81;
                                     TempDimensionBuffer."Dimension Code" := TempDimensionBuffer3."Dimension Code";
                                     TempDimensionBuffer."Dimension Value Code" := TempDimensionBuffer3."Dimension Value Code";
@@ -688,7 +718,6 @@ table 73090 "Spy Create Journal Line"
             SpyErrors."Journal Template Name" := Rec."Journal Template Name";
             SpyErrors."Journal Batch Name" := Rec."Journal Batch Name";
             SpyErrors."Document No." := Rec."Document No.";
-            SpyErrors."Line No." := Rec."Line No.";
             SpyErrors."Error Description".CreateOutStream(ErrorOutStream);
             ErrorOutStream.WriteText(Errors);
             SpyErrors.Insert();
@@ -704,11 +733,9 @@ table 73090 "Spy Create Journal Line"
     var
         lSpyErrors: Record "Spy Errors";
     begin
-        lSpyErrors.SetRange("Entry No.", SpyJournalLine."Entry No.");
         lSpyErrors.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
-        lSpyErrors.SetRange("Journal Batch Name", SpyJournalLine."Journal Batch Name");
+        lSpyErrors.SetRange("Entry No.", SpyJournalLine."Entry No.");
         lSpyErrors.SetRange("Document No.", SpyJournalLine."Document No.");
-        lSpyErrors.SetRange("Line No.", SpyJournalLine."Line No.");
         if lSpyErrors.Get() then
             SpyErrors := lSpyErrors;
     end;
@@ -733,7 +760,7 @@ table 73090 "Spy Create Journal Line"
         day: integer;
         month: Integer;
         year: Integer;
-        EntryNo: Integer;
+        gDimEntryNo: Integer;
         ExclVAT: Decimal;
         ErrorList: List of [Text];
         gPostingDate: Date;

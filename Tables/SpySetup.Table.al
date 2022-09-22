@@ -31,7 +31,7 @@ table 73001 "Spy Setup"
             Caption = 'Gen. Prod. Posting Group';
             DataClassification = ToBeClassified;
         }
-        field(10; "Default Journal Temp Name"; Code[10])
+        field(10; "Default Journal Template Name"; Code[10])
         {
             Caption = 'Default Journal Temp Name';
             DataClassification = ToBeClassified;
@@ -40,6 +40,12 @@ table 73001 "Spy Setup"
         {
             Caption = 'Default Journal Temp Name';
             DataClassification = ToBeClassified;
+        }
+        field(20; "Default Jnl Batch Description"; Text[100])
+        {
+            Caption = 'Default Jnl Batch Description';
+            DataClassification = ToBeClassified;
+            InitValue = 'Spy Journal';
         }
 
         field(21; "Default Template Type"; Enum "Gen. Journal Template Type")

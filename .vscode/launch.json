@@ -7,7 +7,7 @@
             "type": "al",
             "environmentType": "Sandbox",
             "environmentName": "TestKongesSloejd",
-            "startupObjectId": 22,
+            "startupObjectId": 73004,
             "startupObjectType": "Page",
             "breakOnError": true,
             "launchBrowser": true,

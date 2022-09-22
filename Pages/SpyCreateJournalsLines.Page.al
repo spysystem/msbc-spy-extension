@@ -88,11 +88,7 @@ page 73004 "Spy Journals"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Journal Template Name field.';
                 }
-                field("Line No."; Rec."Line No.")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Line No. field.';
-                }
+
                 field("Payment Terms Code"; Rec."Payment Terms Code")
                 {
                     ApplicationArea = All;
@@ -196,6 +192,26 @@ page 73004 "Spy Journals"
                     SpyCreateJournalLine: codeunit SpyCreateJournalLine;
                 begin
                     SpyCreateJournalLine.commitToJournalLine();
+                end;
+            }
+
+            action("View Spy Dimensions")
+            {
+                ApplicationArea = All;
+                Caption = 'View Spy Dimensions', comment = 'DAN="Vis Spy-dimensioner"';
+                ToolTip = 'Post SPY Line Dimensions';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Image = CreateBins;
+
+                trigger OnAction()
+                var
+                    SypDimensions: Record "Spy Dimensions";
+                begin
+                    SypDimensions.SetRange("Entry No.", Rec."Entry No.");
+                    if SypDimensions.FindSet() then
+                        Page.RunModal(PAGE::"Spy Dimensions", SypDimensions)
                 end;
             }
         }
