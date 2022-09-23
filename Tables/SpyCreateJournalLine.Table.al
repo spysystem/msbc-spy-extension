@@ -177,6 +177,7 @@ table 73090 "Spy Create Journal Line"
         }
         field(901; custGroup; Text[50])
         {
+            Caption = 'custGroup';
         }
 
         field(1000; "SPY Dimensions"; Integer)
@@ -686,11 +687,14 @@ table 73090 "Spy Create Journal Line"
     /// SetGlobalDimensions.
     /// </summary>
     procedure SetGlobalDimensions()
+    var
+        SpyDimensions: Record "Spy Dimensions";
     begin
         GenJournalLine.Reset();
         GenJournalLine.SETRANGE(GenJournalLine."Journal Template Name", Rec."Journal Template Name");
         GenJournalLine.SETRANGE("Journal Batch Name", Rec."Journal Batch Name");
         GenJournalLine.SETFILTER("Document No.", Rec."Document No.");
+
         if GenJournalLine.FindSet() then
             repeat
                 DimensionManagement.UpdateGlobalDimFromDimSetID(
@@ -702,10 +706,9 @@ table 73090 "Spy Create Journal Line"
     end;
 
     /// <summary>
-    /// SetErrors.
+    /// ErrorExists.
     /// </summary>
-    /// <param name="SpyJournalLine">VAR Record "Spy Create Journal Line".</param>
-    /// <param name="SpyErrors">VAR Record "Spy Errors".</param>
+    /// <returns>Return variable ErrorFound of type Boolean.</returns>
     procedure ErrorExists() ErrorFound: Boolean
     var
         SpyErrors: Record "Spy Errors";
@@ -740,6 +743,8 @@ table 73090 "Spy Create Journal Line"
         if lSpyErrors.Get() then
             SpyErrors := lSpyErrors;
     end;
+
+
 
     var
         BankAccount: record "Bank Account";

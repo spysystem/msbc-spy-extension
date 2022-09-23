@@ -25,11 +25,14 @@ table 73001 "Spy Setup"
         {
             Caption = 'VAT Prod. Posting Group';
             DataClassification = ToBeClassified;
+            InitValue = 'SPY';
         }
         field(5; "Gen. Prod. Posting Group"; Code[20])
         {
             Caption = 'Gen. Prod. Posting Group';
             DataClassification = ToBeClassified;
+            InitValue = 'SPY';
+
         }
         field(10; "Default Journal Template Name"; Code[10])
         {
