@@ -9,8 +9,8 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3121182283 - Method 1142516467 - NamedType 1670204571" size-unit="char" translate="yes" xml:space="preserve">
-          <source>{"code": 400, %1 "message": "%2"}</source>
-          <note from="Developer" annotates="general" priority="2">%1 = NewLine, %2 = CollectedErrorMessages</note>
+          <source>{"code": 400, "message": "%1"}</source>
+          <note from="Developer" annotates="general" priority="2">%1 = CollectedErrorMessages</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method GetErrorTextList - NamedType ErrorsLbl</note>
         </trans-unit>
         <trans-unit id="Table 3121182283 - Method 1153924898 - NamedType 2704139927" size-unit="char" translate="yes" xml:space="preserve">

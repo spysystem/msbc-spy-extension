@@ -250,7 +250,7 @@ table 73090 "Spy Create Journal Line"
         end;
 
         if not GenJournalLine.Insert(true) then
-            ErrorList.Add(StrSubstNo('Failed to insert Gen. Journal Line', Rec."Document No." + ' ' + Format(Rec."Entry No.")));
+            ErrorList.Add(StrSubstNo('[CreationErr] Failed to Insert Gen. Journal Line', Rec."Document No." + ' ' + Format(Rec."Entry No.")));
 
 
         //Set dimensionsId
@@ -420,10 +420,11 @@ table 73090 "Spy Create Journal Line"
     /// <returns>Return value of type Text.</returns>
     procedure GetErrorTextList(): Text
     var
-        ErrorsLbl: label '{"code": 400, "message": "%2"}', Comment = '%1 = CollectedErrorMessages';
+        ErrorsLbl: label '{"code": 400, "message": "%1"}', Comment = '%1 = CollectedErrorMessages';
         ErrorText: Text;
         ErrorTotal: Text;
         i: Integer;
+        JO: JsonObject;
     //NewLine: Text[2];
     begin
         //NewLine := '';
@@ -433,7 +434,7 @@ table 73090 "Spy Create Journal Line"
         if ErrorList.Count > 0 Then
             foreach ErrorText in ErrorList do begin
                 i += 1;
-                ErrorTotal += ErrorList.Get(i) + ' \ ';
+                ErrorTotal += ErrorList.Get(i) + ' ';
 
             end;
         if ErrorTotal <> '' then begin
