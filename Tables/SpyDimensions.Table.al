@@ -1,3 +1,6 @@
+/// <summary>
+/// Table Spy Dimensions (ID 73002).
+/// </summary>
 table 73002 "Spy Dimensions"
 {
     DataClassification = ToBeClassified;
@@ -20,6 +23,12 @@ table 73002 "Spy Dimensions"
         field(2; "Line No."; Integer)
         {
             Caption = 'Line No.';
+        }
+
+        field(37; "External Document No."; Code[20])
+        {
+            Caption = 'Document No.';
+            DataClassification = CustomerContent;
         }
 
         field(30; "Journal Batch Name"; Code[10])
@@ -57,8 +66,14 @@ table 73002 "Spy Dimensions"
     /// <summary>
     /// HandleDimensions.
     /// </summary>
-    procedure HandleDimensions()
+    /// <param name="SpyJournalLine">VAR Record "Spy Create Journal Line".</param>
+    /// <returns>Return variable DimensionsAdded of type Boolean.</returns>
+    procedure HandleDimensions(var SpyJournalLine: Record "Spy Create Journal Line"): Boolean
     var
+        r: Text;
+        SpyDimCreateErr: Label '[SypDimensionCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 = postType';
+        SpyDimValueCreateErr: Label '[SypDimensioValueCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 = postType';
+        SpyDimBufferCreateErr: Label '[SypDimensioBufferCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 = postType';
     begin
         if ("Dimension Name" <> '') and ("Dimension Value Code" <> '') then begin
             DimensionRecord.SetFilter(Code, "Dimension Name");
@@ -66,7 +81,8 @@ table 73002 "Spy Dimensions"
                 DimensionRecord.Init();
                 DimensionRecord.Code := CopyStr(Rec."Dimension Name", 1, MaxStrLen(DimensionRecord.Code));
                 DimensionRecord.Name := Rec."Dimension Name";
-                DimensionRecord.Insert(true);
+                if not DimensionRecord.Insert(true) THEN
+                    ErrorList.Add(StrSubstNo(SpyDimCreateErr, Rec."External Document No." + ' ' + Format(Rec."Dimension Name")));
             end;
 
             DimensionValueRecord.SetFilter("Dimension Code", "Dimension Name");
@@ -75,7 +91,9 @@ table 73002 "Spy Dimensions"
                 DimensionValueRecord.Init();
                 DimensionValueRecord."Dimension Code" := CopyStr("Dimension Name", 1, MaxStrLen(DimensionValueRecord."Dimension Code"));
                 DimensionValueRecord.Code := "Dimension Value Code";
-                DimensionValueRecord.Insert(true);
+                if not DimensionValueRecord.Insert(true) then
+                    ErrorList.Add(StrSubstNo(SpyDimValueCreateErr, Rec."External Document No." + ' ' + Format(Rec."Dimension Name")));
+
             end;
             DimensionBuffer.Reset();
             DimensionBuffer.SetFilter("Dimension Code", "Dimension Name");
@@ -89,16 +107,21 @@ table 73002 "Spy Dimensions"
                 DimensionBuffer."Table ID" := 81;
                 DimensionBuffer."Dimension Code" := CopyStr("Dimension Name", 1, MaxStrLen(DimensionBuffer."Dimension Code"));
                 DimensionBuffer."Dimension Value Code" := "Dimension Value Code";
-                DimensionBuffer.Insert();
+                if not DimensionBuffer.Insert() then
+                    ErrorList.Add(StrSubstNo(SpyDimBufferCreateErr, Rec."External Document No." + ' ' + Format(Rec."Dimension Name")));
+
             end;
         end;
+        if not SpyError.AddError(SpyJournalLine, ErrorList) then
+            Exit(true);
     end;
 
     var
-
         DimensionValueRecord: Record "Dimension Value";
         DimensionRecord: Record Dimension;
         DimensionBuffer: Record "Dimension Buffer";
+        SpyError: Record "Spy Errors";
+        ErrorList: List of [Text];
         EntryNo: Integer;
 
 }

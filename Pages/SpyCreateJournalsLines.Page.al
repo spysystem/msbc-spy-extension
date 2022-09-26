@@ -1,3 +1,6 @@
+/// <summary>
+/// Page Spy Journals (ID 73004).
+/// </summary>
 page 73004 "Spy Journals"
 {
     ApplicationArea = All;
@@ -104,11 +107,11 @@ page 73004 "Spy Journals"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Posting Date field.';
                 }
-                field("SPY Dimensions"; Rec."SPY Dimensions")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the SPY Dimensions field.';
-                }
+                // field("SPY Dimensions"; Rec."SPY Dimensions")
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the SPY Dimensions field.';
+                // }
                 field("State US Tax Account"; Rec."State US Tax Account")
                 {
                     ApplicationArea = All;
@@ -212,6 +215,25 @@ page 73004 "Spy Journals"
                     SypDimensions.SetRange("Entry No.", Rec."Entry No.");
                     if SypDimensions.FindSet() then
                         Page.RunModal(PAGE::"Spy Dimensions", SypDimensions)
+                end;
+            }
+
+            action("Clean Up")
+            {
+                ApplicationArea = All;
+                Caption = 'Clean Up', comment = 'DAN="Clean Up"';
+                ToolTip = 'Clean Up';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Image = CreateBins;
+
+                trigger OnAction()
+                var
+                    spyError: Record "Spy Errors";
+                    spycr: Codeunit SpyCreateJournalLine;
+                begin
+                    spycr.CleanUp(Rec, spyError);
                 end;
             }
         }

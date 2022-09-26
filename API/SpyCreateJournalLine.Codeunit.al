@@ -1,3 +1,6 @@
+/// <summary>
+/// Codeunit SpyCreateJournalLine (ID 73006).
+/// </summary>
 codeunit 73006 SpyCreateJournalLine
 {
 
@@ -7,10 +10,9 @@ codeunit 73006 SpyCreateJournalLine
     end;
 
     /// <summary>
-    /// CommitToJournalLine.
+    /// commitToJournalLine.
     /// </summary>
-    /// <param name="VAR JournalLines">Record "Spy Create Journal Line".</param>
-    /// <returns>Return variable Return of type Text[50].</returns>    
+    /// <returns>Return value of type Text.</returns>
     [ServiceEnabled]
     procedure commitToJournalLine(): Text
     var
@@ -37,9 +39,17 @@ codeunit 73006 SpyCreateJournalLine
 
                 if (CurrentCount = TotalCount) Then
                     if (PostedCount <> TotalCount) then
-                        Exit(CleanUp(SpyCreateJournalLine, SpyErrors)); //Delete current Spy Journal Lines and related GenJournalLines
+                        if not GuiAllowed then
+                            //Delete current Spy Journal Lines and related GenJournalLines
+                            Exit(CleanUp(SpyCreateJournalLine, SpyErrors)) else
+                            IF CONFIRM(StrSubstNo('Erorrs found %1 - continue to delete lines', SpyCreateJournalLine.GetErrorTextList()), false) then
+                                Exit(CleanUp(SpyCreateJournalLine, SpyErrors));
             until SpyCreateJournalLine.Next() = 0;
+            if (PostedCount = TotalCount) THEN
+                deleteAllEntries();
         end;
+        if GuiAllowed then
+            Message('Completed');
     end;
     /// <summary>
     /// ExportJournalLine.
@@ -72,35 +82,36 @@ codeunit 73006 SpyCreateJournalLine
     /// CleanUp.
     /// </summary>
     /// <param name="SpyCreateJournalLine">VAR Record "Spy Create Journal Line".</param>
-    /// <param name="Errors">VAR Text.</param>
+    /// <param name="SpyErrors">VAR Record "Spy Errors".</param>
+    /// <returns>Return variable Errors of type Text.</returns>
     procedure CleanUp(var SpyCreateJournalLine: Record "Spy Create Journal Line"; var SpyErrors: Record "Spy Errors") Errors: Text
     var
         GenJournalLine: Record "Gen. Journal Line";
         SpyDim: Record "Spy Dimensions";
         ErrorInStream: InStream;
     begin
-        SpyCreateJournalLine.SetRange("Document No.");
+        SpyCreateJournalLine.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
         if SpyCreateJournalLine.FindSet() then
             repeat
                 SpyCreateJournalLine.Delete();
             until SpyCreateJournalLine.Next() = 0;
         //Delete if any exists in GenJournalLine
         GenJournalLine.SetRange("Journal Template Name", SpyCreateJournalLine."Journal Template Name");
-        GenJournalLine.SetRange("Document No.", SpyCreateJournalLine."Document No.");
+        GenJournalLine.SetRange("Document No.", SpyCreateJournalLine."External Document No.");
         if GenJournalLine.FindSet() then
             repeat
                 GenJournalLine.Delete(true);
             until GenJournalLine.Next() = 0;
 
         //Delete Spy Dims
-        SpyDim.SetRange("Entry No.");
+        SpyDim.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
         if SpyDim.FindSet() then
             repeat
                 SpyDim.Delete();
             until SpyDim.Next() = 0;
 
         //Return Error Text from Blob  
-        SpyErrors.SetRange("Entry No.", SpyCreateJournalLine."Entry No.");
+        SpyErrors.SetRange("Document No.", SpyCreateJournalLine."External Document No.");
         if SpyErrors.FindFirst() then begin
             SpyErrors.CalcFields("Error Description");
             IF SpyErrors."Error Description".HasValue() then begin
@@ -111,6 +122,19 @@ codeunit 73006 SpyCreateJournalLine
             end;
         end;
         Exit(Errors);
+    end;
+
+    /// <summary>
+    /// deleteAllEntries.
+    /// </summary>
+    /// <returns>Return value of type Text.</returns>
+    [ServiceEnabled]
+    procedure deleteAllEntries(): Text
+    var
+        spyJournalLines: Record "Spy Create Journal Line";
+    begin
+        spyJournalLines.DeleteAll();
+        Exit('Deleted All Entries');
     end;
 
     [IntegrationEvent(false, false)]

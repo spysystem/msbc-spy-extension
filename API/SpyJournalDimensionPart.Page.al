@@ -48,6 +48,11 @@ page 73003 SpyJournalDimensionPart
                         //ValidateDimension(CopyStr(Rec."Dimension Name", 1, 20), Rec."Dimension Value Code");
                     end;
                 }
+                field(SystemId; Rec.SystemId)
+                {
+                    Caption = 'sysid, msformat';
+                    Visible = false;
+                }
             }
         }
     }
@@ -57,26 +62,12 @@ page 73003 SpyJournalDimensionPart
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     var
-    //SpyJournalLine: Record "Spy Create Journal Line";
-    //SpyDimensionLine: Record "Spy Dimensions";
     begin
-        // if IsDeepInsert then begin
-        //     SpyJournalLine.GetBySystemId(Rec."Spy Journal System Id");
-        //     Rec."Spy Journal System Id" := SpyJournalLine.SystemId;
-        //     Rec."Entry No." := SpyJournalLine."Entry No.";
-        //     Rec."Journal Batch Name" := SpyJournalLine."Journal Batch Name";
-        //     Rec."Journal Template Name" := SpyJournalLine."Journal Template Name";
-
-        //     SpyDimensionLine.SetRange("Entry No.", Rec."Entry No.");
-        //     if SpyDimensionLine.FindLast() then
-        //         Rec."Line No." := SpyDimensionLine."Line No." + 1
-        //     else
-        //         Rec."Line No." := 1;
+        Rec.HandleDimensions(SpyCreateJournalLine);
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     var
-        SpyCreateJournalLine: Record "Spy Create Journal Line";
         SpyDimensionsRec: Record "Spy Dimensions";
     begin
         SpyCreateJournalLine.SetRange(SystemId, Rec."Spy Journal System Id");
@@ -88,13 +79,11 @@ page 73003 SpyJournalDimensionPart
                 Rec."Line No." := 1;
             Rec."Journal Template Name" := SpyCreateJournalLine."Journal Template Name";
             Rec."Journal Batch Name" := SpyCreateJournalLine."Journal Batch Name";
+            Rec."External Document No." := SpyCreateJournalLine."External Document No.";
         end;
-        //IsDeepInsert := IsNullGuid(Rec."Spy Journal System Id");
-        //if not IsDeepInsert then begin
-        //   SpyCreateJournalLine.GetBySystemId(Rec."Spy Journal System Id");
-        //  Rec."Entry No." := Rec."Entry No.";
     end;
 
-
+    var
+        SpyCreateJournalLine: Record "Spy Create Journal Line";
 
 }

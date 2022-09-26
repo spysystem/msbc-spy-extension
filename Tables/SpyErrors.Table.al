@@ -47,6 +47,35 @@ table 73000 "Spy Errors"
             Clustered = true;
         }
     }
+
+    /// <summary>
+    /// AddError.
+    /// </summary>
+    /// <param name="SpyJournalLine">Record "Spy Create Journal Line".</param>
+    /// <param name="ErrorList">List of [Text].</param>
+    /// <returns>Return variable ErrorWasAdded of type Boolean.</returns>
+    procedure AddError(SpyJournalLine: Record "Spy Create Journal Line"; ErrorList: List of [Text]) ErrorWasAdded: Boolean
+    var
+        ErrorText: Text;
+        ErrorTotal: Text;
+        ErrorNumber: Integer;
+        BlobOutStream: OutStream;
+    begin
+        if ErrorList.Count > 0 then begin
+            foreach ErrorText in ErrorList do begin
+                ErrorNumber += 1;
+                ErrorTotal += ErrorList.Get(ErrorNumber) + ' ';
+            end;
+            Rec."Journal Template Name" := SpyJournalLine."Journal Template Name";
+            Rec."Entry No." := SpyJournalLine."Entry No.";
+            Rec."Document No." := SpyJournalLine."External Document No.";
+            Rec."Error Description".CreateOutStream(BlobOutStream);
+            BlobOutStream.WriteText(ErrorTotal);
+            if not Rec.Insert() then
+                Rec.Modify();
+        end;
+    end;
+
     var
 
     trigger OnInsert()
