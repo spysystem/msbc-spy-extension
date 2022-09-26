@@ -446,6 +446,7 @@ table 73090 "Spy Create Journal Line"
             until SpyDim.Next() = 0;
         GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
         TempDimensionBuffer.DeleteAll();
+
         gDimEntryNo := 1;
         GenJournalLine.Modify();
         Rec.SetSalesPurchExclVAT();
@@ -515,7 +516,6 @@ table 73090 "Spy Create Journal Line"
         VATBusinessPostingGroup: Record "VAT Business Posting Group";
         GenBusinessPostingGroup: Record "Gen. Business Posting Group";
         InvalidVATCodeLbl: Label '[VATCode Err] %1 does not exist in BC', Comment = '%1 = VAT Code from SPY';
-        VATCodeBlankLbl: Label '[VATCode Err] VAT Code was empty';
     begin
         GenJournalLine."Gen. Bus. Posting Group" := '';
         GenJournalLine."Gen. Prod. Posting Group" := '';
@@ -797,10 +797,10 @@ table 73090 "Spy Create Journal Line"
             exit(true);
     end;
 
-    procedure CleanUpAfterManulPosting(var SpyCreateJournalLine: Record "Spy Create Journal Line")
+    procedure CleanUpAfterManualPosting(var SpyCreateJournalLine: Record "Spy Create Journal Line")
     var
         GenJournalLine: Record "Gen. Journal Line";
-        SpyDim: Record "Spy Dimensions";
+        SpyDimensions: Record "Spy Dimensions";
         SpyErrors: Record "Spy Errors";
         ErrorInStream: InStream;
     begin
@@ -810,11 +810,11 @@ table 73090 "Spy Create Journal Line"
                 SpyCreateJournalLine.Delete();
             until SpyCreateJournalLine.Next() = 0;
         //Delete Spy Dims
-        SpyDim.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
-        if SpyDim.FindSet() then
+        SpyDimensions.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
+        if SpyDimensions.FindSet() then
             repeat
-                SpyDim.Delete();
-            until SpyDim.Next() = 0;
+                SpyDimensions.Delete();
+            until SpyDimensions.Next() = 0;
 
         //Return Error Text from Blob  
         SpyErrors.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
@@ -826,15 +826,9 @@ table 73090 "Spy Create Journal Line"
 
     procedure FillTempDimBuffer(var SpyDim: Record "Spy Dimensions") DimNo: Integer
     var
-        DimArray: Array[8] of code[20];
-        i: Integer;
         EntryNo: Integer;
     begin
         EntryNo := 1;
-        DimensionManagement.GetGLSetup(DimArray);
-        FOR i := 1 to ArrayLen(DimArray) DO
-            if DimArray[i] = SpyDim."Dimension Name" then
-                DimNo := i;
         TempDimensionBuffer.Reset();
         TempDimensionBuffer.SetFilter("Dimension Code", SpyDim."Dimension Name");
         TempDimensionBuffer.SetFilter("Dimension Value Code", SpyDim."Dimension Value Code");
@@ -851,6 +845,16 @@ table 73090 "Spy Create Journal Line"
         end;
     end;
 
+    procedure GetBCDimGLNo(var SpyDim: Record "Spy Dimensions") DimNo: Integer
+    var
+        DimArray: Array[8] of code[20];
+        i: Integer;
+    begin
+        DimensionManagement.GetGLSetup(DimArray);
+        FOR i := 1 to ArrayLen(DimArray) DO
+            if DimArray[i] = SpyDim."Dimension Name" then
+                DimNo := i;
+    end;
 
     var
         BankAccount: record "Bank Account";

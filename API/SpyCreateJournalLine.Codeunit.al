@@ -49,9 +49,10 @@ codeunit 73006 SpyCreateJournalLine
             //IF ALL POSTED
             if (PostedCount = TotalCount) THEN
                 if not GuiAllowed then
-                    SpyCreateJournalLine.CleanUpAfterManulPosting(SpyCreateJournalLine) else
+                    Exit(CleanUp(SpyCreateJournalLine, SpyErrors))
+                else
                     IF CONFIRM('Posting completed. do you want to delete all Spy lines?', false) then
-                        Exit(CleanUp(SpyCreateJournalLine, SpyErrors));
+                        SpyCreateJournalLine.CleanUpAfterManualPosting(SpyCreateJournalLine)
         end;
         if GuiAllowed then
             Message('Completed');
