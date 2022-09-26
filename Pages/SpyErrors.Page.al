@@ -4,7 +4,7 @@ page 73005 "Spy Errors"
     Caption = 'Spy Errors';
     AdditionalSearchTerms = 'spy,error';
     PageType = List;
-    SourceTable = "Spy Errors";
+    SourceTable = "Spy Error";
     UsageCategory = Lists;
 
     layout

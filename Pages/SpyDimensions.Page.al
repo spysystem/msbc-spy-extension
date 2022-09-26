@@ -4,7 +4,7 @@ page 73006 "Spy Dimensions"
     Caption = 'Spy Dimensions';
     AdditionalSearchTerms = 'spy,sypd,spy dim';
     PageType = List;
-    SourceTable = "Spy Dimensions";
+    SourceTable = "Spy Dimension";
     UsageCategory = Lists;
 
     layout

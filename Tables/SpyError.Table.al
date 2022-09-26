@@ -1,7 +1,7 @@
-table 73000 "Spy Errors"
+table 73000 "Spy Error"
 {
     DataClassification = ToBeClassified;
-    Caption = 'Spy Errors';
+    Caption = 'Spy Error', comment = 'DAN="Spy Fejl"';
 
     fields
     {
@@ -54,13 +54,14 @@ table 73000 "Spy Errors"
     /// <param name="SpyJournalLine">Record "Spy Create Journal Line".</param>
     /// <param name="ErrorList">List of [Text].</param>
     /// <returns>Return variable ErrorWasAdded of type Boolean.</returns>
-    procedure AddError(SpyJournalLine: Record "Spy Create Journal Line"; ErrorList: List of [Text]) ErrorWasAdded: Boolean
+    procedure AddError(SpyJournalLine: Record "Spy Journal Line"; ErrorList: List of [Text]) ErrorWasAdded: Boolean
     var
         ErrorText: Text;
         ErrorTotal: Text;
         ErrorNumber: Integer;
         BlobOutStream: OutStream;
     begin
+        //TODO: This may not be good, ErrorList may be > 0 due to ealier errors.
         if ErrorList.Count > 0 then begin
             foreach ErrorText in ErrorList do begin
                 ErrorNumber += 1;

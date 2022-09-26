@@ -8,7 +8,7 @@ page 73002 SpyCreateJournalLineAPI
     EntityName = 'journalLine';
     EntitySetName = 'journalLines';
     PageType = API;
-    SourceTable = "Spy Create Journal Line";
+    SourceTable = "Spy Journal Line";
     ODataKeyFields = SystemId;
 
     layout

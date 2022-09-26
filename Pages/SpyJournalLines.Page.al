@@ -1,13 +1,13 @@
 /// <summary>
 /// Page Spy Journals (ID 73004).
 /// </summary>
-page 73004 "Spy Journals"
+page 73004 "Spy Journal Lines"
 {
     ApplicationArea = All;
     Caption = 'Spy Create Journal Lines';
     AdditionalSearchTerms = 'spy,Spy Create Journal Lines,spy create';
     PageType = List;
-    SourceTable = "Spy Create Journal Line";
+    SourceTable = "Spy Journal Line";
     UsageCategory = Lists;
 
     layout
@@ -210,7 +210,7 @@ page 73004 "Spy Journals"
 
                 trigger OnAction()
                 var
-                    SypDimensions: Record "Spy Dimensions";
+                    SypDimensions: Record "Spy Dimension";
                 begin
                     SypDimensions.SetRange("Entry No.", Rec."Entry No.");
                     if SypDimensions.FindSet() then
@@ -230,7 +230,7 @@ page 73004 "Spy Journals"
 
                 trigger OnAction()
                 var
-                    spyError: Record "Spy Errors";
+                    spyError: Record "Spy Error";
                     spycr: Codeunit SpyCreateJournalLine;
                 begin
                     spycr.CleanUp(Rec, spyError);

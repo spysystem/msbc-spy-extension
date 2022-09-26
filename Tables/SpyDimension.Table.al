@@ -1,8 +1,9 @@
 /// <summary>
 /// Table Spy Dimensions (ID 73002).
 /// </summary>
-table 73002 "Spy Dimensions"
+table 73002 "Spy Dimension"
 {
+    Caption = 'Spy Dimension', comment = 'DAN="Spy Dimension"';
     DataClassification = ToBeClassified;
     fields
     {
@@ -10,7 +11,7 @@ table 73002 "Spy Dimensions"
         field(1; "Entry No."; Integer)
         {
             Caption = 'Entry No.';
-            TableRelation = "Spy Create Journal Line"."Entry No.";
+            TableRelation = "Spy Journal Line"."Entry No.";
         }
         field(10; "Journal Template Name"; Code[10])
         {
@@ -41,7 +42,7 @@ table 73002 "Spy Dimensions"
 
         field(12; "Spy Journal System Id"; Guid)
         {
-            TableRelation = "Spy Create Journal Line".SystemId;
+            TableRelation = "Spy Journal Line".SystemId;
         }
 
         field(14; "Dimension Value Code"; Code[20])
@@ -68,9 +69,8 @@ table 73002 "Spy Dimensions"
     /// </summary>
     /// <param name="SpyJournalLine">VAR Record "Spy Create Journal Line".</param>
     /// <returns>Return variable DimensionsAdded of type Boolean.</returns>
-    procedure HandleDimensions(var SpyJournalLine: Record "Spy Create Journal Line"): Boolean
+    procedure HandleDimensions(var SpyJournalLine: Record "Spy Journal Line"): Boolean
     var
-        r: Text;
         SpyDimCreateErr: Label '[SypDimensionCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 = postType';
         SpyDimValueCreateErr: Label '[SypDimensioValueCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 = postType';
         SpyDimBufferCreateErr: Label '[SypDimensioBufferCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 = postType';
@@ -112,7 +112,10 @@ table 73002 "Spy Dimensions"
 
             end;
         end;
-        if not SpyError.AddError(SpyJournalLine, ErrorList) then
+        if ErrorList.Contains(SpyDimCreateErr) or ErrorList.Contains(SpyDimValueCreateErr) or ErrorList.Contains(SpyDimBufferCreateErr) then begin
+            SpyError.AddError(SpyJournalLine, ErrorList);
+            Exit(false);
+        end else
             Exit(true);
     end;
 
@@ -120,7 +123,7 @@ table 73002 "Spy Dimensions"
         DimensionValueRecord: Record "Dimension Value";
         DimensionRecord: Record Dimension;
         DimensionBuffer: Record "Dimension Buffer";
-        SpyError: Record "Spy Errors";
+        SpyError: Record "Spy Error";
         ErrorList: List of [Text];
         EntryNo: Integer;
 

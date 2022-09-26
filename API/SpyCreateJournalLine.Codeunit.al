@@ -16,8 +16,8 @@ codeunit 73006 SpyCreateJournalLine
     [ServiceEnabled]
     procedure commitToJournalLine(): Text
     var
-        SpyCreateJournalLine: Record "Spy Create Journal Line";
-        SpyErrors: Record "Spy Errors";
+        SpyJournalLine: Record "Spy Journal Line";
+        SpyErrors: Record "Spy Error";
         TotalCount: Integer;
         CurrentCount: Integer;
         Posted: Boolean;
@@ -27,13 +27,13 @@ codeunit 73006 SpyCreateJournalLine
     begin
         Clear(TotalCount);
         Clear(Errors);
-        if SpyCreateJournalLine.FindSet() then begin
-            TotalCount := SpyCreateJournalLine.Count();
+        if SpyJournalLine.FindSet() then begin
+            TotalCount := SpyJournalLine.Count();
             repeat
                 CurrentCount += 1;
-                SpyCreateJournalLine.GetErrorsRec(SpyCreateJournalLine, SpyErrors);
+                SpyJournalLine.GetErrorsRec(SpyJournalLine, SpyErrors);
                 if SpyErrors.IsEmpty then begin
-                    Posted := SpyCreateJournalLine.PostJournal(); //POST
+                    Posted := SpyJournalLine.PostJournal(); //POST
                     if Posted then
                         PostedCount += 1;
                 end;
@@ -42,17 +42,19 @@ codeunit 73006 SpyCreateJournalLine
                     if (PostedCount <> TotalCount) then
                         if not GuiAllowed then
                             //Delete current Spy Journal Lines and related GenJournalLines
-                            Exit(CleanUp(SpyCreateJournalLine, SpyErrors)) else
-                            IF CONFIRM(StrSubstNo(ErrorFoundLbl, SpyCreateJournalLine.GetErrorTextList()), false) then
-                                Exit(CleanUp(SpyCreateJournalLine, SpyErrors));
-            until SpyCreateJournalLine.Next() = 0;
+                            Exit(CleanUp(SpyJournalLine, SpyErrors)) else
+                            IF CONFIRM(StrSubstNo(ErrorFoundLbl, SpyJournalLine.GetErrorTextList()), false) then begin
+                                Message(CleanUp(SpyJournalLine, SpyErrors));
+                                Exit('');
+                            end;
+            until SpyJournalLine.Next() = 0;
             //IF ALL POSTED
             if (PostedCount = TotalCount) THEN
                 if not GuiAllowed then
-                    Exit(CleanUp(SpyCreateJournalLine, SpyErrors))
+                    Exit(CleanUp(SpyJournalLine, SpyErrors))
                 else
                     IF CONFIRM('Posting completed. do you want to delete all Spy lines?', false) then
-                        SpyCreateJournalLine.CleanUpAfterManualPosting(SpyCreateJournalLine)
+                        SpyJournalLine.CleanUpAfterManualPosting(SpyJournalLine)
         end;
         if GuiAllowed then
             Message('Completed');
@@ -87,42 +89,42 @@ codeunit 73006 SpyCreateJournalLine
     /// <summary>
     /// CleanUp.
     /// </summary>
-    /// <param name="SpyCreateJournalLine">VAR Record "Spy Create Journal Line".</param>
+    /// <param name="SpyJournalLine">VAR Record "Spy Create Journal Line".</param>
     /// <param name="SpyErrors">VAR Record "Spy Errors".</param>
     /// <returns>Return variable Errors of type Text.</returns>
-    procedure CleanUp(var SpyCreateJournalLine: Record "Spy Create Journal Line"; var SpyErrors: Record "Spy Errors") Errors: Text
+    procedure CleanUp(var SpyJournalLine: Record "Spy Journal Line"; var SpyErrors: Record "Spy Error") Errors: Text
     var
         GenJournalLine: Record "Gen. Journal Line";
-        SpyDim: Record "Spy Dimensions";
-        ErrorInStream: InStream;
+        SpyDimensions: Record "Spy Dimension";
+        ErrorDescInStream: InStream;
     begin
-        SpyCreateJournalLine.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
-        if SpyCreateJournalLine.FindSet() then
+        SpyJournalLine.SetRange("External Document No.", SpyJournalLine."External Document No.");
+        if SpyJournalLine.FindSet() then
             repeat
-                SpyCreateJournalLine.Delete();
-            until SpyCreateJournalLine.Next() = 0;
+                SpyJournalLine.Delete();
+            until SpyJournalLine.Next() = 0;
         //Delete if any exists in GenJournalLine
-        GenJournalLine.SetRange("Journal Template Name", SpyCreateJournalLine."Journal Template Name");
-        GenJournalLine.SetRange("Document No.", SpyCreateJournalLine."External Document No.");
+        GenJournalLine.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
+        GenJournalLine.SetRange("Document No.", SpyJournalLine."External Document No.");
         if GenJournalLine.FindSet() then
             repeat
                 GenJournalLine.Delete(true);
             until GenJournalLine.Next() = 0;
 
         //Delete Spy Dims
-        SpyDim.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
-        if SpyDim.FindSet() then
+        SpyDimensions.SetRange("External Document No.", SpyJournalLine."External Document No.");
+        if SpyDimensions.FindSet() then
             repeat
-                SpyDim.Delete();
-            until SpyDim.Next() = 0;
+                SpyDimensions.Delete();
+            until SpyDimensions.Next() = 0;
 
         //Return Error Text from Blob  
-        SpyErrors.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
+        SpyErrors.SetRange("External Document No.", SpyJournalLine."External Document No.");
         if SpyErrors.FindFirst() then begin
             SpyErrors.CalcFields("Error Description");
             IF SpyErrors."Error Description".HasValue() then begin
-                SpyErrors."Error Description".CreateInStream(ErrorInStream);
-                ErrorInStream.ReadText(Errors, SpyErrors."Error Description".Length());
+                SpyErrors."Error Description".CreateInStream(ErrorDescInStream);
+                ErrorDescInStream.ReadText(Errors, SpyErrors."Error Description".Length());
                 //Delete All Errors Alwyase
                 SpyErrors.DeleteAll();
             end;
@@ -137,14 +139,28 @@ codeunit 73006 SpyCreateJournalLine
     [ServiceEnabled]
     procedure deleteAllEntries(): Text
     var
-        spyJournalLines: Record "Spy Create Journal Line";
+        SpyJournalLine: Record "Spy Journal Line";
+        LinesDeleted: Text;
+        CountTotal: Integer;
+        CountDel: Integer;
+        DeleteStatusTxt: Label 'Deleted Lines Count: %1 of %2, Document No Deleted: %3', Comment = '%1 = CountTotal, %2 = CountDeleted, %3 = DocumentNos.';
     begin
-        spyJournalLines.DeleteAll();
-        Exit('Deleted All Entries');
+        if SpyJournalLine.FindSet() then
+            repeat
+                if SpyJournalLine.Delete() then begin
+                    LinesDeleted += SpyJournalLine."Document No." + ',';
+                    CountDel += 1;
+                end;
+            until SpyJournalLine.Next() = 0;
+        CountTotal := SpyJournalLine.Count();
+        Exit(StrSubstNo(DeleteStatusTxt, CountTotal, CountDel, LinesDeleted));
     end;
 
+
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeExportJournalLine(var SpyXmlCreateJournalLine: XmlPort SpyXmlCreateJournalLine; var Return: Text[50]; var IsHandled: Boolean)
+    local procedure OnBeforeExportJournalLine(var SpyXmlCreateJournalLine: XmlPort SpyXmlCreateJournalLine; var Return: Text[50];
+    var
+        IsHandled: Boolean)
     begin
     end;
 

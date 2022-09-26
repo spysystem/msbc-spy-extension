@@ -6,7 +6,7 @@ page 73003 SpyJournalDimensionPart
 
     Caption = 'spyDimensions';
     PageType = ListPart;
-    SourceTable = "Spy Dimensions";
+    SourceTable = "Spy Dimension";
     DelayedInsert = true;
     //AutoSplitKey = true;
     PopulateAllFields = true;
@@ -63,27 +63,27 @@ page 73003 SpyJournalDimensionPart
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     var
     begin
-        Rec.HandleDimensions(SpyCreateJournalLine);
+        Rec.HandleDimensions(SpyJournalLine);
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     var
-        SpyDimensionsRec: Record "Spy Dimensions";
+        SpyDimensionsRec: Record "Spy Dimension";
     begin
-        SpyCreateJournalLine.SetRange(SystemId, Rec."Spy Journal System Id");
-        if SpyCreateJournalLine.FindFirst() then begin
-            Rec."Entry No." := SpyCreateJournalLine."Entry No.";
+        SpyJournalLine.SetRange(SystemId, Rec."Spy Journal System Id");
+        if SpyJournalLine.FindFirst() then begin
+            Rec."Entry No." := SpyJournalLine."Entry No.";
             if SpyDimensionsRec.FindLast() then
                 Rec."Line No." := SpyDimensionsRec."Line No." + 1
             else
                 Rec."Line No." := 1;
-            Rec."Journal Template Name" := SpyCreateJournalLine."Journal Template Name";
-            Rec."Journal Batch Name" := SpyCreateJournalLine."Journal Batch Name";
-            Rec."External Document No." := SpyCreateJournalLine."External Document No.";
+            Rec."Journal Template Name" := SpyJournalLine."Journal Template Name";
+            Rec."Journal Batch Name" := SpyJournalLine."Journal Batch Name";
+            Rec."External Document No." := SpyJournalLine."External Document No.";
         end;
     end;
 
     var
-        SpyCreateJournalLine: Record "Spy Create Journal Line";
+        SpyJournalLine: Record "Spy Journal Line";
 
 }
