@@ -23,6 +23,7 @@ codeunit 73006 SpyCreateJournalLine
         Posted: Boolean;
         PostedCount: Integer;
         Errors: Text;
+        ErrorFoundLbl: Label 'Erorrs found %1 - continue to delete lines', comment = '%1 = Errors';
     begin
         Clear(TotalCount);
         Clear(Errors);
@@ -32,21 +33,25 @@ codeunit 73006 SpyCreateJournalLine
                 CurrentCount += 1;
                 SpyCreateJournalLine.GetErrorsRec(SpyCreateJournalLine, SpyErrors);
                 if SpyErrors.IsEmpty then begin
-                    Posted := SpyCreateJournalLine.PostJournal();
+                    Posted := SpyCreateJournalLine.PostJournal(); //POST
                     if Posted then
                         PostedCount += 1;
                 end;
-
+                //IF NOT ALL POSTED
                 if (CurrentCount = TotalCount) Then
                     if (PostedCount <> TotalCount) then
                         if not GuiAllowed then
                             //Delete current Spy Journal Lines and related GenJournalLines
                             Exit(CleanUp(SpyCreateJournalLine, SpyErrors)) else
-                            IF CONFIRM(StrSubstNo('Erorrs found %1 - continue to delete lines', SpyCreateJournalLine.GetErrorTextList()), false) then
+                            IF CONFIRM(StrSubstNo(ErrorFoundLbl, SpyCreateJournalLine.GetErrorTextList()), false) then
                                 Exit(CleanUp(SpyCreateJournalLine, SpyErrors));
             until SpyCreateJournalLine.Next() = 0;
+            //IF ALL POSTED
             if (PostedCount = TotalCount) THEN
-                deleteAllEntries();
+                if not GuiAllowed then
+                    SpyCreateJournalLine.CleanUpAfterManulPosting(SpyCreateJournalLine) else
+                    IF CONFIRM('Posting completed. do you want to delete all Spy lines?', false) then
+                        Exit(CleanUp(SpyCreateJournalLine, SpyErrors));
         end;
         if GuiAllowed then
             Message('Completed');
@@ -111,7 +116,7 @@ codeunit 73006 SpyCreateJournalLine
             until SpyDim.Next() = 0;
 
         //Return Error Text from Blob  
-        SpyErrors.SetRange("Document No.", SpyCreateJournalLine."External Document No.");
+        SpyErrors.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
         if SpyErrors.FindFirst() then begin
             SpyErrors.CalcFields("Error Description");
             IF SpyErrors."Error Description".HasValue() then begin

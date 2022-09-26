@@ -39,6 +39,11 @@ page 73006 "Spy Dimensions"
                     ToolTip = 'Line No.';
 
                 }
+                field("external Document No."; Rec."External Document No.")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'External Document No.';
+                }
 
                 field("Entry No."; Rec."Entry No.")
                 {

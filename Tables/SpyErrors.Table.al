@@ -27,7 +27,7 @@ table 73000 "Spy Errors"
             Caption = 'Line No.';
         }
 
-        field(37; "Document No."; Code[20])
+        field(37; "External Document No."; Code[20])
         {
             Caption = 'Document No.';
             DataClassification = CustomerContent;
@@ -42,7 +42,7 @@ table 73000 "Spy Errors"
 
     keys
     {
-        key(Key1; "Entry No.", "Journal Template Name", "Journal Batch Name", "Document No.", "Line No.")
+        key(Key1; "Entry No.", "Journal Template Name", "Journal Batch Name", "External Document No.", "Line No.")
         {
             Clustered = true;
         }
@@ -68,7 +68,7 @@ table 73000 "Spy Errors"
             end;
             Rec."Journal Template Name" := SpyJournalLine."Journal Template Name";
             Rec."Entry No." := SpyJournalLine."Entry No.";
-            Rec."Document No." := SpyJournalLine."External Document No.";
+            Rec."External Document No." := SpyJournalLine."External Document No.";
             Rec."Error Description".CreateOutStream(BlobOutStream);
             BlobOutStream.WriteText(ErrorTotal);
             if not Rec.Insert() then

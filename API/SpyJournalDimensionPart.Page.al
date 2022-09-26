@@ -51,14 +51,14 @@ page 73003 SpyJournalDimensionPart
                 field(SystemId; Rec.SystemId)
                 {
                     Caption = 'sysid, msformat';
+                    ToolTip = 'SystemID';
                     Visible = false;
                 }
             }
         }
     }
 
-    var
-        IsDeepInsert: Boolean;
+    var //Globals
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     var

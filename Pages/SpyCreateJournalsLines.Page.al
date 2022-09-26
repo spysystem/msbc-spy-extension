@@ -226,7 +226,7 @@ page 73004 "Spy Journals"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                Image = CreateBins;
+                Image = DeleteQtyToHandle;
 
                 trigger OnAction()
                 var

@@ -306,7 +306,7 @@ table 73090 "Spy Create Journal Line"
             SpyErrors."Entry No." := Rec."Entry No.";
             SpyErrors."Journal Template Name" := Rec."Journal Template Name";
             SpyErrors."Journal Batch Name" := Rec."Journal Batch Name";
-            SpyErrors."Document No." := Rec."External Document No.";
+            SpyErrors."External Document No." := Rec."External Document No.";
             SpyErrors."Error Description".CreateOutStream(ErrorOutStream);
             ErrorOutStream.WriteText(Errors);
             SpyErrors.Insert();
@@ -354,7 +354,7 @@ table 73090 "Spy Create Journal Line"
     begin
         lSpyErrors.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
         lSpyErrors.SetRange("Entry No.", SpyJournalLine."Entry No.");
-        lSpyErrors.SetRange("Document No.", SpyJournalLine."Document No.");
+        lSpyErrors.SetRange("External Document No.", SpyJournalLine."Document No.");
         if lSpyErrors.FindSet then
             SpyErrors := lSpyErrors;
     end;
@@ -389,6 +389,8 @@ table 73090 "Spy Create Journal Line"
     procedure PostJournal(): Boolean
     var
         GLSetup: record "General Ledger Setup";
+        SpyDim: Record "Spy Dimensions";
+        InsertGenJnlLineErr: Label '[CreationErr] Failed to Insert Gen. Journal Line %1', comment = '%1 = Ext Doc No.';
     begin
         Clear(ErrorList);
         Clear(BankAccount);
@@ -423,7 +425,6 @@ table 73090 "Spy Create Journal Line"
                 GenJournalLine."Currency Code" := '' else
                 GenJournalLine."Currency Code" := Rec."Currency Code";
 
-
             Rec.ValidateTaxTitle(Rec."Tax Title");
             Rec.SetPostingGroups();
             Rec.GetBankAccount();
@@ -434,9 +435,15 @@ table 73090 "Spy Create Journal Line"
         end;
 
         if not GenJournalLine.Insert(true) then
-            ErrorList.Add(StrSubstNo('[CreationErr] Failed to Insert Gen. Journal Line', Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
+            ErrorList.Add(StrSubstNo(InsertGenJnlLineErr, Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
 
         //Set dimensionsId
+        SpyDim.SetRange("External Document No.", Rec."External Document No.");
+        SpyDim.SetRange("Entry No.", Rec."Entry No.");
+        if SpyDim.FindSet() then
+            repeat
+                FillTempDimBuffer(SpyDim);
+            until SpyDim.Next() = 0;
         GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
         TempDimensionBuffer.DeleteAll();
         gDimEntryNo := 1;
@@ -444,7 +451,7 @@ table 73090 "Spy Create Journal Line"
         Rec.SetSalesPurchExclVAT();
         if (Rec."Account Type" = "Account Type"::Customer) then
             Rec.CopyCustomerDimensions();
-        Rec.UpdateGlobalDimensions();
+        //Rec.UpdateGlobalDimensions();
         if Rec.ErrorExists() then
             exit(false) else
             exit(true);
@@ -482,25 +489,20 @@ table 73090 "Spy Create Journal Line"
     /// <returns>Return value of type Boolean.</returns>
     procedure UpdateGlobalDimensions(): Boolean
     var
-        SpyDimensions: Record "Spy Dimensions";
     begin
         //This i called from SpyDimensions table
         GenJournalLine.Reset();
         GenJournalLine.SETRANGE("Journal Template Name", Rec."Journal Template Name");
         GenJournalLine.SETRANGE("Journal Batch Name", Rec."Journal Batch Name");
         GenJournalLine.SETFILTER("Document No.", Rec."External Document No.");
-
-        SpyDimensions.Setrange("External Document No.", Rec."External Document No.");
-        SpyDimensions.SetRange("Entry No.");
-        if SpyDimensions.Findset() then
+        if GenJournalLine.FindSet() then
             repeat
-                if GenJournalLine.FindSet() then
-                    DimensionManagement.UpdateGlobalDimFromDimSetID(
-                        GenJournalLine."Dimension Set ID",
-                        SpyDimensions."Dimension Value Code",
-                        GenJournalLine."Shortcut Dimension 2 Code");
-                GenJournalLine.Modify();
-            until SpyDimensions.Next() = 0;
+                DimensionManagement.UpdateGlobalDimFromDimSetID(
+                    GenJournalLine."Dimension Set ID",
+                    GenJournalLine."Shortcut Dimension 1 Code",
+                    GenJournalLine."Shortcut Dimension 2 Code");
+            until GenJournalLine.Next() = 0;
+        GenJournalLine.Modify();
     end;
 
     /// <summary>
@@ -587,12 +589,11 @@ table 73090 "Spy Create Journal Line"
         Vendor: Record Vendor;
         AccountNoGetErrorLbl: Label '[postTypeErr] Account No. does not exist %1', comment = '%1 = Account No';
         InvalidPostTypeLbl: Label '[postTypeErr] %1 is an invalid postyingType, posttypes avaible: tax,ledger,customer or supplier', comment = '%1,%2,%3,%5 = postType';
-        Error: Text;
     begin
         if not (postType in ['tax', 'ledger', 'customer', 'supplier']) then begin
             ErrorList.Add(StrSubstNo(InvalidPostTypeLbl, postType));
             SpyError.AddError(Rec, ErrorList);
-        end else begin
+        end else
             case postType of
                 'tax', 'ledger':
                     begin
@@ -613,7 +614,6 @@ table 73090 "Spy Create Journal Line"
                             ErrorList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
                     end;
             end;
-        end;
         if not ErrorList.Contains('[postTypeErr]') then begin
             GenJournalLine.Validate("Account No.", Rec."Account No.");
             exit(true)
@@ -796,6 +796,61 @@ table 73090 "Spy Create Journal Line"
         end else
             exit(true);
     end;
+
+    procedure CleanUpAfterManulPosting(var SpyCreateJournalLine: Record "Spy Create Journal Line")
+    var
+        GenJournalLine: Record "Gen. Journal Line";
+        SpyDim: Record "Spy Dimensions";
+        SpyErrors: Record "Spy Errors";
+        ErrorInStream: InStream;
+    begin
+        SpyCreateJournalLine.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
+        if SpyCreateJournalLine.FindSet() then
+            repeat
+                SpyCreateJournalLine.Delete();
+            until SpyCreateJournalLine.Next() = 0;
+        //Delete Spy Dims
+        SpyDim.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
+        if SpyDim.FindSet() then
+            repeat
+                SpyDim.Delete();
+            until SpyDim.Next() = 0;
+
+        //Return Error Text from Blob  
+        SpyErrors.SetRange("External Document No.", SpyCreateJournalLine."External Document No.");
+        if SpyErrors.FindFirst() then
+            repeat
+                SpyErrors.Delete();
+            until SpyErrors.Next() = 0;
+    end;
+
+    procedure FillTempDimBuffer(var SpyDim: Record "Spy Dimensions") DimNo: Integer
+    var
+        DimArray: Array[8] of code[20];
+        i: Integer;
+        EntryNo: Integer;
+    begin
+        EntryNo := 1;
+        DimensionManagement.GetGLSetup(DimArray);
+        FOR i := 1 to ArrayLen(DimArray) DO
+            if DimArray[i] = SpyDim."Dimension Name" then
+                DimNo := i;
+        TempDimensionBuffer.Reset();
+        TempDimensionBuffer.SetFilter("Dimension Code", SpyDim."Dimension Name");
+        TempDimensionBuffer.SetFilter("Dimension Value Code", SpyDim."Dimension Value Code");
+        TempDimensionBuffer.SetFilter("Table ID", '81');
+        if not TempDimensionBuffer.FindSet() then begin
+            TempDimensionBuffer.Reset();
+            TempDimensionBuffer.Init();
+            TempDimensionBuffer."Entry No." := EntryNo;
+            EntryNo := EntryNo + 1;
+            TempDimensionBuffer."Table ID" := 81;
+            TempDimensionBuffer."Dimension Code" := SpyDim."Dimension Name";
+            TempDimensionBuffer."Dimension Value Code" := SpyDim."Dimension Value Code";
+            TempDimensionBuffer.Insert();
+        end;
+    end;
+
 
     var
         BankAccount: record "Bank Account";

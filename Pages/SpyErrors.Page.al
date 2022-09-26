@@ -13,7 +13,7 @@ page 73005 "Spy Errors"
         {
             repeater(General)
             {
-                field("Document No."; Rec."Document No.")
+                field("Document No."; Rec."External Document No.")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Document No. field.';
