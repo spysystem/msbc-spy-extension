@@ -164,4 +164,20 @@ codeunit 73006 SpyCreateJournalLine
     begin
     end;
 
+    [ServiceEnabled]
+    procedure GetGenJournalTemplates(): Text
+    var
+        GenJournalTemplate: Record "Gen. Journal Template";
+        TemplateList: Text;
+    begin
+
+        If GenJournalTemplate.FindSet() then
+            repeat
+
+            until GenJournalTemplate.Next() = 0;
+
+
+
+    end;
+
 }

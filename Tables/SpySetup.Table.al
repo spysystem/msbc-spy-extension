@@ -41,7 +41,7 @@ table 73001 "Spy Setup"
         }
         field(15; "Default Journal Batch Name"; Code[10])
         {
-            Caption = 'Default Journal Temp Name';
+            Caption = 'Default Journal Batch Name';
             DataClassification = ToBeClassified;
         }
         field(20; "Default Jnl Batch Description"; Text[100])

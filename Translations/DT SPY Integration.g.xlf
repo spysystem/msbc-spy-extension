@@ -3,226 +3,6 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="DT SPY Integration">
     <body>
       <group id="body">
-        <trans-unit id="Table 3121182283 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Spy Create Journal Line</source>
-          <note from="Developer" annotates="general" priority="2">DAN="Spy Opret Kladde"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 1142516467 - NamedType 1670204571" size-unit="char" translate="yes" xml:space="preserve">
-          <source>{"code": 400, "message": "%1"}</source>
-          <note from="Developer" annotates="general" priority="2">%1 = CollectedErrorMessages</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method GetErrorTextList - NamedType ErrorsLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 2926267923 - NamedType 4110841844" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[CreationErr] Failed to Insert Gen. Journal Line %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 = Ext Doc No.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method PostJournal - NamedType InsertGenJnlLineErr</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 1153924898 - NamedType 2704139927" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[VATCode Err] %1 does not exist in BC</source>
-          <note from="Developer" annotates="general" priority="2">%1 = VAT Code from SPY</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method SetPostingGroups - NamedType InvalidVATCodeLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 1153924898 - NamedType 1726072186" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[VATCode Err] VAT Code was empty</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method SetPostingGroups - NamedType VATCodeBlankLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 1226951289 - NamedType 2864912246" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[SetSalesPurchExclVATErr] %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 = LineNo</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method SetSalesPurchExclVAT - NamedType SetSalesPurchExclVATErr</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 2068871241 - NamedType 2949915528" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[postTypeErr] Account No. does not exist %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 = Account No</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method ValidateAccountType - NamedType AccountNoGetErrorLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 2068871241 - NamedType 861390621" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[postTypeErr] %1 is an invalid postyingType, posttypes avaible: tax,ledger,customer or supplier</source>
-          <note from="Developer" annotates="general" priority="2">%1,%2,%3,%5 = postType</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method ValidateAccountType - NamedType InvalidPostTypeLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 1044930139 - NamedType 1731371728" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[documentTypeErr] Document Type does not exist %1, document types avaliable: Sale,SaleCredit,Purchase,PurchaseCredit</source>
-          <note from="Developer" annotates="general" priority="2">%1,%2,%3,%4 = doc type</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method ValidateDocumentType - NamedType InvalidDocumentTypeLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 112233112 - NamedType 3967461121" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[CreateJnlTemplateErr] Failed to Create Journal Template Name %1</source>
-          <note from="Developer" annotates="general" priority="2">DAN="Kladde blev ikke oprette %1"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method ValidateJournalBatchName - NamedType JnlTemplateNotCreatedLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 112233112 - NamedType 4071360813" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[CreateJnlBacthErr] Failed to Create Journal Template Name %1</source>
-          <note from="Developer" annotates="general" priority="2">DAN="Kladde blev ikke oprette %1"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method ValidateJournalBatchName - NamedType BatchNotCreatedLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 3067519390 - NamedType 4249219403" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[DateConvErr] Day convertion failed: %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 = Day sent from SPY</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method ValidatePostingDate - NamedType DayConvFailedLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 3067519390 - NamedType 2403073583" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[DateConvErr] Month convertion failed: %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 = Month sent from SPY</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method ValidatePostingDate - NamedType MonthConvFailedLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 3067519390 - NamedType 3582577230" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[DateConvErr] Year convertion failed: %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 = Year sent from SPY</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method ValidatePostingDate - NamedType YearConvFailedLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Method 660186525 - NamedType 1994224481" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[TAXErr] Failed to insert TAX Dimension %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 = Dimensions Code</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Method ValidateTaxTitle - NamedType TaxErrorLbl</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 1622979514 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Account No.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Account No. - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 3699788827 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Account Type</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Account Type - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 636392376 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Amount</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Amount - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 592951229 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Amount (LCY)</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Amount (LCY) - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 284764054 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Country/Region Code</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Country/Region Code - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 1752552460 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>County US Tax Account</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field County US Tax Account - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 4198939294 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Currency Code</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Currency Code - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 1280732994 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>custGroup</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field custGroup - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 1678508055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Delivery Acoount</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field deliveryAccount - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Description</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Description - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 486908828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Document No.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Document No. - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 2363328873 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Document Type</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Document Type - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 1254809252 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>documentTypeAsText</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field documentTypeAsText - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 4085727052 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Due Date</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Due Date - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Entry No.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Entry No. - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 4002976000 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>entryType</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field entryType - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 1527563463 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>External Document No.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field External Document No. - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Journal Batch Name</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Journal Batch Name - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 3684440170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Journal Template Name</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Journal Template Name - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 966740350 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Payment Terms Code</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Payment Terms Code - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 1636953138 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Pmt. Discount Date</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Pmt. Discount Date - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 3710982960 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Posting Date</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Posting Date - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 443557708 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>postType</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field postType - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 3369315532 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Ready To Post</source>
-          <note from="Developer" annotates="general" priority="2">DAN="Klar til bogf."</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Ready To Post - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 2626241895 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>State US Tax Account</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field State US Tax Account - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 659574327 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Tax Percent</source>
-          <note from="Developer" annotates="general" priority="2">DAN="Moms Percent"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field tax Percentage - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 3497560119 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>TaxTitle</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field Tax Title - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 1256068594 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>VAT Code</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field VAT Code - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3121182283 - Field 518852592 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>vatArea</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Create Journal Line - Field vatArea - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Table 92756324 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Spy Customer Balance</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -243,95 +23,315 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Customer Balance - Field dueBalanceLcy - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Method 801471539 - NamedType 4044247445" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Dimension</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Spy Dimension"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1308829302 - Method 801471539 - NamedType 4044247445" size-unit="char" translate="yes" xml:space="preserve">
           <source>[SypDimensionCreationErr] Failed to Insert SpyDimenison %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = postType</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Method HandleDimensions - NamedType SpyDimCreateErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Method HandleDimensions - NamedType SpyDimCreateErr</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Method 801471539 - NamedType 595797940" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Method 801471539 - NamedType 595797940" size-unit="char" translate="yes" xml:space="preserve">
           <source>[SypDimensioValueCreationErr] Failed to Insert SpyDimenison %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = postType</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Method HandleDimensions - NamedType SpyDimValueCreateErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Method HandleDimensions - NamedType SpyDimValueCreateErr</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Method 801471539 - NamedType 74517741" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Method 801471539 - NamedType 74517741" size-unit="char" translate="yes" xml:space="preserve">
           <source>[SypDimensioBufferCreationErr] Failed to Insert SpyDimenison %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = postType</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Method HandleDimensions - NamedType SpyDimBufferCreateErr</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Method HandleDimensions - NamedType SpyDimBufferCreateErr</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Field 2580555873 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Field 2580555873 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Dimension Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Field Dimension Name - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Dimension Name - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Field 2277534386 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Field 2277534386 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Dimension Value Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Field Dimension Value Code - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Dimension Value Code - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Entry No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Field Entry No. - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Entry No. - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Field 1527563463 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Field 1527563463 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Field External Document No. - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field External Document No. - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Field 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Field 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Journal Batch Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Field Journal Batch Name - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Journal Batch Name - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Field 3684440170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Field 3684440170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Journal Template Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Field Journal Template Name - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Journal Template Name - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Field 3320823955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Field 3320823955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Line No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Field Line No. - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Line No. - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1668317091 - Field 3087293037 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1308829302 - Field 3087293037 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Spy Journal System Id</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimensions - Field Spy Journal System Id - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Spy Journal System Id - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 2448441827 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Spy Errors</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Errors - Property Caption</note>
+        <trans-unit id="Table 1931873846 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Error</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Spy Fejl"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 2448441827 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1931873846 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Entry No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Errors - Field Entry No. - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Entry No. - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 2448441827 - Field 1805468730 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1931873846 - Field 1805468730 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Error Description</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Errors - Field Error Description - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Error Description - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 2448441827 - Field 1527563463 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1931873846 - Field 1527563463 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Errors - Field External Document No. - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field External Document No. - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 2448441827 - Field 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1931873846 - Field 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Journal Batch Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Errors - Field Journal Batch Name - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Journal Batch Name - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 2448441827 - Field 3684440170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1931873846 - Field 3684440170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Journal Template Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Errors - Field Journal Template Name - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Journal Template Name - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 2448441827 - Field 3320823955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 1931873846 - Field 3320823955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Line No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Errors - Field Line No. - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Journal Line</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Spy kladdelinje</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 1142516467 - NamedType 1670204571" size-unit="char" translate="yes" xml:space="preserve">
+          <source>{"code": 400, "message": "%1"}</source>
+          <note from="Developer" annotates="general" priority="2">%1 = CollectedErrorMessages</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method GetErrorTextList - NamedType ErrorsLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 2926267923 - NamedType 4110841844" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[CreationErr] Failed to Insert Gen. Journal Line %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Ext Doc No.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method PostJournal - NamedType InsertGenJnlLineErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 1153924898 - NamedType 2704139927" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[VAT Code Err] %1 does not exist in BC</source>
+          <note from="Developer" annotates="general" priority="2">%1 = VAT Code from SPY</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method SetPostingGroups - NamedType InvalidVATCodeLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 1226951289 - NamedType 2864912246" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[SetSalesPurchExclVATErr] %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = LineNo</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method SetSalesPurchExclVAT - NamedType SetSalesPurchExclVATErr</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 2163259295 - NamedType 2949915528" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[postTypeErr] Account No. does not exist %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Account No</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateAccountTypeAndNo - NamedType AccountNoGetErrorLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 2163259295 - NamedType 861390621" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[postTypeErr] %1 is an invalid postyingType, posttypes avaible: tax,ledger,customer or supplier</source>
+          <note from="Developer" annotates="general" priority="2">%1,%2,%3,%5 = postType</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateAccountTypeAndNo - NamedType InvalidPostTypeLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 1044930139 - NamedType 1731371728" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[documentTypeErr] Document Type does not exist %1, document types avaliable: Sale,SaleCredit,Purchase,PurchaseCredit</source>
+          <note from="Developer" annotates="general" priority="2">%1,%2,%3,%4 = doc type</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateDocumentType - NamedType InvalidDocumentTypeLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 112233112 - NamedType 3967461121" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[CreateJnlTemplateErr] Failed to Create Journal Template Name %1</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Kladde blev ikke oprette %1"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateJournalBatchName - NamedType JnlTemplateNotCreatedLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 112233112 - NamedType 4071360813" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[CreateJnlBacthErr] Failed to Create Journal Template Name %1</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Kladde blev ikke oprette %1"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateJournalBatchName - NamedType BatchNotCreatedLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 3067519390 - NamedType 4249219403" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[DateConvErr] Day convertion failed: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Day sent from SPY</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidatePostingDate - NamedType DayConvFailedLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 3067519390 - NamedType 2403073583" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[DateConvErr] Month convertion failed: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Month sent from SPY</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidatePostingDate - NamedType MonthConvFailedLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 3067519390 - NamedType 3582577230" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[DateConvErr] Year convertion failed: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Year sent from SPY</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidatePostingDate - NamedType YearConvFailedLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 660186525 - NamedType 1994224481" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[TAX Title Err] Failed to insert TAX Dimension %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Dimensions Code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateTaxTitle - NamedType TaxErrorLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 1622979514 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Account No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Account No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 3699788827 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Account Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Account Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 636392376 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Amount</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Amount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 592951229 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Amount (LCY)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Amount (LCY) - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 2996033180 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pmt. Discount Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Cash Discount Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 284764054 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Country/Region Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Country/Region Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 1752552460 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>County US Tax Account</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field County US Tax Account - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 4198939294 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Currency Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Currency Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 1280732994 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>custGroup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field custGroup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 1678508055 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delivery Acoount</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field deliveryAccount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 486908828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Document No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 2363328873 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Document Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 1254809252 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>documentTypeAsText</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field documentTypeAsText - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 4085727052 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Due Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Due Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 4002976000 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>entryType</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field entryType - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 1527563463 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Document No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field External Document No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Batch Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Journal Batch Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 3684440170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Template Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Journal Template Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 966740350 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payment Terms Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Payment Terms Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 3710982960 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Posting Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 443557708 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>postType</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field postType - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 3369315532 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ready To Post</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Klar til bogf."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Ready To Post - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 2626241895 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>State US Tax Account</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field State US Tax Account - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 659574327 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tax Percent</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Moms Percent"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field tax Percentage - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 3497560119 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>TaxTitle</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Tax Title - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 1256068594 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field VAT Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 518852592 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>vatArea</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field vatArea - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4228076119 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>SPY Setup</source>
@@ -344,7 +344,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Default Jnl Batch Description - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4228076119 - Field 3246934339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Default Journal Temp Name</source>
+          <source>Default Journal Batch Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Default Journal Batch Name - Property Caption</note>
         </trans-unit>
@@ -387,6 +387,11 @@
           <source>Erorrs found %1 - continue to delete lines</source>
           <note from="Developer" annotates="general" priority="2">%1 = Errors</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method commitToJournalLine - NamedType ErrorFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1200734571 - Method 3964488894 - NamedType 491796767" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deleted Lines Count: %1 of %2, Document No Deleted: %3</source>
+          <note from="Developer" annotates="general" priority="2">%1 = CountTotal, %2 = CountDeleted, %3 = DocumentNos.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method deleteAllEntries - NamedType DeleteStatusTxt</note>
         </trans-unit>
         <trans-unit id="Page 3926563785 - Control 636392376 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
@@ -1103,195 +1108,195 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control VAT Prod. Posting Group - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Spy Create Journal Lines</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Property Caption</note>
+        <trans-unit id="Page 39425386 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Journal Lines</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Spy kladdelinjer"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
-          <source>spy,Spy Create Journal Lines,spy create</source>
+        <trans-unit id="Page 39425386 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
+          <source>spy,Spy Journal Lines,spy create</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Property AdditionalSearchTerms</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Property AdditionalSearchTerms</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 1622979514 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 1622979514 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Account No. field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Account No. - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Account No. - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 3699788827 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 3699788827 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Account Type field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Account Type - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Account Type - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 636392376 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 636392376 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Amount field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Amount - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Amount - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 592951229 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 592951229 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Amount (LCY) field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Amount (LCY) - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Amount (LCY) - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 284764054 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Country/Region Code field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Country/Region Code - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 1752552460 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the County US Tax Account field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control County US Tax Account - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 4198939294 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Currency Code field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Currency Code - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 1280732994 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the custGroup field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control custGroup - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 1678508055 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Delivery Acoount field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control deliveryAccount - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Description field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Description - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 486908828 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Document No. field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Document No. - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 2363328873 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Document Type field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Document Type - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 1254809252 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the documentTypeAsText field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control documentTypeAsText - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 4085727052 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Due Date field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Due Date - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Entry No. field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Entry No. - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 4002976000 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the entryType field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control entryType - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 1527563463 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the External Document No. field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control External Document No. - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 2704330142 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Journal Batch Name field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Journal Batch Name - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 3684440170 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Journal Template Name field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Journal Template Name - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 966740350 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Payment Terms Code field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Payment Terms Code - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 1636953138 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 2996033180 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Pmt. Discount Date field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Pmt. Discount Date - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Cash Discount Date - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 3710982960 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 284764054 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Country/Region Code field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Country/Region Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 1752552460 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the County US Tax Account field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control County US Tax Account - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 4198939294 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Currency Code field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Currency Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 1280732994 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the custGroup field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control custGroup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 1678508055 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Delivery Acoount field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control deliveryAccount - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Description field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 486908828 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Document No. field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Document No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 2363328873 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Document Type field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Document Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 1254809252 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the documentTypeAsText field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control documentTypeAsText - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 4085727052 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Due Date field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Due Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Entry No. field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Entry No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 4002976000 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the entryType field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control entryType - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 1527563463 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the External Document No. field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control External Document No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 2704330142 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Journal Batch Name field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Journal Batch Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 3684440170 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Journal Template Name field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Journal Template Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 966740350 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Payment Terms Code field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Payment Terms Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Control 3710982960 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Posting Date field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Posting Date - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Posting Date - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 443557708 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 443557708 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the postType field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control postType - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control postType - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 2626241895 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 2626241895 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the State US Tax Account field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control State US Tax Account - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control State US Tax Account - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 577209412 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 577209412 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the SystemCreatedAt field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control SystemCreatedAt - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control SystemCreatedAt - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 4000648066 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 4000648066 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the SystemCreatedBy field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control SystemCreatedBy - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control SystemCreatedBy - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 659574327 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 659574327 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Tax Percent field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control tax Percentage - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control tax Percentage - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 3497560119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 3497560119 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the TaxTitle field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control Tax Title - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control Tax Title - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 1256068594 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 1256068594 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the VAT Code field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control VAT Code - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control VAT Code - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Control 518852592 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Control 518852592 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the vatArea field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Control vatArea - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Control vatArea - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Action 2140800332 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Action 2140800332 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Clean Up</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Action Clean Up - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action Clean Up - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Action 2140800332 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Action 2140800332 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Clean Up</source>
           <note from="Developer" annotates="general" priority="2">DAN="Clean Up"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Action Clean Up - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action Clean Up - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Action 2282416948 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Action 2282416948 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Post SPY Lines</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Action Post - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action Post - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Action 2282416948 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Action 2282416948 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Post</source>
           <note from="Developer" annotates="general" priority="2">DAN="Bogfør"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Action Post - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action Post - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Action 890592552 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Action 890592552 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Post SPY Line Dimensions</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Action View Spy Dimensions - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action View Spy Dimensions - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 3642970004 - Action 890592552 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 39425386 - Action 890592552 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>View Spy Dimensions</source>
           <note from="Developer" annotates="general" priority="2">DAN="Vis Spy-dimensioner"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journals - Action View Spy Dimensions - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action View Spy Dimensions - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3821052265 - Control 714791889 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
@@ -1458,40 +1463,40 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 1007289100 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3402426115 - Control 1136720531 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Account No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control accountNo - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 1486462331 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Account Type</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control accountType - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control account - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3402426115 - Control 1121446808 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Amount</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control amount - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 1826362222 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3402426115 - Control 1567374442 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Amount (LCY)</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control amountLCY - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control amountBaseCurrency - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 639513079 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3402426115 - Control 737849940 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cash Discount Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control cashDiscountDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3402426115 - Control 3653267092 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Country/Region Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control countryRegionCode - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control countryType - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3402426115 - Control 3406081324 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>County US Tax Account</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control countyUSTaxAccount - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 1808640270 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3402426115 - Control 3429870193 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Currency Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control currencyCode - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control currency - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3402426115 - Control 1280732994 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>custGroup</source>
@@ -1508,65 +1513,45 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control description - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 73228906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3402426115 - Control 1150262424 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control documentNo - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control documentNumber - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3402426115 - Control 305869689 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document Type</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control documentType - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 1254809252 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>documentTypeAsText</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control documentTypeAsText - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Page 3402426115 - Control 2763176388 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Due Date</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control dueDate - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 2683860767 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Entry No.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control entryNo - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3402426115 - Control 4002976000 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>entryType</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control entryType - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 3947953933 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>External Document No.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control externalDocumentNo - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Page 3402426115 - Control 2686962215 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Account No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3402426115 - Control 1108393212 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Document No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control invoiceNo - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3402426115 - Control 4092684834 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Journal Batch Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control journalName - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 2958552522 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Journal Template Name</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control journalTemplateName - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 3493223734 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Page 3402426115 - Control 1579203656 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Payment Terms Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control paymentTermsCode - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 3402426115 - Control 1648808196 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Pmt. Discount Date</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control pmtDiscountDate - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control paymentTerm - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3402426115 - Control 1260828904 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Posting Date</source>
@@ -1618,6 +1603,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control taxTitle - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 3402426115 - Control 2468587225 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Template Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control templateName - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3402426115 - Control 518852592 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>vatArea</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1627,6 +1617,91 @@
           <source>VAT Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control vatCode - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3618512546 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SpyGenJnlTemplate</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3618512546 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies a brief description of the journal template you are creating.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplate - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3618512546 - Control 2961552353 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the journal template you are creating.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplate - Control Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3618512546 - Control 1351594800 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. Series</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplate - Control No. Series - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3618512546 - Control 1351594800 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. Series</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplate - Control No. Series - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3618512546 - Control 103924864 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting No. Series</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplate - Control Posting No. Series - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3618512546 - Control 103924864 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting No. Series</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplate - Control Posting No. Series - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3618512546 - Control 1367528460 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the SystemId field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplate - Control SystemId - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3618512546 - Control 1878130204 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the journal type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplate - Control Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 620616310 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Jnl Template Batch</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplateBatch - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 620616310 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies a brief description of the journal batch you are creating.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplateBatch - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 620616310 - Control 3684440170 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Template Name </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplateBatch - Control Journal Template Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 620616310 - Control 2961552353 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the name of the journal you are creating.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplateBatch - Control Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 620616310 - Control 1351594800 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number series from which entry or record numbers are assigned to new entries or records.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplateBatch - Control No. Series - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 620616310 - Control 103924864 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the code for the number series that will be used to assign document numbers to ledger entries that are posted from this journal batch.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplateBatch - Control Posting No. Series - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 620616310 - Control 1367528460 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the SystemId field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplateBatch - Control SystemId - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 620616310 - Control 3507948476 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Template Type </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGenJnlTemplateBatch - Control Template Type - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 3946736872 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>spyDimensions</source>
@@ -1762,6 +1837,131 @@
           <source> </source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyTempJournalLines - Action UPJO - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SpyVATPostingSetup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 3928393419 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether to recalculate VAT amounts when you post payments that trigger payment discounts.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Adjust for Payment Discount - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 3543129988 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies if this particular combination of VAT business posting group and VAT product posting group is blocked.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Blocked - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 224568314 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies if documents that use this combination of VAT business posting group and VAT product posting group require a certificate of supply.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Certificate of Supply Required - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies a description of the VAT posting setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Description - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 1299529991 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies if this combination of VAT business posting group and VAT product posting group are to be reported as services in the periodic VAT reports.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control EU Service - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 63381393 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the general ledger account to post unrealized purchase VAT to.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Purch. VAT Unreal. Account - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 290317523 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the general ledger account number to which to post purchase VAT for the particular combination of business group and product group.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Purchase VAT Account - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 1665497752 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the general ledger account number to which you want to post reverse charge VAT (purchase VAT) for this combination of VAT business posting group and VAT product posting group, if you have selected the Reverse Charge VAT option in the VAT Calculation Type field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Reverse Chrg. VAT Acc. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 2596317437 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the general ledger account to post amounts for unrealized reverse charge VAT to.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Reverse Chrg. VAT Unreal. Acc. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 1216917726 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the general ledger account number to which to post sales VAT for the particular combination of VAT business posting group and VAT product posting group.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Sales VAT Account - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 2527862975 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the number of the general ledger account to post unrealized sales VAT to.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Sales VAT Unreal. Account - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 577209412 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the SystemCreatedAt field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control SystemCreatedAt - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 4000648066 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the SystemCreatedBy field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control SystemCreatedBy - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 1367528460 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the SystemId field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control SystemId - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 2453272523 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the SystemModifiedAt field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control SystemModifiedAt - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 4085837753 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the SystemModifiedBy field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control SystemModifiedBy - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 495755103 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the VAT category in connection with electronic document sending. For example, when you send sales documents through the PEPPOL service, the value in this field is used to populate the TaxApplied element in the Supplier group. The number is based on the UNCL5305 standard.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Tax Category - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 2743123148 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how to handle unrealized VAT, which is VAT that is calculated but not due until the invoice is paid.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control Unrealized VAT Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 1246077090 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the relevant VAT rate for the particular combination of VAT business posting group and VAT product posting group. Do not enter the percent sign, only the number. For example, if the VAT rate is 25 %, enter 25 in this field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control VAT % - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 1844012642 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the VAT specification of the involved customer or vendor to link transactions made for this record with the appropriate general ledger account according to the VAT posting setup.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control VAT Bus. Posting Group - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 2971014054 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how VAT will be calculated for purchases or sales of items with this particular combination of VAT business posting group and VAT product posting group.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control VAT Calculation Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 2162283589 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the VAT Clause Code that is associated with the VAT Posting Setup.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control VAT Clause Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 2534656220 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies a code to group various VAT posting setups with similar attributes, for example VAT percentage.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control VAT Identifier - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3366673458 - Control 236064653 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the VAT specification of the involved item or resource to link transactions made for this record with the appropriate general ledger account according to the VAT posting setup.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control VAT Prod. Posting Group - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="PageExtension 3990914254 - Control 1303377601 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 523354100">
           <source> </source>

@@ -18,99 +18,45 @@ page 73002 SpyCreateJournalLineAPI
             repeater(General)
             {
                 field(id; Rec.SystemId) { Caption = 'Account No.'; }
-                field(accountNo; Rec."Account No.")
-                {
-                    Caption = 'Account No.';
-                }
-                field(accountType; Rec."Account Type")
-                {
-                    Caption = 'Account Type';
-                }
-                field(amount; Rec.Amount)
-                {
-                    Caption = 'Amount';
-                }
-                field(amountLCY; Rec."Amount (LCY)")
-                {
-                    Caption = 'Amount (LCY)';
-                }
-                field(countryRegionCode; Rec."Country/Region Code")
-                {
-                    Caption = 'Country/Region Code';
-                }
-                field(countyUSTaxAccount; Rec."County US Tax Account")
-                {
-                    Caption = 'County US Tax Account';
-                }
-                field(currencyCode; Rec."Currency Code")
-                {
-                    Caption = 'Currency Code';
-                }
-                field(description; Rec.Description)
-                {
-                    Caption = 'Description';
-                }
-                field(documentNo; Rec."Document No.")
-                {
-                    Caption = 'Document No.';
-                }
-                field(documentType; gDocumentType)
-                {
-                    Caption = 'Document Type';
-                }
-                field(dueDate; Rec."Due Date")
-                {
-                    Caption = 'Due Date';
-                }
-                field(entryNo; Rec."Entry No.")
-                {
-                    Caption = 'Entry No.';
-                }
-                field(externalDocumentNo; Rec."External Document No.")
-                {
-                    Caption = 'External Document No.';
-                }
-                field(journalName; Rec."Journal Batch Name")
-                {
-                    Caption = 'Journal Batch Name';
-                    trigger OnValidate()
-                    begin
-                    end;
+                field(templateName; Rec."Journal Template Name") { Caption = 'Journal Template Name'; }
+                field(journalName; Rec."Journal Batch Name") { Caption = 'Journal Batch Name'; }
+                field(documentNumber; Rec."Document No.") { Caption = 'Document No.'; }
+                field(documentType; gDocumentType) { Caption = 'Document Type'; }
+                field(countryType; Rec."Country/Region Code") { Caption = 'Country/Region Code'; }
 
-                }
-                field(journalTemplateName; Rec."Journal Template Name")
-                {
-                    Caption = 'Journal Template Name';
-                    trigger OnValidate()
-                    begin
+                field(account; Rec."Account No.") { Caption = 'Account No.'; }
+                field(description; Rec.Description) { Caption = 'Description'; }
+                field(amount; Rec.Amount) { Caption = 'Amount'; }
+                field(entryType; Rec.entryType) { Caption = 'entryType'; }
+                field(postingDate; Rec."Posting Date") { Caption = 'Posting Date'; }
+                field(deliveryAccount; Rec.deliveryAccount) { Caption = 'Delivery Acoount'; }
+                field(postType; Rec.postType) { Caption = 'postType'; }
+                field(invoiceNo; Rec."External Document No.") { Caption = 'External Document No.'; }
+                field(currency; Rec."Currency Code") { Caption = 'Currency Code'; }
 
-                    end;
-                }
+                field(amountBaseCurrency; Rec."Amount (LCY)") { Caption = 'Amount (LCY)'; }
+                field(countyUSTaxAccount; Rec."County US Tax Account") { Caption = 'County US Tax Account'; }
+                field(stateUSTaxAccount; Rec."State US Tax Account") { Caption = 'State US Tax Account'; }
+                field(vatCode; Rec."VAT Code") { Caption = 'VAT Code'; }
+                field(vatArea; Rec.vatArea) { Caption = 'vatArea'; }
+                field(taxTitle; Rec."Tax Title") { Caption = 'TaxTitle'; }
+                field(taxPercentage; Rec."tax Percentage") { Caption = 'Tax Percent'; }
 
-                field(paymentTermsCode; Rec."Payment Terms Code")
-                {
-                    Caption = 'Payment Terms Code';
-                }
-                field(pmtDiscountDate; Rec."Pmt. Discount Date")
-                {
-                    Caption = 'Pmt. Discount Date';
-                }
-                field(postingDate; Rec."Posting Date")
-                {
-                    Caption = 'Posting Date';
+                field(dueDate; Rec."Due Date") { Caption = 'Due Date'; }
+                field(paymentTerm; Rec."Payment Terms Code") { Caption = 'Payment Terms Code'; }
 
-                }
-                part(spyDimensions; SpyJournalDimensionPart)
+                field(cashDiscountDate; Rec."Cash Discount Date") { Caption = 'Cash Discount Date'; }
+
+                field(custGroup; Rec.custGroup) { Caption = 'custGroup'; }
+
+                part(dimensions; SpyJournalDimensionPart)
                 {
                     EntityName = 'spyDimension';
                     EntitySetName = 'spyDimensions';
                     SubPageLink = "Spy Journal System Id" = field(SystemId);
                 }
 
-                field(stateUSTaxAccount; Rec."State US Tax Account")
-                {
-                    Caption = 'State US Tax Account';
-                }
+
                 field(systemCreatedAt; Rec.SystemCreatedAt)
                 {
                     Caption = 'SystemCreatedAt';
@@ -130,43 +76,6 @@ page 73002 SpyCreateJournalLineAPI
                 field(systemModifiedBy; Rec.SystemModifiedBy)
                 {
                     Caption = 'SystemModifiedBy';
-                }
-                field(taxTitle; Rec."Tax Title")
-                {
-                    Caption = 'TaxTitle';
-
-                }
-                field(vatCode; Rec."VAT Code")
-                {
-                    Caption = 'VAT Code';
-                }
-                field(custGroup; Rec.custGroup)
-                {
-                    Caption = 'custGroup';
-                }
-                field(deliveryAccount; Rec.deliveryAccount)
-                {
-                    Caption = 'Delivery Acoount';
-                }
-                field(documentTypeAsText; Rec.documentTypeAsText)
-                {
-                    Caption = 'documentTypeAsText';
-                }
-                field(entryType; Rec.entryType)
-                {
-                    Caption = 'entryType';
-                }
-                field(postType; Rec.postType)
-                {
-                    Caption = 'postType';
-                }
-                field(taxPercentage; Rec."tax Percentage")
-                {
-                    Caption = 'Tax Percent';
-                }
-                field(vatArea; Rec.vatArea)
-                {
-                    Caption = 'vatArea';
                 }
             }
         }

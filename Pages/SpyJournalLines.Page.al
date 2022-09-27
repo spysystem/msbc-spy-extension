@@ -4,8 +4,8 @@
 page 73004 "Spy Journal Lines"
 {
     ApplicationArea = All;
-    Caption = 'Spy Create Journal Lines';
-    AdditionalSearchTerms = 'spy,Spy Create Journal Lines,spy create';
+    Caption = 'Spy Journal Lines', comment = 'DAN="Spy kladdelinjer"';
+    AdditionalSearchTerms = 'spy,Spy Journal Lines,spy create';
     PageType = List;
     SourceTable = "Spy Journal Line";
     UsageCategory = Lists;
@@ -97,7 +97,7 @@ page 73004 "Spy Journal Lines"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Payment Terms Code field.';
                 }
-                field("Pmt. Discount Date"; Rec."Pmt. Discount Date")
+                field("Cash Discount Date"; Rec."Cash Discount Date")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Pmt. Discount Date field.';

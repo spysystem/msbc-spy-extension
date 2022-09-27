@@ -73,7 +73,7 @@ table 73090 "Spy Journal Line"
             Caption = 'Due Date';
         }
 
-        field(39; "Pmt. Discount Date"; Date) //cashDiscountDate
+        field(39; "Cash Discount Date"; Text[20]) //cashDiscountDate
         {
             Caption = 'Pmt. Discount Date';
         }
@@ -416,9 +416,11 @@ table 73090 "Spy Journal Line"
             Rec.ValidatePostingDate();
             Rec.ValidateDocumentType();
 
-            GenJournalLine.Validate("Document No.", Rec."External Document No.");
+            GenJournalLine.Validate("Document No.", "Document No.");
+            GenJournalLine.Validate("External Document No.", Rec."External Document No.");
             GenJournalLine.Validate(Description, Rec.Description);
             GenJournalLine.Validate("Amount (LCY)", Rec."Amount (LCY)");
+
 
             if GeneralLedgerSetup."LCY Code" = Rec."Currency Code" then
                 GenJournalLine."Currency Code" := '' else
@@ -462,10 +464,10 @@ table 73090 "Spy Journal Line"
     /// </summary>
     procedure SetCashDiscountDate()
     begin
-        if Rec."Pmt. Discount Date" <> 0D then begin
-            evaluate(day, CopyStr(Format("Pmt. Discount Date"), 9, 2));
-            evaluate(month, CopyStr(Format("Pmt. Discount Date"), 6, 2));
-            evaluate(year, CopyStr(Format("Pmt. Discount Date"), 1, 4));
+        if Rec."Cash Discount Date" <> '' then begin
+            evaluate(day, CopyStr(Format(Rec."Cash Discount Date"), 9, 2));
+            evaluate(month, CopyStr(Format(Rec."Cash Discount Date"), 6, 2));
+            evaluate(year, CopyStr(Format(Rec."Cash Discount Date"), 1, 4));
             GenJournalLine."Pmt. Discount Date" := DMY2Date(day, month, year);
         end;
     end;
