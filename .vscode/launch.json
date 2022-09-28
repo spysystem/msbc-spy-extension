@@ -2,18 +2,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "KS_Sandbox",
+            "name": "SPY_Sandbox",
             "request": "launch",
             "type": "al",
             "environmentType": "Sandbox",
-            "environmentName": "TestKongesSloejd",
+            "environmentName": "Sandbox",
             "startupObjectId": 73004,
             "startupObjectType": "Page",
             "breakOnError": true,
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true,
-            "tenant": "fc2c4fd0-9650-4502-b64b-6564b0016b60",
+            "tenant": "04ed98cf-2f8a-47fa-8d0f-0a23e4dcf61f",
             "schemaUpdateMode": "ForceSync"      
         }
     ]
