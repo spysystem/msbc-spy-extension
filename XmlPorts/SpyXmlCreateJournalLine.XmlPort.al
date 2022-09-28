@@ -317,7 +317,7 @@ xmlport 73090 SpyXmlCreateJournalLine
                     MaxOccurs = Once;
                     trigger OnAfterAssignVariable()
                     begin
-                        Evaluate(gAmount, cashDiscountAmount);
+                        //Evaluate(gAmount, cashDiscountAmount);
                     end;
                 }
                 textelement(custGroup)
@@ -617,7 +617,7 @@ xmlport 73090 SpyXmlCreateJournalLine
         DimensionManagement: Codeunit DimensionManagement;
         MyRecordRef: RecordRef;
         MyFieldRef: FieldRef;
-        gAmount: Decimal;
+        //gAmount: Decimal;
         templateName: code[20];
         batchName: code[20];
         UdenMoms: Decimal;
