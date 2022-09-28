@@ -21,27 +21,32 @@ page 73003 SpyJournalDimensionPart
                 field(id; Format(Rec.SystemId, 0, 4).ToLower())
                 {
                     Caption = 'SystemID', Locked = true;
+                    ApplicationArea = All;
                     ToolTip = ' ';
                 }
                 field(entryNo; Rec."Entry No.")
                 {
                     Caption = 'EntryNo';
+                    ApplicationArea = All;
                     ToolTip = ' ';
                 }
                 field(spyJournalSystemId; Rec."Spy Journal System Id")
                 {
                     Caption = 'spyJournalSystemId';
+                    ApplicationArea = All;
                     ToolTip = ' ';
                 }
 
                 field(dimensionName; Rec."Dimension Name")
                 {
                     Caption = 'dimensionName';
+                    ApplicationArea = All;
                     ToolTip = ' ';
                 }
                 field(dimensionValue; Rec."Dimension Value Code")
                 {
                     Caption = 'dimensionValue';
+                    ApplicationArea = All;
                     ToolTip = ' ';
                     trigger OnValidate()
                     begin
@@ -53,6 +58,7 @@ page 73003 SpyJournalDimensionPart
                     Caption = 'sysid, msformat';
                     ToolTip = 'SystemID';
                     Visible = false;
+                    ApplicationArea = All;
                 }
             }
         }
