@@ -1,1 +1,1 @@
-﻿{"Added":[],"Modified":[],"Removed":[]}
+﻿{"Added":[],"Modified":[{"Id":73006,"Kind":11,"Name":"SpyCreateJournalLine","PackagePath":"/src/API/SpyCreateJournalLine.Codeunit.al"},{"Id":73090,"Kind":15,"Name":"SpyXmlCreateJournalLine","PackagePath":"/src/XmlPorts/SpyXmlCreateJournalLine.XmlPort.al"}],"Removed":[]}
