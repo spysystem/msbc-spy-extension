@@ -2,8 +2,7 @@ permissionset 73002 SpyPermissionsSet
 {
     Assignable = true;
     Caption = 'Spy Permissions', MaxLength = 30;
-    Permissions =
-        table "Spy Customer Balance" = X,
+    Permissions = table "Spy Customer Balance" = X,
         tabledata "Spy Customer Balance" = RMID,
         table "Spy Setup" = X,
         tabledata "Spy Setup" = RMID,
@@ -30,6 +29,14 @@ permissionset 73002 SpyPermissionsSet
         page "Spy Template Line" = X,
         page "Spy Vendor Ledger Entry" = X,
         xmlport SpyCustomerBalance = X,
-        xmlport SpyXmlCreateJournalLine = X;
-
+        xmlport spyXmlCreateJournalLine = X,
+        tabledata "Spy Error" = RIMD,
+        table "Spy Error" = X,
+        page "Spy Dimensions" = X,
+        page "Spy Errors" = X,
+        page "Spy Journal Lines" = X,
+        page SpyGenJnlTemplate = X,
+        page SpyGenJnlTemplateBatch = X,
+        page SpyJournalDimensionPart = X,
+        page SpyVATPostingSetup = X;
 }

@@ -59,12 +59,24 @@ codeunit 73006 SpyCreateJournalLine
         if GuiAllowed then
             Message('Completed');
     end;
+
+    /// <summary>
+    /// CreateJournalLine.
+    /// </summary>
+    /// <param name="VAR journalLineList">XmlPort spyXmlCreateJournalLine.</param>
+    /// <returns>Return variable return of type Text[50].</returns>
+    procedure CreateJournalLine(VAR JournalLineList: XmlPort SpyXmlCreateJournalLine) Return: Text[50]
+    begin
+        JournalLineList.Import();
+        EXIT(CopyStr(Database.CompanyName, 1, 50));
+    end;
+
     /// <summary>
     /// ExportJournalLine.
     /// </summary>
     /// <param name="VAR spyXmlCreateJournalLine">XmlPort SpyXmlCreateJournalLine.</param>  
     /// <returns>Return variable Return of type Text[50].</returns>
-    procedure ExportJournalLine(VAR spyXmlCreateJournalLine: XmlPort SpyXmlCreateJournalLine) Return: Text[50]
+    procedure ExportJournalLine(VAR spyXmlCreateJournalLine: XmlPort spyXmlCreateJournalLine) return: Text[50]
     var
         IsHandled: Boolean;
     begin
@@ -72,7 +84,7 @@ codeunit 73006 SpyCreateJournalLine
         if IsHandled then
             exit;
 
-        SpyXmlCreateJournalLine.Export();
+        spyXmlCreateJournalLine.Export();
         EXIT(CopyStr(Database.CompanyName, 1, 50));
     end;
 
@@ -86,12 +98,6 @@ codeunit 73006 SpyCreateJournalLine
         Exit('Pong');
     end;
 
-    /// <summary>
-    /// CleanUp.
-    /// </summary>
-    /// <param name="SpyJournalLine">VAR Record "Spy Create Journal Line".</param>
-    /// <param name="SpyErrors">VAR Record "Spy Errors".</param>
-    /// <returns>Return variable Errors of type Text.</returns>
     procedure CleanUp(var SpyJournalLine: Record "Spy Journal Line"; var SpyErrors: Record "Spy Error") Errors: Text
     var
         GenJournalLine: Record "Gen. Journal Line";
@@ -158,7 +164,7 @@ codeunit 73006 SpyCreateJournalLine
 
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeExportJournalLine(var SpyXmlCreateJournalLine: XmlPort SpyXmlCreateJournalLine; var Return: Text[50];
+    local procedure OnBeforeExportJournalLine(var SpyXmlCreateJournalLine: XmlPort spyXmlCreateJournalLine; var Return: Text[50];
     var
         IsHandled: Boolean)
     begin
