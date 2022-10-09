@@ -1484,7 +1484,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control cashDiscountDate - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3402426115 - Control 3653267092 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Country/Region Code</source>
+          <source>countryType</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control countryType - Property Caption</note>
         </trans-unit>
