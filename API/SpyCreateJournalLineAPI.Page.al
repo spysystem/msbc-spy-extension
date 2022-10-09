@@ -22,7 +22,8 @@ page 73002 SpyCreateJournalLineAPI
                 field(journalName; Rec."Journal Batch Name") { Caption = 'Journal Batch Name'; }
                 field(documentNumber; Rec."Document No.") { Caption = 'Document No.'; }
                 field(documentType; gDocumentType) { Caption = 'Document Type'; }
-                field(countryType; Rec."Country/Region Code") { Caption = 'Country/Region Code'; }
+                field(countryType; gcountryType) { Caption = 'countryType'; } //Thomas told me to change this since 10 was not long enough - yet you're not using this in the old XML.
+                //Please confirm what to do here. 
 
                 field(account; Rec."Account No.") { Caption = 'Account No.'; }
                 field(description; Rec.Description) { Caption = 'Description'; }
@@ -92,5 +93,6 @@ page 73002 SpyCreateJournalLineAPI
 
     var
         gDocumentType: Text;
+        gcountryType: Text;
 
 }

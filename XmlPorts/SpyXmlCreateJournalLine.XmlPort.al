@@ -100,7 +100,7 @@ xmlport 73090 SpyXmlCreateJournalLine
                 }
                 textelement(countryType)
                 {
-                    MinOccurs = Zero;
+                    MinOccurs = Zero; //Please confirm if this indeed is not used for anything. KW.
                     MaxOccurs = Once;
                 }
                 fieldelement(account; journalLine."Account No.")

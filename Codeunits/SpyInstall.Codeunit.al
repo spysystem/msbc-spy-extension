@@ -60,4 +60,13 @@ codeunit 73005 "Spy Install"
             TenantWebService.Insert(true);
         end;
     end;
+
+    procedure CreateDefaultSetup()
+    var
+    SpySetup: Record "Spy Setup";
+    begin
+        SpySetup.Init();
+        SpySetup."Default Jnl Batch Description" := 'Spy Description';
+        SpySetup."Default Journal Batch Name" := ''
+    end;
 }
