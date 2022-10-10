@@ -21,7 +21,7 @@ page 73002 SpyCreateJournalLineAPI
                 field(templateName; Rec."Journal Template Name") { Caption = 'Journal Template Name'; }
                 field(journalName; Rec."Journal Batch Name") { Caption = 'Journal Batch Name'; }
                 field(documentNumber; Rec."Document No.") { Caption = 'Document No.'; }
-                field(documentType; gDocumentType) { Caption = 'Document Type'; }
+                field(documentType; Rec.documentTypeAsText) { Caption = 'Document Type'; }
                 field(countryType; gcountryType) { Caption = 'countryType'; } //Thomas told me to change this since 10 was not long enough - yet you're not using this in the old XML.
                 //Please confirm what to do here. 
 
@@ -92,7 +92,7 @@ page 73002 SpyCreateJournalLineAPI
     end;
 
     var
-        gDocumentType: Text;
+        //gDocumentType: Text;
         gcountryType: Text;
 
 }
