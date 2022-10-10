@@ -221,7 +221,7 @@ page 73004 "Spy Journal Lines"
             action("Clean Up")
             {
                 ApplicationArea = All;
-                Caption = 'Clean Up', comment = 'DAN="Clean Up"';
+                Caption = 'Clean Up', comment = 'DAN="Ryd kladde"';
                 ToolTip = 'Clean Up';
                 Promoted = true;
                 PromotedCategory = Process;

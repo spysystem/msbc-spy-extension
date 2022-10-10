@@ -18,16 +18,12 @@ codeunit 73006 SpyCreateJournalLine
     var
         SpyJournalLine: Record "Spy Journal Line";
         SpyErrors: Record "Spy Error";
-        errors: Record "Error Message" temporary;
-        error: ErrorInfo;
-        i: Record Integer;
         TotalCount: Integer;
         CurrentCount: Integer;
         Posted: Boolean;
         PostedCount: Integer;
         ErrorsWritten: Text;
-        HttpErrors: Text;
-        ErrorFoundLbl: Label 'Erorrs found %1 - continue to delete lines', comment = '%1 = Errors';
+        ErrorFoundLbl: label 'Erorrs found %1 - continue to delete lines', comment = '%1 = Errors';
     begin
         Clear(TotalCount);
         Clear(ErrorsWritten);
@@ -79,20 +75,21 @@ codeunit 73006 SpyCreateJournalLine
     /// <summary>
     /// CreateJournalLine.
     /// </summary>
-    /// <param name="VAR journalLineList">XmlPort spyXmlCreateJournalLine.</param>
-    /// <returns>Return variable return of type Text[50].</returns>
+    /// <param name="VAR JournalLineList">XmlPort SpyXmlCreateJournalLine.</param>
+    /// <returns>Return variable Return of type Text[50].</returns>
     procedure CreateJournalLine(VAR JournalLineList: XmlPort SpyXmlCreateJournalLine) Return: Text[50]
     begin
         JournalLineList.Import();
         EXIT(CopyStr(Database.CompanyName, 1, 50));
     end;
 
+
     /// <summary>
     /// ExportJournalLine.
     /// </summary>
-    /// <param name="VAR spyXmlCreateJournalLine">XmlPort SpyXmlCreateJournalLine.</param>  
-    /// <returns>Return variable Return of type Text[50].</returns>
-    procedure ExportJournalLine(VAR spyXmlCreateJournalLine: XmlPort spyXmlCreateJournalLine) return: Text[50]
+    /// <param name="spyXmlCreateJournalLine">VAR xmlPort spyXmlCreateJournalLine.</param>
+    /// <returns>Return variable return of type Text[50].</returns>
+    procedure ExportJournalLine(var spyXmlCreateJournalLine: xmlPort spyXmlCreateJournalLine) return: Text[50]
     var
         IsHandled: Boolean;
     begin
@@ -114,6 +111,12 @@ codeunit 73006 SpyCreateJournalLine
         Exit('Pong');
     end;
 
+    /// <summary>
+    /// CleanUp.
+    /// </summary>
+    /// <param name="SpyJournalLine">VAR Record "Spy Journal Line".</param>
+    /// <param name="SpyErrors">VAR Record "Spy Error".</param>
+    /// <returns>Return variable Errors of type Text.</returns>
     procedure CleanUp(var SpyJournalLine: Record "Spy Journal Line"; var SpyErrors: Record "Spy Error") Errors: Text
     var
         GenJournalLine: Record "Gen. Journal Line";
