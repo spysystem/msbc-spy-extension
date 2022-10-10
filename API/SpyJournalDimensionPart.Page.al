@@ -86,6 +86,7 @@ page 73003 SpyJournalDimensionPart
             Rec."Journal Template Name" := SpyJournalLine."Journal Template Name";
             Rec."Journal Batch Name" := SpyJournalLine."Journal Batch Name";
             Rec."External Document No." := SpyJournalLine."External Document No.";
+            Rec.Description := SpyJournalLine.Description;
         end;
     end;
 

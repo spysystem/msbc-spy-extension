@@ -37,12 +37,14 @@ table 73001 "Spy Setup"
         field(10; "Default Journal Template Name"; Code[10])
         {
             Caption = 'Default Journal Temp Name';
+            TableRelation = "Gen. Journal Template";
             DataClassification = ToBeClassified;
         }
         field(15; "Default Journal Batch Name"; Code[10])
         {
             Caption = 'Default Journal Batch Name';
             DataClassification = ToBeClassified;
+            TableRelation = "Gen. Journal Batch";
         }
         field(20; "Default Jnl Batch Description"; Text[100])
         {
@@ -54,6 +56,7 @@ table 73001 "Spy Setup"
         field(21; "Default Template Type"; Enum "Gen. Journal Template Type")
         {
             Caption = 'Default Template Type';
+            TableRelation = "Gen. Journal Template".Type;
             DataClassification = ToBeClassified;
         }
     }

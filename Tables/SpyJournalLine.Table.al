@@ -68,7 +68,7 @@ table 73090 "Spy Journal Line"
             Caption = 'Document No.';
             DataClassification = CustomerContent;
         }
-        field(38; "Due Date"; Date) //dueDate
+        field(38; "Due Date"; Text[20]) //dueDate
         {
             Caption = 'Due Date';
         }
@@ -477,7 +477,7 @@ table 73090 "Spy Journal Line"
     /// </summary>
     procedure SetDueDate()
     begin
-        if Rec."Due Date" <> 0D then begin
+        if Rec."Due Date" <> '' then begin
             evaluate(day, CopyStr(Format("Due Date"), 9, 2));
             evaluate(month, CopyStr(Format("Due Date"), 6, 2));
             evaluate(year, CopyStr(Format("Due Date"), 1, 4));
@@ -589,6 +589,7 @@ table 73090 "Spy Journal Line"
         Vendor: Record Vendor;
         AccountNoGetErrorLbl: Label '[postTypeErr] Account No. does not exist %1', comment = '%1 = Account No';
         InvalidPostTypeLbl: Label '[postTypeErr] %1 is an invalid postyingType, posttypes avaible: tax,ledger,customer or supplier', comment = '%1,%2,%3,%5 = postType';
+        Errors: Text;
     begin
         if not (postType in ['tax', 'ledger', 'customer', 'supplier']) then begin
             ErrorList.Add(StrSubstNo(InvalidPostTypeLbl, postType));
@@ -614,7 +615,9 @@ table 73090 "Spy Journal Line"
                             ErrorList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
                     end;
             end;
-        if not ErrorList.Contains('[postTypeErr]') then begin
+
+        Errors := GetErrorTextList();
+        if StrPos(Errors, '[postTypeErr]') < 0 then begin
             GenJournalLine.Validate("Account No.", Rec."Account No.");
             exit(true)
         end
@@ -805,20 +808,20 @@ table 73090 "Spy Journal Line"
         SpyDimensions: Record "Spy Dimension";
         SpyErrors: Record "Spy Error";
     begin
-        SpyJournalLine.SetRange("External Document No.", SpyJournalLine."External Document No.");
+        SpyJournalLine.SetRange(Description, SpyJournalLine.Description);
         if SpyJournalLine.FindSet() then
             repeat
                 SpyJournalLine.Delete();
             until SpyJournalLine.Next() = 0;
         //Delete Spy Dims
-        SpyDimensions.SetRange("External Document No.", SpyJournalLine."External Document No.");
+        SpyDimensions.SetRange(Description, SpyJournalLine.Description);
         if SpyDimensions.FindSet() then
             repeat
                 SpyDimensions.Delete();
             until SpyDimensions.Next() = 0;
 
         //Return Error Text from Blob  
-        SpyErrors.SetRange("External Document No.", SpyJournalLine."External Document No.");
+        SpyErrors.SetRange(Description, SpyJournalLine.Description);
         if SpyErrors.FindFirst() then
             repeat
                 SpyErrors.Delete();

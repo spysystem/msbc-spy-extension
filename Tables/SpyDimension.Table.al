@@ -26,6 +26,13 @@ table 73002 "Spy Dimension"
             Caption = 'Line No.';
         }
 
+        field(8; Description; Text[100])
+        {
+            Caption = 'Description';
+            DataClassification = CustomerContent;
+
+        }
+
         field(37; "External Document No."; Code[20])
         {
             Caption = 'Document No.';
@@ -114,9 +121,9 @@ table 73002 "Spy Dimension"
         end;
         if ErrorList.Contains(SpyDimCreateErr) or ErrorList.Contains(SpyDimValueCreateErr) or ErrorList.Contains(SpyDimBufferCreateErr) then begin
             SpyError.AddError(SpyJournalLine, ErrorList);
-            Exit(false);
+            exit(false);
         end else
-            Exit(true);
+            exit(true);
     end;
 
     var
