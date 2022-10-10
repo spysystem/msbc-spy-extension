@@ -93,11 +93,6 @@
           <note from="Developer" annotates="general" priority="2">DAN="Spy Fejl"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1931873846 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Description</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Description - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Table 1931873846 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Entry No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -127,6 +122,11 @@
           <source>Line No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1931873846 - Field 632522958 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Spy Jnl Line Description - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3833745087 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Spy Journal Line</source>
@@ -932,6 +932,11 @@
           <source>spy,error</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 2448441827 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Spy Jnl Line Description field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Control Description - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2448441827 - Control 486908828 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Document No. field.</source>

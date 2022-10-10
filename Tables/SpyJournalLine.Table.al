@@ -301,11 +301,12 @@ table 73090 "Spy Journal Line"
         Errors: Text;
     begin
         Errors := Rec.GetErrorTextList();
-        If Errors <> '' then begin
+        if Errors <> '' then begin
             SpyErrors.Init();
             SpyErrors."Entry No." := Rec."Entry No.";
             SpyErrors."Journal Template Name" := Rec."Journal Template Name";
             SpyErrors."Journal Batch Name" := Rec."Journal Batch Name";
+            SpyErrors."Spy Jnl Line Description" := Rec.Description;
             SpyErrors."External Document No." := Rec."External Document No.";
             SpyErrors."Error Description".CreateOutStream(ErrorOutStream);
             ErrorOutStream.WriteText(Errors);
@@ -315,7 +316,7 @@ table 73090 "Spy Journal Line"
             exit(true);
         end
         else
-            Exit(false);
+            exit(false);
     end;
 
     /// <summary>
@@ -331,7 +332,7 @@ table 73090 "Spy Journal Line"
                 FieldRefBank := RecordRefBank.Field(2);
 
             FieldRefBank.SetFilter("Account No.");
-            If RecordRefBank.FindSet() THEN begin
+            if RecordRefBank.FindSet() THEN begin
                 BankAccount.SetFilter("Bank Acc. Posting Group", RecordRefBank.field(1).Value);
                 BankAccount.SetFilter("Currency Code", "Currency Code");
                 if BankAccount.FindFirst() then begin
@@ -821,7 +822,7 @@ table 73090 "Spy Journal Line"
             until SpyDimensions.Next() = 0;
 
         //Return Error Text from Blob  
-        SpyErrors.SetRange(Description, SpyJournalLine.Description);
+        SpyErrors.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
         if SpyErrors.FindFirst() then
             repeat
                 SpyErrors.Delete();

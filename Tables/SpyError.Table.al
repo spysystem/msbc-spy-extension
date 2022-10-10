@@ -9,7 +9,7 @@ table 73000 "Spy Error"
         {
             Caption = 'Entry No.';
         }
-        field(8; Description; Text[100])
+        field(8; "Spy Jnl Line Description"; Text[100])
         {
             Caption = 'Description';
             DataClassification = CustomerContent;
@@ -75,7 +75,7 @@ table 73000 "Spy Error"
             end;
             Rec."Journal Template Name" := SpyJournalLine."Journal Template Name";
             Rec."Entry No." := SpyJournalLine."Entry No.";
-            Rec.Description := SpyJournalLine.Description;
+            Rec."Spy Jnl Line Description" := SpyJournalLine.Description;
             Rec."External Document No." := SpyJournalLine."External Document No.";
             Rec."Error Description".CreateOutStream(BlobOutStream);
             BlobOutStream.WriteText(ErrorTotal);

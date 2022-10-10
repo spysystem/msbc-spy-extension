@@ -31,6 +31,9 @@ codeunit 73006 SpyCreateJournalLine
     begin
         Clear(TotalCount);
         Clear(ErrorsWritten);
+        clear(SpyErrors);
+        SpyErrors.DeleteAll();
+
         if SpyJournalLine.FindSet() then begin
             TotalCount := SpyJournalLine.Count();
             repeat
@@ -41,33 +44,37 @@ codeunit 73006 SpyCreateJournalLine
                     if Posted then
                         PostedCount += 1;
                 end;
-                //IF NOT ALL POSTED
-                if (CurrentCount = TotalCount) Then
-                    if (PostedCount <> TotalCount) then
-                        if not GuiAllowed then begin
-                            //Delete current Spy Journal Lines and related GenJournalLines
-                            ErrorsWritten := GetErrorBlobMessage(SpyJournalLine, SpyErrors);
-                            CleanUp(SpyJournalLine, SpyErrors);
-                            Error := ErrorInfo.Create(ErrorsWritten);
-                            exit(Error.Message);
-                        end
+
+                if (CurrentCount = TotalCount) then //when all Lines is processed
+                    if (PostedCount <> TotalCount) then begin //if errors occured
+                        ErrorsWritten := GetErrorBlobMessage(SpyJournalLine, SpyErrors);
+                        if not GuiAllowed then
+                            CleanUp(SpyJournalLine, SpyErrors)//Delete current Spy Journal Lines and related GenJournalLines    
                         else
                             if CONFIRM(StrSubstNo(ErrorFoundLbl, SpyJournalLine.GetErrorTextList()), false) then begin
                                 Message(CleanUp(SpyJournalLine, SpyErrors));
                                 exit('');
                             end;
+                    end;
             until SpyJournalLine.Next() = 0;
             //IF ALL POSTED
-            if (PostedCount = TotalCount) THEN
-                if not GuiAllowed then
-                    Exit(CleanUp(SpyJournalLine, SpyErrors))
+            if (PostedCount = TotalCount) then
+                if not GuiAllowed then begin
+                    CleanUp(SpyJournalLine, SpyErrors);
+                    exit('OK!');
+                end
                 else
-                    IF CONFIRM('Posting completed. do you want to delete all Spy lines?', false) then
+                    if CONFIRM('Posting completed. do you want to delete all Spy lines?', false) then
                         SpyJournalLine.CleanUpAfterManualPosting(SpyJournalLine)
         end;
-        if (PostedCount <> TotalCount) and (GuiAllowed) then
+
+        if (PostedCount = TotalCount) and GuiAllowed then
             Message('Completed');
+
+        if (PostedCount <> TotalCount) then
+            Error(ErrorsWritten);
     end;
+
 
     /// <summary>
     /// CreateJournalLine.
@@ -113,17 +120,21 @@ codeunit 73006 SpyCreateJournalLine
         SpyDimensions: Record "Spy Dimension";
         ErrorDescInStream: InStream;
     begin
+        //Delete Temp Spy Journal Lines
         SpyJournalLine.SetRange(Description, SpyJournalLine.Description);
         if SpyJournalLine.FindSet() then
             repeat
                 SpyJournalLine.Delete();
+                Commit();
             until SpyJournalLine.Next() = 0;
+
         //Delete if any exists in GenJournalLine
         GenJournalLine.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
         GenJournalLine.SetRange(Description, SpyJournalLine.Description);
         if GenJournalLine.FindSet() then
             repeat
                 GenJournalLine.Delete(true);
+                Commit();
             until GenJournalLine.Next() = 0;
 
         //Delete Spy Dims
@@ -131,10 +142,11 @@ codeunit 73006 SpyCreateJournalLine
         if SpyDimensions.FindSet() then
             repeat
                 SpyDimensions.Delete();
+                Commit();
             until SpyDimensions.Next() = 0;
 
         //Return Error Text from Blob  
-        SpyErrors.SetRange(Description, SpyJournalLine.Description);
+        SpyErrors.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
         if SpyErrors.FindFirst() then begin
             SpyErrors.CalcFields("Error Description");
             if SpyErrors."Error Description".HasValue() then begin
@@ -142,9 +154,10 @@ codeunit 73006 SpyCreateJournalLine
                 ErrorDescInStream.ReadText(Errors, SpyErrors."Error Description".Length());
                 //Delete All Errors Alwyase
                 SpyErrors.DeleteAll();
+                Commit();
             end;
         end;
-        Exit(Errors);
+        exit(Errors);
     end;
 
     /// <summary>
@@ -156,15 +169,13 @@ codeunit 73006 SpyCreateJournalLine
 
     procedure GetErrorBlobMessage(var SpyJournalLine: Record "Spy Journal Line"; var SpyErrors: Record "Spy Error") Errors: Text
     var
-        GenJournalLine: Record "Gen. Journal Line";
-        SpyDimensions: Record "Spy Dimension";
         ErrorDescInStream: InStream;
     begin
         //Return Error Text from Blob  
-        SpyErrors.SetRange(Description, SpyJournalLine.Description);
+        SpyErrors.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
         if SpyErrors.FindFirst() then begin
             SpyErrors.CalcFields("Error Description");
-            IF SpyErrors."Error Description".HasValue() then begin
+            if SpyErrors."Error Description".HasValue() then begin
                 SpyErrors."Error Description".CreateInStream(ErrorDescInStream);
                 ErrorDescInStream.ReadText(Errors, SpyErrors."Error Description".Length());
                 //Delete All Errors Alwyase
@@ -186,7 +197,7 @@ codeunit 73006 SpyCreateJournalLine
         Errors: Text;
     begin
         //Return Error Text from Blob  
-        SpyErrors.SetRange(Description, SpyJournalLine.Description);
+        SpyErrors.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
         if SpyErrors.FindFirst() then begin
             SpyErrors.CalcFields("Error Description");
             if SpyErrors."Error Description".HasValue() then begin

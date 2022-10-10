@@ -23,6 +23,12 @@ page 73005 "Spy Errors"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Entry No. field.';
                 }
+
+                field(Description; Rec."Spy Jnl Line Description")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Spy Jnl Line Description field.';
+                }
                 field("Error Description"; Rec."Error Description")
                 {
                     ApplicationArea = All;
