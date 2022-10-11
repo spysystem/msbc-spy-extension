@@ -28,17 +28,18 @@ codeunit 73006 SpyCreateJournalLine
         Clear(TotalCount);
         Clear(ErrorsWritten);
         clear(SpyErrors);
+        SpyErrors.DeleteAll();
 
         if SpyJournalLine.FindSet() then begin
             TotalCount := SpyJournalLine.Count();
             repeat
                 CurrentCount += 1;
-                //SpyJournalLine.GetErrorsRec(SpyJournalLine, SpyErrors);
-                //if SpyErrors.IsEmpty then begin
-                Posted := SpyJournalLine.PostTempSpyJournalLines(); //POST
-                if Posted then
-                    PostedCount += 1;
-                //end;
+                SpyJournalLine.GetErrorsRec(SpyJournalLine, SpyErrors);
+                if SpyErrors.IsEmpty then begin
+                    Posted := SpyJournalLine.PostTempSpyJournalLines(); //POST
+                    if Posted then
+                        PostedCount += 1;
+                end;
                 //WHEN All lines.Run (PostTempSpyJournalLines) then 
                 if (CurrentCount = TotalCount) and (PostedCount <> TotalCount) then
                     ErrorsWritten := GetErrorBlobMessage(SpyJournalLine, SpyErrors);
@@ -54,13 +55,9 @@ codeunit 73006 SpyCreateJournalLine
         //IF NOT ALL POSTED
         if (PostedCount <> TotalCount) then begin
             if GuiAllowed then
-                if CONFIRM(StrSubstNo(ErrorFoundLbl, ErrorsWritten), false) then
+                if CONFIRM(StrSubstNo(ErrorFoundLbl, SpyJournalLine.GetErrorTextList()), false) then
                     Message(CleanUpWhenError(SpyJournalLine, SpyErrors));
-
-            if not GuiAllowed then begin
-                CleanUpWhenError(SpyJournalLine, SpyErrors);
-                Error(ErrorsWritten);
-            end;
+            Error(ErrorsWritten);
         end;
     end;
 
@@ -134,10 +131,12 @@ codeunit 73006 SpyCreateJournalLine
             until GenJournalLine.Next() = 0;
 
         //Delete Spy Dims
-        if SpyDimensions.FindSet() then begin
-            SpyDimensions.DeleteAll();
-            Commit();
-        end;
+        SpyDimensions.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
+        if SpyDimensions.FindSet() then
+            repeat
+                SpyDimensions.Delete();
+                Commit();
+            until SpyDimensions.Next() = 0;
 
         //Return Error Text from Blob  
         SpyErrors.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
@@ -181,10 +180,11 @@ codeunit 73006 SpyCreateJournalLine
 
         //Delete Spy Dims
         SpyDimensions.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
-        if SpyDimensions.FindSet() then begin
-            SpyDimensions.DeleteAll();
-            Commit();
-        end;
+        if SpyDimensions.FindSet() then
+            repeat
+                SpyDimensions.Delete();
+                Commit();
+            until SpyDimensions.Next() = 0;
 
         //Return Error Text from Blob  
         SpyErrors.DeleteAll();

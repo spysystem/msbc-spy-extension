@@ -304,7 +304,6 @@ table 73090 "Spy Journal Line"
     begin
         Errors := Rec.GetErrorTextList();
         if Errors <> '' then begin
-
             SpyErrors.Init();
             SpyErrors."Entry No." := Rec."Entry No.";
             SpyErrors."Journal Template Name" := Rec."Journal Template Name";
@@ -436,10 +435,11 @@ table 73090 "Spy Journal Line"
         end;
 
         if not GlobalGenJournalLine.Insert(true) then
-            GlobalErrorTextList.Add(StrSubstNo(InsertGenJnlLineErr, Rec.Description + ' ' + Format(Rec."Entry No.")));
+            GlobalErrorTextList.Add(StrSubstNo(InsertGenJnlLineErr, Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
 
         //Set dimensionsId
-        SpyDimensions.SetRange("Spy Jnl Line Description", Rec.Description);
+        SpyDimensions.SetRange("External Document No.", Rec."External Document No.");
+        SpyDimensions.SetRange("Entry No.", Rec."Entry No.");
         if SpyDimensions.FindSet() then
             repeat
                 FillTempDimBuffer(SpyDimensions);
@@ -451,7 +451,7 @@ table 73090 "Spy Journal Line"
         GlobalGenJournalLine.Modify();
         Rec.SetSalesPurchExclVAT();    //Only run if "Account Type" = "Account Type"::Customer, Vendor
         Rec.CopyCustomerDimensions(); //Only run if "Account Type" = "Account Type"::Customer
-        Rec.UpdateGlobalDimensions();
+        //Rec.UpdateGlobalDimensions();
 
         if ErrorFoundInErrorTextList('[CreationErr]') then
             exit(false) else
