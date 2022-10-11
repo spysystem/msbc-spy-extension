@@ -13,11 +13,7 @@ page 73005 "Spy Errors"
         {
             repeater(General)
             {
-                field("Document No."; Rec."External Document No.")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Document No. field.';
-                }
+
                 field("Entry No."; Rec."Entry No.")
                 {
                     ApplicationArea = All;
@@ -29,11 +25,7 @@ page 73005 "Spy Errors"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Spy Jnl Line Description field.';
                 }
-                field("Error Description"; Rec."Error Description")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Error Description field.';
-                }
+
                 field("Journal Batch Name"; Rec."Journal Batch Name")
                 {
                     ApplicationArea = All;

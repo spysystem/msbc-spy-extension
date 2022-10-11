@@ -39,6 +39,11 @@
           <note from="Developer" annotates="general" priority="2"/>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Dimension Value Code - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1308829302 - Field 486908828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document No.</source>
+          <note from="Developer" annotates="general" priority="2"/>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Document No. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1308829302 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Entry No.</source>
           <note from="Developer" annotates="general" priority="2"/>
@@ -89,11 +94,6 @@
           <source>Error Description</source>
           <note from="Developer" annotates="general" priority="2"/>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Error Description - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 1931873846 - Field 1527563463 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Document No.</source>
-          <note from="Developer" annotates="general" priority="2"/>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field External Document No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1931873846 - Field 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Journal Batch Name</source>
@@ -805,6 +805,11 @@
           <note from="Developer" annotates="general" priority="2"/>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Dimensions - Control Dimension Value Code - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 1668317091 - Control 486908828 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document No.</source>
+          <note from="Developer" annotates="general" priority="2"/>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Dimensions - Control Document No. - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 1668317091 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Entry No.</source>
           <note from="Developer" annotates="general" priority="2"/>
@@ -840,6 +845,11 @@
           <note from="Developer" annotates="general" priority="2"/>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Dimensions - Control lineNo - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 1668317091 - Control 632522958 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Jnl Line Description.</source>
+          <note from="Developer" annotates="general" priority="2"/>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Dimensions - Control Spy Jnl Line Description - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 1668317091 - Control 3087293037 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>SystemId</source>
           <note from="Developer" annotates="general" priority="2"/>
@@ -865,20 +875,10 @@
           <note from="Developer" annotates="general" priority="2"/>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Control Description - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 2448441827 - Control 486908828 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Document No. field.</source>
-          <note from="Developer" annotates="general" priority="2"/>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Control Document No. - Property ToolTip</note>
-        </trans-unit>
         <trans-unit id="Page 2448441827 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Entry No. field.</source>
           <note from="Developer" annotates="general" priority="2"/>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Control Entry No. - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 2448441827 - Control 1805468730 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Error Description field.</source>
-          <note from="Developer" annotates="general" priority="2"/>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Control Error Description - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2448441827 - Control 2704330142 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Journal Batch Name field.</source>

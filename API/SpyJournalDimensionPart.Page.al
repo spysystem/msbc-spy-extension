@@ -84,53 +84,13 @@ page 73003 SpyJournalDimensionPart
                 Rec."Line No." := 1;
             Rec."Journal Template Name" := SpyJournalLine."Journal Template Name";
             Rec."Journal Batch Name" := SpyJournalLine."Journal Batch Name";
+            Rec."Document No." := SpyJournalLine."Document No.";
             Rec."External Document No." := SpyJournalLine."External Document No.";
             Rec."Spy Jnl Line Description" := SpyJournalLine.Description;
         end;
     end;
 
-    /// <summary>
-    /// AddError.
-    /// </summary>
-    /// <param name="SpyJournalLine">Record "Spy Journal Line".</param>
-    procedure AddError(SpyJournalLine: Record "Spy Journal Line")
-    var
-        spyError: Record "Spy Error";
-        ErrorText: Text;
-        ErrorTotal: Text;
-        ErrorNumber: Integer;
-        BlobOutStream: OutStream;
-        ErrorList: List of [Text];
-
-    begin
-
-        if ErrorList.Count > 0 then begin
-            foreach ErrorText in ErrorList do begin
-                ErrorNumber += 1;
-                ErrorTotal += ErrorList.Get(ErrorNumber) + ' ';
-            end;
-
-            spyError.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
-            spyError.SetRange("Entry No.", SpyJournalLine."Entry No.");
-            spyError.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
-
-            if spyError.FindFirst() then
-                spyError."Line No." := spyError."Line No." + 1;
-
-            spyError."Journal Template Name" := SpyJournalLine."Journal Template Name";
-            spyError."Entry No." := SpyJournalLine."Entry No.";
-            spyError."Spy Jnl Line Description" := SpyJournalLine.Description;
-
-            spyError."Error Description".CreateOutStream(BlobOutStream);
-            BlobOutStream.WriteText(ErrorTotal);
-            if not spyError.Insert() then
-                spyError.Modify();
-        end;
-
-    end;
-
     var
         SpyJournalLine: Record "Spy Journal Line";
-
 
 }

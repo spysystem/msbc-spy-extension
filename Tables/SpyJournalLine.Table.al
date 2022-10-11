@@ -295,7 +295,7 @@ table 73090 "Spy Journal Line"
     /// ErrorExists.
     /// </summary>
     /// <returns>Return variable ErrorFound of type Boolean.</returns>
-    procedure ErrorExists() ErrorFound: Boolean
+    procedure CreateSypErrorRecords() ErrorDocumented: Boolean
     var
         SpyErrors: Record "Spy Error";
         ErrorOutStream: OutStream;
@@ -308,7 +308,6 @@ table 73090 "Spy Journal Line"
             SpyErrors."Journal Template Name" := Rec."Journal Template Name";
             SpyErrors."Journal Batch Name" := Rec."Journal Batch Name";
             SpyErrors."Spy Jnl Line Description" := Rec.Description;
-            SpyErrors."External Document No." := Rec."External Document No.";
             SpyErrors."Error Description".CreateOutStream(ErrorOutStream);
             ErrorOutStream.WriteText(Errors);
             SpyErrors.Insert();
@@ -346,22 +345,6 @@ table 73090 "Spy Journal Line"
     end;
 
     /// <summary>
-    /// GetErrorsRec.
-    /// </summary>
-    /// <param name="SpyJournalLine">VAR Record "Spy Create Journal Line".</param>
-    /// <param name="SpyErrors">VAR Record "Spy Errors".</param>
-    procedure GetErrorsRec(var SpyJournalLine: Record "Spy Journal Line"; var SpyErrors: Record "Spy Error")
-    var
-        lSpyErrors: Record "Spy Error";
-    begin
-        lSpyErrors.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
-        lSpyErrors.SetRange("Entry No.", SpyJournalLine."Entry No.");
-        lSpyErrors.SetRange("External Document No.", SpyJournalLine."Document No.");
-        if lSpyErrors.FindFirst() then
-            SpyErrors := lSpyErrors;
-    end;
-
-    /// <summary>
     /// GetErrors.
     /// </summary>
     /// <returns>Return value of type Text.</returns>
@@ -372,7 +355,7 @@ table 73090 "Spy Journal Line"
         ErrorTotal: Text;
         i: Integer;
     begin
-        if GlobalErrorTextList.Count > 0 Then
+        if GlobalErrorTextList.Count > 0 then
             foreach ErrorText in GlobalErrorTextList do begin
                 i += 1;
                 ErrorTotal += GlobalErrorTextList.Get(i) + ' ';
@@ -429,8 +412,9 @@ table 73090 "Spy Journal Line"
             Rec.GetBankAccount();
             Rec.SetDueDate();
             Rec.SetCashDiscountDate();
-            if Rec.ErrorExists() then
-                exit(false);
+
+            ///if Rec.CreateSypErrorRecords() then
+            //    exit(false);
         end;
 
         if not GenJournalLine.Insert(true) then
@@ -450,7 +434,7 @@ table 73090 "Spy Journal Line"
         Rec.CopyCustomerDimensions();
         //Rec.UpdateGlobalDimensions();
 
-        if ErrorFoundInErrorTextList('[CreationErr]') then
+        if Rec.CreateSypErrorRecords() then
             exit(false) else
             exit(true);
     end;
@@ -775,35 +759,6 @@ table 73090 "Spy Journal Line"
         if ErrorFoundInErrorTextList('[TAX Title Err]') then
             exit(false) else
             exit(true);
-    end;
-
-    /// <summary>
-    /// CleanUpAfterManualPosting - used for debugging BC Code.
-    /// </summary>
-    /// <param name="SpyJournalLine">VAR Record "Spy Journal Line".</param>
-    procedure CleanUpAfterManualPosting(var SpyJournalLine: Record "Spy Journal Line")
-    var
-        SpyDimensions: Record "Spy Dimension";
-        SpyErrors: Record "Spy Error";
-    begin
-        SpyJournalLine.SetRange(Description, SpyJournalLine.Description);
-        if SpyJournalLine.FindSet() then
-            repeat
-                SpyJournalLine.Delete();
-            until SpyJournalLine.Next() = 0;
-        //Delete Spy Dims
-        SpyDimensions.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
-        if SpyDimensions.FindSet() then
-            repeat
-                SpyDimensions.Delete();
-            until SpyDimensions.Next() = 0;
-
-        //Return Error Text from Blob  
-        SpyErrors.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
-        if SpyErrors.FindFirst() then
-            repeat
-                SpyErrors.Delete();
-            until SpyErrors.Next() = 0;
     end;
 
     /// <summary>

@@ -232,7 +232,7 @@ page 73004 "Spy Journal Lines"
                 var
                     spycr: codeunit SpyCreateJournalLine;
                 begin
-                    spycr.CleanUpWhenError(Rec);
+                    spycr.CleanUpWithGUIAllowed(Rec);
                 end;
             }
         }

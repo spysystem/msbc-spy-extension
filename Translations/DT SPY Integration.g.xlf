@@ -108,11 +108,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Error Description - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1931873846 - Field 1527563463 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Document No.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field External Document No. - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Table 1931873846 - Field 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Journal Batch Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -393,25 +388,20 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field VAT Prod. Posting Group - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1200734571 - Method 985081440 - NamedType 731237784" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Cleaned, %1: %2, %3: %4, %5: %6, %7: %8</source>
-          <note from="Developer" annotates="general" priority="2">%1: %2, %3: %4, %5: %6, %7: %8</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method CleanUpWhenError - NamedType ResultSummazionTxt</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 1200734571 - Method 1886847335 - NamedType 3713220116" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 1200734571 - Method 3449725409 - NamedType 3713220116" size-unit="char" translate="yes" xml:space="preserve">
           <source>Posted %1 lines to Journal: %2 with Description: %3</source>
           <note from="Developer" annotates="general" priority="2">%1, %2, %3</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method CleanUpWhenPosted - NamedType PostedMessageLbl</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method CleanSpyData - NamedType PostedMessageLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1200734571 - Method 482609307 - NamedType 731237784" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cleaned, %1: %2, %3: %4, %5: %6, %7: %8</source>
+          <note from="Developer" annotates="general" priority="2">%1: %2, %3: %4, %5: %6, %7: %8</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method CleanUpWithGUIAllowed - NamedType ResultSummazionTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 1200734571 - Method 3235906455 - NamedType 2523370944" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Erorrs found %1 - continue to delete lines</source>
+          <source>Erorrs found %1. Continue and delete SPY data?</source>
           <note from="Developer" annotates="general" priority="2">%1 = Errors</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method commitToJournalLine - NamedType ErrorFoundLbl</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 1200734571 - Method 3235906455 - NamedType 1602421078" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Posting completed. do you want to delete all Spy-related records?</source>
-          <note from="Developer" annotates="general" priority="2">DAN="Bogføring udført, venligst slet de relaterede spy-data ved at trykke Ja, eller tryk nej"</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method commitToJournalLine - NamedType PostedSuccessTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 1200734571 - Method 3964488894 - NamedType 491796767" size-unit="char" translate="yes" xml:space="preserve">
           <source>Deleted Lines Count: %1 of %2, Document No Deleted: %3</source>
@@ -963,20 +953,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Control Description - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 2448441827 - Control 486908828 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Document No. field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Control Document No. - Property ToolTip</note>
-        </trans-unit>
         <trans-unit id="Page 2448441827 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Entry No. field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Control Entry No. - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 2448441827 - Control 1805468730 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Error Description field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Control Error Description - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2448441827 - Control 2704330142 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Journal Batch Name field.</source>
