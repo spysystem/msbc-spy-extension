@@ -67,10 +67,12 @@ page 73003 SpyJournalDimensionPart
     var //Globals
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    var
+        spyError: Record "Spy Error";
     begin
         Rec.HandleDimensions(SpyJournalLine, GlobalErrorTextList);
         if GlobalErrorTextList.Count > 0 then
-            AddDimensionsCreationError(SpyJournalLine, GlobalErrorTextList);
+            AddError(SpyJournalLine, GlobalErrorTextList);
     end;
 
 
@@ -92,13 +94,7 @@ page 73003 SpyJournalDimensionPart
         end;
     end;
 
-    /// <summary>
-    /// AddError.
-    /// </summary>
-    /// <param name="pSpyJournalLine">Record "Spy Journal Line".</param>
-    /// <param name="ErrorList">List of [Text].</param>
-    /// <returns>Return variable ErrorWasAdded of type Boolean.</returns>
-    procedure AddDimensionsCreationError(pSpyJournalLine: Record "Spy Journal Line"; ErrorList: List of [Text]) ErrorWasAdded: Boolean
+    procedure AddError(SpyJournalLine: Record "Spy Journal Line"; ErrorList: List of [Text]) ErrorWasAdded: Boolean
     var
         spyError: Record "Spy Error";
         ErrorText: Text;
@@ -114,16 +110,16 @@ page 73003 SpyJournalDimensionPart
                 ErrorTotal += ErrorList.Get(ErrorNumber) + ' ';
             end;
 
-            spyError.SetRange("Journal Template Name", pSpyJournalLine."Journal Template Name");
-            spyError.SetRange("Entry No.", pSpyJournalLine."Entry No.");
-            spyError.SetRange("Spy Jnl Line Description", pSpyJournalLine.Description);
+            spyError.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
+            spyError.SetRange("Entry No.", SpyJournalLine."Entry No.");
+            spyError.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
 
             if spyError.FindFirst() then
                 spyError."Line No." := spyError."Line No." + 1;
 
-            spyError."Journal Template Name" := pSpyJournalLine."Journal Template Name";
-            spyError."Entry No." := pSpyJournalLine."Entry No.";
-            spyError."Spy Jnl Line Description" := pSpyJournalLine.Description;
+            spyError."Journal Template Name" := SpyJournalLine."Journal Template Name";
+            spyError."Entry No." := SpyJournalLine."Entry No.";
+            spyError."Spy Jnl Line Description" := SpyJournalLine.Description;
 
             spyError."Error Description".CreateOutStream(BlobOutStream);
             BlobOutStream.WriteText(ErrorTotal);
