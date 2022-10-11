@@ -625,39 +625,31 @@ table 73090 "Spy Journal Line"
     /// </summary>
     /// <returns>Return value of type Boolean.</returns>
     procedure ValidateDocumentType(): Boolean
-    var
-        InvalidDocumentTypeLbl: label '[documentTypeErr] Document Type does not exist %1, document types avaliable: Sale,SaleCredit,Purchase,PurchaseCredit', comment = '%1,%2,%3,%4 = doc type';
     begin
         PostingType := '';
-        if not (documentTypeAsText in ['Sale', 'SaleCredit', 'Purchase', 'PurchaseCredit']) then
-            GlobalErrorTextList.Add(StrSubstNo(InvalidDocumentTypeLbl, documentTypeAsText));
-
-        if ErrorFoundInErrorTextList('[documentTypeErr]') then
-            exit(false) else begin
-            case documentTypeAsText of
-                'Sale':
-                    begin
-                        GenJournalLine.Validate("Document Type", "Document Type"::Invoice);
-                        PostingType := 'Sale';
-                    end;
-                'SaleCredit':
-                    begin
-                        GenJournalLine.Validate("Document Type", "Document Type"::"Credit Memo");
-                        PostingType := 'Sale';
-                    end;
-                'Purchase':
-                    begin
-                        GenJournalLine.Validate("Document Type", "Document Type"::Invoice);
-                        PostingType := 'Purchase';
-                    end;
-                'PurchaseCredit':
-                    begin
-                        GenJournalLine.Validate("Document Type", "Document Type"::"Credit Memo");
-                        PostingType := 'Purchase';
-                    end;
-            end;
-            exit(true);
+        case documentTypeAsText of
+            'Sale':
+                begin
+                    GenJournalLine.Validate("Document Type", "Document Type"::Invoice);
+                    PostingType := 'Sale';
+                end;
+            'SaleCredit':
+                begin
+                    GenJournalLine.Validate("Document Type", "Document Type"::"Credit Memo");
+                    PostingType := 'Sale';
+                end;
+            'Purchase':
+                begin
+                    GenJournalLine.Validate("Document Type", "Document Type"::Invoice);
+                    PostingType := 'Purchase';
+                end;
+            'PurchaseCredit':
+                begin
+                    GenJournalLine.Validate("Document Type", "Document Type"::"Credit Memo");
+                    PostingType := 'Purchase';
+                end;
         end;
+        exit(true);
     end;
 
     /// <summary>
