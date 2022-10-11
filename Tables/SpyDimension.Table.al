@@ -33,7 +33,13 @@ table 73002 "Spy Dimension"
 
         }
 
-        field(37; "External Document No."; Code[20])
+        field(37; "Document No."; Code[20])
+        {
+            Caption = 'Document No.';
+            DataClassification = CustomerContent;
+        }
+
+        field(38; "External Document No."; Code[20])
         {
             Caption = 'Document No.';
             DataClassification = CustomerContent;
@@ -76,7 +82,7 @@ table 73002 "Spy Dimension"
     /// </summary>
     /// <param name="pSpyJournalLine">VAR Record "Spy Create Journal Line".</param>
     /// <returns>Return variable DimensionsAdded of type Boolean.</returns>
-    procedure HandleDimensions(var pSpyJournalLine: Record "Spy Journal Line"; var pErrorTextList: List of [Text]): Boolean
+    procedure HandleDimensions(var pSpyJournalLine: Record "Spy Journal Line"): Boolean
     var
         SpyDimCreateErr: label '[SypDimensionCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 = create dimension';
         SpyDimValueCreateErr: label '[SypDimensioValueCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 =  create dimension';
@@ -88,8 +94,7 @@ table 73002 "Spy Dimension"
                 DimensionRecord.Init();
                 DimensionRecord.Code := CopyStr(Rec."Dimension Name", 1, MaxStrLen(DimensionRecord.Code));
                 DimensionRecord.Name := Rec."Dimension Name";
-                if not DimensionRecord.Insert(true) THEN
-                    pErrorTextList.Add(StrSubstNo(SpyDimCreateErr, Rec."External Document No." + ' ' + Format(Rec."Dimension Name")));
+                DimensionRecord.Insert(true);
             end;
 
             DimensionValueRecord.SetFilter("Dimension Code", "Dimension Name");
@@ -98,34 +103,26 @@ table 73002 "Spy Dimension"
                 DimensionValueRecord.Init();
                 DimensionValueRecord."Dimension Code" := CopyStr("Dimension Name", 1, MaxStrLen(DimensionValueRecord."Dimension Code"));
                 DimensionValueRecord.Code := "Dimension Value Code";
-                if not DimensionValueRecord.Insert(true) then
-                    pErrorTextList.Add(StrSubstNo(SpyDimValueCreateErr, Rec."External Document No." + ' ' + Format(Rec."Dimension Name")));
+                DimensionValueRecord.Insert(true);
 
             end;
-            DimensionBuffer.Reset();
-            DimensionBuffer.SetFilter("Dimension Code", "Dimension Name");
-            DimensionBuffer.SetFilter("Dimension Value Code", "Dimension Value Code");
-            DimensionBuffer.SetFilter("Table ID", '81');
-            if not DimensionBuffer.FindSet() then begin
-                DimensionBuffer.Reset();
-                DimensionBuffer.Init();
-                DimensionBuffer."Entry No." := EntryNo;
+            TempDimensionBuffer.Reset();
+            TempDimensionBuffer.SetFilter("Dimension Code", "Dimension Name");
+            TempDimensionBuffer.SetFilter("Dimension Value Code", "Dimension Value Code");
+            TempDimensionBuffer.SetFilter("Table ID", '81');
+            if not TempDimensionBuffer.FindSet() then begin
+                TempDimensionBuffer.Reset();
+                TempDimensionBuffer.Init();
+                TempDimensionBuffer."Entry No." := EntryNo;
                 EntryNo := EntryNo + 1;
-                DimensionBuffer."Table ID" := 81;
-                DimensionBuffer."Dimension Code" := CopyStr("Dimension Name", 1, MaxStrLen(DimensionBuffer."Dimension Code"));
-                DimensionBuffer."Dimension Value Code" := "Dimension Value Code";
-                if not DimensionBuffer.Insert() then
-                    pErrorTextList.Add(StrSubstNo(SpyDimBufferCreateErr, Rec."External Document No." + ' ' + Format(Rec."Dimension Name")));
+                TempDimensionBuffer."Table ID" := 81;
+                TempDimensionBuffer."Dimension Code" := CopyStr("Dimension Name", 1, MaxStrLen(TempDimensionBuffer."Dimension Code"));
+                TempDimensionBuffer."Dimension Value Code" := "Dimension Value Code";
+                TempDimensionBuffer.Insert();
 
             end;
         end;
-
-        if ErrorFoundInErrorTextList(SpyDimCreateErr, pErrorTextList) or
-            ErrorFoundInErrorTextList(SpyDimValueCreateErr, pErrorTextList) or
-                ErrorFoundInErrorTextList(SpyDimBufferCreateErr, pErrorTextList) then
-            exit(false)
-        else
-            exit(true);
+        exit(true);
     end;
 
     /// <summary>
@@ -151,7 +148,7 @@ table 73002 "Spy Dimension"
     var
         DimensionValueRecord: Record "Dimension Value";
         DimensionRecord: Record Dimension;
-        DimensionBuffer: Record "Dimension Buffer";
+        TempDimensionBuffer: Record "Dimension Buffer" temporary;
         EntryNo: Integer;
 
 }

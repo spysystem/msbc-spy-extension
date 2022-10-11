@@ -67,14 +67,9 @@ page 73003 SpyJournalDimensionPart
     var //Globals
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
-    var
-        spyError: Record "Spy Error";
     begin
-        Rec.HandleDimensions(SpyJournalLine, GlobalErrorTextList);
-        if GlobalErrorTextList.Count > 0 then
-            AddError(SpyJournalLine, GlobalErrorTextList);
+        Rec.HandleDimensions(SpyJournalLine);
     end;
-
 
     trigger OnNewRecord(BelowxRec: Boolean)
     var
@@ -94,13 +89,18 @@ page 73003 SpyJournalDimensionPart
         end;
     end;
 
-    procedure AddError(SpyJournalLine: Record "Spy Journal Line"; ErrorList: List of [Text]) ErrorWasAdded: Boolean
+    /// <summary>
+    /// AddError.
+    /// </summary>
+    /// <param name="SpyJournalLine">Record "Spy Journal Line".</param>
+    procedure AddError(SpyJournalLine: Record "Spy Journal Line")
     var
         spyError: Record "Spy Error";
         ErrorText: Text;
         ErrorTotal: Text;
         ErrorNumber: Integer;
         BlobOutStream: OutStream;
+        ErrorList: List of [Text];
 
     begin
 
@@ -129,9 +129,8 @@ page 73003 SpyJournalDimensionPart
 
     end;
 
-
     var
         SpyJournalLine: Record "Spy Journal Line";
-        GlobalErrorTextList: List of [Text];
+
 
 }

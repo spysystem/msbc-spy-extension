@@ -53,6 +53,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Dimension Value Code - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1308829302 - Field 486908828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Document No. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1308829302 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Entry No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -388,6 +393,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field VAT Prod. Posting Group - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1200734571 - Method 985081440 - NamedType 731237784" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cleaned, %1: %2, %3: %4, %5: %6, %7: %8</source>
+          <note from="Developer" annotates="general" priority="2">%1: %2, %3: %4, %5: %6, %7: %8</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method CleanUpWhenError - NamedType ResultSummazionTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 1200734571 - Method 1886847335 - NamedType 3713220116" size-unit="char" translate="yes" xml:space="preserve">
           <source>Posted %1 lines to Journal: %2 with Description: %3</source>
           <note from="Developer" annotates="general" priority="2">%1, %2, %3</note>
@@ -397,6 +407,11 @@
           <source>Erorrs found %1 - continue to delete lines</source>
           <note from="Developer" annotates="general" priority="2">%1 = Errors</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method commitToJournalLine - NamedType ErrorFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1200734571 - Method 3235906455 - NamedType 1602421078" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting completed. do you want to delete all Spy-related records?</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Bogføring udført, venligst slet de relaterede spy-data ved at trykke Ja, eller tryk nej"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method commitToJournalLine - NamedType PostedSuccessTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 1200734571 - Method 3964488894 - NamedType 491796767" size-unit="char" translate="yes" xml:space="preserve">
           <source>Deleted Lines Count: %1 of %2, Document No Deleted: %3</source>
@@ -878,6 +893,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Dimensions - Control Dimension Value Code - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 1668317091 - Control 486908828 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Dimensions - Control Document No. - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 1668317091 - Control 883711285 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Entry No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -912,6 +932,11 @@
           <source>Line No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Dimensions - Control lineNo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1668317091 - Control 632522958 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Jnl Line Description.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Dimensions - Control Spy Jnl Line Description - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1668317091 - Control 3087293037 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>SystemId</source>

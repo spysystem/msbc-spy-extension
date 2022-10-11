@@ -19,12 +19,15 @@ page 73006 "Spy Dimensions"
                     caption = 'id';
                     ApplicationArea = All;
                     ToolTip = 'SystemId';
+                    Visible = false;
+
                 }
                 field("Spy Journal System Id"; Rec."Spy Journal System Id")
                 {
                     caption = 'Spy Journal System Id';
                     ApplicationArea = All;
                     ToolTip = 'SystemId';
+                    Visible = false;
                 }
 
                 field("Journal Template Name"; Rec."Journal Template Name")
@@ -38,6 +41,18 @@ page 73006 "Spy Dimensions"
                     Caption = 'Line No.';
                     ToolTip = 'Line No.';
 
+                }
+
+                field("Spy Jnl Line Description"; Rec."Spy Jnl Line Description")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Spy Jnl Line Description.';
+                }
+
+                field("Document No."; Rec."Document No.")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Document No.';
                 }
                 field("external Document No."; Rec."External Document No.")
                 {

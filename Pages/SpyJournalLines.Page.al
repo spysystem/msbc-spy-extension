@@ -230,10 +230,9 @@ page 73004 "Spy Journal Lines"
 
                 trigger OnAction()
                 var
-                    spyError: Record "Spy Error";
-                    spycr: Codeunit SpyCreateJournalLine;
+                    spycr: codeunit SpyCreateJournalLine;
                 begin
-                    spycr.CleanUpWhenError(Rec, spyError);
+                    spycr.CleanUpWhenError(Rec);
                 end;
             }
         }

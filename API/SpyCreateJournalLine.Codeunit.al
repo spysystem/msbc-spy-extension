@@ -24,6 +24,7 @@ codeunit 73006 SpyCreateJournalLine
         PostedCount: Integer;
         ErrorsWritten: Text;
         ErrorFoundLbl: label 'Erorrs found %1 - continue to delete lines', comment = '%1 = Errors';
+        PostedSuccessTxt: label 'Posting completed. do you want to delete all Spy-related records?', comment = 'DAN="Bogføring udført, venligst slet de relaterede spy-data ved at trykke Ja, eller tryk nej"';
     begin
         Clear(TotalCount);
         Clear(ErrorsWritten);
@@ -40,24 +41,31 @@ codeunit 73006 SpyCreateJournalLine
                     if Posted then
                         PostedCount += 1;
                 end;
-                //WHEN All lines.Run (PostTempSpyJournalLines) then 
                 if (CurrentCount = TotalCount) and (PostedCount <> TotalCount) then
                     ErrorsWritten := GetErrorBlobMessage(SpyJournalLine, SpyErrors);
             until SpyJournalLine.Next() = 0;
         end;
 
+        //IF ALL POSTED
         if (PostedCount = TotalCount) then
             if not GuiAllowed then
                 exit(CleanUpWhenPosted(SpyJournalLine)) else
-                if CONFIRM('Posting completed. do you want to delete all Spy-related records?', false) then
+                if CONFIRM(PostedSuccessTxt, false) then
                     SpyJournalLine.CleanUpAfterManualPosting(SpyJournalLine);
 
         //IF NOT ALL POSTED
         if (PostedCount <> TotalCount) then begin
             if GuiAllowed then
-                if CONFIRM(StrSubstNo(ErrorFoundLbl, SpyJournalLine.GetErrorTextList()), false) then
-                    Message(CleanUpWhenError(SpyJournalLine, SpyErrors));
-            Error(ErrorsWritten);
+                if CONFIRM(StrSubstNo(ErrorFoundLbl, ErrorsWritten), false) then begin
+                    CleanUpWhenError(SpyJournalLine);
+                    Message('Completed');
+                end;
+
+            if not GuiAllowed then begin
+                CleanUpWhenError(SpyJournalLine);
+                Error(ErrorsWritten);
+            end;
+
         end;
     end;
 
@@ -107,28 +115,45 @@ codeunit 73006 SpyCreateJournalLine
     /// <param name="SpyJournalLine">VAR Record "Spy Journal Line".</param>
     /// <param name="SpyErrors">VAR Record "Spy Error".</param>
     /// <returns>Return variable Errors of type Text.</returns>
-    procedure CleanUpWhenError(var SpyJournalLine: Record "Spy Journal Line"; var SpyErrors: Record "Spy Error") Errors: Text
+    procedure CleanUpWhenError(var SpyJournalLine: Record "Spy Journal Line") Result: Text
     var
         GenJournalLine: Record "Gen. Journal Line";
         SpyDimensions: Record "Spy Dimension";
-        ErrorDescInStream: InStream;
+        SpyErrors: Record "Spy Error";
+        GJLCount: Integer;
+        SpyJournalLinesCount: Integer;
+        SpyErrorsCount: Integer;
+        SpyDimensionsCount: Integer;
+        ResultSummazionTxt: label 'Cleaned, %1: %2, %3: %4, %5: %6, %7: %8', comment = '%1: %2, %3: %4, %5: %6, %7: %8';//tableCaptions and Counters or rows in that table
     begin
+
+        //Delete if any exists in GenJournalLine
+        GenJournalLine.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
+        GenJournalLine.SetRange(Description, SpyJournalLine.Description);
+
+        if GenJournalLine.FindSet() then
+            repeat
+                GenJournalLine.Delete(true);
+                Commit();
+                GJLCount += 1;
+            until GenJournalLine.Next() = 0;
+
         //Delete Temp Spy Journal Lines
         SpyJournalLine.SetRange(Description, SpyJournalLine.Description);
         if SpyJournalLine.FindSet() then
             repeat
                 SpyJournalLine.Delete();
                 Commit();
+                SpyJournalLinesCount += 1;
             until SpyJournalLine.Next() = 0;
 
-        //Delete if any exists in GenJournalLine
-        GenJournalLine.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
-        GenJournalLine.SetRange(Description, SpyJournalLine.Description);
-        if GenJournalLine.FindSet() then
-            repeat
-                GenJournalLine.Delete(true);
-                Commit();
-            until GenJournalLine.Next() = 0;
+        //Delete All Errors Alwyase
+        if SpyErrors.FindSet() then begin
+            SpyErrors.DeleteAll();
+            Commit();
+            SpyErrorsCount += 1;
+        end;
+
 
         //Delete Spy Dims
         SpyDimensions.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
@@ -136,21 +161,14 @@ codeunit 73006 SpyCreateJournalLine
             repeat
                 SpyDimensions.Delete();
                 Commit();
+                SpyDimensionsCount += 1;
             until SpyDimensions.Next() = 0;
 
-        //Return Error Text from Blob  
-        SpyErrors.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
-        if SpyErrors.FindFirst() then begin
-            SpyErrors.CalcFields("Error Description");
-            if SpyErrors."Error Description".HasValue() then begin
-                SpyErrors."Error Description".CreateInStream(ErrorDescInStream);
-                ErrorDescInStream.ReadText(Errors, SpyErrors."Error Description".Length());
-                //Delete All Errors Alwyase
-                SpyErrors.DeleteAll();
-                Commit();
-            end;
-        end;
-        exit(Errors);
+        exit(StrSubstNo(ResultSummazionTxt,
+                            GenJournalLine.TableCaption, GJLCount,
+                            SpyJournalLine.TableCaption, SpyJournalLinesCount,
+                                 SpyErrors.TableCaption, SpyErrorsCount,
+                                 SpyDimensions.TableCaption, SpyDimensionsCount));
     end;
 
     /// <summary>
@@ -203,16 +221,20 @@ codeunit 73006 SpyCreateJournalLine
     procedure GetErrorBlobMessage(var SpyJournalLine: Record "Spy Journal Line"; var SpyErrors: Record "Spy Error") Errors: Text
     var
         ErrorDescInStream: InStream;
+        CollectedErrors: Text;
     begin
         //Return Error Text from Blob  
         SpyErrors.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
-        if SpyErrors.FindFirst() then begin
-            SpyErrors.CalcFields("Error Description");
-            if SpyErrors."Error Description".HasValue() then begin
-                SpyErrors."Error Description".CreateInStream(ErrorDescInStream);
-                ErrorDescInStream.ReadText(Errors, SpyErrors."Error Description".Length());
-            end;
-        end;
+        if SpyErrors.FindFirst() then
+            repeat
+                SpyErrors.CalcFields("Error Description");
+                if SpyErrors."Error Description".HasValue() then begin
+                    clear(CollectedErrors);
+                    SpyErrors."Error Description".CreateInStream(ErrorDescInStream);
+                    ErrorDescInStream.ReadText(CollectedErrors, SpyErrors."Error Description".Length());
+                    Errors += CollectedErrors;
+                end;
+            until SpyErrors.Next() = 0;
         exit(Errors);
     end;
 

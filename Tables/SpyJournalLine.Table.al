@@ -215,79 +215,80 @@ table 73090 "Spy Journal Line"
     /// </summary>
     procedure CopyCustomerDimensions()
     begin
-        gDefaultDimension.Setfilter("Table ID", '18');
-        gCustomer.Reset();
-        gCustomer.SetFilter("No.", deliveryAccount);
+        if (Rec."Account Type" = "Account Type"::Customer) then begin
+            gDefaultDimension.Setfilter("Table ID", '18');
+            gCustomer.Reset();
+            gCustomer.SetFilter("No.", deliveryAccount);
 
-        if (deliveryAccount <> '') AND gCustomer.FindFirst() then
-            gDefaultDimension.SetFilter("No.", deliveryAccount)
-        else
-            gDefaultDimension.SetFilter("No.", "Account No.");
+            if (deliveryAccount <> '') AND gCustomer.FindFirst() then
+                gDefaultDimension.SetFilter("No.", deliveryAccount)
+            else
+                gDefaultDimension.SetFilter("No.", "Account No.");
 
-        if gDefaultDimension.FindSet() then begin
-            gDimEntryNo := 1;
-            repeat
-                IF (gDefaultDimension."Dimension Code" <> '') AND (gDefaultDimension."Dimension Value Code" <> '') then begin
-                    TempDimensionBuffer3.Reset();
-                    TempDimensionBuffer3.SetFilter("Dimension Code", gDefaultDimension."Dimension Code");
-                    TempDimensionBuffer3.SetFilter("Dimension Value Code", gDefaultDimension."Dimension Value Code");
-                    TempDimensionBuffer3.SetFilter("Table ID", '81');
-                    if not TempDimensionBuffer3.FindSet() then begin
-                        TempDimensionBuffer3.Reset();
-                        TempDimensionBuffer3.Init();
-                        TempDimensionBuffer3."Table ID" := 81;
-                        TempDimensionBuffer3."Entry No." := gDimEntryNo;
-                        gDimEntryNo := gDimEntryNo + 1;
-                        TempDimensionBuffer3."Dimension Code" := gDefaultDimension."Dimension Code";
-                        TempDimensionBuffer3."Dimension Value Code" := gDefaultDimension."Dimension Value Code";
-                        TempDimensionBuffer3.Insert();
-                    end;
-                end;
-            until gDefaultDimension.Next() = 0;
-
-            GenJournalLine.Reset();
-            GenJournalLine.SETRANGE(GenJournalLine."Journal Template Name", "Journal Template Name");
-            GenJournalLine.SETRANGE("Journal Batch Name", "Journal Batch Name");
-            GenJournalLine.SETFILTER("Document No.", "Document No.");
-            if GenJournalLine.FindSet() then begin
+            if gDefaultDimension.FindSet() then begin
                 gDimEntryNo := 1;
                 repeat
-                    DimensionSetEntry.Reset();
-                    DimensionSetEntry.SetFilter("Dimension Set ID", FORMAT(GenJournalLine."Dimension Set ID"));
-                    if DimensionSetEntry.FindSet() then
-                        repeat
-                            TempDimensionBuffer.Reset();
-                            TempDimensionBuffer.Init();
-                            TempDimensionBuffer."Entry No." := gDimEntryNo;
+                    IF (gDefaultDimension."Dimension Code" <> '') AND (gDefaultDimension."Dimension Value Code" <> '') then begin
+                        TempDimensionBuffer3.Reset();
+                        TempDimensionBuffer3.SetFilter("Dimension Code", gDefaultDimension."Dimension Code");
+                        TempDimensionBuffer3.SetFilter("Dimension Value Code", gDefaultDimension."Dimension Value Code");
+                        TempDimensionBuffer3.SetFilter("Table ID", '81');
+                        if not TempDimensionBuffer3.FindSet() then begin
+                            TempDimensionBuffer3.Reset();
+                            TempDimensionBuffer3.Init();
+                            TempDimensionBuffer3."Table ID" := 81;
+                            TempDimensionBuffer3."Entry No." := gDimEntryNo;
                             gDimEntryNo := gDimEntryNo + 1;
-                            TempDimensionBuffer."Table ID" := 81;
-                            TempDimensionBuffer."Dimension Code" := DimensionSetEntry."Dimension Code";
-                            TempDimensionBuffer."Dimension Value Code" := DimensionSetEntry."Dimension Value Code";
-                            TempDimensionBuffer.Insert();
-                        until DimensionSetEntry.Next() = 0;
+                            TempDimensionBuffer3."Dimension Code" := gDefaultDimension."Dimension Code";
+                            TempDimensionBuffer3."Dimension Value Code" := gDefaultDimension."Dimension Value Code";
+                            TempDimensionBuffer3.Insert();
+                        end;
+                    end;
+                until gDefaultDimension.Next() = 0;
 
-                    IF TempDimensionBuffer3.FindSet() then
-                        repeat
-                            TempDimensionBuffer2.SETFILTER("Dimension Code", TempDimensionBuffer3."Dimension Code");
-                            IF not TempDimensionBuffer2.FindSet() then begin
+                GenJournalLine.Reset();
+                GenJournalLine.SETRANGE(GenJournalLine."Journal Template Name", "Journal Template Name");
+                GenJournalLine.SETRANGE("Journal Batch Name", "Journal Batch Name");
+                GenJournalLine.SETFILTER("Document No.", "Document No.");
+                if GenJournalLine.FindSet() then begin
+                    gDimEntryNo := 1;
+                    repeat
+                        DimensionSetEntry.Reset();
+                        DimensionSetEntry.SetFilter("Dimension Set ID", FORMAT(GenJournalLine."Dimension Set ID"));
+                        if DimensionSetEntry.FindSet() then
+                            repeat
                                 TempDimensionBuffer.Reset();
                                 TempDimensionBuffer.Init();
                                 TempDimensionBuffer."Entry No." := gDimEntryNo;
                                 gDimEntryNo := gDimEntryNo + 1;
                                 TempDimensionBuffer."Table ID" := 81;
-                                TempDimensionBuffer."Dimension Code" := TempDimensionBuffer3."Dimension Code";
-                                TempDimensionBuffer."Dimension Value Code" := TempDimensionBuffer3."Dimension Value Code";
+                                TempDimensionBuffer."Dimension Code" := DimensionSetEntry."Dimension Code";
+                                TempDimensionBuffer."Dimension Value Code" := DimensionSetEntry."Dimension Value Code";
                                 TempDimensionBuffer.Insert();
-                            end;
-                        until TempDimensionBuffer3.Next() = 0;
-                    GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
-                    GenJournalLine.Modify();
-                    TempDimensionBuffer.DeleteAll();
-                until GenJournalLine.Next() = 0;
-                TempDimensionBuffer3.DeleteAll();
+                            until DimensionSetEntry.Next() = 0;
+
+                        IF TempDimensionBuffer3.FindSet() then
+                            repeat
+                                TempDimensionBuffer2.SETFILTER("Dimension Code", TempDimensionBuffer3."Dimension Code");
+                                IF not TempDimensionBuffer2.FindSet() then begin
+                                    TempDimensionBuffer.Reset();
+                                    TempDimensionBuffer.Init();
+                                    TempDimensionBuffer."Entry No." := gDimEntryNo;
+                                    gDimEntryNo := gDimEntryNo + 1;
+                                    TempDimensionBuffer."Table ID" := 81;
+                                    TempDimensionBuffer."Dimension Code" := TempDimensionBuffer3."Dimension Code";
+                                    TempDimensionBuffer."Dimension Value Code" := TempDimensionBuffer3."Dimension Value Code";
+                                    TempDimensionBuffer.Insert();
+                                end;
+                            until TempDimensionBuffer3.Next() = 0;
+                        GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
+                        GenJournalLine.Modify();
+                        TempDimensionBuffer.DeleteAll();
+                    until GenJournalLine.Next() = 0;
+                    TempDimensionBuffer3.DeleteAll();
+                end;
             end;
         end;
-
     end;
 
     /// <summary>
@@ -436,20 +437,17 @@ table 73090 "Spy Journal Line"
             GlobalErrorTextList.Add(StrSubstNo(InsertGenJnlLineErr, Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
 
         //Set dimensionsId
-        SpyDimensions.SetRange("External Document No.", Rec."External Document No.");
-        SpyDimensions.SetRange("Entry No.", Rec."Entry No.");
+        SpyDimensions.SetRange("Spy Jnl Line Description", Rec.Description);
         if SpyDimensions.FindSet() then
             repeat
                 FillTempDimBuffer(SpyDimensions);
             until SpyDimensions.Next() = 0;
         GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
         TempDimensionBuffer.DeleteAll();
-
         gDimEntryNo := 1;
         GenJournalLine.Modify();
         Rec.SetSalesPurchExclVAT();
-        if (Rec."Account Type" = "Account Type"::Customer) then
-            Rec.CopyCustomerDimensions();
+        Rec.CopyCustomerDimensions();
         //Rec.UpdateGlobalDimensions();
 
         if ErrorFoundInErrorTextList('[CreationErr]') then
