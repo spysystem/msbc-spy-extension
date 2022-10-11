@@ -451,7 +451,7 @@ table 73090 "Spy Journal Line"
         GlobalGenJournalLine.Modify();
         Rec.SetSalesPurchExclVAT();    //Only run if "Account Type" = "Account Type"::Customer, Vendor
         Rec.CopyCustomerDimensions(); //Only run if "Account Type" = "Account Type"::Customer
-        //Rec.UpdateGlobalDimensions();
+        Rec.UpdateGlobalDimensions();
 
         if ErrorFoundInErrorTextList('[CreationErr]') then
             exit(false) else
