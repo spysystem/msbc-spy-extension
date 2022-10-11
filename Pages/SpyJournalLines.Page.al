@@ -233,7 +233,7 @@ page 73004 "Spy Journal Lines"
                     spyError: Record "Spy Error";
                     spycr: Codeunit SpyCreateJournalLine;
                 begin
-                    spycr.CleanUp(Rec, spyError);
+                    spycr.CleanUpWhenError(Rec, spyError);
                 end;
             }
         }

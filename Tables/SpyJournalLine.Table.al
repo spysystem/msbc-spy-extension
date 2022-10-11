@@ -371,10 +371,10 @@ table 73090 "Spy Journal Line"
         ErrorTotal: Text;
         i: Integer;
     begin
-        if ErrorList.Count > 0 Then
-            foreach ErrorText in ErrorList do begin
+        if GlobalErrorTextList.Count > 0 Then
+            foreach ErrorText in GlobalErrorTextList do begin
                 i += 1;
-                ErrorTotal += ErrorList.Get(i) + ' ';
+                ErrorTotal += GlobalErrorTextList.Get(i) + ' ';
             end;
         if ErrorTotal <> '' then begin
             ErrorTotal := StrSubstNo(ErrorsLbl, ErrorTotal);
@@ -387,21 +387,17 @@ table 73090 "Spy Journal Line"
     /// </summary>
     /// <returns>Return value of type Boolean.</returns>
     [ServiceEnabled]
-    procedure PostJournal(): Boolean
+    procedure PostTempSpyJournalLines(): Boolean
     var
         GeneralLedgerSetup: record "General Ledger Setup";
         SpyDimensions: Record "Spy Dimension";
-        InsertGenJnlLineErr: Label '[CreationErr] Failed to Insert Gen. Journal Line %1', comment = '%1 = Ext Doc No.';
+        InsertGenJnlLineErr: label '[CreationErr] Failed to Insert Gen. Journal Line %1', comment = '%1 = Ext Doc No.';
     begin
-        Clear(ErrorList);
+        Clear(GlobalErrorTextList);
         Clear(BankAccount);
         Clear(TempDimensionBuffer);
         SPYSetup.Get();
         GeneralLedgerSetup.Get();
-        // SPYSetup.TestField("VAT Prod. Posting Group");
-        // SPYSetup.TestField("VAT Bus. Posting Group");
-        // SPYSetup.TestField("Gen. Bus. Posting Group");
-        // SPYSetup.TestField("Gen. Prod. Posting Group");
         SPYSetup.TestField("Default Journal Template Name");
 
         gDimEntryNo := 1;
@@ -437,7 +433,7 @@ table 73090 "Spy Journal Line"
         end;
 
         if not GenJournalLine.Insert(true) then
-            ErrorList.Add(StrSubstNo(InsertGenJnlLineErr, Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
+            GlobalErrorTextList.Add(StrSubstNo(InsertGenJnlLineErr, Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
 
         //Set dimensionsId
         SpyDimensions.SetRange("External Document No.", Rec."External Document No.");
@@ -455,7 +451,8 @@ table 73090 "Spy Journal Line"
         if (Rec."Account Type" = "Account Type"::Customer) then
             Rec.CopyCustomerDimensions();
         //Rec.UpdateGlobalDimensions();
-        if Rec.ErrorExists() then
+
+        if ErrorFoundInErrorTextList('[CreationErr]') then
             exit(false) else
             exit(true);
     end;
@@ -526,11 +523,11 @@ table 73090 "Spy Journal Line"
 
         if Rec."VAT Code" <> '' then begin
             If not VATBusinessPostingGroup.Get(Rec."VAT Code") then
-                ErrorList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
+                GlobalErrorTextList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
                 GenJournalLine.Validate("VAT Bus. Posting Group", "VAT Code");
 
             If not GenBusinessPostingGroup.Get(Rec."VAT Code") then
-                ErrorList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
+                GlobalErrorTextList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
                 GenJournalLine.Validate("Gen. Bus. Posting Group", "VAT Code");
 
             GenJournalLine.Validate("VAT Prod. Posting Group", SPYSetup."VAT Prod. Posting Group");
@@ -542,10 +539,10 @@ table 73090 "Spy Journal Line"
                 GenJournalLine.Validate("Gen. Posting Type", GenJournalLine."Gen. Posting Type"::Purchase);
         end;
 
+        if ErrorFoundInErrorTextList('[VAT Code Err]') then
+            exit(false) else
+            exit(true);
 
-        if not ErrorList.Contains('[VAT Code Err]') then
-            exit(true) else
-            SpyError.AddError(Rec, ErrorList);
     end;
 
     /// <summary>
@@ -570,13 +567,14 @@ table 73090 "Spy Journal Line"
                 until GenJournalLine.Next() = 0;
             end;
             GenJournalLine."Sales/Purch. (LCY)" := ExclVAT;
-            if not GenJournalLine.Modify() then begin
-                ErrorList.Add(StrSubstNo(SetSalesPurchExclVATErr, Rec."Entry No."));
-                SpyError.AddError(Rec, ErrorList);
-            end;
+            if not GenJournalLine.Modify() then
+                GlobalErrorTextList.Add(StrSubstNo(SetSalesPurchExclVATErr, Rec."Entry No."));
+
         end;
-        if not ErrorList.Contains('[SetSalesPurchExclVATErr]') then
+        if ErrorFoundInErrorTextList('[SetSalesPurchExclVATErr]') then
+            exit(false) else
             exit(true);
+
     end;
 
     /// <summary>
@@ -590,40 +588,36 @@ table 73090 "Spy Journal Line"
         Vendor: Record Vendor;
         AccountNoGetErrorLbl: Label '[postTypeErr] Account No. does not exist %1', comment = '%1 = Account No';
         InvalidPostTypeLbl: Label '[postTypeErr] %1 is an invalid postyingType, posttypes avaible: tax,ledger,customer or supplier', comment = '%1,%2,%3,%5 = postType';
-        Errors: Text;
     begin
-        if not (postType in ['tax', 'ledger', 'customer', 'supplier']) then begin
-            ErrorList.Add(StrSubstNo(InvalidPostTypeLbl, postType));
-            SpyError.AddError(Rec, ErrorList);
-        end else
+        if not (postType in ['tax', 'ledger', 'customer', 'supplier']) then
+            GlobalErrorTextList.Add(StrSubstNo(InvalidPostTypeLbl, postType))
+        else
             case postType of
                 'tax', 'ledger':
                     begin
                         GenJournalLine."Account Type" := "Account Type"::"G/L Account";
                         if not GLAccount.Get("Account No.") then
-                            ErrorList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
+                            GlobalErrorTextList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
                     end;
                 'customer':
                     begin
                         GenJournalLine."Account Type" := "Account Type"::Customer;
                         if not Customer.Get("Account No.") then
-                            ErrorList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
+                            GlobalErrorTextList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
                     end;
                 'supplier':
                     begin
                         GenJournalLine."Account Type" := "Account Type"::Vendor;
                         if not Vendor.Get("Account No.") then
-                            ErrorList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
+                            GlobalErrorTextList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
                     end;
             end;
 
-        Errors := GetErrorTextList();
-        if StrPos(Errors, '[postTypeErr]') < 0 then begin
+        if ErrorFoundInErrorTextList('[postTypeErr]') then
+            exit(false) else begin
             GenJournalLine.Validate("Account No.", Rec."Account No.");
             exit(true)
-        end
-        else
-            exit(false);
+        end;
     end;
 
     /// <summary>
@@ -632,38 +626,38 @@ table 73090 "Spy Journal Line"
     /// <returns>Return value of type Boolean.</returns>
     procedure ValidateDocumentType(): Boolean
     var
-        InvalidDocumentTypeLbl: Label '[documentTypeErr] Document Type does not exist %1, document types avaliable: Sale,SaleCredit,Purchase,PurchaseCredit', comment = '%1,%2,%3,%4 = doc type';
+        InvalidDocumentTypeLbl: label '[documentTypeErr] Document Type does not exist %1, document types avaliable: Sale,SaleCredit,Purchase,PurchaseCredit', comment = '%1,%2,%3,%4 = doc type';
     begin
         PostingType := '';
-        if not (documentTypeAsText in ['Sale', 'SaleCredit', 'Purchase', 'PurchaseCredit']) then begin
-            ErrorList.Add(StrSubstNo(InvalidDocumentTypeLbl, documentTypeAsText));
-            SpyError.AddError(Rec, ErrorList);
-        end;
-        case documentTypeAsText of
-            'Sale':
-                begin
-                    GenJournalLine.Validate("Document Type", "Document Type"::Invoice);
-                    PostingType := 'Sale';
-                end;
-            'SaleCredit':
-                begin
-                    GenJournalLine.Validate("Document Type", "Document Type"::"Credit Memo");
-                    PostingType := 'Sale';
-                end;
-            'Purchase':
-                begin
-                    GenJournalLine.Validate("Document Type", "Document Type"::Invoice);
-                    PostingType := 'Purchase';
-                end;
-            'PurchaseCredit':
-                begin
-                    GenJournalLine.Validate("Document Type", "Document Type"::"Credit Memo");
-                    PostingType := 'Purchase';
-                end;
-        end;
-        If not (ErrorList.Contains('[documentTypeErr]')) then
-            exit(true);
+        if not (documentTypeAsText in ['Sale', 'SaleCredit', 'Purchase', 'PurchaseCredit']) then
+            GlobalErrorTextList.Add(StrSubstNo(InvalidDocumentTypeLbl, documentTypeAsText));
 
+        if ErrorFoundInErrorTextList('[documentTypeErr]') then
+            exit(false) else begin
+            case documentTypeAsText of
+                'Sale':
+                    begin
+                        GenJournalLine.Validate("Document Type", "Document Type"::Invoice);
+                        PostingType := 'Sale';
+                    end;
+                'SaleCredit':
+                    begin
+                        GenJournalLine.Validate("Document Type", "Document Type"::"Credit Memo");
+                        PostingType := 'Sale';
+                    end;
+                'Purchase':
+                    begin
+                        GenJournalLine.Validate("Document Type", "Document Type"::Invoice);
+                        PostingType := 'Purchase';
+                    end;
+                'PurchaseCredit':
+                    begin
+                        GenJournalLine.Validate("Document Type", "Document Type"::"Credit Memo");
+                        PostingType := 'Purchase';
+                    end;
+            end;
+            exit(true);
+        end;
     end;
 
     /// <summary>
@@ -687,10 +681,8 @@ table 73090 "Spy Journal Line"
         if not GenJournalTemplate.Get(Rec."Journal Template Name") then begin
             GenJournalTemplate.Init();
             GenJournalTemplate.Name := Rec."Journal Template Name";
-            if not GenJournalTemplate.Insert() then begin
-                ErrorList.Add(StrSubstNo(JnlTemplateNotCreatedLbl, Rec."Journal Template Name"));
-                SpyError.AddError(Rec, ErrorList);
-            end;
+            if not GenJournalTemplate.Insert() then
+                GlobalErrorTextList.Add(StrSubstNo(JnlTemplateNotCreatedLbl, Rec."Journal Template Name"));
         end;
 
         //IF missing, then create GenJnlBatch
@@ -703,14 +695,14 @@ table 73090 "Spy Journal Line"
             genJournalBatch.Name := Rec."Journal Batch Name";
             genJournalBatch."Template Type" := SPYSetup."Default Template Type";
             genJournalBatch."Journal Template Name" := SPYSetup."Default Journal Template Name";
-            if not genJournalBatch.Insert() then begin
-                ErrorList.Add(StrSubstNo(BatchNotCreatedLbl, SPYSetup."Default Template Type"));
-                SpyError.AddError(Rec, ErrorList);
-            end;
+            if not genJournalBatch.Insert() then
+                GlobalErrorTextList.Add(StrSubstNo(BatchNotCreatedLbl, SPYSetup."Default Template Type"));
         end;
-        If not (ErrorList.Contains('[CreateJnlTemplateErr]')) or (ErrorList.Contains('[CreateJnlBacthErr]')) then
+        if (ErrorFoundInErrorTextList('[CreateJnlTemplateErr]')) or
+             (ErrorFoundInErrorTextList('[CreateJnlBacthErr]')) then
+            exit(false)
+        else
             exit(true);
-
     end;
 
 
@@ -723,24 +715,20 @@ table 73090 "Spy Journal Line"
         DayConvFailedLbl: Label '[DateConvErr] Day convertion failed: %1', Comment = '%1 = Day sent from SPY';
         MonthConvFailedLbl: Label '[DateConvErr] Month convertion failed: %1', Comment = '%1 = Month sent from SPY';
         YearConvFailedLbl: Label '[DateConvErr] Year convertion failed: %1', Comment = '%1 = Year sent from SPY';
-        Error: Text;
     begin
         clear(gPostingDate);
         if not evaluate(day, CopyStr(Format(Rec."Posting Date"), 9, 2)) then
-            ErrorList.Add(StrSubstNo(DayConvFailedLbl, CopyStr(Format(Rec."Posting Date"), 9, 2)));
+            GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, CopyStr(Format(Rec."Posting Date"), 9, 2)));
         if not evaluate(month, CopyStr(Format(Rec."Posting Date"), 6, 2)) then
-            ErrorList.Add(StrSubstNo(MonthConvFailedLbl, CopyStr(Format(Rec."Posting Date"), 6, 2)));
+            GlobalErrorTextList.Add(StrSubstNo(MonthConvFailedLbl, CopyStr(Format(Rec."Posting Date"), 6, 2)));
         if not evaluate(year, CopyStr(Format(Rec."Posting Date"), 1, 4)) then
-            ErrorList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Posting Date"), 1, 4)));
+            GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Posting Date"), 1, 4)));
 
         gPostingDate := DMY2Date(day, month, year);
         GenJournalLine."Posting Date" := gPostingDate;
 
-        Error := Rec.GetErrorTextList();
-        If Error.Contains('[DateConvErr]') then begin
-            spyError.AddError(Rec, ErrorList);
-            exit(false)
-        end else
+        if ErrorFoundInErrorTextList('[DateConvErr]') then
+            exit(false) else
             exit(true);
     end;
 
@@ -763,7 +751,7 @@ table 73090 "Spy Journal Line"
                 TempDimensionBuffer."Dimension Code" := 'STATETAX';
                 TempDimensionBuffer."Dimension Value Code" := Rec."Tax Title";
                 if not TempDimensionBuffer.Insert() then
-                    ErrorList.Add(StrSubstNo(TaxErrorLbl, 'STATETAX'));
+                    GlobalErrorTextList.Add(StrSubstNo(TaxErrorLbl, 'STATETAX'));
                 StateTax := Rec."Tax Title";
                 "Account No." := "State US Tax Account";
             end else begin
@@ -779,7 +767,7 @@ table 73090 "Spy Journal Line"
                 TempDimensionBuffer."Dimension Code" := 'STATETAX';
                 TempDimensionBuffer."Dimension Value Code" := StateTax;
                 if not TempDimensionBuffer.Insert() then
-                    ErrorList.Add(StrSubstNo(TaxErrorLbl, 'STATETAX, Country or Municipal'));
+                    GlobalErrorTextList.Add(StrSubstNo(TaxErrorLbl, 'STATETAX, Country or Municipal'));
 
                 TempDimensionBuffer.Init();
                 TempDimensionBuffer."Table ID" := 81;
@@ -788,15 +776,14 @@ table 73090 "Spy Journal Line"
                 TempDimensionBuffer."Dimension Code" := 'COUNTYTAX';
                 TempDimensionBuffer."Dimension Value Code" := Rec."Tax Title";
                 if not TempDimensionBuffer.Insert() then
-                    ErrorList.Add(StrSubstNo(TaxErrorLbl, 'COUNTYTAX'));
+                    GlobalErrorTextList.Add(StrSubstNo(TaxErrorLbl, 'COUNTYTAX'));
                 "Account No." := "County US Tax Account";
                 StateTax := '';
-            END;
+            end;
         Rec."Tax Title" := '';
-        if ErrorList.Contains('[TAX Title Err]') then begin
-            SpyError.AddError(Rec, ErrorList);
-            Exit(false);
-        end else
+
+        if ErrorFoundInErrorTextList('[TAX Title Err]') then
+            exit(false) else
             exit(true);
     end;
 
@@ -815,7 +802,7 @@ table 73090 "Spy Journal Line"
                 SpyJournalLine.Delete();
             until SpyJournalLine.Next() = 0;
         //Delete Spy Dims
-        SpyDimensions.SetRange(Description, SpyJournalLine.Description);
+        SpyDimensions.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
         if SpyDimensions.FindSet() then
             repeat
                 SpyDimensions.Delete();
@@ -871,6 +858,27 @@ table 73090 "Spy Journal Line"
                 DimNo := i;
     end;
 
+
+    /// <summary>
+    /// ErrorFoundInErrorTextList.
+    /// </summary>
+    /// <param name="ErrorTextToFind">Text.</param>
+    /// <returns>Return value of type Boolean.</returns>
+    procedure ErrorFoundInErrorTextList(ErrorTextToFind: Text): Boolean
+    var
+        ErrorText: Text;
+        ErrorCurrent: Text;
+        i: Integer;
+    begin
+        if GlobalErrorTextList.Count > 0 Then
+            foreach ErrorText in GlobalErrorTextList do begin
+                i += 1;
+                ErrorCurrent += GlobalErrorTextList.Get(i);
+                if StrPos(ErrorCurrent, ErrorTextToFind) > 0 then
+                    exit(true);
+            end;
+    end;
+
     var
         BankAccount: record "Bank Account";
         GenJournalLine: Record "Gen. Journal Line";
@@ -883,7 +891,7 @@ table 73090 "Spy Journal Line"
         TempDimensionBuffer3: Record "Dimension Buffer" temporary;
         gDefaultDimension: record "Default Dimension";
         SPYSetup: Record "Spy Setup";
-        SpyError: Record "Spy Error";
+        gSpyErrorRec: Record "Spy Error";
 
         DimensionManagement: Codeunit DimensionManagement;
         RecordRefBank: RecordRef;
@@ -897,7 +905,7 @@ table 73090 "Spy Journal Line"
         year: Integer;
         gDimEntryNo: Integer;
         ExclVAT: Decimal;
-        ErrorList: List of [Text];
+        GlobalErrorTextList: List of [Text];
         gPostingDate: Date;
 
 }

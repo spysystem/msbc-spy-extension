@@ -68,9 +68,13 @@ page 73003 SpyJournalDimensionPart
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     var
+        spyError: Record "Spy Error";
     begin
-        Rec.HandleDimensions(SpyJournalLine);
+        Rec.HandleDimensions(SpyJournalLine, GlobalErrorTextList);
+        if GlobalErrorTextList.Count > 0 then
+            AddError(SpyJournalLine, GlobalErrorTextList);
     end;
+
 
     trigger OnNewRecord(BelowxRec: Boolean)
     var
@@ -86,11 +90,48 @@ page 73003 SpyJournalDimensionPart
             Rec."Journal Template Name" := SpyJournalLine."Journal Template Name";
             Rec."Journal Batch Name" := SpyJournalLine."Journal Batch Name";
             Rec."External Document No." := SpyJournalLine."External Document No.";
-            Rec.Description := SpyJournalLine.Description;
+            Rec."Spy Jnl Line Description" := SpyJournalLine.Description;
         end;
     end;
 
+    procedure AddError(SpyJournalLine: Record "Spy Journal Line"; ErrorList: List of [Text]) ErrorWasAdded: Boolean
+    var
+        spyError: Record "Spy Error";
+        ErrorText: Text;
+        ErrorTotal: Text;
+        ErrorNumber: Integer;
+        BlobOutStream: OutStream;
+
+    begin
+
+        if ErrorList.Count > 0 then begin
+            foreach ErrorText in ErrorList do begin
+                ErrorNumber += 1;
+                ErrorTotal += ErrorList.Get(ErrorNumber) + ' ';
+            end;
+
+            spyError.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
+            spyError.SetRange("Entry No.", SpyJournalLine."Entry No.");
+            spyError.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
+
+            if spyError.FindFirst() then
+                spyError."Line No." := spyError."Line No." + 1;
+
+            spyError."Journal Template Name" := SpyJournalLine."Journal Template Name";
+            spyError."Entry No." := SpyJournalLine."Entry No.";
+            spyError."Spy Jnl Line Description" := SpyJournalLine.Description;
+
+            spyError."Error Description".CreateOutStream(BlobOutStream);
+            BlobOutStream.WriteText(ErrorTotal);
+            if not spyError.Insert() then
+                spyError.Modify();
+        end;
+
+    end;
+
+
     var
         SpyJournalLine: Record "Spy Journal Line";
+        GlobalErrorTextList: List of [Text];
 
 }
