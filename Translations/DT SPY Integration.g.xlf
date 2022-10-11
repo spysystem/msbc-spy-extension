@@ -163,11 +163,6 @@
           <note from="Developer" annotates="general" priority="2">%1,%2,%3,%5 = postType</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateAccountTypeAndNo - NamedType InvalidPostTypeLbl</note>
         </trans-unit>
-        <trans-unit id="Table 3833745087 - Method 1044930139 - NamedType 1731371728" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[documentTypeErr] Document Type does not exist %1, document types avaliable: Sale,SaleCredit,Purchase,PurchaseCredit</source>
-          <note from="Developer" annotates="general" priority="2">%1,%2,%3,%4 = doc type</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateDocumentType - NamedType InvalidDocumentTypeLbl</note>
-        </trans-unit>
         <trans-unit id="Table 3833745087 - Method 112233112 - NamedType 3967461121" size-unit="char" translate="yes" xml:space="preserve">
           <source>[CreateJnlTemplateErr] Failed to Create Journal Template Name %1</source>
           <note from="Developer" annotates="general" priority="2">DAN="Kladde blev ikke oprette %1"</note>

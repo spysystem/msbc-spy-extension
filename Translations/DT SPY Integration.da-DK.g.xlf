@@ -29,11 +29,6 @@
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Property Caption</note>
           <target>Spy Dimension</target>
         </trans-unit>
-        <trans-unit id="Table 1308829302 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Description</source>
-          <note from="Developer" annotates="general" priority="2"/>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Description - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Table 1308829302 - Field 2580555873 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Dimension Name</source>
           <note from="Developer" annotates="general" priority="2"/>
@@ -68,6 +63,11 @@
           <source>Line No.</source>
           <note from="Developer" annotates="general" priority="2"/>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1308829302 - Field 632522958 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"/>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Field Spy Jnl Line Description - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1308829302 - Field 3087293037 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Spy Journal System Id</source>
