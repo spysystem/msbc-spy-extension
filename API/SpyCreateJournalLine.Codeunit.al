@@ -241,20 +241,15 @@ codeunit 73006 SpyCreateJournalLine
     procedure deleteAllEntries(): Text
     var
         SpyJournalLine: Record "Spy Journal Line";
-        LinesDeleted: Text;
-        CountTotal: Integer;
-        CountDel: Integer;
-        DeleteStatusTxt: Label 'Deleted Lines Count: %1 of %2, Document No Deleted: %3', Comment = '%1 = CountTotal, %2 = CountDeleted, %3 = DocumentNos.';
+        SpyDimensions: record "Spy Dimension";
+        SpyError: Record "Spy Error";
     begin
         if SpyJournalLine.FindSet() then
-            repeat
-                if SpyJournalLine.Delete() then begin
-                    LinesDeleted += SpyJournalLine."Document No." + ',';
-                    CountDel += 1;
-                end;
-            until SpyJournalLine.Next() = 0;
-        CountTotal := SpyJournalLine.Count();
-        Exit(StrSubstNo(DeleteStatusTxt, CountTotal, CountDel, LinesDeleted));
+            SpyJournalLine.DeleteAll();
+        if SpyDimensions.FindSet() then
+            SpyDimensions.DeleteAll();
+        if SpyError.FindSet() then
+            spyError.DeleteAll();
     end;
 
 

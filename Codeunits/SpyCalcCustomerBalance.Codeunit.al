@@ -16,7 +16,7 @@ codeunit 73008 SpyCalcCustomerBalance
     begin
 
         Customer.CalcFields("Balance (LCY)", "Balance Due (LCY)");
-        Customer.FindSet();
+        Customer.FindSet(); //TODO: TEST IF IS EMPTY Can be used, or this can be removed.
 
     end;
 
@@ -27,7 +27,7 @@ codeunit 73008 SpyCalcCustomerBalance
     procedure ping(): Text
     var
     begin
-        Exit('Pong');
+        exit('Pong');
     end;
 
     var

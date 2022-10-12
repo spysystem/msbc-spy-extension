@@ -836,7 +836,6 @@ table 73090 "Spy Journal Line"
         TempDimensionBuffer3: Record "Dimension Buffer" temporary;
         gDefaultDimension: record "Default Dimension";
         SPYSetup: Record "Spy Setup";
-        gSpyErrorRec: Record "Spy Error";
 
         DimensionManagement: Codeunit DimensionManagement;
         RecordRefBank: RecordRef;

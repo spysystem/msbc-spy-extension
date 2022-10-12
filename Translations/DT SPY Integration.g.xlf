@@ -28,21 +28,6 @@
           <note from="Developer" annotates="general" priority="2">DAN="Spy Dimension"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 1308829302 - Method 801471539 - NamedType 4044247445" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[SypDimensionCreationErr] Failed to Insert SpyDimenison %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 = create dimension</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Method HandleDimensions - NamedType SpyDimCreateErr</note>
-        </trans-unit>
-        <trans-unit id="Table 1308829302 - Method 801471539 - NamedType 595797940" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[SypDimensioValueCreationErr] Failed to Insert SpyDimenison %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 =  create dimension</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Method HandleDimensions - NamedType SpyDimValueCreateErr</note>
-        </trans-unit>
-        <trans-unit id="Table 1308829302 - Method 801471539 - NamedType 74517741" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[SypDimensioBufferCreationErr] Failed to Insert SpyDimenison %1</source>
-          <note from="Developer" annotates="general" priority="2">%1 =  create dimension</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Dimension - Method HandleDimensions - NamedType SpyDimBufferCreateErr</note>
-        </trans-unit>
         <trans-unit id="Table 1308829302 - Field 2580555873 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Dimension Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -402,11 +387,6 @@
           <source>Erorrs found %1. Continue and delete SPY data?</source>
           <note from="Developer" annotates="general" priority="2">%1 = Errors</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method commitToJournalLine - NamedType ErrorFoundLbl</note>
-        </trans-unit>
-        <trans-unit id="Codeunit 1200734571 - Method 3964488894 - NamedType 491796767" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Deleted Lines Count: %1 of %2, Document No Deleted: %3</source>
-          <note from="Developer" annotates="general" priority="2">%1 = CountTotal, %2 = CountDeleted, %3 = DocumentNos.</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method deleteAllEntries - NamedType DeleteStatusTxt</note>
         </trans-unit>
         <trans-unit id="Page 3926563785 - Control 636392376 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>

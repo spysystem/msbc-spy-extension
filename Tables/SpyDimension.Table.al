@@ -84,9 +84,9 @@ table 73002 "Spy Dimension"
     /// <returns>Return variable DimensionsAdded of type Boolean.</returns>
     procedure HandleDimensions(var pSpyJournalLine: Record "Spy Journal Line"): Boolean
     var
-        SpyDimCreateErr: label '[SypDimensionCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 = create dimension';
-        SpyDimValueCreateErr: label '[SypDimensioValueCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 =  create dimension';
-        SpyDimBufferCreateErr: label '[SypDimensioBufferCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 =  create dimension';
+    //SpyDimCreateErr: label '[SypDimensionCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 = create dimension';
+    //SpyDimValueCreateErr: label '[SypDimensioValueCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 =  create dimension';
+    //SpyDimBufferCreateErr: label '[SypDimensioBufferCreationErr] Failed to Insert SpyDimenison %1', comment = '%1 =  create dimension';
     begin
         if ("Dimension Name" <> '') and ("Dimension Value Code" <> '') then begin
             DimensionRecord.SetFilter(Code, "Dimension Name");
