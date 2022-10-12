@@ -4,7 +4,7 @@
 page 73004 "Spy Journal Lines"
 {
     ApplicationArea = All;
-    Caption = 'Spy Journal Lines', comment = 'DAN="Spy kladdelinjer"';
+    Caption = 'Temp Spy Journal Lines', comment = 'DAN="Temp Spy-linjer"';
     AdditionalSearchTerms = 'spy,Spy Journal Lines,spy create';
     PageType = List;
     SourceTable = "Spy Journal Line";

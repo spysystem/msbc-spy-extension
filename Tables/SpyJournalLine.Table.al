@@ -422,6 +422,8 @@ table 73090 "Spy Journal Line"
 
         //Set dimensionsId
         SpyDimensions.SetRange("Spy Jnl Line Description", Rec.Description);
+        SpyDimensions.SetRange("Entry No.", Rec."Entry No.");
+
         if SpyDimensions.FindSet() then
             repeat
                 FillTempDimBuffer(SpyDimensions);

@@ -1051,10 +1051,10 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control VAT Prod. Posting Group - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 39425386 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Spy Journal Lines</source>
-          <note from="Developer" annotates="general" priority="2">DAN="Spy kladdelinjer"</note>
+          <source>Temp Spy Journal Lines</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Temp Spy-linjer"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Property Caption</note>
-          <target>Spy kladdelinjer</target>
+          <target>Temp Spy-linjer</target>
         </trans-unit>
         <trans-unit id="Page 39425386 - Property 3863440606" size-unit="char" translate="yes" xml:space="preserve">
           <source>spy,Spy Journal Lines,spy create</source>
