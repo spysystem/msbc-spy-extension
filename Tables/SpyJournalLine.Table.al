@@ -130,8 +130,6 @@ table 73090 "Spy Journal Line"
             Caption = 'postType';
             DataClassification = CustomerContent;
 
-
-
         }
 
         field(515; deliveryAccount; Text[20])
@@ -220,36 +218,36 @@ table 73090 "Spy Journal Line"
             gCustomer.Reset();
             gCustomer.SetFilter("No.", deliveryAccount);
 
-            if (deliveryAccount <> '') AND gCustomer.FindFirst() then
+            if (deliveryAccount <> '') and gCustomer.FindFirst() then
                 gDefaultDimension.SetFilter("No.", deliveryAccount)
             else
                 gDefaultDimension.SetFilter("No.", "Account No.");
-
+            //Fill Dim buffer with customer default dimensions
             if gDefaultDimension.FindSet() then begin
                 gDimEntryNo := 1;
                 repeat
-                    IF (gDefaultDimension."Dimension Code" <> '') AND (gDefaultDimension."Dimension Value Code" <> '') then begin
-                        TempDimensionBuffer3.Reset();
-                        TempDimensionBuffer3.SetFilter("Dimension Code", gDefaultDimension."Dimension Code");
-                        TempDimensionBuffer3.SetFilter("Dimension Value Code", gDefaultDimension."Dimension Value Code");
-                        TempDimensionBuffer3.SetFilter("Table ID", '81');
-                        if not TempDimensionBuffer3.FindSet() then begin
-                            TempDimensionBuffer3.Reset();
-                            TempDimensionBuffer3.Init();
-                            TempDimensionBuffer3."Table ID" := 81;
-                            TempDimensionBuffer3."Entry No." := gDimEntryNo;
+                    if (gDefaultDimension."Dimension Code" <> '') and (gDefaultDimension."Dimension Value Code" <> '') then begin
+                        TempCustomerDimensionBuffer3.Reset();
+                        TempCustomerDimensionBuffer3.SetFilter("Dimension Code", gDefaultDimension."Dimension Code");
+                        TempCustomerDimensionBuffer3.SetFilter("Dimension Value Code", gDefaultDimension."Dimension Value Code");
+                        TempCustomerDimensionBuffer3.SetFilter("Table ID", '81');
+                        if not TempCustomerDimensionBuffer3.FindSet() then begin
+                            TempCustomerDimensionBuffer3.Reset();
+                            TempCustomerDimensionBuffer3.Init();
+                            TempCustomerDimensionBuffer3."Table ID" := 81;
+                            TempCustomerDimensionBuffer3."Entry No." := gDimEntryNo;
                             gDimEntryNo := gDimEntryNo + 1;
-                            TempDimensionBuffer3."Dimension Code" := gDefaultDimension."Dimension Code";
-                            TempDimensionBuffer3."Dimension Value Code" := gDefaultDimension."Dimension Value Code";
-                            TempDimensionBuffer3.Insert();
+                            TempCustomerDimensionBuffer3."Dimension Code" := gDefaultDimension."Dimension Code";
+                            TempCustomerDimensionBuffer3."Dimension Value Code" := gDefaultDimension."Dimension Value Code";
+                            TempCustomerDimensionBuffer3.Insert();
                         end;
                     end;
                 until gDefaultDimension.Next() = 0;
 
                 GenJournalLine.Reset();
-                GenJournalLine.SETRANGE(GenJournalLine."Journal Template Name", "Journal Template Name");
-                GenJournalLine.SETRANGE("Journal Batch Name", "Journal Batch Name");
-                GenJournalLine.SETFILTER("Document No.", "Document No.");
+                GenJournalLine.SETRANGE(GenJournalLine."Journal Template Name", Rec."Journal Template Name");
+                GenJournalLine.SETRANGE("Journal Batch Name", Rec."Journal Batch Name");
+                GenJournalLine.SETFILTER("Document No.", Rec."Document No.");
                 if GenJournalLine.FindSet() then begin
                     gDimEntryNo := 1;
                     repeat
@@ -267,25 +265,25 @@ table 73090 "Spy Journal Line"
                                 TempDimensionBuffer.Insert();
                             until DimensionSetEntry.Next() = 0;
 
-                        IF TempDimensionBuffer3.FindSet() then
+                        if TempCustomerDimensionBuffer3.FindSet() then
                             repeat
-                                TempDimensionBuffer2.SETFILTER("Dimension Code", TempDimensionBuffer3."Dimension Code");
-                                IF not TempDimensionBuffer2.FindSet() then begin
+                                TempDimensionBuffer2.SETFILTER("Dimension Code", TempCustomerDimensionBuffer3."Dimension Code");
+                                if not TempDimensionBuffer2.FindSet() then begin
                                     TempDimensionBuffer.Reset();
                                     TempDimensionBuffer.Init();
                                     TempDimensionBuffer."Entry No." := gDimEntryNo;
                                     gDimEntryNo := gDimEntryNo + 1;
                                     TempDimensionBuffer."Table ID" := 81;
-                                    TempDimensionBuffer."Dimension Code" := TempDimensionBuffer3."Dimension Code";
-                                    TempDimensionBuffer."Dimension Value Code" := TempDimensionBuffer3."Dimension Value Code";
+                                    TempDimensionBuffer."Dimension Code" := TempCustomerDimensionBuffer3."Dimension Code";
+                                    TempDimensionBuffer."Dimension Value Code" := TempCustomerDimensionBuffer3."Dimension Value Code";
                                     TempDimensionBuffer.Insert();
                                 end;
-                            until TempDimensionBuffer3.Next() = 0;
+                            until TempCustomerDimensionBuffer3.Next() = 0;
                         GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
                         GenJournalLine.Modify();
                         TempDimensionBuffer.DeleteAll();
                     until GenJournalLine.Next() = 0;
-                    TempDimensionBuffer3.DeleteAll();
+                    TempCustomerDimensionBuffer3.DeleteAll();
                 end;
             end;
         end;
@@ -400,7 +398,7 @@ table 73090 "Spy Journal Line"
             GenJournalLine.Validate("Document No.", "Document No.");
             GenJournalLine.Validate("External Document No.", Rec."External Document No.");
             GenJournalLine.Validate(Description, Rec.Description);
-            GenJournalLine.Validate("Amount (LCY)", Rec."Amount (LCY)");
+            //GenJournalLine.Validate("Amount (LCY)", Rec."Amount (LCY)");
 
 
             if GeneralLedgerSetup."LCY Code" = Rec."Currency Code" then
@@ -579,13 +577,13 @@ table 73090 "Spy Journal Line"
             case postType of
                 'tax', 'ledger':
                     begin
-                        GenJournalLine."Account Type" := "Account Type"::"G/L Account";
+                        GenJournalLine.Validate("Account Type", "Account Type"::"G/L Account");
                         if not GLAccount.Get("Account No.") then
                             GlobalErrorTextList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
                     end;
                 'customer':
                     begin
-                        GenJournalLine."Account Type" := "Account Type"::Customer;
+                        GenJournalLine.Validate("Account Type", "Account Type"::Customer);
                         if not Customer.Get("Account No.") then
                             GlobalErrorTextList.Add(StrSubstNo(AccountNoGetErrorLbl, "Account No."))
                     end;
@@ -598,11 +596,11 @@ table 73090 "Spy Journal Line"
             end;
 
         if ErrorFoundInErrorTextList('[postTypeErr]') then
-            exit(false) else begin
+            exit(false) else
             GenJournalLine.Validate("Account No.", Rec."Account No.");
-            exit(true)
-        end;
+        exit(true)
     end;
+
 
     /// <summary>
     /// ValidateDocumentType, this will also set the postinType
@@ -835,7 +833,7 @@ table 73090 "Spy Journal Line"
 
         TempDimensionBuffer: Record "Dimension Buffer" temporary;
         TempDimensionBuffer2: Record "Dimension Buffer" temporary;
-        TempDimensionBuffer3: Record "Dimension Buffer" temporary;
+        TempCustomerDimensionBuffer3: Record "Dimension Buffer" temporary;
         gDefaultDimension: record "Default Dimension";
         SPYSetup: Record "Spy Setup";
 

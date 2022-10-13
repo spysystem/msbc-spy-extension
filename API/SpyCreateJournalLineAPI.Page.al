@@ -91,8 +91,33 @@ page 73002 SpyCreateJournalLineAPI
         exit('Pong');
     end;
 
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    begin
+        APIValidateAccountTypeAndNo();
+    end;
+
+    /// <summary>
+    /// ValidateAccountTypeAndNo.
+    /// </summary>
+    procedure APIValidateAccountTypeAndNo()
+    var
+    begin
+        case postType of
+            'tax':
+                Rec."Account Type" := Rec."Account Type"::"G/L Account";
+            'ledger':
+                Rec."Account Type" := Rec."Account Type"::"G/L Account";
+            'customer':
+                Rec."Account Type" := Rec."Account Type"::Customer;
+            'supplier':
+                Rec."Account Type" := Rec."Account Type"::Vendor;
+        end;
+
+    end;
+
     var
         //gDocumentType: Text;
         gcountryType: Text;
+
 
 }
