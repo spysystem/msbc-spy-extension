@@ -398,7 +398,9 @@ table 73090 "Spy Journal Line"
             GenJournalLine.Validate("Document No.", "Document No.");
             GenJournalLine.Validate("External Document No.", Rec."External Document No.");
             GenJournalLine.Validate(Description, Rec.Description);
-            //GenJournalLine.Validate("Amount (LCY)", Rec."Amount (LCY)");
+
+            GenJournalLine.Amount := Rec.Amount;
+            GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)";
 
 
             if GeneralLedgerSetup."LCY Code" = Rec."Currency Code" then
@@ -534,25 +536,26 @@ table 73090 "Spy Journal Line"
     /// <returns>Return value of type Boolean.</returns>
     procedure SetSalesPurchExclVAT(): Boolean
     var
-        SetSalesPurchExclVATErr: Label '[SetSalesPurchExclVATErr] %1', Comment = '%1 = LineNo';
+        SetSalesPurchExclVATErr: label '[SetSalesPurchExclVATErr] %1', Comment = '%1 = LineNo';
     begin
         if (Rec."Account Type" = "Account Type"::Customer) or
             (Rec."Account Type" = "Account Type"::Vendor) then begin
             GenJournalLine.Reset();
-            GenJournalLine.SETRANGE(GenJournalLine."Journal Template Name", Rec."Journal Template Name");
+            GenJournalLine.SETRANGE("Journal Template Name", Rec."Journal Template Name");
             GenJournalLine.SETRANGE("Journal Batch Name", Rec."Journal Batch Name");
-            GenJournalLine.SETFILTER("Document No.", Rec."External Document No.");
+            GenJournalLine.SETFILTER("Document No.", Rec."Document No.");
             if GenJournalLine.FindSet() then begin
-                ExclVAT := "Amount (LCY)";
+                ExclVAT := Rec."Amount (LCY)";
                 repeat
                     ExclVAT := ExclVAT + GenJournalLine."VAT Amount (LCY)";
                 until GenJournalLine.Next() = 0;
             end;
-            GenJournalLine."Sales/Purch. (LCY)" := ExclVAT;
+            GenJournalLine.Validate("Sales/Purch. (LCY)", ExclVAT);
             if not GenJournalLine.Modify() then
                 GlobalErrorTextList.Add(StrSubstNo(SetSalesPurchExclVATErr, Rec."Entry No."));
 
         end;
+
         if ErrorFoundInErrorTextList('[SetSalesPurchExclVATErr]') then
             exit(false) else
             exit(true);
