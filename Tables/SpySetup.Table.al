@@ -59,6 +59,13 @@ table 73001 "Spy Setup"
             TableRelation = "Gen. Journal Template".Type;
             DataClassification = ToBeClassified;
         }
+
+        field(30; "Auto Extract PaymentId"; Boolean)
+        {
+            Caption = 'Auto Extract PaymentId', comment = 'DAN="Auto, ovf. betalingsid"';
+            InitValue = true;
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {

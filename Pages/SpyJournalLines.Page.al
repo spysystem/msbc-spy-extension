@@ -236,8 +236,5 @@ page 73004 "Spy Journal Lines"
                 end;
             }
         }
-
     }
-
-
 }

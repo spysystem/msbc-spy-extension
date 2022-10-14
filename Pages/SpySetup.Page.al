@@ -64,6 +64,12 @@ page 73001 "Spy Setup"
                     ToolTip = 'Specifies the value of the Template Type field.';
                 }
 
+                field("Auto Extract PaymentId"; Rec."Auto Extract PaymentId")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies if payment id should be extracted when importing spy lines';
+                }
+
             }
         }
     }

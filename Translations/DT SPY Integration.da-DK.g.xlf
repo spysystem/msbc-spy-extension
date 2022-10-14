@@ -238,6 +238,12 @@
           <note from="Developer" annotates="general" priority="2"/>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Payment Terms Code - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 2115553929 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PaymentID</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Betalingsid"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field PaymentId - Property Caption</note>
+          <target>Betalingsid</target>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Field 3710982960 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Posting Date</source>
           <note from="Developer" annotates="general" priority="2"/>
@@ -284,6 +290,12 @@
           <source>SPY Setup</source>
           <note from="Developer" annotates="general" priority="2"/>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4228076119 - Field 1910381583 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Auto Extract PaymentId</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Auto, ovf. betalingsid"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Auto Extract PaymentId - Property Caption</note>
+          <target>Auto, ovf. betalingsid</target>
         </trans-unit>
         <trans-unit id="Table 4228076119 - Field 2874995131 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Default Jnl Batch Description</source>
@@ -1268,6 +1280,11 @@
           <source>spy,spy set</source>
           <note from="Developer" annotates="general" priority="2"/>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Property AdditionalSearchTerms</note>
+        </trans-unit>
+        <trans-unit id="Page 4228076119 - Control 1910381583 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies if payment id should be extracted when importing spy lines</source>
+          <note from="Developer" annotates="general" priority="2"/>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Auto Extract PaymentId - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 4228076119 - Control 2874995131 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Default Jnl Batch Description</source>

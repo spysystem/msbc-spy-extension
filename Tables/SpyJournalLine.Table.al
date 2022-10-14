@@ -189,6 +189,11 @@ table 73090 "Spy Journal Line"
 
         }
 
+        field(1200; PaymentId; Text[100])
+        {
+            Caption = 'PaymentID', comment = 'DAN="Betalingsid"';
+        }
+
     }
 
     keys
@@ -412,6 +417,7 @@ table 73090 "Spy Journal Line"
             Rec.GetBankAccount();
             Rec.SetDueDate();
             Rec.SetCashDiscountDate();
+            Rec.IsolateSpyPaymentId();
 
             ///if Rec.CreateSypErrorRecords() then
             //    exit(false);
@@ -827,6 +833,30 @@ table 73090 "Spy Journal Line"
             end;
     end;
 
+    /// <summary>
+    /// isolateSpyPaymentId.
+    /// </summary>
+    /// <returns>Return value of type Text.</returns>
+    procedure IsolateSpyPaymentId()
+    var
+        SpySetUp: Record "Spy Setup";
+        StartSeperator: Integer;
+        EndSeperator: Integer;
+        lPaymentid: Text;
+    begin
+        clear(lPaymentid);
+        if SpySetUp.FindFirst() then
+            if SpySetUp."Auto Extract PaymentId" then
+                if StrPos(Description, 'P:') > 0 then begin
+                    StartSeperator := StrPos(Description, ':');
+                    lPaymentid := CopyStr(Description, StartSeperator + 1, strlen(Description));
+                    EndSeperator := StrPos(lPaymentid, ';');
+                    lPaymentid := CopyStr(lPaymentid, 1, EndSeperator - 1);
+                    Rec.PaymentId := lPaymentid;
+                    GenJournalLine.Validate("Transaction Information", lPaymentid);
+                end;
+    end;
+
     var
         BankAccount: record "Bank Account";
         GenJournalLine: Record "Gen. Journal Line";
@@ -854,5 +884,6 @@ table 73090 "Spy Journal Line"
         ExclVAT: Decimal;
         GlobalErrorTextList: List of [Text];
         gPostingDate: Date;
+
 
 }
