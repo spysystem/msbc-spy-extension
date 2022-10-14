@@ -1403,6 +1403,31 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control VAT Prod. Posting Group - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 4228076119 - Action 1720733308 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Web-Services</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Opret Webtjenester"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Action CreateWS - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4228076119 - Action 1720733308 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Web-Services</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Opret Webtjenester"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Action CreateWS - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4228076119 - Action 1899845807 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Registration No. Formats will be deleted!</source>
+          <note from="Developer" annotates="general" priority="2">DAN="CVR/SE format koder vil blive slettet!"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Action DeleteVatSetup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4228076119 - Action 1899845807 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delete VAT Registration No. Formats</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Slet CVR/SE format koder"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Action DeleteVatSetup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4228076119 - Action 1899845807 - Method 1377591017 - NamedType 2115799914" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Registration No. Formats will be deleted!</source>
+          <note from="Developer" annotates="general" priority="2">DAN="CVR/SE format koder vil blive slettet!"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Action DeleteVatSetup - Method OnAction - NamedType VatRegDeleteWarningQst</note>
+        </trans-unit>
         <trans-unit id="Page 1921021216 - Control 1593446156 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
           <note from="Developer" annotates="general" priority="2"></note>
