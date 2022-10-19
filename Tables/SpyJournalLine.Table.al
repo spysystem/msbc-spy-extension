@@ -508,13 +508,22 @@ table 73090 "Spy Journal Line"
         if Rec."VAT Code" <> '' then begin
 
             //JB - Ændret rækkefølge på de 2 afsnit da en validate af Virksomhedsbogføringsgruppen overstyrer MomsVirksomhedsbogføringsgruppen
-            If not GenBusinessPostingGroup.Get(Rec."VAT Code") then
-                GlobalErrorTextList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
+            //JB - Indsæt record hvis den ikke findes
+            If not GenBusinessPostingGroup.Get(Rec."VAT Code") then begin
+                GenBusinessPostingGroup.Code := Rec."VAT Code";
+                GenBusinessPostingGroup.Insert();
                 GenJournalLine.Validate("Gen. Bus. Posting Group", "VAT Code");
+            end;
 
-            If not VATBusinessPostingGroup.Get(Rec."VAT Code") then
-                GlobalErrorTextList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
+
+            If not VATBusinessPostingGroup.Get(Rec."VAT Code") then begin
+                VATBusinessPostingGroup.Code := Rec."VAT Code";
+                VATBusinessPostingGroup.Insert();
                 GenJournalLine.Validate("VAT Bus. Posting Group", "VAT Code");
+            end;
+
+            GenJournalLine.Validate("Gen. Bus. Posting Group", "VAT Code");
+            GenJournalLine.Validate("VAT Bus. Posting Group", "VAT Code");
 
 
             //JB - Ændret rækkefølge på de 2 linjer da en validate af ProduktBogføringsgruppe overskriver MomsProduktBogføringsgruppe
