@@ -506,16 +506,20 @@ table 73090 "Spy Journal Line"
         GenJournalLine."VAT Bus. Posting Group" := '';
 
         if Rec."VAT Code" <> '' then begin
-            If not VATBusinessPostingGroup.Get(Rec."VAT Code") then
-                GlobalErrorTextList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
-                GenJournalLine.Validate("VAT Bus. Posting Group", "VAT Code");
 
+            //JB - Ændret rækkefølge på de 2 afsnit da en validate af Virksomhedsbogføringsgruppen overstyrer MomsVirksomhedsbogføringsgruppen
             If not GenBusinessPostingGroup.Get(Rec."VAT Code") then
                 GlobalErrorTextList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
                 GenJournalLine.Validate("Gen. Bus. Posting Group", "VAT Code");
 
-            GenJournalLine.Validate("VAT Prod. Posting Group", SPYSetup."VAT Prod. Posting Group");
+            If not VATBusinessPostingGroup.Get(Rec."VAT Code") then
+                GlobalErrorTextList.Add(StrSubstNo(InvalidVATCodeLbl, Rec."VAT Code")) else
+                GenJournalLine.Validate("VAT Bus. Posting Group", "VAT Code");
+
+
+            //JB - Ændret rækkefølge på de 2 linjer da en validate af ProduktBogføringsgruppe overskriver MomsProduktBogføringsgruppe
             GenJournalLine.Validate("Gen. Prod. Posting Group", SPYSetup."Gen. Prod. Posting Group");
+            GenJournalLine.Validate("VAT Prod. Posting Group", SPYSetup."VAT Prod. Posting Group");
 
             if (PostingType = 'Sale') then
                 GenJournalLine.Validate("Gen. Posting Type", GenJournalLine."Gen. Posting Type"::Sale);
