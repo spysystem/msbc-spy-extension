@@ -402,10 +402,13 @@ table 73090 "Spy Journal Line"
             GenJournalLine.Amount := Rec.Amount;
             GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)";
 
-
+            //JB Indsat validering tp valutakode
             if GeneralLedgerSetup."LCY Code" = Rec."Currency Code" then
-                GenJournalLine."Currency Code" := '' else
+                GenJournalLine."Currency Code" := ''
+            else begin
                 GenJournalLine."Currency Code" := Rec."Currency Code";
+                GenJournalLine.Validate("Currency Code");
+            end;
 
             Rec.ValidateTaxTitle();
             Rec.SetPostingGroups();
