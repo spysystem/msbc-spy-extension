@@ -283,6 +283,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Payment Terms Code - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 2115553929 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PaymentID</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Betalingsid"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field PaymentId - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Field 3710982960 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Posting Date</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -353,20 +358,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Entry No. - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 4228076119 - Field 633819257 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Gen. Bus. Posting Group</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Gen. Bus. Posting Group - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Table 4228076119 - Field 2139693550 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Gen. Prod. Posting Group</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Gen. Prod. Posting Group - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 4228076119 - Field 1844012642 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>VAT Bus. Posting Group</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field VAT Bus. Posting Group - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4228076119 - Field 236064653 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>VAT Prod. Posting Group</source>
@@ -1338,11 +1333,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Default Journal Temp Name - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 4228076119 - Control 633819257 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Gen. Bus. Posting Group field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Gen. Bus. Posting Group - Property ToolTip</note>
-        </trans-unit>
         <trans-unit id="Page 4228076119 - Control 2139693550 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Gen. Prod. Posting Group field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1352,11 +1342,6 @@
           <source>Specifies the value of the Template Type field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Template Type - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 4228076119 - Control 1844012642 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the VAT Bus. Posting Group field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control VAT Bus. Posting Group - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 4228076119 - Control 236064653 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the VAT Prod. Posting Group field.</source>

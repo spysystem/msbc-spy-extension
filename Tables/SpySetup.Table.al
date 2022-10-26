@@ -11,16 +11,8 @@ table 73001 "Spy Setup"
             Caption = 'Entry No.';
             DataClassification = ToBeClassified;
         }
-        field(2; "VAT Bus. Posting Group"; Code[20])
-        {
-            Caption = 'VAT Bus. Posting Group';
-            DataClassification = ToBeClassified;
-        }
-        field(3; "Gen. Bus. Posting Group"; Code[20])
-        {
-            Caption = 'Gen. Bus. Posting Group';
-            DataClassification = ToBeClassified;
-        }
+
+
         field(4; "VAT Prod. Posting Group"; Code[20])
         {
             Caption = 'VAT Prod. Posting Group';
@@ -38,12 +30,14 @@ table 73001 "Spy Setup"
         {
             Caption = 'Default Journal Temp Name';
             TableRelation = "Gen. Journal Template";
+            ValidateTableRelation = false;
             DataClassification = ToBeClassified;
         }
         field(15; "Default Journal Batch Name"; Code[10])
         {
             Caption = 'Default Journal Batch Name';
             DataClassification = ToBeClassified;
+            ValidateTableRelation = false;
             TableRelation = "Gen. Journal Batch";
         }
         field(20; "Default Jnl Batch Description"; Text[100])
@@ -57,6 +51,7 @@ table 73001 "Spy Setup"
         {
             Caption = 'Default Template Type';
             TableRelation = "Gen. Journal Template".Type;
+            ValidateTableRelation = false;
             DataClassification = ToBeClassified;
         }
     }

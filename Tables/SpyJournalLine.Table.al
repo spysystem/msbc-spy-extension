@@ -109,7 +109,7 @@ table 73090 "Spy Journal Line"
             Caption = 'Posting Date';
             DataClassification = CustomerContent;
         }
-        field(77; "External Document No."; Code[20])
+        field(77; "External Document No."; Code[35])
         {
             Caption = 'External Document No.';
             DataClassification = CustomerContent;
@@ -175,6 +175,11 @@ table 73090 "Spy Journal Line"
         field(901; custGroup; Text[50])
         {
             Caption = 'custGroup';
+        }
+
+        field(1200; PaymentId; Text[100])
+        {
+            Caption = 'PaymentID', comment = 'DAN="Betalingsid"';
         }
 
         // field(1000; "SPY Dimensions"; Integer)
@@ -400,7 +405,7 @@ table 73090 "Spy Journal Line"
             GenJournalLine.Validate(Description, Rec.Description);
 
             GenJournalLine.Amount := Rec.Amount;
-            GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)";
+            // GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)";
 
             //JB Indsat validering tp valutakode
             if GeneralLedgerSetup."LCY Code" = Rec."Currency Code" then
@@ -409,12 +414,15 @@ table 73090 "Spy Journal Line"
                 GenJournalLine."Currency Code" := Rec."Currency Code";
                 GenJournalLine.Validate("Currency Code");
             end;
+            //Moved KW - LCY must be set AFTER amount and AFTER validation of Currency
+            GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)";
 
             Rec.ValidateTaxTitle();
             Rec.SetPostingGroups();
             Rec.GetBankAccount();
             Rec.SetDueDate();
             Rec.SetCashDiscountDate();
+            Rec.IsolateSpyPaymentId();
 
             ///if Rec.CreateSypErrorRecords() then
             //    exit(false);
@@ -664,7 +672,7 @@ table 73090 "Spy Journal Line"
         BatchNotCreatedLbl: label '[CreateJnlBacthErr] Failed to Create Journal Template Name %1', comment = 'DAN="Kladde blev ikke oprette %1"';
     begin
         SPYSetup.TestField("Default Journal Template Name");
-        SPYSetup.TestField("Default Journal Batch Name");
+        //SPYSetup.TestField("Default Journal Batch Name");
         if Rec."Journal Template Name" = '' then
             Rec."Journal Template Name" := SPYSetup."Default Journal Template Name";
 
@@ -841,6 +849,24 @@ table 73090 "Spy Journal Line"
                 if StrPos(ErrorCurrent, ErrorTextToFind) > 0 then
                     exit(true);
             end;
+    end;
+
+    procedure IsolateSpyPaymentId()
+    var
+        SpySetUp: Record "Spy Setup";
+        StartSeperator: Integer;
+        EndSeperator: Integer;
+        lPaymentid: Text;
+    begin
+        clear(lPaymentid);
+        if StrPos(Description, 'P:') > 0 then begin
+            StartSeperator := StrPos(Description, ':');
+            lPaymentid := CopyStr(Description, StartSeperator + 1, strlen(Description));
+            EndSeperator := StrPos(lPaymentid, ';');
+            lPaymentid := CopyStr(lPaymentid, 1, EndSeperator - 1);
+            Rec.PaymentId := lPaymentid;
+            GenJournalLine.Validate("Transaction Information", lPaymentid);
+        end;
     end;
 
     var
