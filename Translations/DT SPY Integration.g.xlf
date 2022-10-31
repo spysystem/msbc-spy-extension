@@ -128,11 +128,6 @@
           <note from="Developer" annotates="general" priority="2">%1 = Ext Doc No.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method PostTempSpyJournalLines - NamedType InsertGenJnlLineErr</note>
         </trans-unit>
-        <trans-unit id="Table 3833745087 - Method 1153924898 - NamedType 2704139927" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[VAT Code Err] %1 does not exist in BC</source>
-          <note from="Developer" annotates="general" priority="2">%1 = VAT Code from SPY</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method SetPostingGroups - NamedType InvalidVATCodeLbl</note>
-        </trans-unit>
         <trans-unit id="Table 3833745087 - Method 1226951289 - NamedType 2864912246" size-unit="char" translate="yes" xml:space="preserve">
           <source>[SetSalesPurchExclVATErr] %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = LineNo</note>
@@ -1967,6 +1962,16 @@
           <source> </source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Spy Customer Template - Control Global Dimension 2 Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 108901823 - Action 3881618888 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2583272393">
+          <source>Spy - Update Dimensions</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Spy - Update Dimensions"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension SPY General Journal - Action AttemptDimUpdate - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 108901823 - Action 3881618888 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2583272393">
+          <source>Spy - Update Dimensions</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Spy - Update Dimensions"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension SPY General Journal - Action AttemptDimUpdate - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 428838763 - Control 3684440170 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3603089623">
           <source>Journal Template Name </source>

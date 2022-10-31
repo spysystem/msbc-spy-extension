@@ -227,30 +227,30 @@ table 73090 "Spy Journal Line"
                 gDefaultDimension.SetFilter("No.", deliveryAccount)
             else
                 gDefaultDimension.SetFilter("No.", "Account No.");
-            //Fill Dim buffer with customer default dimensions
+            //IF Default dim for the customer exists and this is not on G/L Entry, then Insert this into TempDimBuffer to modift G/L entry posts dimensions.
             if gDefaultDimension.FindSet() then begin
                 gDimEntryNo := 1;
                 repeat
                     if (gDefaultDimension."Dimension Code" <> '') and (gDefaultDimension."Dimension Value Code" <> '') then begin
-                        TempCustomerDimensionBuffer3.Reset();
-                        TempCustomerDimensionBuffer3.SetFilter("Dimension Code", gDefaultDimension."Dimension Code");
-                        TempCustomerDimensionBuffer3.SetFilter("Dimension Value Code", gDefaultDimension."Dimension Value Code");
-                        TempCustomerDimensionBuffer3.SetFilter("Table ID", '81');
-                        if not TempCustomerDimensionBuffer3.FindSet() then begin
-                            TempCustomerDimensionBuffer3.Reset();
-                            TempCustomerDimensionBuffer3.Init();
-                            TempCustomerDimensionBuffer3."Table ID" := 81;
-                            TempCustomerDimensionBuffer3."Entry No." := gDimEntryNo;
+                        TempDimensionBuffer3.Reset();
+                        TempDimensionBuffer3.SetFilter("Dimension Code", gDefaultDimension."Dimension Code");
+                        TempDimensionBuffer3.SetFilter("Dimension Value Code", gDefaultDimension."Dimension Value Code");
+                        TempDimensionBuffer3.SetFilter("Table ID", '81');
+                        if not TempDimensionBuffer3.FindSet() then begin
+                            TempDimensionBuffer3.Reset();
+                            TempDimensionBuffer3.Init();
+                            TempDimensionBuffer3."Table ID" := 81;
+                            TempDimensionBuffer3."Entry No." := gDimEntryNo;
                             gDimEntryNo := gDimEntryNo + 1;
-                            TempCustomerDimensionBuffer3."Dimension Code" := gDefaultDimension."Dimension Code";
-                            TempCustomerDimensionBuffer3."Dimension Value Code" := gDefaultDimension."Dimension Value Code";
-                            TempCustomerDimensionBuffer3.Insert();
+                            TempDimensionBuffer3."Dimension Code" := gDefaultDimension."Dimension Code";
+                            TempDimensionBuffer3."Dimension Value Code" := gDefaultDimension."Dimension Value Code";
+                            TempDimensionBuffer3.Insert();
                         end;
                     end;
                 until gDefaultDimension.Next() = 0;
 
                 GenJournalLine.Reset();
-                GenJournalLine.SETRANGE(GenJournalLine."Journal Template Name", Rec."Journal Template Name");
+                GenJournalLine.SETRANGE("Journal Template Name", Rec."Journal Template Name");
                 GenJournalLine.SETRANGE("Journal Batch Name", Rec."Journal Batch Name");
                 GenJournalLine.SETFILTER("Document No.", Rec."Document No.");
                 if GenJournalLine.FindSet() then begin
@@ -270,25 +270,25 @@ table 73090 "Spy Journal Line"
                                 TempDimensionBuffer.Insert();
                             until DimensionSetEntry.Next() = 0;
 
-                        if TempCustomerDimensionBuffer3.FindSet() then
+                        if TempDimensionBuffer3.FindSet() then
                             repeat
-                                TempDimensionBuffer2.SETFILTER("Dimension Code", TempCustomerDimensionBuffer3."Dimension Code");
+                                TempDimensionBuffer2.SETFILTER("Dimension Code", TempDimensionBuffer3."Dimension Code");
                                 if not TempDimensionBuffer2.FindSet() then begin
                                     TempDimensionBuffer.Reset();
                                     TempDimensionBuffer.Init();
                                     TempDimensionBuffer."Entry No." := gDimEntryNo;
                                     gDimEntryNo := gDimEntryNo + 1;
                                     TempDimensionBuffer."Table ID" := 81;
-                                    TempDimensionBuffer."Dimension Code" := TempCustomerDimensionBuffer3."Dimension Code";
-                                    TempDimensionBuffer."Dimension Value Code" := TempCustomerDimensionBuffer3."Dimension Value Code";
+                                    TempDimensionBuffer."Dimension Code" := TempDimensionBuffer3."Dimension Code";
+                                    TempDimensionBuffer."Dimension Value Code" := TempDimensionBuffer3."Dimension Value Code";
                                     TempDimensionBuffer.Insert();
                                 end;
-                            until TempCustomerDimensionBuffer3.Next() = 0;
+                            until TempDimensionBuffer3.Next() = 0;
                         GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
                         GenJournalLine.Modify();
                         TempDimensionBuffer.DeleteAll();
                     until GenJournalLine.Next() = 0;
-                    TempCustomerDimensionBuffer3.DeleteAll();
+                    TempDimensionBuffer3.DeleteAll();
                 end;
             end;
         end;
@@ -377,7 +377,6 @@ table 73090 "Spy Journal Line"
     procedure PostTempSpyJournalLines(): Boolean
     var
         GeneralLedgerSetup: record "General Ledger Setup";
-        SpyDimensions: Record "Spy Dimension";
         InsertGenJnlLineErr: label '[CreationErr] Failed to Insert Gen. Journal Line %1', comment = '%1 = Ext Doc No.';
     begin
         Clear(GlobalErrorTextList);
@@ -392,60 +391,48 @@ table 73090 "Spy Journal Line"
 
         GenJournalLine.Init();
         //GenJournalLine.SetCurrentKey(GenJournalLine."Journal Template Name", GenJournalLine."Journal Batch Name", GenJournalLine."Line No.");
-        if Rec.ValidateJournalBatchName() then begin
+        if ValidateJournalBatchName() then begin
             GenJournalLine.Validate("Journal Template Name", Rec."Journal Template Name");
             GenJournalLine.validate("Journal Batch Name", Rec."Journal Batch Name");
             GenJournalLine."Line No." := GenJournalLine.GetNewLineNo(Rec."Journal Template Name", Rec."Journal Batch Name"); //Validates Temp and Batch Name
-            Rec.ValidateAccountTypeAndNo();
-            Rec.ValidatePostingDate();
-            Rec.ValidateDocumentType();
+
+            ValidateAccountTypeAndNo();
+            ValidatePostingDate();
+            ValidateDocumentType();
 
             GenJournalLine.Validate("Document No.", "Document No.");
             GenJournalLine.Validate("External Document No.", Rec."External Document No.");
             GenJournalLine.Validate(Description, Rec.Description);
 
             GenJournalLine.Amount := Rec.Amount;
-            // GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)";
 
-            //JB Indsat validering tp valutakode
             if GeneralLedgerSetup."LCY Code" = Rec."Currency Code" then
                 GenJournalLine."Currency Code" := ''
             else begin
                 GenJournalLine."Currency Code" := Rec."Currency Code";
                 GenJournalLine.Validate("Currency Code");
             end;
-            //Moved KW - LCY must be set AFTER amount and AFTER validation of Currency
-            GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)";
 
-            Rec.ValidateTaxTitle();
-            Rec.SetPostingGroups();
-            Rec.GetBankAccount();
-            Rec.SetDueDate();
-            Rec.SetCashDiscountDate();
-            Rec.IsolateSpyPaymentId();
+            GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)"; //Moved KW - LCY must be set AFTER amount and AFTER validation of Currency
 
-            ///if Rec.CreateSypErrorRecords() then
-            //    exit(false);
+            ValidateTaxTitle();
+            SetPostingGroups();
+            GetBankAccount();
+            SetDueDate();
+            SetCashDiscountDate();
+            IsolateSpyPaymentId();
+
         end;
 
         if not GenJournalLine.Insert(true) then
             GlobalErrorTextList.Add(StrSubstNo(InsertGenJnlLineErr, Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
 
         //Set dimensionsId
-        SpyDimensions.SetRange("Spy Jnl Line Description", Rec.Description);
-        SpyDimensions.SetRange("Entry No.", Rec."Entry No.");
-
-        if SpyDimensions.FindSet() then
-            repeat
-                FillTempDimBuffer(SpyDimensions);
-            until SpyDimensions.Next() = 0;
-        GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
-        TempDimensionBuffer.DeleteAll();
-        gDimEntryNo := 1;
-        GenJournalLine.Modify();
-        Rec.SetSalesPurchExclVAT();
-        Rec.CopyCustomerDimensions();
-        //Rec.UpdateGlobalDimensions();
+        SetDimensionsSetIdWithSpyDim();
+        SetSalesPurchExclVAT();
+        //CopyCustomerDimensions();
+        HandleDimensions();
+        UpdateGlobalDimensions();
 
         if Rec.CreateSypErrorRecords() then
             exit(false) else
@@ -489,15 +476,78 @@ table 73090 "Spy Journal Line"
         GenJournalLine.Reset();
         GenJournalLine.SETRANGE("Journal Template Name", Rec."Journal Template Name");
         GenJournalLine.SETRANGE("Journal Batch Name", Rec."Journal Batch Name");
-        GenJournalLine.SETFILTER("Document No.", Rec."External Document No.");
+        GenJournalLine.SETFILTER("Document No.", Rec."Document No.");
         if GenJournalLine.FindSet() then
             repeat
                 DimensionManagement.UpdateGlobalDimFromDimSetID(
                     GenJournalLine."Dimension Set ID",
                     GenJournalLine."Shortcut Dimension 1 Code",
                     GenJournalLine."Shortcut Dimension 2 Code");
+                GenJournalLine.Modify();
             until GenJournalLine.Next() = 0;
-        GenJournalLine.Modify();
+    end;
+
+    /// <summary>
+    /// HandleDimensions.
+    /// </summary>
+    /// <returns>Return value of type Boolean.</returns>
+    procedure HandleDimensions(): Boolean
+    var
+    begin
+        //Ignore if not a customer acc.
+        if Rec."Account Type" <> Rec."Account Type"::Customer then
+            exit;
+
+        // Delete NewDimensionSetEntry (Temporary)
+        CustomerDimensionSetEntry.DeleteAll();
+
+        // Find Dimension from Existing GL Customer line
+        DimensionSetEntry.Reset();
+        DimensionSetEntry.SETRANGE("Dimension Set ID", GenJournalLine."Dimension Set ID");
+        if DimensionSetEntry.FindFirst() then
+            repeat
+                // Insert Existing Dimensions
+                CustomerDimensionSetEntry.Init();
+                CustomerDimensionSetEntry."Dimension Set ID" := 0;
+                CustomerDimensionSetEntry.VALIDATE("Dimension Code", DimensionSetEntry."Dimension Code");
+                CustomerDimensionSetEntry.VALIDATE("Dimension Value Code", DimensionSetEntry."Dimension Value Code");
+                CustomerDimensionSetEntry.Insert(true);
+            until DimensionSetEntry.Next() = 0;
+
+        // Find GL Account Dimensions
+
+        GenJournalLine2.Reset();
+        GenJournalLine2.SETRANGE("Journal Template Name", GenJournalLine."Journal Template Name");
+        GenJournalLine2.SETRANGE("Journal Batch Name", GenJournalLine."Journal Batch Name");
+        GenJournalLine2.SETFILTER("Document No.", GenJournalLine."Document No.");
+        if GenJournalLine2.FindSet() then
+            repeat
+                if GenJournalLine2."Line No." <> GenJournalLine."Line No." then begin
+                    GLAccountDimensionSetEntry2.DeleteAll();
+                    DimensionSetEntry.Reset();
+                    DimensionSetEntry.SETRANGE("Dimension Set ID", GenJournalLine2."Dimension Set ID");
+                    if DimensionSetEntry.FindSet() then
+                        repeat
+                            // Insert Existing Dimensions
+                            GLAccountDimensionSetEntry2.Init();
+                            GLAccountDimensionSetEntry2."Dimension Set ID" := 0;
+                            GLAccountDimensionSetEntry2.VALIDATE("Dimension Code", DimensionSetEntry."Dimension Code");
+                            GLAccountDimensionSetEntry2.VALIDATE("Dimension Value Code", DimensionSetEntry."Dimension Value Code");
+                            GLAccountDimensionSetEntry2.Insert();
+                        until DimensionSetEntry.Next() = 0;
+
+                    if CustomerDimensionSetEntry.FindFirst() then
+                        repeat
+                            GLAccountDimensionSetEntry2 := CustomerDimensionSetEntry;
+                            if not GLAccountDimensionSetEntry2.Insert() then;
+                        until CustomerDimensionSetEntry.Next() = 0;
+
+                    GenJournalLine2."Dimension Set ID" := GLAccountDimensionSetEntry2.GetDimensionSetID(GLAccountDimensionSetEntry2);
+                    GenJournalLine2.Modify();
+                end;
+            until GenJournalLine2.Next() = 0;
+
+        exit(true);
     end;
 
     /// <summary>
@@ -508,7 +558,7 @@ table 73090 "Spy Journal Line"
     var
         VATBusinessPostingGroup: Record "VAT Business Posting Group";
         GenBusinessPostingGroup: Record "Gen. Business Posting Group";
-        InvalidVATCodeLbl: Label '[VAT Code Err] %1 does not exist in BC', Comment = '%1 = VAT Code from SPY';
+    //InvalidVATCodeLbl: Label '[VAT Code Err] %1 does not exist in BC', Comment = '%1 = VAT Code from SPY';
     begin
         GenJournalLine."Gen. Bus. Posting Group" := '';
         GenJournalLine."Gen. Prod. Posting Group" := '';
@@ -517,17 +567,16 @@ table 73090 "Spy Journal Line"
         GenJournalLine."VAT Bus. Posting Group" := '';
 
         if Rec."VAT Code" <> '' then begin
-
             //JB - Ændret rækkefølge på de 2 afsnit da en validate af Virksomhedsbogføringsgruppen overstyrer MomsVirksomhedsbogføringsgruppen
             //JB - Indsæt record hvis den ikke findes
-            If not GenBusinessPostingGroup.Get(Rec."VAT Code") then begin
+            if not GenBusinessPostingGroup.Get(Rec."VAT Code") then begin
                 GenBusinessPostingGroup.Code := Rec."VAT Code";
                 GenBusinessPostingGroup.Insert();
                 GenJournalLine.Validate("Gen. Bus. Posting Group", "VAT Code");
             end;
 
 
-            If not VATBusinessPostingGroup.Get(Rec."VAT Code") then begin
+            if not VATBusinessPostingGroup.Get(Rec."VAT Code") then begin
                 VATBusinessPostingGroup.Code := Rec."VAT Code";
                 VATBusinessPostingGroup.Insert();
                 GenJournalLine.Validate("VAT Bus. Posting Group", "VAT Code");
@@ -535,10 +584,7 @@ table 73090 "Spy Journal Line"
 
             GenJournalLine.Validate("Gen. Bus. Posting Group", "VAT Code");
             GenJournalLine.Validate("VAT Bus. Posting Group", "VAT Code");
-
-
-            //JB - Ændret rækkefølge på de 2 linjer da en validate af ProduktBogføringsgruppe overskriver MomsProduktBogføringsgruppe
-            GenJournalLine.Validate("Gen. Prod. Posting Group", SPYSetup."Gen. Prod. Posting Group");
+            //GenJournalLine.Validate("Gen. Prod. Posting Group", SPYSetup."Gen. Prod. Posting Group");
             GenJournalLine.Validate("VAT Prod. Posting Group", SPYSetup."VAT Prod. Posting Group");
 
             if (PostingType = 'Sale') then
@@ -814,22 +860,6 @@ table 73090 "Spy Journal Line"
         end;
     end;
 
-    /// <summary>
-    /// GetBCDimGLNo.
-    /// </summary>
-    /// <param name="SpyDimensions">VAR Record "Spy Dimensions".</param>
-    /// <returns>Return variable DimNo of type Integer.</returns>
-    procedure GetBCDimGLNo(var SpyDimensions: Record "Spy Dimension") DimNo: Integer
-    var
-        DimArray: Array[8] of code[20];
-        i: Integer;
-    begin
-        DimensionManagement.GetGLSetup(DimArray);
-        FOR i := 1 to ArrayLen(DimArray) DO
-            if DimArray[i] = SpyDimensions."Dimension Name" then
-                DimNo := i;
-    end;
-
 
     /// <summary>
     /// ErrorFoundInErrorTextList.
@@ -853,10 +883,9 @@ table 73090 "Spy Journal Line"
 
     procedure IsolateSpyPaymentId()
     var
-        SpySetUp: Record "Spy Setup";
         StartSeperator: Integer;
         EndSeperator: Integer;
-        lPaymentid: Text;
+        lPaymentid: Text[100];
     begin
         clear(lPaymentid);
         if StrPos(Description, 'P:') > 0 then begin
@@ -869,16 +898,68 @@ table 73090 "Spy Journal Line"
         end;
     end;
 
+    local procedure SetDimensionsSetIdWithSpyDim()
+    var
+        SpyDimensions: Record "Spy Dimension";
+    begin
+        SpyDimensions.SetRange("Spy Jnl Line Description", Rec.Description);
+        SpyDimensions.SetRange("Entry No.", Rec."Entry No.");
+        if SpyDimensions.FindSet() then
+            repeat
+                FillTempDimBuffer(SpyDimensions);
+            until SpyDimensions.Next() = 0;
+
+        //GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
+        if TempDimensionBuffer.FindFirst() then begin
+            GenJournalLine2.Reset();
+            GenJournalLine2.SETRANGE("Journal Template Name", GenJournalLine."Journal Template Name");
+            GenJournalLine2.SETRANGE("Journal Batch Name", GenJournalLine."Journal Batch Name");
+            GenJournalLine2.SETFILTER("Document No.", GenJournalLine."Document No.");
+            if GenJournalLine2.FindFirst() then begin
+                GLAccountDimensionSetEntry2.DeleteAll();
+                DimensionSetEntry.Reset();
+                DimensionSetEntry.SETRANGE("Dimension Set ID", GenJournalLine2."Dimension Set ID");
+                if DimensionSetEntry.FindSet() then
+                    repeat
+                        // Insert Existing Dimensions
+                        GLAccountDimensionSetEntry2.Init();
+                        GLAccountDimensionSetEntry2."Dimension Set ID" := 0;
+                        GLAccountDimensionSetEntry2.VALIDATE("Dimension Code", DimensionSetEntry."Dimension Code");
+                        GLAccountDimensionSetEntry2.VALIDATE("Dimension Value Code", DimensionSetEntry."Dimension Value Code");
+                        GLAccountDimensionSetEntry2.Insert();
+                    until DimensionSetEntry.Next() = 0;
+
+                if TempDimensionBuffer.FindFirst() then
+                    repeat
+                        GLAccountDimensionSetEntry2.Init();
+                        GLAccountDimensionSetEntry2."Dimension Set ID" := 0;
+                        GLAccountDimensionSetEntry2.VALIDATE("Dimension Code", TempDimensionBuffer."Dimension Code");
+                        GLAccountDimensionSetEntry2.VALIDATE("Dimension Value Code", TempDimensionBuffer."Dimension Value Code");
+                        if GLAccountDimensionSetEntry2.Insert() then;
+                    until CustomerDimensionSetEntry.Next() = 0;
+
+                GenJournalLine2."Dimension Set ID" := GLAccountDimensionSetEntry2.GetDimensionSetID(GLAccountDimensionSetEntry2);
+                GenJournalLine2.Modify();
+            end;
+        end;
+        gDimEntryNo := 1;
+    end;
+
     var
         BankAccount: record "Bank Account";
         GenJournalLine: Record "Gen. Journal Line";
+        GenJournalLine2: Record "Gen. Journal Line";
+
         gCustomer: record Customer;
         genJournalBatch: Record "Gen. Journal Batch";
         DimensionSetEntry: Record "Dimension Set Entry";
 
         TempDimensionBuffer: Record "Dimension Buffer" temporary;
         TempDimensionBuffer2: Record "Dimension Buffer" temporary;
-        TempCustomerDimensionBuffer3: Record "Dimension Buffer" temporary;
+        TempDimensionBuffer3: Record "Dimension Buffer" temporary;
+
+        CustomerDimensionSetEntry: Record "Dimension Set Entry" temporary;
+        GLAccountDimensionSetEntry2: Record "Dimension Set Entry" temporary;
         gDefaultDimension: record "Default Dimension";
         SPYSetup: Record "Spy Setup";
 

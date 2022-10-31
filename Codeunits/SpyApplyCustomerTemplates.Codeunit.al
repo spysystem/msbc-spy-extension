@@ -14,20 +14,17 @@ codeunit 73009 SpyApplyCustomerTemplates
         Country := lCustomer."Country/Region Code";
 
         IF ConfigTemplateHeader.GET('SPYCUS') THEN BEGIN
-
             ConfigTemplateManagement.UpdateRecord(ConfigTemplateHeader, CustomerRecordRef);
             DimensionsTemplate.InsertDimensionsFromTemplates(ConfigTemplateHeader, lCustomer."No.", DATABASE::Customer);
 
         END;
         IF ConfigTemplateHeader.GET('SPYCUS-' + UpperCase(CountryType)) THEN BEGIN
-
             ConfigTemplateManagement.UpdateRecord(ConfigTemplateHeader, CustomerRecordRef);
             DimensionsTemplate.InsertDimensionsFromTemplates(ConfigTemplateHeader, lCustomer."No.", DATABASE::Customer);
 
         END;
 
         IF ConfigTemplateHeader.GET('SPYCUS-' + UpperCase(Country)) THEN BEGIN
-
             ConfigTemplateManagement.UpdateRecord(ConfigTemplateHeader, CustomerRecordRef);
             DimensionsTemplate.InsertDimensionsFromTemplates(ConfigTemplateHeader, lCustomer."No.", DATABASE::Customer);
 

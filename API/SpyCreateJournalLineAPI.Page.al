@@ -102,7 +102,7 @@ page 73002 SpyCreateJournalLineAPI
     procedure APIValidateAccountTypeAndNo()
     var
     begin
-        case postType of
+        case Rec.postType of
             'tax':
                 Rec."Account Type" := Rec."Account Type"::"G/L Account";
             'ledger':

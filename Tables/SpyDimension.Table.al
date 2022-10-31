@@ -39,7 +39,7 @@ table 73002 "Spy Dimension"
             DataClassification = CustomerContent;
         }
 
-        field(38; "External Document No."; Code[20])
+        field(38; "External Document No."; Code[35])
         {
             Caption = 'Document No.';
             DataClassification = CustomerContent;

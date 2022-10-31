@@ -31,7 +31,7 @@ codeunit 73006 SpyCreateJournalLine
         if SpyJournalLine.FindSet() then
             repeat
                 CurrentCount += 1;
-                if SpyJournalLine.PostTempSpyJournalLines() then
+                if SpyJournalLine.PostTempSpyJournalLines() then //THIS IS MOVING sypJournalLines to General Journal.
                     PostedCount += 1;
                 if (CurrentCount = SpyJournalLine.Count()) and (PostedCount <> SpyJournalLine.Count()) then
                     ErrorsCollectedTxt := GetErrorBlobMessage(SpyJournalLine);

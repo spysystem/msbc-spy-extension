@@ -1,0 +1,264 @@
+{
+    "requests": 
+    [
+        {
+            "method": "POST",
+            "id": "1",
+            "url": "companies({{companyId}})/journalLines",
+            "headers": {
+                "Content-Type": "application/json",
+                "Prefer": "return-no-content"
+            },
+            "body": {
+                "templateName": "",
+                "journalName": "SPY-SALES",
+                "documentNumber": "244881",
+                "documentType": "Sale",
+                "countryType": "Domestic",
+                "account": "1710",
+                "description": "Invoice:244881;D:242612;A:10767",
+                "amount": 2168.1,
+                "entryType": "cogs",
+                "postingDate": "2022-10-27",
+                "deliveryAccount": "",
+                "postType": "ledger",
+                "invoiceNo": "",
+                "currency": "",
+                "amountBaseCurrency": 2168.1,
+                "countyUSTaxAccount": "",
+                "stateUSTaxAccount": "",
+                "vatCode": "",
+                "vatArea": "",
+                "taxTitle": "",
+                "taxPercentage": 0,
+                "dueDate": "",
+                "paymentTerm": "",
+                "cashDiscountDate": "",
+                "custGroup": ""
+            }
+        },
+        {
+        "method": "POST",
+        "id": "2",
+        "url": "companies({{companyId}})/journalLines",
+        "headers": {
+            "Content-Type": "application/json",
+            "Prefer": "return-no-content"
+        },      
+            "body": {
+                "journalName": "SPY-SALES",
+                "documentNumber": "244881",
+                "documentType": "Sale",
+                "countryType": "Domestic",
+                "account": "5640",
+                "description": "Invoice:244881;D:242612;A:10767",
+                "amount": -2168.1,
+                "entryType": "stock_exit",
+                "postingDate": "2022-10-27",
+                "postType": "ledger",
+                "currency": "",
+                "amountBaseCurrency": -2168.1,
+                "vatCode": "",
+                "taxPercentage": 0
+            }
+        },
+        {
+            "method": "POST",
+            "id": "3",
+            "url": "companies({{companyId}})/journalLines",
+            "headers": {
+                "Content-Type": "application/json",
+                "Prefer": "return-no-content"
+            },      
+            "body": {
+                "journalName": "SPY-SALES",
+                "documentNumber": "244881",
+                "documentType": "Sale",
+                "countryType": "Domestic",
+                "account": "1010",
+                "description": "Invoice:244881;D:242612;A:10767",
+                "amount": -8137.5,
+                "entryType": "sale",
+                "postingDate": "2022-10-27",
+                "postType": "ledger",
+                "currency": "",
+                "amountBaseCurrency": -8137.5,
+                "vatCode": "DOMESTIC",
+                "taxPercentage": 0
+            }
+        },
+        {
+            "method": "POST",
+            "id": "4",
+            "url": "companies({{companyId}})/journalLines",
+            "headers": {
+                "Content-Type": "application/json",
+                "Prefer": "return-no-content"
+            },      
+            "body": {
+                "id": "9cf8350b-f555-ed11-8c36-002248a01c3e",
+                "templateName": "",
+                "journalName": "SPY-SALES",
+                "documentNumber": "244881",
+                "documentType": "Sale",
+                "countryType": "Domestic",
+                "account": "1010",
+                "description": "Invoice:244881;D:242612;A:10767",
+                "amount": -8137.5,
+                "entryType": "sale",
+                "postingDate": "2022-10-27",
+                "deliveryAccount": "",
+                "postType": "ledger",
+                "invoiceNo": "",
+                "currency": "",
+                "amountBaseCurrency": -8137.5,
+                "countyUSTaxAccount": "",
+                "stateUSTaxAccount": "",
+                "vatCode": "DOMESTIC",
+                "vatArea": "",
+                "taxTitle": "",
+                "taxPercentage": 0,
+                "dueDate": "",
+                "paymentTerm": "",
+                "cashDiscountDate": "",
+                "custGroup": ""
+
+            }
+        },
+        {
+            "method": "POST",
+            "id": "5",
+            "url": "companies({{companyId}})/journalLines",
+            "headers": {
+                "Content-Type": "application/json",
+                "Prefer": "return-no-content"
+            },      
+            "body": {
+                "journalName": "SPY-SALES",
+                "documentNumber": "244881",
+                "documentType": "Sale",
+                "countryType": "Domestic",
+                "account": "1510",
+                "description": "Invoice:244881;D:242612;A:10767",
+                "amount": -148.1,
+                "entryType": "freight",
+                "postingDate": "2022-10-27",
+                "postType": "ledger",
+                "currency": "",
+                "amountBaseCurrency": -148.1,
+                "vatCode": "DOMESTIC",
+                "taxPercentage": 0
+            }
+        },  
+        
+        {
+            "method": "POST",
+            "id": "6",
+            "url": "companies({{companyId}})/journalLines",
+            "headers": {
+                "Content-Type": "application/json",
+                "Prefer": "return-no-content"
+            },      
+            "body": {
+                "id": "a0f8350b-f555-ed11-8c36-002248a01c3e",
+                "templateName": "",
+                "journalName": "SPY-SALES",
+                "documentNumber": "244881",
+                "documentType": "Sale",
+                "countryType": "Domestic",
+                "account": "1510",
+                "description": "Invoice:244881;D:242612;A:10767",
+                "amount": -148.1,
+                "entryType": "freight",
+                "postingDate": "2022-10-27",
+                "deliveryAccount": "",
+                "postType": "ledger",
+                "invoiceNo": "",
+                "currency": "",
+                "amountBaseCurrency": -148.1,
+                "countyUSTaxAccount": "",
+                "stateUSTaxAccount": "",
+                "vatCode": "DOMESTIC",
+                "vatArea": "",
+                "taxTitle": "",
+                "taxPercentage": 0,
+                "dueDate": "",
+                "paymentTerm": "",
+                "cashDiscountDate": "",
+                "custGroup": ""
+
+            }
+        },
+
+        {
+            "method": "POST",
+            "id": "7",
+            "url": "companies({{companyId}})/journalLines",
+            "headers": {
+                "Content-Type": "application/json",
+                "Prefer": "return-no-content"
+            },      
+            "body": {
+                "journalName": "SPY-SALES",
+                "documentNumber": "244881",
+                "documentType": "Sale",
+                "countryType": "Domestic",
+                "account": "1510",
+                "description": "Invoice:244881;D:242612;A:10767",
+                "amount": -62.5,
+                "entryType": "fee",
+                "postingDate": "2022-10-27",
+                "postType": "ledger",
+                "currency": "",
+                "amountBaseCurrency": -62.5,
+                "vatCode": "DOMESTIC",
+                "taxPercentage": 0
+            }   
+        },
+        
+        {
+            "method": "POST",
+            "id": "8",
+            "url": "companies({{companyId}})/journalLines",
+            "headers": {
+                "Content-Type": "application/json",
+                "Prefer": "return-no-content"
+            },      
+
+            "body": {
+                "id": "a5f8350b-f555-ed11-8c36-002248a01c3e",
+                "templateName": "",
+                "journalName": "SPY-SALES",
+                "documentNumber": "244881",
+                "documentType": "Sale",
+                "countryType": "Domestic",
+                "account": "10767",
+                "description": "Invoice:244881;D:242612;A:10767",
+                "amount": 8348.1,
+                "entryType": "debitor",
+                "postingDate": "2022-10-27",
+                "deliveryAccount": "",
+                "postType": "customer",
+                "invoiceNo": "",
+                "currency": "",
+                "amountBaseCurrency": 8348.1,
+                "countyUSTaxAccount": "",
+                "stateUSTaxAccount": "",
+                "vatCode": "",
+                "vatArea": "",
+                "taxTitle": "",
+                "taxPercentage": 0,
+                "dueDate": "2022-11-10",
+                "paymentTerm": "14D",
+                "cashDiscountDate": "",
+                "custGroup": ""
+            }  
+        }
+
+]
+}
+
+
+
+ 
+
