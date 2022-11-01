@@ -93,14 +93,13 @@ codeunit 73006 SpyCreateJournalLine
     procedure ping(): Text
     var
     begin
-        Exit('Pong');
+        exit('Pong');
     end;
 
     /// <summary>
     /// CleanUp.
     /// </summary>
     /// <param name="SpyJournalLine">VAR Record "Spy Journal Line".</param>
-    /// <param name="SpyErrors">VAR Record "Spy Error".</param>
     /// <returns>Return variable Errors of type Text.</returns>
     procedure CleanUpWithGUIAllowed(var SpyJournalLine: Record "Spy Journal Line") Result: Text
     var
@@ -158,11 +157,7 @@ codeunit 73006 SpyCreateJournalLine
                                  SpyDimensions.TableCaption, SpyDimensionsCount));
     end;
 
-    /// <summary>
-    /// CleanUpWhenPosted.
-    /// </summary>
-    /// <param name="SpyJournalLine">VAR Record "Spy Journal Line".</param>
-    /// <returns>Return value of type Boolean.</returns>
+ 
     procedure CleanSpyData(var SpyJournalLine: Record "Spy Journal Line"; ReadyToPost: Boolean) PostMessage: Text
     var
         GenJournalLine: Record "Gen. Journal Line";

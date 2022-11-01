@@ -13,13 +13,13 @@ page 73001 "Spy Setup"
         {
             group(General)
             {
-                field("Default Journal Temp Name"; Rec."Default Journal Template Name")
+                field("Default Journal Temp Name"; Rec."Default Journal Template Name") //Used when Gen Journal Batch does not exist.
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Default Journal Temp Name field.';
                     TableRelation = "Gen. Journal Template";
                 }
-                field("Default Journal Batch Name"; Rec."Default Journal Batch Name")
+                field("Default Journal Batch Name"; Rec."Default Journal Batch Name") //Used when Gen Journal Batch does not exist.
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Default Journal Batch Name.';
@@ -27,28 +27,13 @@ page 73001 "Spy Setup"
 
                 }
 
-                field("Default Jnl Batch Description"; Rec."Default Jnl Batch Description")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Default Jnl Batch Description';
-
-
-                }
-
-                field("Gen. Prod. Posting Group"; Rec."Gen. Prod. Posting Group")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Gen. Prod. Posting Group field.';
-                    TableRelation = "Gen. Product Posting Group";
-                }
-
-                field("VAT Prod. Posting Group"; Rec."VAT Prod. Posting Group")
+                field("VAT Prod. Posting Group"; Rec."VAT Prod. Posting Group") //Used in GenJrnLine
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the VAT Prod. Posting Group field.';
                     TableRelation = "VAT Product Posting Group";
                 }
-                field("Template Type"; Rec."Default Template Type")
+                field("Template Type"; Rec."Default Template Type") ///Used when Gen Journal Batch does not exist
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Template Type field.';

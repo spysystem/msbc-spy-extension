@@ -61,12 +61,14 @@ codeunit 73005 "Spy Install"
         end;
     end;
 
+    /// <summary>
+    /// CreateDefaultSetup.
+    /// </summary>
     procedure CreateDefaultSetup()
     var
-    SpySetup: Record "Spy Setup";
+        SpySetup: Record "Spy Setup";
     begin
         SpySetup.Init();
-        SpySetup."Default Jnl Batch Description" := 'Spy Description';
-        SpySetup."Default Journal Batch Name" := ''
     end;
 }
+

@@ -129,6 +129,7 @@ table 73002 "Spy Dimension"
     /// ErrorFoundInErrorTextList.
     /// </summary>
     /// <param name="ErrorTextToFind">Text.</param>
+    /// <param name="GlobalErrorTextList">VAR List of [Text].</param>
     /// <returns>Return value of type Boolean.</returns>
     procedure ErrorFoundInErrorTextList(ErrorTextToFind: Text; var GlobalErrorTextList: List of [Text]): Boolean
     var

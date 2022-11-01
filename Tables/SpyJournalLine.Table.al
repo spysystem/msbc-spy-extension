@@ -499,7 +499,7 @@ table 73090 "Spy Journal Line"
             exit;
 
         // Delete NewDimensionSetEntry (Temporary)
-        CustomerDimensionSetEntry.DeleteAll();
+        TempCustomerDimensionSetEntry.DeleteAll();
 
         // Find Dimension from Existing GL Customer line
         DimensionSetEntry.Reset();
@@ -507,11 +507,11 @@ table 73090 "Spy Journal Line"
         if DimensionSetEntry.FindFirst() then
             repeat
                 // Insert Existing Dimensions
-                CustomerDimensionSetEntry.Init();
-                CustomerDimensionSetEntry."Dimension Set ID" := 0;
-                CustomerDimensionSetEntry.VALIDATE("Dimension Code", DimensionSetEntry."Dimension Code");
-                CustomerDimensionSetEntry.VALIDATE("Dimension Value Code", DimensionSetEntry."Dimension Value Code");
-                CustomerDimensionSetEntry.Insert(true);
+                TempCustomerDimensionSetEntry.Init();
+                TempCustomerDimensionSetEntry."Dimension Set ID" := 0;
+                TempCustomerDimensionSetEntry.VALIDATE("Dimension Code", DimensionSetEntry."Dimension Code");
+                TempCustomerDimensionSetEntry.VALIDATE("Dimension Value Code", DimensionSetEntry."Dimension Value Code");
+                TempCustomerDimensionSetEntry.Insert(true);
             until DimensionSetEntry.Next() = 0;
 
         // Find GL Account Dimensions
@@ -523,26 +523,26 @@ table 73090 "Spy Journal Line"
         if GenJournalLine2.FindSet() then
             repeat
                 if GenJournalLine2."Line No." <> GenJournalLine."Line No." then begin
-                    GLAccountDimensionSetEntry2.DeleteAll();
+                    TempGLAccountDimensionSetEntry2.DeleteAll();
                     DimensionSetEntry.Reset();
                     DimensionSetEntry.SETRANGE("Dimension Set ID", GenJournalLine2."Dimension Set ID");
                     if DimensionSetEntry.FindSet() then
                         repeat
                             // Insert Existing Dimensions
-                            GLAccountDimensionSetEntry2.Init();
-                            GLAccountDimensionSetEntry2."Dimension Set ID" := 0;
-                            GLAccountDimensionSetEntry2.VALIDATE("Dimension Code", DimensionSetEntry."Dimension Code");
-                            GLAccountDimensionSetEntry2.VALIDATE("Dimension Value Code", DimensionSetEntry."Dimension Value Code");
-                            GLAccountDimensionSetEntry2.Insert();
+                            TempGLAccountDimensionSetEntry2.Init();
+                            TempGLAccountDimensionSetEntry2."Dimension Set ID" := 0;
+                            TempGLAccountDimensionSetEntry2.VALIDATE("Dimension Code", DimensionSetEntry."Dimension Code");
+                            TempGLAccountDimensionSetEntry2.VALIDATE("Dimension Value Code", DimensionSetEntry."Dimension Value Code");
+                            TempGLAccountDimensionSetEntry2.Insert();
                         until DimensionSetEntry.Next() = 0;
 
-                    if CustomerDimensionSetEntry.FindFirst() then
+                    if TempCustomerDimensionSetEntry.FindFirst() then
                         repeat
-                            GLAccountDimensionSetEntry2 := CustomerDimensionSetEntry;
-                            if not GLAccountDimensionSetEntry2.Insert() then;
-                        until CustomerDimensionSetEntry.Next() = 0;
+                            TempGLAccountDimensionSetEntry2 := TempCustomerDimensionSetEntry;
+                            if not TempGLAccountDimensionSetEntry2.Insert() then;
+                        until TempCustomerDimensionSetEntry.Next() = 0;
 
-                    GenJournalLine2."Dimension Set ID" := GLAccountDimensionSetEntry2.GetDimensionSetID(GLAccountDimensionSetEntry2);
+                    GenJournalLine2."Dimension Set ID" := TempGLAccountDimensionSetEntry2.GetDimensionSetID(TempGLAccountDimensionSetEntry2);
                     GenJournalLine2.Modify();
                 end;
             until GenJournalLine2.Next() = 0;
@@ -723,7 +723,7 @@ table 73090 "Spy Journal Line"
             Rec."Journal Template Name" := SPYSetup."Default Journal Template Name";
 
         if Rec."Journal Batch Name" = '' then
-            Rec."Journal Batch Name" := SPYSetup."Default Journal Batch Name";
+            Rec."Journal Batch Name" := SPYSetup."Default Journal Batch Name"; //TODO: Can be removed, will alwayse come from SPY.
         //IF missing, then create GenJnlTemplate
         if not GenJournalTemplate.Get(Rec."Journal Template Name") then begin
             GenJournalTemplate.Init();
@@ -881,6 +881,9 @@ table 73090 "Spy Journal Line"
             end;
     end;
 
+    /// <summary>
+    /// IsolateSpyPaymentId.
+    /// </summary>
     procedure IsolateSpyPaymentId()
     var
         StartSeperator: Integer;
@@ -892,7 +895,7 @@ table 73090 "Spy Journal Line"
             StartSeperator := StrPos(Description, ':');
             lPaymentid := CopyStr(Description, StartSeperator + 1, strlen(Description));
             EndSeperator := StrPos(lPaymentid, ';');
-            lPaymentid := CopyStr(lPaymentid, 1, EndSeperator - 1);
+            lPaymentid := CopyStr(CopyStr(lPaymentid, 1, EndSeperator - 1), 1, MaxStrLen(lPaymentid));
             Rec.PaymentId := lPaymentid;
             GenJournalLine.Validate("Transaction Information", lPaymentid);
         end;
@@ -916,29 +919,29 @@ table 73090 "Spy Journal Line"
             GenJournalLine2.SETRANGE("Journal Batch Name", GenJournalLine."Journal Batch Name");
             GenJournalLine2.SETFILTER("Document No.", GenJournalLine."Document No.");
             if GenJournalLine2.FindFirst() then begin
-                GLAccountDimensionSetEntry2.DeleteAll();
+                TempGLAccountDimensionSetEntry2.DeleteAll();
                 DimensionSetEntry.Reset();
                 DimensionSetEntry.SETRANGE("Dimension Set ID", GenJournalLine2."Dimension Set ID");
                 if DimensionSetEntry.FindSet() then
                     repeat
                         // Insert Existing Dimensions
-                        GLAccountDimensionSetEntry2.Init();
-                        GLAccountDimensionSetEntry2."Dimension Set ID" := 0;
-                        GLAccountDimensionSetEntry2.VALIDATE("Dimension Code", DimensionSetEntry."Dimension Code");
-                        GLAccountDimensionSetEntry2.VALIDATE("Dimension Value Code", DimensionSetEntry."Dimension Value Code");
-                        GLAccountDimensionSetEntry2.Insert();
+                        TempGLAccountDimensionSetEntry2.Init();
+                        TempGLAccountDimensionSetEntry2."Dimension Set ID" := 0;
+                        TempGLAccountDimensionSetEntry2.VALIDATE("Dimension Code", DimensionSetEntry."Dimension Code");
+                        TempGLAccountDimensionSetEntry2.VALIDATE("Dimension Value Code", DimensionSetEntry."Dimension Value Code");
+                        TempGLAccountDimensionSetEntry2.Insert();
                     until DimensionSetEntry.Next() = 0;
 
                 if TempDimensionBuffer.FindFirst() then
                     repeat
-                        GLAccountDimensionSetEntry2.Init();
-                        GLAccountDimensionSetEntry2."Dimension Set ID" := 0;
-                        GLAccountDimensionSetEntry2.VALIDATE("Dimension Code", TempDimensionBuffer."Dimension Code");
-                        GLAccountDimensionSetEntry2.VALIDATE("Dimension Value Code", TempDimensionBuffer."Dimension Value Code");
-                        if GLAccountDimensionSetEntry2.Insert() then;
-                    until CustomerDimensionSetEntry.Next() = 0;
+                        TempGLAccountDimensionSetEntry2.Init();
+                        TempGLAccountDimensionSetEntry2."Dimension Set ID" := 0;
+                        TempGLAccountDimensionSetEntry2.VALIDATE("Dimension Code", TempDimensionBuffer."Dimension Code");
+                        TempGLAccountDimensionSetEntry2.VALIDATE("Dimension Value Code", TempDimensionBuffer."Dimension Value Code");
+                        if TempGLAccountDimensionSetEntry2.Insert() then;
+                    until TempCustomerDimensionSetEntry.Next() = 0;
 
-                GenJournalLine2."Dimension Set ID" := GLAccountDimensionSetEntry2.GetDimensionSetID(GLAccountDimensionSetEntry2);
+                GenJournalLine2."Dimension Set ID" := TempGLAccountDimensionSetEntry2.GetDimensionSetID(TempGLAccountDimensionSetEntry2);
                 GenJournalLine2.Modify();
             end;
         end;
@@ -958,8 +961,8 @@ table 73090 "Spy Journal Line"
         TempDimensionBuffer2: Record "Dimension Buffer" temporary;
         TempDimensionBuffer3: Record "Dimension Buffer" temporary;
 
-        CustomerDimensionSetEntry: Record "Dimension Set Entry" temporary;
-        GLAccountDimensionSetEntry2: Record "Dimension Set Entry" temporary;
+        TempCustomerDimensionSetEntry: Record "Dimension Set Entry" temporary;
+        TempGLAccountDimensionSetEntry2: Record "Dimension Set Entry" temporary;
         gDefaultDimension: record "Default Dimension";
         SPYSetup: Record "Spy Setup";
 
