@@ -14,6 +14,8 @@ table 73001 "Spy Setup"
         field(4; "VAT Prod. Posting Group"; Code[20]) //Used in GenJrnLine
         {
             Caption = 'VAT Prod. Posting Group', comment = 'DAN="Moms. produktbogf. Gruppe"';
+            TableRelation = "VAT Product Posting Group";
+            ValidateTableRelation = true;
             DataClassification = ToBeClassified;
         }
 
@@ -21,7 +23,7 @@ table 73001 "Spy Setup"
         {
             Caption = 'Default Journal Temp Name', comment = 'DAN="Std. Kladde-skabelonnavn"';
             TableRelation = "Gen. Journal Template";
-            ValidateTableRelation = false;
+            ValidateTableRelation = true;
             DataClassification = ToBeClassified;
         }
 

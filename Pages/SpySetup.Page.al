@@ -17,6 +17,7 @@ page 73001 "Spy Setup"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Default Journal Temp Name field.';
+                    ShowMandatory = true;
                 }
 
                 field("Default Journal Description"; Rec."Default Journal Description")
@@ -29,6 +30,7 @@ page 73001 "Spy Setup"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the VAT Prod. Posting Group field.';
+                    ShowMandatory = true;
                 }
 
             }
