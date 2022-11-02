@@ -558,6 +558,7 @@ table 73090 "Spy Journal Line"
     var
         VATBusinessPostingGroup: Record "VAT Business Posting Group";
         GenBusinessPostingGroup: Record "Gen. Business Posting Group";
+        VATPostingSetup: Record "VAT Posting Setup";
     //InvalidVATCodeLbl: Label '[VAT Code Err] %1 does not exist in BC', Comment = '%1 = VAT Code from SPY';
     begin
         GenJournalLine."Gen. Bus. Posting Group" := '';
@@ -586,6 +587,10 @@ table 73090 "Spy Journal Line"
             GenJournalLine.Validate("VAT Bus. Posting Group", "VAT Code");
             //GenJournalLine.Validate("Gen. Prod. Posting Group", SPYSetup."Gen. Prod. Posting Group");
             GenJournalLine.Validate("VAT Prod. Posting Group", SPYSetup."VAT Prod. Posting Group");
+
+            //GenJournalLines Vat Calculation Type
+            if VATPostingSetup.Get("VAT Code", SPYSetup."VAT Prod. Posting Group") then
+                GenJournalLine.Validate("VAT Calculation Type", VATPostingSetup."VAT Calculation Type");
 
             if (PostingType = 'Sale') then
                 GenJournalLine.Validate("Gen. Posting Type", GenJournalLine."Gen. Posting Type"::Sale);
@@ -721,9 +726,8 @@ table 73090 "Spy Journal Line"
         //SPYSetup.TestField("Default Journal Batch Name");
         if Rec."Journal Template Name" = '' then
             Rec."Journal Template Name" := SPYSetup."Default Journal Template Name";
+        //"Journal Batch Name" Will alwayse come from SPY, is mandatory in SPY.
 
-        if Rec."Journal Batch Name" = '' then
-            Rec."Journal Batch Name" := SPYSetup."Default Journal Batch Name"; //TODO: Can be removed, will alwayse come from SPY.
         //IF missing, then create GenJnlTemplate
         if not GenJournalTemplate.Get(Rec."Journal Template Name") then begin
             GenJournalTemplate.Init();
@@ -734,16 +738,16 @@ table 73090 "Spy Journal Line"
 
         //IF missing, then create GenJnlBatch
         genJournalBatch.SetFilter("Journal Template Name", Rec."Journal Template Name");
-        genJournalBatch.SetFilter("Template Type", '%1', SPYSetup."Default Template Type");
+        genJournalBatch.SetFilter("Template Type", 'General');
         genJournalBatch.SetFilter(Name, Rec."Journal Batch Name");
         if not genJournalBatch.FindSet() then begin
             genJournalBatch.Init();
-            genJournalBatch.Description := SPYSetup."Default Journal Batch Name";
+            genJournalBatch.Description := SPYSetup."Default Journal Description";
             genJournalBatch.Name := Rec."Journal Batch Name";
-            genJournalBatch."Template Type" := SPYSetup."Default Template Type";
+            genJournalBatch."Template Type" := genJournalBatch."Template Type"::General;
             genJournalBatch."Journal Template Name" := SPYSetup."Default Journal Template Name";
             if not genJournalBatch.Insert() then
-                GlobalErrorTextList.Add(StrSubstNo(BatchNotCreatedLbl, SPYSetup."Default Template Type"));
+                GlobalErrorTextList.Add(StrSubstNo(BatchNotCreatedLbl, Rec."Journal Batch Name"));
         end;
         if (ErrorFoundInErrorTextList('[CreateJnlTemplateErr]')) or
              (ErrorFoundInErrorTextList('[CreateJnlBacthErr]')) then

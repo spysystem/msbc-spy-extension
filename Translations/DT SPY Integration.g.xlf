@@ -328,39 +328,24 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 4228076119 - Field 2874995131 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Default Jnl Batch Description</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Default Jnl Batch Description - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 4228076119 - Field 3246934339 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Default Journal Batch Name</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Default Journal Batch Name - Property Caption</note>
+        <trans-unit id="Table 4228076119 - Field 1813174336 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Default Journal Description</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Kaldde-beskrivelse"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Default Journal Description - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4228076119 - Field 3738934999 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Default Journal Temp Name</source>
-          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Developer" annotates="general" priority="2">DAN="Std. Kladde-skabelonnavn"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Default Journal Template Name - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 4228076119 - Field 2325391069 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Default Template Type</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Default Template Type - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4228076119 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Entry No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Entry No. - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 4228076119 - Field 2139693550 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Gen. Prod. Posting Group</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Gen. Prod. Posting Group - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Table 4228076119 - Field 236064653 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>VAT Prod. Posting Group</source>
-          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Developer" annotates="general" priority="2">DAN="Moms. produktbogf. Gruppe"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field VAT Prod. Posting Group - Property Caption</note>
         </trans-unit>
         <trans-unit id="Codeunit 1200734571 - Method 3449725409 - NamedType 3713220116" size-unit="char" translate="yes" xml:space="preserve">
@@ -1313,30 +1298,15 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Property AdditionalSearchTerms</note>
         </trans-unit>
-        <trans-unit id="Page 4228076119 - Control 2874995131 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Default Jnl Batch Description</source>
+        <trans-unit id="Page 4228076119 - Control 1813174336 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Default Journal Description</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Default Jnl Batch Description - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 4228076119 - Control 3246934339 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Default Journal Batch Name.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Default Journal Batch Name - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Default Journal Description - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 4228076119 - Control 1821152931 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Default Journal Temp Name field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Default Journal Temp Name - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 4228076119 - Control 2139693550 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Gen. Prod. Posting Group field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Gen. Prod. Posting Group - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 4228076119 - Control 3507948476 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the Template Type field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Template Type - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 4228076119 - Control 236064653 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the VAT Prod. Posting Group field.</source>

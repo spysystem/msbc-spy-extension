@@ -17,26 +17,18 @@ page 73001 "Spy Setup"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Default Journal Temp Name field.';
-                    TableRelation = "Gen. Journal Template";
                 }
-                field("Default Journal Batch Name"; Rec."Default Journal Batch Name") //Used when Gen Journal Batch does not exist.
+
+                field("Default Journal Description"; Rec."Default Journal Description")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Default Journal Batch Name.';
-                    TableRelation = "Gen. Journal Batch";
-
+                    ToolTip = 'Specifies the value of the Default Journal Description';
                 }
 
                 field("VAT Prod. Posting Group"; Rec."VAT Prod. Posting Group") //Used in GenJrnLine
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the VAT Prod. Posting Group field.';
-                    TableRelation = "VAT Product Posting Group";
-                }
-                field("Template Type"; Rec."Default Template Type") ///Used when Gen Journal Batch does not exist
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Template Type field.';
                 }
 
             }
