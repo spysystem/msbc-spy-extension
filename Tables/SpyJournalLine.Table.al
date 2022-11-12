@@ -585,7 +585,11 @@ table 73090 "Spy Journal Line"
 
             GenJournalLine.Validate("Gen. Bus. Posting Group", "VAT Code");
             GenJournalLine.Validate("VAT Bus. Posting Group", "VAT Code");
-            //GenJournalLine.Validate("Gen. Prod. Posting Group", SPYSetup."Gen. Prod. Posting Group");
+
+
+            //JB - Aktiveret nedenstående linje igen da den alligevel skulle sættes
+            GenJournalLine.Validate("Gen. Prod. Posting Group", SPYSetup."VAT Prod. Posting Group");
+
             GenJournalLine.Validate("VAT Prod. Posting Group", SPYSetup."VAT Prod. Posting Group");
 
             //GenJournalLines Vat Calculation Type
