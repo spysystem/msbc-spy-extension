@@ -559,6 +559,7 @@ table 73090 "Spy Journal Line"
         VATBusinessPostingGroup: Record "VAT Business Posting Group";
         GenBusinessPostingGroup: Record "Gen. Business Posting Group";
         VATPostingSetup: Record "VAT Posting Setup";
+        GenProdPostingGroup: Record "Gen. Product Posting Group";
     //InvalidVATCodeLbl: Label '[VAT Code Err] %1 does not exist in BC', Comment = '%1 = VAT Code from SPY';
     begin
         GenJournalLine."Gen. Bus. Posting Group" := '';
@@ -588,6 +589,10 @@ table 73090 "Spy Journal Line"
 
 
             //JB - Aktiveret nedenstående linje igen da den alligevel skulle sættes
+            if not GenProdPostingGroup.Get(SPYSetup."VAT Prod. Posting Group") then begin
+                GenProdPostingGroup.Code := SPYSetup."VAT Prod. Posting Group";
+                GenProdPostingGroup.Insert();
+            end;
             GenJournalLine.Validate("Gen. Prod. Posting Group", SPYSetup."VAT Prod. Posting Group");
 
             GenJournalLine.Validate("VAT Prod. Posting Group", SPYSetup."VAT Prod. Posting Group");
