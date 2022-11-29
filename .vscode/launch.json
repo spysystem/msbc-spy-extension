@@ -3,18 +3,19 @@
     "configurations": [
         {
             "name": "KS_Sandbox",
-            "request": "launch",
+            "request": "attach",
             "type": "al",
+            "breakOnNext": "WebServiceClient",
             "environmentType": "Sandbox",
-            "environmentName": "TestKongesSloejd",
+            "environmentName": "Production",
             "startupObjectId": 73004,
             "startupObjectType": "Page",
             "breakOnError": true,
             "launchBrowser": true,
             "enableLongRunningSqlStatements": true,
             "enableSqlInformationDebugger": true,
-            "tenant": "fc2c4fd0-9650-4502-b64b-6564b0016b60",
-            "schemaUpdateMode": "ForceSync"      
+            "tenant": "fa0f8dc4-407f-4191-b4ca-080ce47bd18f",
+            "schemaUpdateMode": "Synchronize"
         },
         {
             "name": "CANCLE",
