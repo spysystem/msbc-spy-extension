@@ -1,1 +1,1 @@
-﻿{"Added":[],"Modified":[{"Id":73001,"Kind":10,"Name":"Spy Setup","PackagePath":"/src/Tables/SpySetup.Table.al"},{"Id":73001,"Kind":12,"Name":"Spy Setup","PackagePath":"/src/Pages/SpySetup.Page.al"},{"Id":73090,"Kind":10,"Name":"Spy Journal Line","PackagePath":"/src/Tables/SpyJournalLine.Table.al"}],"Removed":[]}
+﻿{"Added":[],"Modified":[{"Id":73090,"Kind":10,"Name":"Spy Journal Line","PackagePath":"/src/Tables/SpyJournalLine.Table.al"}],"Removed":[]}

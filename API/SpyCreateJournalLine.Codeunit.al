@@ -157,7 +157,7 @@ codeunit 73006 SpyCreateJournalLine
                                  SpyDimensions.TableCaption, SpyDimensionsCount));
     end;
 
- 
+
     procedure CleanSpyData(var SpyJournalLine: Record "Spy Journal Line"; ReadyToPost: Boolean) PostMessage: Text
     var
         GenJournalLine: Record "Gen. Journal Line";
@@ -187,7 +187,7 @@ codeunit 73006 SpyCreateJournalLine
 
         //Delete Spy Dims
         if SpyDimensions.FindSet() then begin
-            SpyDimensions.Delete();
+            SpyDimensions.DeleteAll();
             Commit();
         end;
 
