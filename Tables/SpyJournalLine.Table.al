@@ -420,6 +420,7 @@ table 73090 "Spy Journal Line"
             GetBankAccount();
             SetDueDate();
             SetCashDiscountDate();
+            SetDiscountsFromPaymentTerms();
             IsolateSpyPaymentId();
 
         end;
@@ -968,6 +969,19 @@ table 73090 "Spy Journal Line"
                     lGenJournalLine.MODIFY(true);
                 until lGenJournalLine.Next() = 0;
         end;
+    end;
+
+    /// <summary>
+    /// SetDiscountsFromPaymentTerms.
+    /// </summary>
+    procedure SetDiscountsFromPaymentTerms()
+    var
+        PaymentTerms: Record "Payment Terms";
+    begin
+        if Rec."Payment Terms Code" <> '' then
+            if not PaymentTerms.Get(rec."Payment Terms Code") then
+                exit;
+        GenJournalLine.Validate("Payment Terms Code", "Payment Terms Code");
     end;
 
     var

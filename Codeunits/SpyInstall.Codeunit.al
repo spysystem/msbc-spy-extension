@@ -27,8 +27,10 @@ codeunit 73005 "Spy Install"
         InsertWebservice('SpyDefaultDimension', 73091, 'page');
         InsertWebservice('SpyVatPostingSetup', 472, 'page');
         InsertWebservice('SpyFieldsPage', 73092, 'page');
+        InsertWebservice('SpyPostedGenJnlLines', 73010, 'page');
         InsertWebservice('SpyApplyCustomerTemplates', 73009, 'codeunit');
         InsertWebservice('SpyInsertPostCode', 73010, 'codeunit');
+
 
         // Slet eventuelle CVR format records TODO: Perhaps move to Guided Setup, so the customer will know they're deleting this data?
         //if VatRegFormat.FindSet() then
