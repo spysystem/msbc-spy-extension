@@ -420,14 +420,13 @@ table 73090 "Spy Journal Line"
             GetBankAccount();
             SetDueDate();
             SetCashDiscountDate();
-            SetDiscountsFromPaymentTerms();
             IsolateSpyPaymentId();
 
         end;
 
         if not GenJournalLine.Insert(true) then
             GlobalErrorTextList.Add(StrSubstNo(InsertGenJnlLineErr, Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
-
+        SetDiscountsFromPaymentTerms();
         ApplySpyDimensions(GenJournalLine);
         SetSalesPurchExclVAT();
         ApllyCustVendDimensions();
