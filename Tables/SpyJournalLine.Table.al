@@ -418,15 +418,15 @@ table 73090 "Spy Journal Line"
             ValidateTaxTitle();
             SetPostingGroups();
             GetBankAccount();
-            SetDueDate();
-            SetCashDiscountDate();
+            //SetDueDate(); 
+            //SetCashDiscountDate();
             IsolateSpyPaymentId();
 
         end;
 
         if not GenJournalLine.Insert(true) then
             GlobalErrorTextList.Add(StrSubstNo(InsertGenJnlLineErr, Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
-        SetDiscountsFromPaymentTerms();
+        //SetDiscountsFromPaymentTerms();
         ApplySpyDimensions(GenJournalLine);
         SetSalesPurchExclVAT();
         ApllyCustVendDimensions();
@@ -780,7 +780,7 @@ table 73090 "Spy Journal Line"
             GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Posting Date"), 1, 4)));
 
         gPostingDate := DMY2Date(day, month, year);
-        GenJournalLine."Posting Date" := gPostingDate;
+        GenJournalLine.Validate("Posting Date", gPostingDate);
 
         if ErrorFoundInErrorTextList('[DateConvErr]') then
             exit(false) else
