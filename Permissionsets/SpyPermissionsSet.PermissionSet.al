@@ -38,5 +38,8 @@ permissionset 73002 SpyPermissionsSet
         page SpyGenJnlTemplate = X,
         page SpyGenJnlTemplateBatch = X,
         page SpyJournalDimensionPart = X,
-        page SpyVATPostingSetup = X;
+        page SpyVATPostingSetup = X,
+        tabledata SpyLog = RIMD,
+        table SpyLog = X,
+        page SpyPostedGenJnlLines = X;
 }
