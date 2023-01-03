@@ -33,6 +33,28 @@ page 73001 "Spy Setup"
                     ShowMandatory = true;
                 }
 
+                field("Database Lock Filter"; Rec."Database Lock Filter")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifes which filter is used to look for databaselocks';
+                    ShowMandatory = true;
+
+                }
+                field("Database Lock Sleep duration"; Rec."Database Lock Sleep duration")
+                {
+                    ApplicationArea = All;
+
+                    ToolTip = 'Specfies how long time there should be between each databaselock lookup in ms. This is paired with the Fail Over Count.';
+                    ShowMandatory = true;
+                }
+                field("Fail Over Count"; Rec."Fail Over Count")
+                {
+                    ApplicationArea = All;
+
+                    ToolTip = 'Specifies how many times to look for the databaselock';
+                    ShowMandatory = true;
+                }
+
             }
         }
     }

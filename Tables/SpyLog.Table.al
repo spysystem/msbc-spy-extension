@@ -187,6 +187,12 @@ table 73003 SpyLog
             Caption = 'custGroup';
         }
 
+        field(1100; "Ready To Post"; Boolean)
+        {
+            Caption = 'Ready To Post', comment = 'DAN="Klar til bogf."';
+
+        }
+
         field(1200; PaymentId; Text[100])
         {
             Caption = 'PaymentID', comment = 'DAN="Betalingsid"';
@@ -198,10 +204,9 @@ table 73003 SpyLog
         //     ValidateTableRelation = false;
         //     TableRelation = "Spy Dimensions" where("Entry No." = field("Entry No."));
         // }
-        field(1100; "Ready To Post"; Boolean)
+        field(1220; "Error Description Text"; Text[2000])
         {
-            Caption = 'Ready To Post', comment = 'DAN="Klar til bogf."';
-
+            caption = 'Error Description', comment = 'DAN="Fejlbeskrivelse"';
         }
 
     }
@@ -215,9 +220,49 @@ table 73003 SpyLog
 
     }
 
-    procedure CreateLogInserted(pSpyJournalLine: Record "Spy Journal Line")
+    /// <summary>
+    /// InitiateSpyLog.
+    /// </summary>
+    /// <param name="SpyJournalLine">Record "Spy Journal Line".</param>
+    procedure Initiate(SpyJournalLine: Record "Spy Journal Line")
+    begin
+        Rec.Init();
+        Rec.TransferFields(SpyJournalLine, true);
+        Rec.Insert();
+    end;
+
+
+    /// <summary>
+    /// WriteCompletedWithErrors.
+    /// </summary>
+    /// <param name="EntryNo">Integer.</param>
+    procedure UpdatelogWithErrors(EntryNo: Integer; GlobalErrorTextList: List of [Text])
+    var
+        ErrorText: Text;
+        ErrorTotal: Text;
+        ErrorCount: Integer;
+        GlobalErrorFormat: Text[2000];
+    begin
+        Rec.Get(EntryNo);
+        if GlobalErrorTextList.Count > 0 then
+            foreach ErrorText in GlobalErrorTextList do begin
+                ErrorCount += 1;
+                ErrorTotal += GlobalErrorTextList.Get(ErrorCount) + ' ';
+            end;
+        Rec."Error Description Text" := ErrorTotal;
+        Rec.Modify();
+    end;
+
+    /// <summary>
+    /// WriteCompletedWithSucess.
+    /// </summary>
+    /// <param name="EntryNo">Integer.</param>
+    procedure UpdateLogWithSucess(EntryNo: Integer)
     var
     begin
-
+        Rec.Get(EntryNo);
+        Rec."Ready To Post" := true;
+        Rec.Modify();
     end;
+
 }

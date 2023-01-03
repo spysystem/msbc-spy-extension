@@ -285,7 +285,7 @@ table 73090 "Spy Journal Line"
                                 end;
                             until TempDimensionBuffer3.Next() = 0;
                         GenJournalLine."Dimension Set ID" := DimensionManagement.CreateDimSetIDFromDimBuf(TempDimensionBuffer);
-                        GenJournalLine.Modify();
+                        GenJournalLine.modify();
                         TempDimensionBuffer.DeleteAll();
                     until GenJournalLine.Next() = 0;
                     TempDimensionBuffer3.DeleteAll();
@@ -315,7 +315,7 @@ table 73090 "Spy Journal Line"
             ErrorOutStream.WriteText(Errors);
             SpyErrors.Insert();
             Rec."Ready To Post" := false;
-            Rec.Modify();
+            Rec.modify();
             exit(true);
         end
         else
@@ -377,8 +377,14 @@ table 73090 "Spy Journal Line"
     procedure PostTempSpyJournalLines(): Boolean
     var
         GeneralLedgerSetup: record "General Ledger Setup";
+        SpyLog: Record SpyLog;
+        DatabaseLock: Record "Database Locks";
+        DatabaselockDescription: Text[2000];
         InsertGenJnlLineErr: label '[CreationErr] Failed to Insert Gen. Journal Line %1', comment = '%1 = Ext Doc No.';
+        TableIsCurrentlyLockedWarning: Label '%1 is currently locked, please try again later', Comment = '%1 api warning for spy, will be not translated';
     begin
+        if TableIslocked(DatabaselockDescription) then
+            error(TableIsCurrentlyLockedWarning);
         Clear(GlobalErrorTextList);
         Clear(BankAccount);
         Clear(TempDimensionBuffer);
@@ -387,6 +393,9 @@ table 73090 "Spy Journal Line"
         SPYSetup.TestField("Default Journal Template Name");
 
         gDimEntryNo := 1;
+
+        SpyLog.Initiate(Rec);
+
         LockTable(true);
 
         GenJournalLine.Init();
@@ -400,8 +409,8 @@ table 73090 "Spy Journal Line"
             ValidatePostingDate();
             ValidateDocumentType();
 
-            GenJournalLine.Validate("Document No.", "Document No.");
-            GenJournalLine.Validate("External Document No.", Rec."External Document No.");
+            GenJournalLine.Validate("Document No.", "Document No."); //Has no ValidationTrigger
+            GenJournalLine.Validate("External Document No.", Rec."External Document No."); //Has no ValidationTrigger
             GenJournalLine.Validate(Description, Rec.Description);
 
             GenJournalLine.Amount := Rec.Amount;
@@ -413,54 +422,28 @@ table 73090 "Spy Journal Line"
                 GenJournalLine.Validate("Currency Code");
             end;
 
-            GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)"; //Moved KW - LCY must be set AFTER amount and AFTER validation of Currency
+            GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)"; //LCY must be set AFTER amount and AFTER validation of Currency
 
             ValidateTaxTitle();
             SetPostingGroups();
             GetBankAccount();
-            //SetDueDate(); 
-            //SetCashDiscountDate();
             IsolateSpyPaymentId();
-
         end;
 
         if not GenJournalLine.Insert(true) then
             GlobalErrorTextList.Add(StrSubstNo(InsertGenJnlLineErr, Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
-        //SetDiscountsFromPaymentTerms();
+
         ApplySpyDimensions(GenJournalLine);
         SetSalesPurchExclVAT();
         ApllyCustVendDimensions();
         UpdateGlobalDimensions();
 
-        if Rec.CreateSypErrorRecords() then
-            exit(false) else
-            exit(true);
-    end;
-
-    /// <summary>
-    /// SetCashDiscountDate.
-    /// </summary>
-    procedure SetCashDiscountDate()
-    begin
-        if Rec."Cash Discount Date" <> '' then begin
-            evaluate(day, CopyStr(Format(Rec."Cash Discount Date"), 9, 2));
-            evaluate(month, CopyStr(Format(Rec."Cash Discount Date"), 6, 2));
-            evaluate(year, CopyStr(Format(Rec."Cash Discount Date"), 1, 4));
-            GenJournalLine."Pmt. Discount Date" := DMY2Date(day, month, year);
+        if Rec.CreateSypErrorRecords() then begin
+            Spylog.UpdatelogWithErrors(Rec."Entry No.", GlobalErrorTextList);
+            exit(false);
         end;
-    end;
-
-    /// <summary>
-    /// SetDueDate.
-    /// </summary>
-    procedure SetDueDate()
-    begin
-        if Rec."Due Date" <> '' then begin
-            evaluate(day, CopyStr(Format("Due Date"), 9, 2));
-            evaluate(month, CopyStr(Format("Due Date"), 6, 2));
-            evaluate(year, CopyStr(Format("Due Date"), 1, 4));
-            GenJournalLine."Due Date" := DMY2Date(day, month, year);
-        end;
+        Spylog.UpdateLogWithSucess(Rec."Entry No.");
+        exit(true);
     end;
 
     /// <summary>
@@ -481,7 +464,7 @@ table 73090 "Spy Journal Line"
                     GenJournalLine."Dimension Set ID",
                     GenJournalLine."Shortcut Dimension 1 Code",
                     GenJournalLine."Shortcut Dimension 2 Code");
-                GenJournalLine.Modify();
+                GenJournalLine.modify();
             until GenJournalLine.Next() = 0;
     end;
 
@@ -537,7 +520,7 @@ table 73090 "Spy Journal Line"
                             until TempCustomerDimensionSetEntry.Next() = 0;
 
                         GenJournalLine2."Dimension Set ID" := TempGLAccountDimensionSetEntry2.GetDimensionSetID(TempGLAccountDimensionSetEntry2);
-                        GenJournalLine2.Modify();
+                        GenJournalLine2.modify();
                     end;
                 until GenJournalLine2.Next() = 0;
 
@@ -545,17 +528,13 @@ table 73090 "Spy Journal Line"
         end;
     end;
 
-    /// <summary>
-    /// SetPostingGroups.
-    /// </summary>
-    /// <returns>Return value of type Boolean.</returns>
-    procedure SetPostingGroups(): Boolean
+
+    local procedure SetPostingGroups()
     var
         VATBusinessPostingGroup: Record "VAT Business Posting Group";
         GenBusinessPostingGroup: Record "Gen. Business Posting Group";
         VATPostingSetup: Record "VAT Posting Setup";
         GenProdPostingGroup: Record "Gen. Product Posting Group";
-    //InvalidVATCodeLbl: Label '[VAT Code Err] %1 does not exist in BC', Comment = '%1 = VAT Code from SPY';
     begin
         GenJournalLine."Gen. Bus. Posting Group" := '';
         GenJournalLine."Gen. Prod. Posting Group" := '';
@@ -602,10 +581,24 @@ table 73090 "Spy Journal Line"
                 GenJournalLine.Validate("Gen. Posting Type", GenJournalLine."Gen. Posting Type"::Purchase);
         end;
 
-        if ErrorFoundInErrorTextList('[VAT Code Err]') then
-            exit(false) else
-            exit(true);
+    end;
 
+    local procedure GetDatabaseLockDescription(var DatabaselockDescription: Text[2000]; var DataBaseLockFilter: Text)
+    var
+        DatabaseLocks: Record "Database Locks";
+        Databaselockinfo: Label 'Found Databaselock. %1 is locked by %2 when  %3 attempted to %4, via. app: %5';
+    begin
+        DatabaseLocks.SetFilter("Object Name", '*%1*', DataBaseLockFilter);
+        if DatabaseLocks.FindSet() then
+            repeat
+                DatabaselockDescription +=
+                    StrSubstNo(Databaselockinfo,
+                               DatabaseLocks."Object Name",
+                               DatabaseLocks."User Name",
+                               DatabaseLocks."AL Object Extension Name",
+                               DatabaseLocks."AL Method Scope",
+                               DatabaseLocks."AL Object Extension Name");
+            until DatabaseLocks.Next() = 0;
     end;
 
     /// <summary>
@@ -630,7 +623,7 @@ table 73090 "Spy Journal Line"
                 until GenJournalLine.Next() = 0;
             end;
             GenJournalLine.Validate("Sales/Purch. (LCY)", ExclVAT);
-            if not GenJournalLine.Modify() then
+            if not GenJournalLine.modify() then
                 GlobalErrorTextList.Add(StrSubstNo(SetSalesPurchExclVATErr, Rec."Entry No."));
 
         end;
@@ -650,8 +643,8 @@ table 73090 "Spy Journal Line"
         GLAccount: Record "G/L Account";
         Customer: Record Customer;
         Vendor: Record Vendor;
-        AccountNoGetErrorLbl: Label '[postTypeErr] Account No. does not exist %1', comment = '%1 = Account No';
-        InvalidPostTypeLbl: Label '[postTypeErr] %1 is an invalid postyingType, posttypes avaible: tax,ledger,customer or supplier', comment = '%1,%2,%3,%5 = postType';
+        AccountNoGetErrorLbl: Label '[ValidateAccountTypeAndNo] Account No. does not exist %1', comment = '%1 = Account No';
+        InvalidPostTypeLbl: Label '[ValidateAccountTypeAndNo] %1 is an invalid postyingType, posttypes avaible: tax,ledger,customer or supplier', comment = '%1,%2,%3,%5 = postType';
     begin
         if not (postType in ['tax', 'ledger', 'customer', 'supplier']) then
             GlobalErrorTextList.Add(StrSubstNo(InvalidPostTypeLbl, postType))
@@ -677,7 +670,7 @@ table 73090 "Spy Journal Line"
                     end;
             end;
 
-        if ErrorFoundInErrorTextList('[postTypeErr]') then
+        if ErrorFoundInErrorTextList('[ValidateAccountTypeAndNo]') then
             exit(false) else
             GenJournalLine.Validate("Account No.", Rec."Account No.");
         exit(true)
@@ -767,9 +760,9 @@ table 73090 "Spy Journal Line"
     /// <returns>Return value of type Boolean.</returns>
     procedure ValidatePostingDate(): Boolean
     var
-        DayConvFailedLbl: Label '[DateConvErr] Day convertion failed: %1', Comment = '%1 = Day sent from SPY';
-        MonthConvFailedLbl: Label '[DateConvErr] Month convertion failed: %1', Comment = '%1 = Month sent from SPY';
-        YearConvFailedLbl: Label '[DateConvErr] Year convertion failed: %1', Comment = '%1 = Year sent from SPY';
+        DayConvFailedLbl: Label '[ValidatePostingDate] Day convertion failed: %1', Comment = '%1 = Day sent from SPY';
+        MonthConvFailedLbl: Label '[ValidatePostingDate] Month convertion failed: %1', Comment = '%1 = Month sent from SPY';
+        YearConvFailedLbl: Label '[ValidatePostingDate] Year convertion failed: %1', Comment = '%1 = Year sent from SPY';
     begin
         clear(gPostingDate);
         if not evaluate(day, CopyStr(Format(Rec."Posting Date"), 9, 2)) then
@@ -782,7 +775,7 @@ table 73090 "Spy Journal Line"
         gPostingDate := DMY2Date(day, month, year);
         GenJournalLine.Validate("Posting Date", gPostingDate);
 
-        if ErrorFoundInErrorTextList('[DateConvErr]') then
+        if ErrorFoundInErrorTextList('[ValidatePostingDate]') then
             exit(false) else
             exit(true);
     end;
@@ -794,7 +787,7 @@ table 73090 "Spy Journal Line"
     /// <returns>Return value of type Boolean.</returns>
     procedure ValidateTaxTitle(): Boolean
     var
-        TaxErrorLbl: Label '[TAX Title Err] Failed to insert TAX Dimension %1', Comment = '%1 = Dimensions Code';
+        TaxErrorLbl: Label '[ValidateTaxTitle] Failed to insert TAX Dimension %1', Comment = '%1 = Dimensions Code';
     begin
         Rec."Tax Title" := DelChr(Rec."Tax Title", '=', '()');
         if Rec."Tax Title" <> '' then
@@ -837,7 +830,7 @@ table 73090 "Spy Journal Line"
             end;
         Rec."Tax Title" := '';
 
-        if ErrorFoundInErrorTextList('[TAX Title Err]') then
+        if ErrorFoundInErrorTextList('[ValidateTaxTitle]') then
             exit(false) else
             exit(true);
     end;
@@ -911,16 +904,20 @@ table 73090 "Spy Journal Line"
     end;
 
     /// <summary>
-    /// HelleDim.
+    /// ApplySpyDimensions.
     /// </summary>
-    /// <param name="GenJournalLine">VAR Record "Gen. Journal Line".</param>
-    /// <param name="spydim">Record "Spy Dimension".</param>
+    /// <param name="pGenJournalLine">VAR Record "Gen. Journal Line".</param>
     procedure ApplySpyDimensions(var pGenJournalLine: Record "Gen. Journal Line")
     var
         TempDimensionSetEntry: Record "Dimension Set Entry" temporary;
         SpyDimensions: Record "Spy Dimension";
         lDimensionManagement: Codeunit DimensionManagement;
+        IsHandled: Boolean;
     begin
+        OnBeforeApplySpyDimensions(Rec, xRec, TempDimensionSetEntry, SpyDimensions, lDimensionManagement, pGenJournalLine, IsHandled);
+        if IsHandled then
+            exit;
+
         lDimensionManagement.GetDimensionSet(TempDimensionSetEntry, pGenJournalLine."Dimension Set ID");
         SpyDimensions.SetRange("Spy Jnl Line Description", Rec.Description);
         SpyDimensions.SetRange("Entry No.", Rec."Entry No.");
@@ -934,14 +931,13 @@ table 73090 "Spy Journal Line"
 
         pGenJournalLine."Dimension Set ID" := lDimensionManagement.GetDimensionSetID(TempDimensionSetEntry);
         lDimensionManagement.UpdateGlobalDimFromDimSetID(pGenJournalLine."Dimension Set ID", pGenJournalLine."Shortcut Dimension 1 Code", pGenJournalLine."Shortcut Dimension 2 Code");
-        pGenJournalLine.MODIFY(true);
+        pGenJournalLine.modify(true);
     end;
+
     /// <summary>
-    /// HelleDim.
+    /// CopyCustomerDimensions2.
     /// </summary>
     /// <param name="pGenJournalLine">VAR Record "Gen. Journal Line".</param>
-    /// <param name="GenJournalLine">VAR Record "Gen. Journal Line".</param>
-    /// <param name="spydim">Record "Spy Dimension".</param>
     procedure CopyCustomerDimensions2(var pGenJournalLine: Record "Gen. Journal Line")
     var
         TempDimensionSetEntry: Record "Dimension Set Entry" temporary;
@@ -965,22 +961,76 @@ table 73090 "Spy Journal Line"
                         until TempDimensionSetEntry.Next() = 0;
                     lGenJournalLine."Dimension Set ID" := lDimensionManagement.GetDimensionSetID(TempDimensionSetEntry2);
                     lDimensionManagement.UpdateGlobalDimFromDimSetID(lGenJournalLine."Dimension Set ID", lGenJournalLine."Shortcut Dimension 1 Code", lGenJournalLine."Shortcut Dimension 2 Code");
-                    lGenJournalLine.MODIFY(true);
+                    lGenJournalLine.modify(true);
                 until lGenJournalLine.Next() = 0;
         end;
     end;
 
     /// <summary>
-    /// SetDiscountsFromPaymentTerms.
+    /// TableIslocked.
     /// </summary>
-    procedure SetDiscountsFromPaymentTerms()
+    /// <param name="DatabaselockDescription">VAR Text[2000].</param>
+    /// <returns>Return variable isLocked of type Boolean.</returns>
+    procedure TableIslocked(var DatabaselockDescription: Text[2000]) isLocked: Boolean
     var
-        PaymentTerms: Record "Payment Terms";
+        DatabaseLockRec: Record "Database Locks";
+        SpySetup: Record "Spy Setup";
+        SetupMissing: Label 'Spy setup missing', comment = 'DAN="Spy opsætning mangler."';
+        FailOverCount: Integer;
+        Locked: Boolean;
+        IsHandled: Boolean;
     begin
-        if Rec."Payment Terms Code" <> '' then
-            if not PaymentTerms.Get(rec."Payment Terms Code") then
-                exit;
-        GenJournalLine.Validate("Payment Terms Code", "Payment Terms Code");
+        OnBeforeTableIslocked(Rec, xRec, DatabaselockDescription, isLocked, IsHandled);
+        if IsHandled then
+            exit;
+
+        if not SpySetup.get() then
+            error(SetupMissing);
+        DatabaseLockRec.SetFilter("Object Name", '*%1*', SpySetup."Database Lock Filter");
+        If DatabaseLockRec.FindFirst() then
+            if CheckDBLockWithFailOver(SpySetup."Database Lock Filter", SpySetup."Database Lock Sleep duration", SpySetup."Fail Over Count") then begin
+                isLocked := true;
+                GetDatabaseLockDescription(DatabaselockDescription, SpySetup."Database Lock Filter");
+            end;
+
+        if not isLocked then
+            exit(false);
+    end;
+
+    /// <summary>
+    /// RunFailOver.
+    /// </summary>
+    /// <param name="LookForLockFilter">Text.</param>
+    /// <param name="SleepDuration">integer.</param>
+    /// <param name="FailOverCount">integer.</param>
+    /// <returns>Return variable Locked of type Boolean.</returns>
+    procedure CheckDBLockWithFailOver(LookForLockFilter: Text; SleepDuration: integer; FailOverCount: integer) Locked: Boolean
+    var
+        DatabaseLocks: Record "Database Locks";
+    begin
+        Clear(GlobalFailOverCount);
+        for GlobalFailOverCount := 0 to FailOverCount do begin
+            DatabaseLocks.SetFilter("Object Name", '*%1*', LookForLockFilter);
+            if DatabaseLocks.FindFirst() then begin
+                GlobalFailOverCount += 1;
+                Locked := true;
+                Sleep(SleepDuration); //The number of milliseconds to return control to the operating system.
+                if GlobalFailOverCount = FailOverCount then
+                    exit(true);
+                Clear(DatabaseLocks);
+            end else
+                exit(false);
+        end;
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeApplySpyDimensions(var Rec: Record "Spy Journal Line"; var xRec: Record "Spy Journal Line"; TempDimensionSetEntry: Record "Dimension Set Entry" temporary; SpyDimensions: Record "Spy Dimension"; lDimensionManagement: Codeunit DimensionManagement; var pGenJournalLine: Record "Gen. Journal Line"; var IsHandled: Boolean)
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeTableIslocked(var Rec: Record "Spy Journal Line"; var xRec: Record "Spy Journal Line"; var DatabaselockDescription: Text[2000]; var isLocked: Boolean; var IsHandled: Boolean)
+    begin
     end;
 
     var
@@ -1012,6 +1062,7 @@ table 73090 "Spy Journal Line"
         month: Integer;
         year: Integer;
         gDimEntryNo: Integer;
+        GlobalFailOverCount: Integer;
         ExclVAT: Decimal;
         GlobalErrorTextList: List of [Text];
         gPostingDate: Date;

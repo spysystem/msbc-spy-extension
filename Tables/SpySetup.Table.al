@@ -33,6 +33,22 @@ table 73001 "Spy Setup"
             DataClassification = ToBeClassified;
         }
 
+        field(25; "Database Lock Filter"; Text[500])
+        {
+            Caption = 'Database Lock Filter', comment = 'DAN="Databaselås, filter"';
+        }
+
+        Field(30; "Fail Over Count"; Integer)
+        {
+            caption = 'Fail Over Count', comment = 'DAN="Fail over, antal gange"';
+
+        }
+        field(35; "Database Lock Sleep duration"; integer)
+        {
+            caption = 'Database Lock Sleep duration', comment = 'DAN="Database Lock Sleep duration"';
+
+        }
+
     }
     keys
     {
