@@ -1,15 +1,15 @@
 {
   "id": "925c466c-1729-4de5-a3f9-5ade5f50ba32",
-  "name": "DT SPY Integration",
-  "publisher": "Dynateam A/S",
-  "version": "1.0.44313.54",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-  "brief": "",
+  "name": "SPY Integration",
+  "publisher": "ECIT A/S",
+  "version": "1.0.54157.55",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+  "brief": "Integration to SPY Webservices",
   "description": "",
   "privacyStatement": "",
   "EULA": "",
   "help": "",
   "url": "",
-  "logo": "",
+  "logo": "./logo.jpg",
   "dependencies": [],
   "screenshots": [],
   "platform": "1.0.0.0",
@@ -26,5 +26,6 @@
     "includeSourceInSymbolFile": false
   },
   "features": ["TranslationFile"],
-  "runtime": "9.0"
+  "runtime": "11.0",
+  "target": "Cloud"
 }

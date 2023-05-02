@@ -240,17 +240,19 @@ table 73003 SpyLog
     var
         ErrorText: Text;
         ErrorTotal: Text;
-        ErrorCount: Integer;
-        GlobalErrorFormat: Text[2000];
+
     begin
         Rec.Get(EntryNo);
-        if GlobalErrorTextList.Count > 0 then
+        if GlobalErrorTextList.Count > 0 then begin
             foreach ErrorText in GlobalErrorTextList do begin
-                ErrorCount += 1;
-                ErrorTotal += GlobalErrorTextList.Get(ErrorCount) + ' ';
+                if ErrorTotal = '' then
+                    ErrorTotal := ErrorText
+                else
+                    ErrorTotal += ' ' + ErrorText;
             end;
-        Rec."Error Description Text" := ErrorTotal;
-        Rec.Modify();
+            Rec."Error Description Text" := CopyStr(ErrorTotal, 1, MaxStrLen(Rec."Error Description Text"));
+            Rec.Modify();
+        end
     end;
 
     /// <summary>

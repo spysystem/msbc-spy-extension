@@ -397,8 +397,10 @@ table 73090 "Spy Journal Line"
         SpyLog.Initiate(Rec);
 
         LockTable(true);
+        GenJournalLine.Locktable(true);
 
         GenJournalLine.Init();
+        GenJournalLine.SetSuppressCommit(true);
         //GenJournalLine.SetCurrentKey(GenJournalLine."Journal Template Name", GenJournalLine."Journal Batch Name", GenJournalLine."Line No.");
         if ValidateJournalBatchName() then begin
             GenJournalLine.Validate("Journal Template Name", Rec."Journal Template Name");
@@ -428,6 +430,7 @@ table 73090 "Spy Journal Line"
             SetPostingGroups();
             GetBankAccount();
             IsolateSpyPaymentId();
+            ValidatePaymentTerms();
         end;
 
         if not GenJournalLine.Insert(true) then
@@ -528,6 +531,21 @@ table 73090 "Spy Journal Line"
         end;
     end;
 
+    local procedure ValidatePaymentTerms()
+    var
+        PayMentTerms: Record "Payment Terms";
+        ErrorLabel: Label 'Could not find Payment terms Code: %1', Comment = '%1 is the missing Payment Terms Code';
+        ErrorText: Text;
+
+    begin
+        if PayMentTerms.Get(Rec."Payment Terms Code") then
+            GenJournalLine.Validate("Payment Terms Code", Rec."Payment Terms Code")
+        else begin
+            ErrorText := StrSubstNo(ErrorLabel, Rec."Payment Terms Code");
+            if not GlobalErrorTextList.Contains(ErrorText) then
+                GlobalErrorTextList.Add(ErrorText);
+        end;
+    end;
 
     local procedure SetPostingGroups()
     var
