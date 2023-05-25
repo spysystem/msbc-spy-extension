@@ -1,4 +1,4 @@
-codeunit 73008 SpyCalcCustomerBalance
+codeunit 73008 "SpyCalcCustomerBalance"
 {
 
     trigger OnRun()

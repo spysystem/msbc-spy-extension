@@ -1,4 +1,4 @@
-codeunit 73007 SpyUpgrade
+codeunit 73007 "SpyUpgrade"
 {
     Subtype = Upgrade;
 

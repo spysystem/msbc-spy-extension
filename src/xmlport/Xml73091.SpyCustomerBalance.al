@@ -1,4 +1,4 @@
-xmlport 73091 SpyCustomerBalance
+xmlport 73091 "SpyCustomerBalance"
 {
     UseDefaultNamespace = true;
     DefaultNamespace = 'urn:microsoft-dynamics-nav/xmlports/SpyCustomerBalance';

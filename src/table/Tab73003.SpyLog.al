@@ -1,4 +1,4 @@
-table 73003 SpyLog
+table 73003 "SpyLog"
 {
     Caption = 'SpyLog';
     DataClassification = ToBeClassified;
@@ -208,17 +208,31 @@ table 73003 SpyLog
         {
             caption = 'Error Description', comment = 'DAN="Fejlbeskrivelse"';
         }
-
+        field(50000; "Document Entry No."; Integer)
+        {
+            Caption = 'Entry No.';
+        }
     }
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(Key1; "Document Entry No.")
         {
             Clustered = true;
         }
 
     }
+
+    trigger OnInsert()
+    var
+        SpyLog: Record SpyLog;
+    begin
+        spylog.reset;
+        If SpyLog.FindLast() then
+            Rec."Document Entry No." := SpyLog."Document Entry No." + 1
+        else
+            Rec."Document Entry No." := 1;
+    end;
 
     /// <summary>
     /// InitiateSpyLog.
@@ -228,7 +242,7 @@ table 73003 SpyLog
     begin
         Rec.Init();
         Rec.TransferFields(SpyJournalLine, true);
-        Rec.Insert();
+        Rec.Insert(true);
     end;
 
 
@@ -242,17 +256,17 @@ table 73003 SpyLog
         ErrorTotal: Text;
 
     begin
-        Rec.Get(EntryNo);
-        if GlobalErrorTextList.Count > 0 then begin
-            foreach ErrorText in GlobalErrorTextList do begin
-                if ErrorTotal = '' then
-                    ErrorTotal := ErrorText
-                else
-                    ErrorTotal += ' ' + ErrorText;
-            end;
-            Rec."Error Description Text" := CopyStr(ErrorTotal, 1, MaxStrLen(Rec."Error Description Text"));
-            Rec.Modify();
-        end
+        if GetRec(EntryNo) then
+            if GlobalErrorTextList.Count > 0 then begin
+                foreach ErrorText in GlobalErrorTextList do begin
+                    if ErrorTotal = '' then
+                        ErrorTotal := ErrorText
+                    else
+                        ErrorTotal += ' ' + ErrorText;
+                end;
+                Rec."Error Description Text" := CopyStr(ErrorTotal, 1, MaxStrLen(Rec."Error Description Text"));
+                Rec.Modify();
+            end
     end;
 
     /// <summary>
@@ -262,9 +276,18 @@ table 73003 SpyLog
     procedure UpdateLogWithSucess(EntryNo: Integer)
     var
     begin
-        Rec.Get(EntryNo);
-        Rec."Ready To Post" := true;
-        Rec.Modify();
+        if GetRec(EntryNo) then begin
+            Rec."Ready To Post" := true;
+            Rec.Modify();
+        end;
+    end;
+
+    local procedure GetRec(EntryNo: integer): Boolean
+
+    begin
+        Rec.reset;
+        Rec.setrange("Entry No.", EntryNo);
+        exit(Rec.FindLast());
     end;
 
 }

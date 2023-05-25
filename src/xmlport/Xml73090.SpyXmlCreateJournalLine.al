@@ -1,4 +1,4 @@
-xmlport 73090 SpyXmlCreateJournalLine
+xmlport 73090 "SpyXmlCreateJournalLine"
 {
     UseDefaultNamespace = true;
     DefaultNamespace = 'urn:microsoft-dynamics-nav/xmlports/SpyXmlCreateJournalLine';

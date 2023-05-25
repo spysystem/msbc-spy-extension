@@ -1,4 +1,4 @@
-page 73082 SpyListJournalBatches
+page 73082 "SpyListJournalBatches"
 {
     PageType = List;
     ApplicationArea = All;

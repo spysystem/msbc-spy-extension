@@ -1,4 +1,4 @@
-page 73010 SpyPostedGenJnlLines
+page 73010 "SpyPostedGenJnlLines"
 {
     ApplicationArea = All;
     Caption = 'SpyPostedGenJnlLines';

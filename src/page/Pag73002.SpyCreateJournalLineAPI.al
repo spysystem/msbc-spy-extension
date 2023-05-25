@@ -1,4 +1,4 @@
-page 73002 SpyCreateJournalLineAPI
+page 73002 "SpyCreateJournalLineAPI"
 {
     APIGroup = 'integration';
     APIPublisher = 'spy';

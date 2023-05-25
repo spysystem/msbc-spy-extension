@@ -1,4 +1,4 @@
-codeunit 73009 SpyApplyCustomerTemplates
+codeunit 73009 "SpyApplyCustomerTemplates"
 {
     Procedure ApplyTemplates(Customer: Code[20]; CountryType: Text[3])
     var

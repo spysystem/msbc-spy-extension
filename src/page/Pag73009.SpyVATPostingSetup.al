@@ -1,4 +1,4 @@
-page 73009 SpyVATPostingSetup
+page 73009 "SpyVATPostingSetup"
 {
     ApplicationArea = All;
     Caption = 'SpyVATPostingSetup';

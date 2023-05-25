@@ -1,4 +1,4 @@
-permissionset 73002 SpyPermissionsSet
+permissionset 73002 "SpyPermissionsSet"
 {
     Assignable = true;
     Caption = 'Spy Permissions', MaxLength = 30;

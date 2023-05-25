@@ -1,4 +1,4 @@
-page 73008 SpyGenJnlTemplateBatch
+page 73008 "SpyGenJnlTemplateBatch"
 {
     ApplicationArea = All;
     Caption = 'Spy Jnl Template Batch';

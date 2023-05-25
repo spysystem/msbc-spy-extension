@@ -1,5 +1,5 @@
 /// <summary>
-/// Codeunit SpyCreateJournalLine (ID 73006).
+/// Codeunit "SpyCreateJournalLine" (ID 73006).
 /// </summary>
 codeunit 73006 SpyCreateJournalLine
 {

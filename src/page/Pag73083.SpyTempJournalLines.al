@@ -1,4 +1,4 @@
-page 73083 SpyTempJournalLines
+page 73083 "SpyTempJournalLines"
 {
     PageType = List;
     ApplicationArea = All;

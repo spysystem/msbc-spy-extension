@@ -383,8 +383,10 @@ table 73090 "Spy Journal Line"
         InsertGenJnlLineErr: label '[CreationErr] Failed to Insert Gen. Journal Line %1', comment = '%1 = Ext Doc No.';
         TableIsCurrentlyLockedWarning: Label '%1 is currently locked, please try again later', Comment = '%1 api warning for spy, will be not translated';
     begin
-        if TableIslocked(DatabaselockDescription) then
-            error(TableIsCurrentlyLockedWarning);
+        //if TableIslocked(DatabaselockDescription) then
+        //  error(TableIsCurrentlyLockedWarning);
+        // TODO: Reenable maybe....
+
         Clear(GlobalErrorTextList);
         Clear(BankAccount);
         Clear(TempDimensionBuffer);
@@ -394,7 +396,7 @@ table 73090 "Spy Journal Line"
 
         gDimEntryNo := 1;
 
-        SpyLog.Initiate(Rec);
+        //SpyLog.Initiate(Rec);
 
         LockTable(true);
         GenJournalLine.Locktable(true);
@@ -442,10 +444,10 @@ table 73090 "Spy Journal Line"
         UpdateGlobalDimensions();
 
         if Rec.CreateSypErrorRecords() then begin
-            Spylog.UpdatelogWithErrors(Rec."Entry No.", GlobalErrorTextList);
+            //Spylog.UpdatelogWithErrors(Rec."Entry No.", GlobalErrorTextList);
             exit(false);
         end;
-        Spylog.UpdateLogWithSucess(Rec."Entry No.");
+        //Spylog.UpdateLogWithSucess(Rec."Entry No.");
         exit(true);
     end;
 

@@ -1,7 +1,7 @@
 /// <summary>
 /// Page SpyCreateJournalDimensionsAPI (ID 73003).
 /// </summary>
-page 73003 SpyJournalDimensionPart
+page 73003 "SpyJournalDimensionPart"
 {
 
     Caption = 'spyDimensions';

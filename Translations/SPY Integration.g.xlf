@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en-US" target-language="en-US" original="DT SPY Integration">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="SPY Integration">
     <body>
       <group id="body">
         <trans-unit id="Table 92756324 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -118,6 +118,11 @@
           <note from="Developer" annotates="general" priority="2">DAN="Spy kladdelinje</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 377097666 - NamedType 3698326060" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Found Databaselock. %1 is locked by %2 when  %3 attempted to %4, via. app: %5</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method GetDatabaseLockDescription - NamedType Databaselockinfo</note>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Method 1142516467 - NamedType 1670204571" size-unit="char" translate="yes" xml:space="preserve">
           <source>{"code": 400, "message": "%1"}</source>
           <note from="Developer" annotates="general" priority="2">%1 = CollectedErrorMessages</note>
@@ -128,18 +133,28 @@
           <note from="Developer" annotates="general" priority="2">%1 = Ext Doc No.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method PostTempSpyJournalLines - NamedType InsertGenJnlLineErr</note>
         </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 668737270 - NamedType 53279188" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 is currently locked, please try again later</source>
+          <note from="Developer" annotates="general" priority="2">%1 api warning for spy, will be not translated</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method PostTempSpyJournalLines - NamedType TableIsCurrentlyLockedWarning</note>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Method 1226951289 - NamedType 2864912246" size-unit="char" translate="yes" xml:space="preserve">
           <source>[SetSalesPurchExclVATErr] %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = LineNo</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method SetSalesPurchExclVAT - NamedType SetSalesPurchExclVATErr</note>
         </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 2851307954 - NamedType 3377691893" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy setup missing</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Spy opsætning mangler."</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method TableIslocked - NamedType SetupMissing</note>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Method 2163259295 - NamedType 2949915528" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[postTypeErr] Account No. does not exist %1</source>
+          <source>[ValidateAccountTypeAndNo] Account No. does not exist %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = Account No</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateAccountTypeAndNo - NamedType AccountNoGetErrorLbl</note>
         </trans-unit>
         <trans-unit id="Table 3833745087 - Method 2163259295 - NamedType 861390621" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[postTypeErr] %1 is an invalid postyingType, posttypes avaible: tax,ledger,customer or supplier</source>
+          <source>[ValidateAccountTypeAndNo] %1 is an invalid postyingType, posttypes avaible: tax,ledger,customer or supplier</source>
           <note from="Developer" annotates="general" priority="2">%1,%2,%3,%5 = postType</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateAccountTypeAndNo - NamedType InvalidPostTypeLbl</note>
         </trans-unit>
@@ -153,23 +168,28 @@
           <note from="Developer" annotates="general" priority="2">DAN="Kladde blev ikke oprette %1"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateJournalBatchName - NamedType BatchNotCreatedLbl</note>
         </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 988479147 - NamedType 1313023698" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Could not find Payment terms Code: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the missing Payment Terms Code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidatePaymentTerms - NamedType ErrorLabel</note>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Method 3067519390 - NamedType 4249219403" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[DateConvErr] Day convertion failed: %1</source>
+          <source>[ValidatePostingDate] Day convertion failed: %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = Day sent from SPY</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidatePostingDate - NamedType DayConvFailedLbl</note>
         </trans-unit>
         <trans-unit id="Table 3833745087 - Method 3067519390 - NamedType 2403073583" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[DateConvErr] Month convertion failed: %1</source>
+          <source>[ValidatePostingDate] Month convertion failed: %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = Month sent from SPY</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidatePostingDate - NamedType MonthConvFailedLbl</note>
         </trans-unit>
         <trans-unit id="Table 3833745087 - Method 3067519390 - NamedType 3582577230" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[DateConvErr] Year convertion failed: %1</source>
+          <source>[ValidatePostingDate] Year convertion failed: %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = Year sent from SPY</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidatePostingDate - NamedType YearConvFailedLbl</note>
         </trans-unit>
         <trans-unit id="Table 3833745087 - Method 660186525 - NamedType 1994224481" size-unit="char" translate="yes" xml:space="preserve">
-          <source>[TAX Title Err] Failed to insert TAX Dimension %1</source>
+          <source>[ValidateTaxTitle] Failed to insert TAX Dimension %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = Dimensions Code</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateTaxTitle - NamedType TaxErrorLbl</note>
         </trans-unit>
@@ -328,6 +348,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 4228076119 - Field 2055939818 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Database Lock Filter</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Databaselås, filter"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Database Lock Filter - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4228076119 - Field 2211995537 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Database Lock Sleep duration</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Database Lock Sleep duration"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Database Lock Sleep duration - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 4228076119 - Field 1813174336 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Default Journal Description</source>
           <note from="Developer" annotates="general" priority="2">DAN="Kaldde-beskrivelse"</note>
@@ -342,6 +372,11 @@
           <source>Entry No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 4228076119 - Field 39277321 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Fail Over Count</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Fail over, antal gange"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Setup - Field Fail Over Count - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4228076119 - Field 236064653 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>VAT Prod. Posting Group</source>
@@ -418,6 +453,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table SpyLog - Field Description - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3249656082 - Field 2790007768 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table SpyLog - Field Document Entry No. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3249656082 - Field 486908828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Document No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -447,6 +487,11 @@
           <source>entryType</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table SpyLog - Field entryType - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3249656082 - Field 4129609381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Description</source>
+          <note from="Developer" annotates="general" priority="2">DAN="Fejlbeskrivelse"</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table SpyLog - Field Error Description Text - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3249656082 - Field 1527563463 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>External Document No.</source>
@@ -1463,6 +1508,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Property AdditionalSearchTerms</note>
         </trans-unit>
+        <trans-unit id="Page 4228076119 - Control 2055939818 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifes which filter is used to look for databaselocks</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Database Lock Filter - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4228076119 - Control 2211995537 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specfies how long time there should be between each databaselock lookup in ms. This is paired with the Fail Over Count.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Database Lock Sleep duration - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 4228076119 - Control 1813174336 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the Default Journal Description</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1472,6 +1527,11 @@
           <source>Specifies the value of the Default Journal Temp Name field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Default Journal Temp Name - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4228076119 - Control 39277321 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies how many times to look for the databaselock</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control Fail Over Count - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 4228076119 - Control 236064653 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the VAT Prod. Posting Group field.</source>

@@ -1,4 +1,4 @@
-page 73007 SpyGenJnlTemplate
+page 73007 "SpyGenJnlTemplate"
 {
     ApplicationArea = All;
     Caption = 'SpyGenJnlTemplate';

@@ -1,4 +1,4 @@
-codeunit 73010 SpyInsertPostCode
+codeunit 73010 "SpyInsertPostCode"
 {
     Procedure InsertPostCode(Country: Code[10]; City: Text[30]; PostCode: Code[20])
     var
