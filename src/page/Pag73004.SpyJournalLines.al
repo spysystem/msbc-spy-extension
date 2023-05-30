@@ -192,7 +192,7 @@ page 73004 "Spy Journal Lines"
 
                 trigger OnAction()
                 var
-                    SpyCreateJournalLine: codeunit SpyCreateJournalLine;
+                    SpyCreateJournalLine: codeunit "Spy Create Journal Line Imp";
                 begin
                     SpyCreateJournalLine.commitToJournalLine();
                 end;
@@ -230,7 +230,7 @@ page 73004 "Spy Journal Lines"
 
                 trigger OnAction()
                 var
-                    spycr: codeunit SpyCreateJournalLine;
+                    spycr: codeunit "Spy Create Journal Line Imp";
                 begin
                     spycr.CleanUpWithGUIAllowed(Rec);
                 end;

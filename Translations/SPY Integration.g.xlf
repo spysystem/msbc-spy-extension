@@ -173,6 +173,11 @@
           <note from="Developer" annotates="general" priority="2">%1 is the missing Payment Terms Code</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidatePaymentTerms - NamedType ErrorLabel</note>
         </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 988479147 - NamedType 3453234248" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Could not insert Payment terms Code: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 is the missing Payment Terms Code</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidatePaymentTerms - NamedType ErrorLabel2</note>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Method 3067519390 - NamedType 4249219403" size-unit="char" translate="yes" xml:space="preserve">
           <source>[ValidatePostingDate] Day convertion failed: %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = Day sent from SPY</note>
@@ -558,20 +563,20 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table SpyLog - Field vatArea - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1200734571 - Method 3449725409 - NamedType 3713220116" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3134243727 - Method 3449725409 - NamedType 3713220116" size-unit="char" translate="yes" xml:space="preserve">
           <source>Posted %1 lines to Journal: %2 with Description: %3</source>
           <note from="Developer" annotates="general" priority="2">%1, %2, %3</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method CleanSpyData - NamedType PostedMessageLbl</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Spy Create Journal Line Imp - Method CleanSpyData - NamedType PostedMessageLbl</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1200734571 - Method 482609307 - NamedType 731237784" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3134243727 - Method 482609307 - NamedType 731237784" size-unit="char" translate="yes" xml:space="preserve">
           <source>Cleaned, %1: %2, %3: %4, %5: %6, %7: %8</source>
           <note from="Developer" annotates="general" priority="2">%1: %2, %3: %4, %5: %6, %7: %8</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method CleanUpWithGUIAllowed - NamedType ResultSummazionTxt</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Spy Create Journal Line Imp - Method CleanUpWithGUIAllowed - NamedType ResultSummazionTxt</note>
         </trans-unit>
-        <trans-unit id="Codeunit 1200734571 - Method 3235906455 - NamedType 2523370944" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Codeunit 3134243727 - Method 3235906455 - NamedType 2523370944" size-unit="char" translate="yes" xml:space="preserve">
           <source>Erorrs found %1. Continue and delete SPY data?</source>
           <note from="Developer" annotates="general" priority="2">%1 = Errors</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SpyCreateJournalLine - Method commitToJournalLine - NamedType ErrorFoundLbl</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Spy Create Journal Line Imp - Method commitToJournalLine - NamedType ErrorFoundLbl</note>
         </trans-unit>
         <trans-unit id="Page 3926563785 - Control 636392376 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
@@ -1482,6 +1487,11 @@
           <source>View Spy Dimensions</source>
           <note from="Developer" annotates="general" priority="2">DAN="Vis Spy-dimensioner"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action View Spy Dimensions - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 598842888 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Log List</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Log List - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3821052265 - Control 714791889 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>

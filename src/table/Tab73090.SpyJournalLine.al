@@ -396,7 +396,7 @@ table 73090 "Spy Journal Line"
 
         gDimEntryNo := 1;
 
-        //SpyLog.Initiate(Rec);
+        SpyLog.Initiate(Rec);
 
         LockTable(true);
         GenJournalLine.Locktable(true);
@@ -444,10 +444,10 @@ table 73090 "Spy Journal Line"
         UpdateGlobalDimensions();
 
         if Rec.CreateSypErrorRecords() then begin
-            //Spylog.UpdatelogWithErrors(Rec."Entry No.", GlobalErrorTextList);
+            Spylog.UpdatelogWithErrors(Rec."Entry No.", GlobalErrorTextList);
             exit(false);
         end;
-        //Spylog.UpdateLogWithSucess(Rec."Entry No.");
+        Spylog.UpdateLogWithSucess(Rec."Entry No.");
         exit(true);
     end;
 
@@ -537,16 +537,29 @@ table 73090 "Spy Journal Line"
     var
         PayMentTerms: Record "Payment Terms";
         ErrorLabel: Label 'Could not find Payment terms Code: %1', Comment = '%1 is the missing Payment Terms Code';
+        ErrorLabel2: Label 'Could not insert Payment terms Code: %1', Comment = '%1 is the missing Payment Terms Code';
         ErrorText: Text;
 
     begin
-        if PayMentTerms.Get(Rec."Payment Terms Code") then
-            GenJournalLine.Validate("Payment Terms Code", Rec."Payment Terms Code")
-        else begin
+        if Rec."Payment Terms Code" = '' then
+            exit;
+        if PayMentTerms.Get(Rec."Payment Terms Code") then begin
+            if not TryValidatePaymentTermsCode() then begin
+                ErrorText := StrSubstNo(ErrorLabel2, Rec."Payment Terms Code");
+                if not GlobalErrorTextList.Contains(ErrorText) then
+                    GlobalErrorTextList.Add(ErrorText);
+            end;
+        end else begin
             ErrorText := StrSubstNo(ErrorLabel, Rec."Payment Terms Code");
             if not GlobalErrorTextList.Contains(ErrorText) then
                 GlobalErrorTextList.Add(ErrorText);
         end;
+    end;
+
+    [TryFunction]
+    local procedure TryValidatePaymentTermsCode()
+    begin
+        GenJournalLine.Validate("Payment Terms Code", Rec."Payment Terms Code")
     end;
 
     local procedure SetPostingGroups()
