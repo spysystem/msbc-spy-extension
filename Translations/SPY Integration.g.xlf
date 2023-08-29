@@ -158,6 +158,21 @@
           <note from="Developer" annotates="general" priority="2">%1,%2,%3,%5 = postType</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateAccountTypeAndNo - NamedType InvalidPostTypeLbl</note>
         </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 1959661362 - NamedType 4249219403" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[ValidateDueDate] Day convertion failed: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Day sent from SPY</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateDueDate - NamedType DayConvFailedLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 1959661362 - NamedType 2403073583" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[ValidateDueDate] Month convertion failed: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Month sent from SPY</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateDueDate - NamedType MonthConvFailedLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 1959661362 - NamedType 3582577230" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[ValidateDueDate] Year convertion failed: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Year sent from SPY</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateDueDate - NamedType YearConvFailedLbl</note>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Method 112233112 - NamedType 3967461121" size-unit="char" translate="yes" xml:space="preserve">
           <source>[CreateJnlTemplateErr] Failed to Create Journal Template Name %1</source>
           <note from="Developer" annotates="general" priority="2">DAN="Kladde blev ikke oprette %1"</note>
@@ -562,6 +577,11 @@
           <source>vatArea</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table SpyLog - Field vatArea - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2000817610 - Method 1665861916 - NamedType 1055637896" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Cannot resolve %1 to Journal Template/Batch set, Use "/" as a delimiter</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit EDK Automatic Journal Posting - Method OnRun - NamedType ErrorNoValidTeplateBatchSet</note>
         </trans-unit>
         <trans-unit id="Codeunit 3134243727 - Method 3449725409 - NamedType 3713220116" size-unit="char" translate="yes" xml:space="preserve">
           <source>Posted %1 lines to Journal: %2 with Description: %3</source>
@@ -1547,6 +1567,11 @@
           <source>Specifies the value of the VAT Prod. Posting Group field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Control VAT Prod. Posting Group - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 4228076119 - Action 1815952693 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Info</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Setup - Action SystemInfo - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1921021216 - Control 1593446156 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
@@ -2937,6 +2962,11 @@
           <source>Specifies the value of the VAT Registration No. field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyPostedGenJnlLines - Control VAT Registration No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2210465283 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SpySystemInfo</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpySystemInfo - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3790329702 - Control 2704330142 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>

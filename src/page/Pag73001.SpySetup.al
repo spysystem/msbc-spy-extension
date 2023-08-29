@@ -58,4 +58,24 @@ page 73001 "Spy Setup"
             }
         }
     }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(SystemInfo)
+            {
+                Caption = 'System Info';
+
+                Trigger OnAction()
+                var
+                    c: Codeunit "Application System Constants";
+                    Info: ModuleInfo;
+                begin
+                    NavApp.GetCurrentModuleInfo(Info);
+                    message('System Info:\Version: %1\Platform File Version: %2\Platform Production Version: %3\\APP Version %4', c.ApplicationVersion(), c.PlatformFileVersion(), c.PlatformProductVersion(), info.AppVersion)
+                end;
+            }
+        }
+    }
 }

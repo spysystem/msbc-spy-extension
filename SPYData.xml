@@ -163,5 +163,11 @@
             <ServiceName>SpyVATPostingSetup</ServiceName>
             <Published>true</Published>
         </TenantWebService> 
+        <TenantWebService>
+            <ObjectType>Page</ObjectType>
+            <ObjectID>73094</ObjectID>
+            <ServiceName>SpySystemInfo</ServiceName>
+            <Published>true</Published>
+        </TenantWebService>
     </TenantWebServiceCollection>
 </ExportedData>

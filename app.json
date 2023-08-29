@@ -13,7 +13,7 @@
   "dependencies": [],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "20.0.0.0",
+  "application": "21.0.0.0",
   "idRanges": [
     {
       "from": 73000,
@@ -26,6 +26,6 @@
     "includeSourceInSymbolFile": false
   },
   "features": ["TranslationFile", "NoImplicitWith"],
-  "runtime": "11.0",
+  "runtime": "10.2",
   "target": "Cloud"
 }

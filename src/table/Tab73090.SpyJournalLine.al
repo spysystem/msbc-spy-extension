@@ -433,6 +433,7 @@ table 73090 "Spy Journal Line"
             GetBankAccount();
             IsolateSpyPaymentId();
             ValidatePaymentTerms();
+            ValidateDueDate();
         end;
 
         if not GenJournalLine.Insert(true) then
@@ -813,6 +814,27 @@ table 73090 "Spy Journal Line"
             exit(true);
     end;
 
+    procedure ValidateDueDate(): Boolean
+    var
+        DayConvFailedLbl: Label '[ValidateDueDate] Day convertion failed: %1', Comment = '%1 = Day sent from SPY';
+        MonthConvFailedLbl: Label '[ValidateDueDate] Month convertion failed: %1', Comment = '%1 = Month sent from SPY';
+        YearConvFailedLbl: Label '[ValidateDueDate] Year convertion failed: %1', Comment = '%1 = Year sent from SPY';
+    begin
+        clear(gPostingDate);
+        if not evaluate(day, CopyStr(Format(Rec."Due Date"), 9, 2)) then
+            GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, CopyStr(Format(Rec."Due Date"), 9, 2)));
+        if not evaluate(month, CopyStr(Format(Rec."Due Date"), 6, 2)) then
+            GlobalErrorTextList.Add(StrSubstNo(MonthConvFailedLbl, CopyStr(Format(Rec."Due Date"), 6, 2)));
+        if not evaluate(year, CopyStr(Format(Rec."Due Date"), 1, 4)) then
+            GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Due Date"), 1, 4)));
+
+        gDueDate := DMY2Date(day, month, year);
+        GenJournalLine.Validate("Due Date", gDueDate);
+
+        if ErrorFoundInErrorTextList('[ValidateDueDate]') then
+            exit(false) else
+            exit(true);
+    end;
 
     /// <summary>
     /// ValidateTaxTitle.
@@ -1099,5 +1121,6 @@ table 73090 "Spy Journal Line"
         ExclVAT: Decimal;
         GlobalErrorTextList: List of [Text];
         gPostingDate: Date;
+        gDueDate: Date;
 
 }

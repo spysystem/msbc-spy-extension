@@ -31,6 +31,16 @@ codeunit 73006 SpyCreateJournalLine
         exit(Implementation.ExportJournalLine(spyXmlCreateJournalLine));
     end;
 
+    procedure uploadDocument(DocumentType: text; DocNo: Text; Data: Text): Text
+    var
+        SpySetup: Record "Spy Setup";
+
+    begin
+        SpySetup.Get();
+        exit(Data);
+
+    end;
+
     procedure ping(): Text
     var
     begin

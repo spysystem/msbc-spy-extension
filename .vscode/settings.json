@@ -1,4 +1,5 @@
 {
     "CRS.ObjectNamePrefix": "",
-    "CRS.RemovePrefixFromFilename": true
+    "CRS.RemovePrefixFromFilename": true,
+    "xliffSync.baseFile": "SPY Integration.g.xlf"
 }
