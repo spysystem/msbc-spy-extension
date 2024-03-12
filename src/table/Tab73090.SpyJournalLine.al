@@ -6,12 +6,10 @@ table 73090 "Spy Journal Line"
     Caption = 'Spy Journal Line', comment = 'DAN="Spy kladdelinje';
     fields
     {
-
         field(1; "Entry No."; Integer)
         {
             Caption = 'Entry No.';
         }
-
         field(2; "Journal Template Name"; Code[10])
         {
             Caption = 'Journal Template Name';
@@ -19,7 +17,6 @@ table 73090 "Spy Journal Line"
             TableRelation = "Gen. Journal Template";
             DataClassification = CustomerContent;
         }
-
         field(4; "Journal Batch Name"; Code[10])
         {
             Caption = 'Journal Batch Name';
@@ -31,38 +28,30 @@ table 73090 "Spy Journal Line"
         {
             Caption = 'Description';
             DataClassification = CustomerContent;
-
         }
-
         field(12; "Currency Code"; Code[10])
         {
             Caption = 'Currency Code';
             TableRelation = Currency;
             ValidateTableRelation = false;
             DataClassification = CustomerContent;
-
         }
-
         field(13; Amount; Decimal)
         {
             Caption = 'Amount';
             DataClassification = CustomerContent;
-
         }
         field(16; "Amount (LCY)"; Decimal)
         {
             AutoFormatType = 1;
             Caption = 'Amount (LCY)';
             DataClassification = CustomerContent;
-
         }
         field(33; "Account Type"; Enum "Gen. Journal Account Type")
         {
             Caption = 'Account Type';
             DataClassification = CustomerContent;
         }
-
-
         field(37; "Document No."; Code[20])
         {
             Caption = 'Document No.';
@@ -72,26 +61,20 @@ table 73090 "Spy Journal Line"
         {
             Caption = 'Due Date';
         }
-
         field(39; "Cash Discount Date"; Text[20]) //cashDiscountDate
         {
             Caption = 'Pmt. Discount Date';
         }
-
         field(40; documentTypeAsText; Text[20])
         {
             Caption = 'documentTypeAsText';
             DataClassification = CustomerContent;
         }
-
-
         field(44; "Account No."; Code[20])
         {
             Caption = 'Account No.';
             DataClassification = CustomerContent;
-
         }
-
         field(46; "Document Type"; Enum "Gen. Journal Document Type")
         {
             Caption = 'Document Type';
@@ -103,7 +86,6 @@ table 73090 "Spy Journal Line"
             TableRelation = "Payment Terms";
             ValidateTableRelation = false;
         }
-
         field(55; "Posting Date"; Text[10])
         {
             Caption = 'Posting Date';
@@ -113,43 +95,33 @@ table 73090 "Spy Journal Line"
         {
             Caption = 'External Document No.';
             DataClassification = CustomerContent;
-
         }
-
         field(120; "Country/Region Code"; Code[10])
         {
             Caption = 'Country/Region Code';
             TableRelation = "Country/Region";
             ValidateTableRelation = false;
             DataClassification = CustomerContent;
-
-
         }
         field(510; postType; Text[20])
         {
             Caption = 'postType';
             DataClassification = CustomerContent;
-
         }
-
         field(515; deliveryAccount; Text[20])
         {
             Caption = 'Delivery Acoount';
             DataClassification = CustomerContent;
-
-
         }
         field(550; "County US Tax Account"; Code[20])
         {
             Caption = 'County US Tax Account';
             DataClassification = CustomerContent;
-
         }
         field(556; "State US Tax Account"; Code[20])
         {
             Caption = 'State US Tax Account';
             DataClassification = CustomerContent;
-
         }
         field(566; "VAT Code"; Code[20])
         {
@@ -176,12 +148,10 @@ table 73090 "Spy Journal Line"
         {
             Caption = 'custGroup';
         }
-
         field(1200; PaymentId; Text[100])
         {
             Caption = 'PaymentID', comment = 'DAN="Betalingsid"';
         }
-
         // field(1000; "SPY Dimensions"; Integer)
         // {
         //     Caption = 'SPY Dimension';
@@ -191,18 +161,26 @@ table 73090 "Spy Journal Line"
         field(1100; "Ready To Post"; Boolean)
         {
             Caption = 'Ready To Post', comment = 'DAN="Klar til bogf."';
-
         }
-
+        field(73000; "Spy Batch Id"; Code[20])
+        {
+            Caption = 'Spy Batch Id', Locked = true;
+        }
+        field(73001; "Spy Status"; Enum SpyJournalLineStatus)
+        {
+            Caption = 'Spy Status', Locked = true;
+        }
+        field(73002; "Created"; DateTime)
+        {
+            Caption = 'Created', Locked = true;
+        }
     }
-
     keys
     {
         key(Key1; "Entry No.")
         {
             Clustered = true;
         }
-
     }
     trigger OnInsert()
     var
@@ -211,6 +189,23 @@ table 73090 "Spy Journal Line"
         if SpyJournalLine.FindLast() then
             Rec."Entry No." := SpyJournalLine."Entry No." + 1 else
             Rec."Entry No." := 1;
+    end;
+
+    trigger OnDelete()
+    var
+        SpyDim: Record "Spy Dimension";
+        SpyErrors: Record "Spy Error";
+    begin
+        if Rec.IsTemporary then
+            exit;
+
+        SpyDim.SetRange("Spy Journal System Id", Rec.SystemId);
+        if not SpyDim.IsEmpty then
+            SpyDim.DeleteAll();
+
+        SpyErrors.SetRange("Entry No.");
+        if not SpyErrors.IsEmpty then
+            SpyErrors.DeleteAll();
     end;
 
     /// <summary>
@@ -1092,25 +1087,19 @@ table 73090 "Spy Journal Line"
         BankAccount: record "Bank Account";
         GenJournalLine: Record "Gen. Journal Line";
         GenJournalLine2: Record "Gen. Journal Line";
-
         gCustomer: record Customer;
         genJournalBatch: Record "Gen. Journal Batch";
         DimensionSetEntry: Record "Dimension Set Entry";
-
         TempDimensionBuffer: Record "Dimension Buffer" temporary;
         TempDimensionBuffer2: Record "Dimension Buffer" temporary;
         TempDimensionBuffer3: Record "Dimension Buffer" temporary;
-
         TempCustomerDimensionSetEntry: Record "Dimension Set Entry" temporary;
         TempGLAccountDimensionSetEntry2: Record "Dimension Set Entry" temporary;
         gDefaultDimension: record "Default Dimension";
         SPYSetup: Record "Spy Setup";
-
         DimensionManagement: Codeunit DimensionManagement;
         RecordRefBank: RecordRef;
-
         FieldRefBank: FieldRef;
-
         StateTax: Text[20];
         PostingType: text;
         day: integer;
@@ -1122,5 +1111,4 @@ table 73090 "Spy Journal Line"
         GlobalErrorTextList: List of [Text];
         gPostingDate: Date;
         gDueDate: Date;
-
 }

@@ -24,7 +24,6 @@ page 73002 "SpyCreateJournalLineAPI"
                 field(documentType; Rec.documentTypeAsText) { Caption = 'Document Type'; }
                 field(countryType; gcountryType) { Caption = 'countryType'; } //TODO: Thomas told me to change this since 10 was not long enough - yet you're not using this in the old XML.
                 //Please confirm what to do here. 
-
                 field(account; Rec."Account No.") { Caption = 'Account No.'; }
                 field(description; Rec.Description) { Caption = 'Description'; }
                 field(amount; Rec.Amount) { Caption = 'Amount'; }
@@ -34,7 +33,6 @@ page 73002 "SpyCreateJournalLineAPI"
                 field(postType; Rec.postType) { Caption = 'postType'; }
                 field(invoiceNo; Rec."External Document No.") { Caption = 'External Document No.'; }
                 field(currency; Rec."Currency Code") { Caption = 'Currency Code'; }
-
                 field(amountBaseCurrency; Rec."Amount (LCY)") { Caption = 'Amount (LCY)'; }
                 field(countyUSTaxAccount; Rec."County US Tax Account") { Caption = 'County US Tax Account'; }
                 field(stateUSTaxAccount; Rec."State US Tax Account") { Caption = 'State US Tax Account'; }
@@ -42,42 +40,25 @@ page 73002 "SpyCreateJournalLineAPI"
                 field(vatArea; Rec.vatArea) { Caption = 'vatArea'; }
                 field(taxTitle; Rec."Tax Title") { Caption = 'TaxTitle'; }
                 field(taxPercentage; Rec."tax Percentage") { Caption = 'Tax Percent'; }
-
                 field(dueDate; Rec."Due Date") { Caption = 'Due Date'; }
                 field(paymentTerm; Rec."Payment Terms Code") { Caption = 'Payment Terms Code'; }
-
                 field(cashDiscountDate; Rec."Cash Discount Date") { Caption = 'Cash Discount Date'; }
-
                 field(custGroup; Rec.custGroup) { Caption = 'custGroup'; }
-
                 part(dimensions; SpyJournalDimensionPart)
                 {
                     EntityName = 'spyDimension';
                     EntitySetName = 'spyDimensions';
                     SubPageLink = "Spy Journal System Id" = field(SystemId);
                 }
-
-
                 field(systemCreatedAt; Rec.SystemCreatedAt)
                 {
                     Caption = 'SystemCreatedAt';
                 }
-                field(systemCreatedBy; Rec.SystemCreatedBy)
-                {
-                    Caption = 'SystemCreatedBy';
-                }
-                field(systemId; Rec.SystemId)
-                {
-                    Caption = 'SystemId';
-                }
-                field(systemModifiedAt; Rec.SystemModifiedAt)
-                {
-                    Caption = 'SystemModifiedAt';
-                }
-                field(systemModifiedBy; Rec.SystemModifiedBy)
-                {
-                    Caption = 'SystemModifiedBy';
-                }
+                field(systemCreatedBy; Rec.SystemCreatedBy) { Caption = 'SystemCreatedBy'; }
+                field(systemId; Rec.SystemId) { Caption = 'SystemId'; }
+                field(systemModifiedAt; Rec.SystemModifiedAt) { Caption = 'SystemModifiedAt'; }
+                field(systemModifiedBy; Rec.SystemModifiedBy) { Caption = 'SystemModifiedBy'; }
+                field(BatchId; Rec."Spy Batch Id") { }
             }
         }
     }
@@ -112,12 +93,9 @@ page 73002 "SpyCreateJournalLineAPI"
             'supplier':
                 Rec."Account Type" := Rec."Account Type"::Vendor;
         end;
-
     end;
 
     var
         //gDocumentType: Text;
         gcountryType: Text;
-
-
 }

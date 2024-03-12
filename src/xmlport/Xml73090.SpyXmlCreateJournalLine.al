@@ -477,6 +477,7 @@ xmlport 73090 "SpyXmlCreateJournalLine"
                     TempDimensionBuffer.DeleteAll();
                     EntryNo := 1;
                     journalLine.Modify();
+                    /*
                     // Set Sales/Purch without VAT
                     if (journalLine."Account Type" = journalLine."Account Type"::Customer) or
                         (journalLine."Account Type" = journalLine."Account Type"::Vendor) then begin
@@ -493,6 +494,7 @@ xmlport 73090 "SpyXmlCreateJournalLine"
                         journalLine."Sales/Purch. (LCY)" := UdenMoms;
                         journalLine.Modify();
                     end;
+                    */
                     // Kopier debitor dimensioner ud på alle poster i transaktion
                     if (journalLine."Account Type" = journalLine."Account Type"::Customer) then begin
                         gDefaultDimension.Setfilter("Table ID", '18');

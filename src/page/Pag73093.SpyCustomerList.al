@@ -116,6 +116,14 @@ page 73093 "Spy Customer List"
                 {
                     ApplicationArea = All;
                     ToolTip = ' ';
+                    
+                    trigger OnValidate()
+                    var
+                        s: record "Salesperson/Purchaser";
+                    begin
+                        if not s.Get(Rec."Salesperson Code") then
+                            Rec."Salesperson Code" := '';
+                    end;
                 }
                 field("Shipment Method Code"; Rec."Shipment Method Code")
                 {

@@ -20,7 +20,17 @@ codeunit 73001 "Spy Create Journal Line Imp"
         exit('Pong');
     end;
 
-    procedure commitToJournalLine(): Text
+    procedure uploadDocument(DocumentType: text; DocNo: Text; Data: Text): Text
+    var
+        SpySetup: Record "Spy Setup";
+
+    begin
+        SpySetup.Get();
+        exit('Succes');
+
+    end;
+
+    procedure commitToJournalLine(BatchId: Code[20]): Text
     var
         SpyJournalLine: Record "Spy Journal Line";
         SpyErrors: Record "Spy Error";
@@ -32,7 +42,10 @@ codeunit 73001 "Spy Create Journal Line Imp"
         Clear(CurrentCount);
         Clear(PostedCount);
         Clear(ErrorsCollectedTxt);
-        SpyErrors.DeleteAll();
+        //SpyErrors.DeleteAll();
+        SpyJournalLine.SetRange("Spy Status", SpyJournalLine."Spy Status"::New);
+        if BatchId <> '' then
+            SpyJournalLine.setrange("Spy Batch Id", BatchId);
 
         if SpyJournalLine.FindSet() then
             repeat
@@ -42,6 +55,8 @@ codeunit 73001 "Spy Create Journal Line Imp"
                 if (CurrentCount = SpyJournalLine.Count()) and (PostedCount <> SpyJournalLine.Count()) then
                     ErrorsCollectedTxt := GetErrorBlobMessage(SpyJournalLine);
             until SpyJournalLine.Next() = 0;
+
+        SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Committed);
 
         if PostedCount = SpyJournalLine.Count() then begin
             //Return SUCESS
@@ -91,7 +106,6 @@ codeunit 73001 "Spy Create Journal Line Imp"
         SpyError: Record "Spy Error";
         PostedMessageLbl: label 'Posted %1 lines to Journal: %2 with Description: %3', comment = '%1, %2, %3';
     begin
-
         if ReadyToPost then begin
             GenJournalLine.SetRange(Description, SpyJournalLine.Description);
             if GenJournalLine.FindSet() then
@@ -103,8 +117,10 @@ codeunit 73001 "Spy Create Journal Line Imp"
                 repeat
                     GenJournalLine.Delete(true);
                 until GenJournalLine.Next() = 0;
-
         end;
+
+        SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Deleted);
+        /*
         //Delete Temp Spy Journal Lines
         if SpyJournalLine.FindSet() then begin
             SpyJournalLine.DeleteAll();
@@ -122,7 +138,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
             SpyError.DeleteAll();
             Commit();
         end;
-
+        */
         exit(PostMessage);
     end;
 
@@ -153,25 +169,27 @@ codeunit 73001 "Spy Create Journal Line Imp"
         SpyJournalLine.SetRange(Description, SpyJournalLine.Description);
         if SpyJournalLine.FindSet() then
             repeat
-                SpyJournalLine.Delete();
-                Commit();
+                //SpyJournalLine.Delete();
+                //Commit();
+                SpyJournalLine."Spy Status" := SpyJournalLine."Spy Status"::Deleted;
+                SpyJournalLine.Modify();
                 SpyJournalLinesCount += 1;
             until SpyJournalLine.Next() = 0;
 
+
         //Delete All Errors Alwyase
         if SpyErrors.FindSet() then begin
-            SpyErrors.DeleteAll();
-            Commit();
+            //SpyErrors.DeleteAll();
+            //Commit();
             SpyErrorsCount += 1;
         end;
-
 
         //Delete Spy Dims
         SpyDimensions.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
         if SpyDimensions.FindSet() then
             repeat
-                SpyDimensions.Delete();
-                Commit();
+                //SpyDimensions.Delete();
+                //Commit();
                 SpyDimensionsCount += 1;
             until SpyDimensions.Next() = 0;
 
@@ -188,12 +206,14 @@ codeunit 73001 "Spy Create Journal Line Imp"
         SpyDimensions: record "Spy Dimension";
         SpyError: Record "Spy Error";
     begin
-        if SpyJournalLine.FindSet() then
-            SpyJournalLine.DeleteAll();
-        if SpyDimensions.FindSet() then
-            SpyDimensions.DeleteAll();
-        if SpyError.FindSet() then
-            spyError.DeleteAll();
+        SpyJournalLine.SetFilter("Spy Status", '<>%1', SpyJournalLine."Spy Status"::Deleted);
+        SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Deleted);
+        /*
+        SpyDimensions.Reset();
+        SpyDimensions.DeleteAll();
+        SpyError.Reset();
+        SpyError.DeleteAll();
+        */
     end;
 
 }

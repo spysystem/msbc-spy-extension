@@ -194,7 +194,7 @@ page 73004 "Spy Journal Lines"
                 var
                     SpyCreateJournalLine: codeunit "Spy Create Journal Line Imp";
                 begin
-                    SpyCreateJournalLine.commitToJournalLine();
+                    SpyCreateJournalLine.commitToJournalLine('');
                 end;
             }
 

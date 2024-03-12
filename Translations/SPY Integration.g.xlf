@@ -3158,6 +3158,21 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Spy Led Jour Batch - Control Template Type - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Enum 4114374083 - EnumValue 760486576 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Committed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum SpyJournalLineStatus - EnumValue Committed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4114374083 - EnumValue 2703452831 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Deleted</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum SpyJournalLineStatus - EnumValue Deleted - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4114374083 - EnumValue 4137051400 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>New</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum SpyJournalLineStatus - EnumValue New - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PermissionSet 1124956244 - Property 2879900210" maxwidth="30" size-unit="char" translate="yes" xml:space="preserve">
           <source>Spy Permissions</source>
           <note from="Developer" annotates="general" priority="2"></note>

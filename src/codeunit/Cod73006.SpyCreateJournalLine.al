@@ -3,7 +3,6 @@
 /// </summary>
 codeunit 73006 SpyCreateJournalLine
 {
-
     trigger OnRun()
     begin
 
@@ -12,7 +11,13 @@ codeunit 73006 SpyCreateJournalLine
     [ServiceEnabled]
     procedure commitToJournalLine(): Text
     begin
-        exit(Implementation.commitToJournalLine());
+        exit(Implementation.commitToJournalLine(''));
+    end;
+
+    [ServiceEnabled]
+    procedure committoJournalLineWithBatch(BatchId: Code[20]): Text
+    begin
+        exit(Implementation.commitToJournalLine(BatchId));
     end;
 
     procedure CreateJournalLine(VAR JournalLineList: XmlPort SpyXmlCreateJournalLine) Return: Text[50]
@@ -32,13 +37,8 @@ codeunit 73006 SpyCreateJournalLine
     end;
 
     procedure uploadDocument(DocumentType: text; DocNo: Text; Data: Text): Text
-    var
-        SpySetup: Record "Spy Setup";
-
     begin
-        SpySetup.Get();
-        exit(Data);
-
+        exit(Implementation.uploadDocument(DocumentType, DocNo, Data));
     end;
 
     procedure ping(): Text
@@ -49,10 +49,6 @@ codeunit 73006 SpyCreateJournalLine
 
     [ServiceEnabled]
     procedure deleteAllEntries(): Text
-    var
-        SpyJournalLine: Record "Spy Journal Line";
-        SpyDimensions: record "Spy Dimension";
-        SpyError: Record "Spy Error";
     begin
         exit(Implementation.deleteAllEntries());
     end;
@@ -64,5 +60,4 @@ codeunit 73006 SpyCreateJournalLine
     local procedure OnBeforeExportJournalLine(var SpyXmlCreateJournalLine: XmlPort spyXmlCreateJournalLine; var Return: Text[50]; var IsHandled: Boolean)
     begin
     end;
-
 }
