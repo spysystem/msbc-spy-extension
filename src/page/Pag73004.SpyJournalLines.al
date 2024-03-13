@@ -16,6 +16,8 @@ page 73004 "Spy Journal Lines"
         {
             repeater(General)
             {
+                field("Spy Batch Id"; Rec."Spy Batch Id") { }
+                field("Spy Status"; Rec."Spy Status") { }
                 field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = All;

@@ -918,11 +918,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Customer List - Control Price Calculation Method - Property ToolTip</note>
         </trans-unit>
-        <trans-unit id="Page 2874899368 - Control 4188138751 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Special Prices &amp; Discounts</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Customer List - Control PriceAndLineDisc - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Page 2874899368 - Control 304272296 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
           <note from="Developer" annotates="general" priority="2"></note>

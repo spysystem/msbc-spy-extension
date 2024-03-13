@@ -9,7 +9,8 @@ page 73093 "Spy Customer List"
     {
         area(Content)
         {
-            group(General)
+            //group(General)
+            repeater(General)
             {
                 field("No."; Rec."No.")
                 {
@@ -116,7 +117,7 @@ page 73093 "Spy Customer List"
                 {
                     ApplicationArea = All;
                     ToolTip = ' ';
-                    
+
                     trigger OnValidate()
                     var
                         s: record "Salesperson/Purchaser";
@@ -400,7 +401,7 @@ page 73093 "Spy Customer List"
                     ApplicationArea = All;
                     ToolTip = ' ';
                 }
-
+                /*
                 part(PriceAndLineDisc; "Sales Pr. & Line Disc. Part")
                 {
                     ApplicationArea = All;
@@ -409,6 +410,7 @@ page 73093 "Spy Customer List"
                               "Sales Type" = CONST(Customer);
                     Visible = true;
                 }
+                */
             }
         }
     }
