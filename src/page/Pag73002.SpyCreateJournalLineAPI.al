@@ -58,7 +58,8 @@ page 73002 "SpyCreateJournalLineAPI"
                 field(systemId; Rec.SystemId) { Caption = 'SystemId'; }
                 field(systemModifiedAt; Rec.SystemModifiedAt) { Caption = 'SystemModifiedAt'; }
                 field(systemModifiedBy; Rec.SystemModifiedBy) { Caption = 'SystemModifiedBy'; }
-                field(BatchId; Rec."Spy Batch Id") { }
+                field(spyBatchid; Rec."Spy Batch Id") { }
+                field(spyStatus; Rec."Spy Status") { }
             }
         }
     }
