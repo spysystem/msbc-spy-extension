@@ -792,8 +792,12 @@ table 73090 "Spy Journal Line"
         DayConvFailedLbl: Label '[ValidatePostingDate] Day convertion failed: %1', Comment = '%1 = Day sent from SPY';
         MonthConvFailedLbl: Label '[ValidatePostingDate] Month convertion failed: %1', Comment = '%1 = Month sent from SPY';
         YearConvFailedLbl: Label '[ValidatePostingDate] Year convertion failed: %1', Comment = '%1 = Year sent from SPY';
+        day: integer;
+        month: Integer;
+        year: Integer;
+        PostingDate: Date;
     begin
-        clear(gPostingDate);
+        clear(PostingDate);
         if not evaluate(day, CopyStr(Format(Rec."Posting Date"), 9, 2)) then
             GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, CopyStr(Format(Rec."Posting Date"), 9, 2)));
         if not evaluate(month, CopyStr(Format(Rec."Posting Date"), 6, 2)) then
@@ -801,11 +805,14 @@ table 73090 "Spy Journal Line"
         if not evaluate(year, CopyStr(Format(Rec."Posting Date"), 1, 4)) then
             GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Posting Date"), 1, 4)));
 
-        gPostingDate := DMY2Date(day, month, year);
-        GenJournalLine.Validate("Posting Date", gPostingDate);
+        if (day > 0) and (month > 0) and (year > 0) then begin
+            PostingDate := DMY2Date(day, month, year);
+            GenJournalLine.Validate("Posting Date", PostingDate);
+        end;
 
         if ErrorFoundInErrorTextList('[ValidatePostingDate]') then
-            exit(false) else
+            exit(false)
+        else
             exit(true);
     end;
 
@@ -814,8 +821,11 @@ table 73090 "Spy Journal Line"
         DayConvFailedLbl: Label '[ValidateDueDate] Day convertion failed: %1', Comment = '%1 = Day sent from SPY';
         MonthConvFailedLbl: Label '[ValidateDueDate] Month convertion failed: %1', Comment = '%1 = Month sent from SPY';
         YearConvFailedLbl: Label '[ValidateDueDate] Year convertion failed: %1', Comment = '%1 = Year sent from SPY';
+        day: integer;
+        month: Integer;
+        year: Integer;
+        DueDate: Date;
     begin
-        clear(gPostingDate);
         if not evaluate(day, CopyStr(Format(Rec."Due Date"), 9, 2)) then
             GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, CopyStr(Format(Rec."Due Date"), 9, 2)));
         if not evaluate(month, CopyStr(Format(Rec."Due Date"), 6, 2)) then
@@ -823,11 +833,14 @@ table 73090 "Spy Journal Line"
         if not evaluate(year, CopyStr(Format(Rec."Due Date"), 1, 4)) then
             GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Due Date"), 1, 4)));
 
-        gDueDate := DMY2Date(day, month, year);
-        GenJournalLine.Validate("Due Date", gDueDate);
+        if (day > 0) and (month > 0) and (year > 0) then begin
+            DueDate := DMY2Date(day, month, year);
+            GenJournalLine.Validate("Due Date", DueDate);
+        end;
 
         if ErrorFoundInErrorTextList('[ValidateDueDate]') then
-            exit(false) else
+            exit(false)
+        else
             exit(true);
     end;
 
@@ -1102,13 +1115,11 @@ table 73090 "Spy Journal Line"
         FieldRefBank: FieldRef;
         StateTax: Text[20];
         PostingType: text;
-        day: integer;
-        month: Integer;
-        year: Integer;
+        //day: integer;
+        //month: Integer;
+        //year: Integer;
         gDimEntryNo: Integer;
         GlobalFailOverCount: Integer;
         ExclVAT: Decimal;
         GlobalErrorTextList: List of [Text];
-        gPostingDate: Date;
-        gDueDate: Date;
 }
