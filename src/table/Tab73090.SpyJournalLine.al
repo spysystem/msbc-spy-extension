@@ -824,27 +824,41 @@ table 73090 "Spy Journal Line"
         day: integer;
         month: Integer;
         year: Integer;
+        dayText, monthText, yearText : Text;
         DueDate: Date;
     begin
-        if StrLen(Rec."Due Date") >= 10 then begin
-            if not evaluate(day, CopyStr(Format(Rec."Due Date"), 9, 2)) then
-                GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, CopyStr(Format(Rec."Due Date"), 9, 2)));
-            if not evaluate(month, CopyStr(Format(Rec."Due Date"), 6, 2)) then
-                GlobalErrorTextList.Add(StrSubstNo(MonthConvFailedLbl, CopyStr(Format(Rec."Due Date"), 6, 2)));
-            if not evaluate(year, CopyStr(Format(Rec."Due Date"), 1, 4)) then
-                GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Due Date"), 1, 4)));
+        dayText := CopyStr(Rec."Due Date", 9, 2);
+        monthText := CopyStr(Rec."Due Date", 6, 2);
+        yearText := CopyStr(Rec."Due Date", 1, 4);
+        /*
+        if not evaluate(day, CopyStr(Format(Rec."Due Date"), 9, 2)) then
+            GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, CopyStr(Format(Rec."Due Date"), 9, 2)));
+        if not evaluate(month, CopyStr(Format(Rec."Due Date"), 6, 2)) then
+            GlobalErrorTextList.Add(StrSubstNo(MonthConvFailedLbl, CopyStr(Format(Rec."Due Date"), 6, 2)));
+        if not evaluate(year, CopyStr(Format(Rec."Due Date"), 1, 4)) then
+            GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Due Date"), 1, 4)));
+        */
+        if dayText <> '' then
+            if not evaluate(day, dayText) then
+                GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, dayText));
 
-            if (day > 0) and (month > 0) and (year > 0) then begin
-                DueDate := DMY2Date(day, month, year);
-                GenJournalLine.Validate("Due Date", DueDate);
-            end;
+        if monthText <> '' then
+            if not evaluate(month, monthText) then
+                GlobalErrorTextList.Add(StrSubstNo(MonthConvFailedLbl, monthText));
 
-            if ErrorFoundInErrorTextList('[ValidateDueDate]') then
-                exit(false)
-            else
-                exit(true);
+        if yearText <> '' then
+            if not evaluate(year, yearText) then
+                GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, yearText));
+
+        if (day > 0) and (month > 0) and (year > 0) then begin
+            DueDate := DMY2Date(day, month, year);
+            GenJournalLine.Validate("Due Date", DueDate);
         end;
-        exit(true);
+
+        if ErrorFoundInErrorTextList('[ValidateDueDate]') then
+            exit(false)
+        else
+            exit(true);
     end;
 
     /// <summary>
