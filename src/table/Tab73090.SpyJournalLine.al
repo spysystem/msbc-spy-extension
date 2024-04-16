@@ -428,7 +428,7 @@ table 73090 "Spy Journal Line"
             GetBankAccount();
             IsolateSpyPaymentId();
             ValidatePaymentTerms();
-            ValidateDueDate();
+            //ValidateDueDate();
         end;
 
         if not GenJournalLine.Insert(true) then
