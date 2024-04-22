@@ -56,8 +56,8 @@ codeunit 73001 "Spy Create Journal Line Imp"
                     ErrorsCollectedTxt := GetErrorBlobMessage(SpyJournalLine);
             until SpyJournalLine.Next() = 0;
 
-        SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Committed);
-
+        //SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Committed);
+        Message('Antal: %1, postantal %2', PostedCount, SpyJournalLine.Count());
         if PostedCount = SpyJournalLine.Count() then begin
             //Return SUCESS
             if GuiAllowed then
