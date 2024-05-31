@@ -36,6 +36,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
         SpyErrors: Record "Spy Error";
         CurrentCount: Integer;
         PostedCount: Integer;
+        NewCount: Integer;
         ErrorsCollectedTxt: Text;
         ErrorFoundLbl: label 'Erorrs found %1. Continue and delete SPY data?', comment = '%1 = Errors';
     begin
@@ -47,18 +48,27 @@ codeunit 73001 "Spy Create Journal Line Imp"
         if BatchId <> '' then
             SpyJournalLine.setrange("Spy Batch Id", BatchId);
 
-        if SpyJournalLine.FindSet() then
+        NewCount := SpyJournalLine.Count;
+
+        if SpyJournalLine.FindSet(true) then
             repeat
                 CurrentCount += 1;
-                if SpyJournalLine.PostTempSpyJournalLines() then //THIS IS MOVING sypJournalLines to General Journal.
+                if SpyJournalLine.PostTempSpyJournalLines() then begin //THIS IS MOVING sypJournalLines to General Journal.
                     PostedCount += 1;
-                if (CurrentCount = SpyJournalLine.Count()) and (PostedCount <> SpyJournalLine.Count()) then
+                    SpyJournalLine."Spy Status" := SpyJournalLine."Spy Status"::Committed;
+                    SpyJournalLine.Modify();
+                end else begin
+                    SpyJournalLine."Spy Status" := SpyJournalLine."Spy Status"::Error;
+                    SpyJournalLine.Modify();
+                end;
+                //if (CurrentCount = SpyJournalLine.Count()) and (PostedCount <> SpyJournalLine.Count()) then
+                if (CurrentCount = NewCount) and (PostedCount <> NewCount) then
                     ErrorsCollectedTxt := GetErrorBlobMessage(SpyJournalLine);
             until SpyJournalLine.Next() = 0;
 
         //SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Committed);
-        Message('Antal: %1, postantal %2', PostedCount, SpyJournalLine.Count());
-        if PostedCount = SpyJournalLine.Count() then begin
+        //if PostedCount = SpyJournalLine.Count() then begin
+        if PostedCount = NewCount then begin
             //Return SUCESS
             if GuiAllowed then
                 Message(CleanSpyData(SpyJournalLine, true));
@@ -107,9 +117,11 @@ codeunit 73001 "Spy Create Journal Line Imp"
         PostedMessageLbl: label 'Posted %1 lines to Journal: %2 with Description: %3', comment = '%1, %2, %3';
     begin
         if ReadyToPost then begin
-            GenJournalLine.SetRange(Description, SpyJournalLine.Description);
+            //GenJournalLine.SetRange(Description, SpyJournalLine.Description);
+            GenJournalLine.SetRange("Document No.", SpyJournalLine."Document No.");
             if GenJournalLine.FindSet() then
-                PostMessage := StrSubstNo(PostedMessageLbl, GenJournalLine.Count(), GenJournalLine."Journal Template Name", GenJournalLine.Description);
+                //PostMessage := StrSubstNo(PostedMessageLbl, GenJournalLine.Count(), GenJournalLine."Journal Template Name", GenJournalLine.Description);
+                PostMessage := StrSubstNo(PostedMessageLbl, GenJournalLine.Count(), GenJournalLine."Journal Batch Name", GenJournalLine.Description);
         end
         else begin
             GenJournalLine.SetFilter(Description, '%1', SpyJournalLine.Description);
@@ -117,9 +129,10 @@ codeunit 73001 "Spy Create Journal Line Imp"
                 repeat
                     GenJournalLine.Delete(true);
                 until GenJournalLine.Next() = 0;
+            SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Deleted);
         end;
 
-        SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Deleted);
+        //SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Deleted);
         /*
         //Delete Temp Spy Journal Lines
         if SpyJournalLine.FindSet() then begin

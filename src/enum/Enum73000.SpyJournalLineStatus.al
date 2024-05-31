@@ -1,7 +1,7 @@
 enum 73000 SpyJournalLineStatus
 {
     Extensible = true;
-    
+
     value(0; New)
     {
         Caption = 'New';
@@ -13,5 +13,9 @@ enum 73000 SpyJournalLineStatus
     value(2; Deleted)
     {
         Caption = 'Deleted';
+    }
+    value(3; Error)
+    {
+        Caption = 'Error';
     }
 }

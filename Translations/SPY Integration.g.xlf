@@ -233,6 +233,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Amount (LCY) - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 1159403147 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Attachment</source>
+          <note from="Developer" annotates="general" priority="2">Bilag</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Attachment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Field 1024873738 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Attachment Name</source>
+          <note from="Developer" annotates="general" priority="2">Bilagsnavn</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Attachment Name - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Field 2996033180 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Pmt. Discount Date</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -597,6 +607,96 @@
           <source>Erorrs found %1. Continue and delete SPY data?</source>
           <note from="Developer" annotates="general" priority="2">%1 = Errors</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit Spy Create Journal Line Imp - Method commitToJournalLine - NamedType ErrorFoundLbl</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>edkGenJournalLine</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 1007289100 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Account No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control accountNo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 1121446808 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Amount</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control amount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 1826362222 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Amount (LCY)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control amountLCY - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 1808640270 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Currency Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control currencyCode - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 4232699882 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 73228906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control documentNo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 305869689 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control documentType - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 2675196190 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Batch Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control journalBatchName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 2958552522 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Template Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control journalTemplateName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 1260828904 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control postingDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 1421298788 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SystemCreatedAt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control systemCreatedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 591346850 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SystemCreatedBy</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control systemCreatedBy - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 3427895715 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System-Created Entry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control systemCreatedEntry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 3092263724 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SystemId</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control systemId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 4098519211 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SystemModifiedAt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control systemModifiedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 1436117145 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SystemModifiedBy</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control systemModifiedBy - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2981891345 - Control 1501060381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT %</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control vat - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3926563785 - Control 636392376 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
@@ -1482,6 +1582,16 @@
           <source>Clean Up</source>
           <note from="Developer" annotates="general" priority="2">DAN="Ryd kladde"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action Clean Up - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Action 1190981817 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Download Attacment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action EDKDownloadAttachment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 39425386 - Action 2618750580 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Upload Attacment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action EDKUploadAttachment - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 39425386 - Action 2282416948 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Post SPY Lines</source>
@@ -3162,6 +3272,11 @@
           <source>Deleted</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum SpyJournalLineStatus - EnumValue Deleted - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4114374083 - EnumValue 2248886284 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum SpyJournalLineStatus - EnumValue Error - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 4114374083 - EnumValue 4137051400 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>New</source>

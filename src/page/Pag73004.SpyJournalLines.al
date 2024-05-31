@@ -237,9 +237,53 @@ page 73004 "Spy Journal Lines"
                     spycr.CleanUpWithGUIAllowed(Rec);
                 end;
             }
+            action(EDKDownloadAttachment)
+            {
+                ApplicationArea = all;
+                Caption = 'Download Attacment';
+                Image = ExportAttachment;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction();
+                var
+                    FileMgt: Codeunit "File Management";
+                    ins: InStream;
+                begin
+                    Rec.CalcFields(Attachment);
+                    if Rec.Attachment.HasValue then begin
+                        Rec.Attachment.CreateInStream(ins);
+                        DownloadFromStream(ins, '', '', '', Rec."Attachment Name");
+                    end;
+                end;
+            }
+            action(EDKUploadAttachment)
+            {
+                ApplicationArea = all;
+                Caption = 'Upload Attacment';
+                Image = Attachments;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction();
+                var
+                    ins: InStream;
+                    outs: OutStream;
+                    Filename: Text;
+                    FromFilter: Text;
+                begin
+                    FromFilter := 'All Files (*.*)|*.*';
+                    UploadIntoStream('Upload', '', FromFilter, Filename, ins);
+                    if Filename <> '' then begin
+                        Rec."Attachment Name" := Filename;
+                        Rec.Attachment.CreateOutStream(outs);
+                        CopyStream(outs, ins);
+                        Rec.Modify();
+                    end;
+                end;
+            }
         }
-
     }
-
-
 }

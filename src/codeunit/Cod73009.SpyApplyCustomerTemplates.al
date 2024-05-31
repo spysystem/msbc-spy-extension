@@ -9,26 +9,27 @@ codeunit 73009 "SpyApplyCustomerTemplates"
         CustomerRecordRef: RecordRef;
         Country: Text;
     begin
-        lCustomer.GET(Customer);
-        CustomerRecordRef.GETTABLE(lCustomer);
-        Country := lCustomer."Country/Region Code";
+        if lCustomer.GET(Customer) then begin
+            CustomerRecordRef.GETTABLE(lCustomer);
+            Country := lCustomer."Country/Region Code";
 
-        IF ConfigTemplateHeader.GET('SPYCUS') THEN BEGIN
-            ConfigTemplateManagement.UpdateRecord(ConfigTemplateHeader, CustomerRecordRef);
-            DimensionsTemplate.InsertDimensionsFromTemplates(ConfigTemplateHeader, lCustomer."No.", DATABASE::Customer);
+            IF ConfigTemplateHeader.GET('SPYCUS') THEN BEGIN
+                ConfigTemplateManagement.UpdateRecord(ConfigTemplateHeader, CustomerRecordRef);
+                DimensionsTemplate.InsertDimensionsFromTemplates(ConfigTemplateHeader, lCustomer."No.", DATABASE::Customer);
 
-        END;
-        IF ConfigTemplateHeader.GET('SPYCUS-' + UpperCase(CountryType)) THEN BEGIN
-            ConfigTemplateManagement.UpdateRecord(ConfigTemplateHeader, CustomerRecordRef);
-            DimensionsTemplate.InsertDimensionsFromTemplates(ConfigTemplateHeader, lCustomer."No.", DATABASE::Customer);
+            END;
+            IF ConfigTemplateHeader.GET('SPYCUS-' + UpperCase(CountryType)) THEN BEGIN
+                ConfigTemplateManagement.UpdateRecord(ConfigTemplateHeader, CustomerRecordRef);
+                DimensionsTemplate.InsertDimensionsFromTemplates(ConfigTemplateHeader, lCustomer."No.", DATABASE::Customer);
 
-        END;
+            END;
 
-        IF ConfigTemplateHeader.GET('SPYCUS-' + UpperCase(Country)) THEN BEGIN
-            ConfigTemplateManagement.UpdateRecord(ConfigTemplateHeader, CustomerRecordRef);
-            DimensionsTemplate.InsertDimensionsFromTemplates(ConfigTemplateHeader, lCustomer."No.", DATABASE::Customer);
+            IF ConfigTemplateHeader.GET('SPYCUS-' + UpperCase(Country)) THEN BEGIN
+                ConfigTemplateManagement.UpdateRecord(ConfigTemplateHeader, CustomerRecordRef);
+                DimensionsTemplate.InsertDimensionsFromTemplates(ConfigTemplateHeader, lCustomer."No.", DATABASE::Customer);
 
-        END;
+            END;
+        end;
     end;
 
 }

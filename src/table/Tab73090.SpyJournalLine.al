@@ -162,6 +162,14 @@ table 73090 "Spy Journal Line"
         {
             Caption = 'Ready To Post', comment = 'DAN="Klar til bogf."';
         }
+        field(2000; Attachment; Blob)
+        {
+            Caption = 'Attachment', Comment = 'Bilag';
+        }
+        field(2001; "Attachment Name"; Text[250])
+        {
+            Caption = 'Attachment Name', Comment = 'Bilagsnavn';
+        }
         field(73000; "Spy Batch Id"; Code[20])
         {
             Caption = 'Spy Batch Id', Locked = true;
@@ -439,12 +447,29 @@ table 73090 "Spy Journal Line"
         ApllyCustVendDimensions();
         UpdateGlobalDimensions();
 
+        if Rec.Attachment.HasValue then
+            AddIncommingDoc();
+
         if Rec.CreateSypErrorRecords() then begin
             Spylog.UpdatelogWithErrors(Rec."Entry No.", GlobalErrorTextList);
             exit(false);
         end;
         Spylog.UpdateLogWithSucess(Rec."Entry No.");
         exit(true);
+    end;
+
+    local procedure AddIncommingDoc()
+    var
+        IncomingDocumentAttachment: Record "Incoming Document Attachment";
+        IncomingDocument: Record "Incoming Document";
+        ImpAtt: Codeunit "Import Attachment - Inc. Doc.";
+        TempBlob: Codeunit "Temp Blob";
+        MainRecordRef: RecordRef;
+    begin
+        TempBlob.FromRecord(Rec, 2000);
+        MainRecordRef.GetTable(GenJournalLine);
+        IncomingDocumentAttachment.SetFiltersFromMainRecord(MainRecordRef, IncomingDocumentAttachment);
+        ImpAtt.ImportAttachment(IncomingDocumentAttachment, Rec."Attachment Name", TempBlob);
     end;
 
     /// <summary>

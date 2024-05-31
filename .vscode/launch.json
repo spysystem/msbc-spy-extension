@@ -7,7 +7,7 @@
             "request": "launch",
             "environmentType": "Sandbox",
             "environmentName": "SPY-Udvikling",
-            "startupObjectId": 22,
+            "startupObjectId": 73004,
             "breakOnError": "All",
             "breakOnRecordWrite": "None",
             "launchBrowser": true,
@@ -16,6 +16,24 @@
             "longRunningSqlStatementsThreshold": 500,
             "numberOfSqlStatements": 10,
             "tenant": "33f54721-646b-403b-ab17-3ba5df02a1a5",
+            "schemaUpdateMode": "ForceSync"
+        },
+        {
+            "name": "SPY-DEV",
+            "type": "al",
+            "request": "launch",
+            "environmentType": "Sandbox",
+            "environmentName": "SPYDEV_ANP_240320",
+            "startupObjectId": 73004,
+            "startupObjectType": "Page",
+            "breakOnError": "All",
+            "breakOnRecordWrite": "None",
+            "launchBrowser": true,
+            "enableSqlInformationDebugger": true,
+            "enableLongRunningSqlStatements": true,
+            "longRunningSqlStatementsThreshold": 500,
+            "numberOfSqlStatements": 10,
+            "tenant": "55c0062b-0eca-44b0-9ca1-c47984945949",
             "schemaUpdateMode": "ForceSync"
         }
         // ,{
