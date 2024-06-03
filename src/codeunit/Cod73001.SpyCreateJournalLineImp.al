@@ -30,7 +30,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
 
     end;
 
-    procedure commitToJournalLine(BatchId: Code[20]): Text
+    procedure commitToJournalLine(BatchId: Code[20], var Base64EncodedFileData: BigText, var FileName: Text[250]): Text
     var
         SpyJournalLine: Record "Spy Journal Line";
         SpyErrors: Record "Spy Error";
@@ -53,7 +53,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
         if SpyJournalLine.FindSet(true) then
             repeat
                 CurrentCount += 1;
-                if SpyJournalLine.PostTempSpyJournalLines() then begin //THIS IS MOVING sypJournalLines to General Journal.
+                if SpyJournalLine.PostTempSpyJournalLines(Base64EncodedFileData, FileName) then begin //THIS IS MOVING sypJournalLines to General Journal.
                     PostedCount += 1;
                     SpyJournalLine."Spy Status" := SpyJournalLine."Spy Status"::Committed;
                 end else begin
@@ -93,7 +93,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
         ErrorDescInStream: InStream;
         CollectedErrors: Text;
     begin
-        //Return Error Text from Blob  
+        //Return Error Text from Blob
         SpyErrors.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
         if SpyErrors.FindFirst() then
             repeat
@@ -145,7 +145,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
             Commit();
         end;
 
-        //Delete SpyErrors 
+        //Delete SpyErrors
         if SpyError.FindSet() then begin
             SpyError.DeleteAll();
             Commit();

@@ -377,7 +377,7 @@ table 73090 "Spy Journal Line"
     /// </summary>
     /// <returns>Return value of type Boolean.</returns>
     [ServiceEnabled]
-    procedure PostTempSpyJournalLines(): Boolean
+    procedure PostTempSpyJournalLines(var Base64EncodedFileData: BigText, var FileName: Text[250]): Boolean
     var
         GeneralLedgerSetup: record "General Ledger Setup";
         SpyLog: Record SpyLog;
@@ -447,8 +447,8 @@ table 73090 "Spy Journal Line"
         ApllyCustVendDimensions();
         UpdateGlobalDimensions();
 
-        if Rec.Attachment.HasValue then
-            AddIncommingDoc();
+        if FileName <> '' then
+            AddIncommingDoc(Base64EncodedFileData, FileName);
 
         if Rec.CreateSypErrorRecords() then begin
             Spylog.UpdatelogWithErrors(Rec."Entry No.", GlobalErrorTextList);
@@ -458,18 +458,21 @@ table 73090 "Spy Journal Line"
         exit(true);
     end;
 
-    local procedure AddIncommingDoc()
+    local procedure AddIncommingDoc(var Base64EncodedFileData: BigText, var FileName: Text[250])
     var
         IncomingDocumentAttachment: Record "Incoming Document Attachment";
         IncomingDocument: Record "Incoming Document";
         ImpAtt: Codeunit "Import Attachment - Inc. Doc.";
         TempBlob: Codeunit "Temp Blob";
         MainRecordRef: RecordRef;
+        TempOutStream: OutStream;
     begin
-        TempBlob.FromRecord(Rec, 2000);
+        TempBlob.CreateOutStream(TempOutStream);
+        Base64Convert.FromBase64(Base64EncodedFileData, TempOutStream);
+
         MainRecordRef.GetTable(GenJournalLine);
         IncomingDocumentAttachment.SetFiltersFromMainRecord(MainRecordRef, IncomingDocumentAttachment);
-        ImpAtt.ImportAttachment(IncomingDocumentAttachment, Rec."Attachment Name", TempBlob);
+        ImpAtt.ImportAttachment(IncomingDocumentAttachment, FileName, TempBlob);
     end;
 
     /// <summary>
@@ -658,7 +661,7 @@ table 73090 "Spy Journal Line"
     /// <summary>
     /// SetSalesPurchExclVAT.
     /// </summary>
-    /// 
+    ///
     /// <returns>Return value of type Boolean.</returns>
     procedure SetSalesPurchExclVAT(): Boolean
     var
