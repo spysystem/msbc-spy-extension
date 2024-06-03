@@ -50,7 +50,7 @@ page 73002 "SpyCreateJournalLineAPI"
                     EntitySetName = 'spyDimensions';
                     SubPageLink = "Spy Journal System Id" = field(SystemId);
                 }
-                field(attacment; Rec.Attachment)
+                field(attachment; Rec.Attachment)
                 {
                     Caption = 'attachment', Locked = true;
                 }

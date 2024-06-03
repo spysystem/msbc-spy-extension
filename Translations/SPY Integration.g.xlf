@@ -1584,12 +1584,12 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action Clean Up - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 39425386 - Action 1190981817 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Download Attacment</source>
+          <source>Download Attachment</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action EDKDownloadAttachment - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 39425386 - Action 2618750580 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Upload Attacment</source>
+          <source>Upload Attachment</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action EDKUploadAttachment - Property Caption</note>
         </trans-unit>

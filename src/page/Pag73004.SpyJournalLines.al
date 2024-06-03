@@ -240,7 +240,7 @@ page 73004 "Spy Journal Lines"
             action(EDKDownloadAttachment)
             {
                 ApplicationArea = all;
-                Caption = 'Download Attacment';
+                Caption = 'Download Attachment';
                 Image = ExportAttachment;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -261,7 +261,7 @@ page 73004 "Spy Journal Lines"
             action(EDKUploadAttachment)
             {
                 ApplicationArea = all;
-                Caption = 'Upload Attacment';
+                Caption = 'Upload Attachment';
                 Image = Attachments;
                 Promoted = true;
                 PromotedCategory = Process;

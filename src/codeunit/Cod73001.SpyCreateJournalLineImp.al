@@ -56,11 +56,10 @@ codeunit 73001 "Spy Create Journal Line Imp"
                 if SpyJournalLine.PostTempSpyJournalLines() then begin //THIS IS MOVING sypJournalLines to General Journal.
                     PostedCount += 1;
                     SpyJournalLine."Spy Status" := SpyJournalLine."Spy Status"::Committed;
-                    SpyJournalLine.Modify();
                 end else begin
                     SpyJournalLine."Spy Status" := SpyJournalLine."Spy Status"::Error;
-                    SpyJournalLine.Modify();
                 end;
+                SpyJournalLine.Modify();
                 //if (CurrentCount = SpyJournalLine.Count()) and (PostedCount <> SpyJournalLine.Count()) then
                 if (CurrentCount = NewCount) and (PostedCount <> NewCount) then
                     ErrorsCollectedTxt := GetErrorBlobMessage(SpyJournalLine);
