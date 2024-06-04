@@ -27,7 +27,7 @@ codeunit 73006 SpyCreateJournalLine
     end;
 
     [ServiceEnabled]
-    procedure commitToJournalLineWithFileData(BatchId: Code[20]; var Base64EncodedFileData: Text; var FileName: Text[250]): Text
+    procedure commitToJournalLineWithFileData(BatchId: Code[20]; Base64EncodedFileData: Text; FileName: Text[250]): Text
     var
     begin
         exit(Implementation.commitToJournalLine(BatchId, Base64EncodedFileData, FileName));
