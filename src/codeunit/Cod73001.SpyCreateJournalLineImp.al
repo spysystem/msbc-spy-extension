@@ -30,7 +30,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
 
     end;
 
-    procedure commitToJournalLine(BatchId: Code[20], var Base64EncodedFileData: BigText, var FileName: Text[250]): Text
+    procedure commitToJournalLine(BatchId: Code[20]; var Base64EncodedFileData: Text; var FileName: Text[250]): Text
     var
         SpyJournalLine: Record "Spy Journal Line";
         SpyErrors: Record "Spy Error";

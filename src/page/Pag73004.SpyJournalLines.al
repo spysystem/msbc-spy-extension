@@ -195,8 +195,10 @@ page 73004 "Spy Journal Lines"
                 trigger OnAction()
                 var
                     SpyCreateJournalLine: codeunit "Spy Create Journal Line Imp";
+                    TempText: Text;
+                    TempText2: Text;
                 begin
-                    SpyCreateJournalLine.commitToJournalLine('');
+                    SpyCreateJournalLine.commitToJournalLine('', TempText, TempText2);
                 end;
             }
 

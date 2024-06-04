@@ -377,7 +377,7 @@ table 73090 "Spy Journal Line"
     /// </summary>
     /// <returns>Return value of type Boolean.</returns>
     [ServiceEnabled]
-    procedure PostTempSpyJournalLines(var Base64EncodedFileData: BigText, var FileName: Text[250]): Boolean
+    procedure PostTempSpyJournalLines(var Base64EncodedFileData: Text; var FileName: Text[250]): Boolean
     var
         GeneralLedgerSetup: record "General Ledger Setup";
         SpyLog: Record SpyLog;
@@ -458,16 +458,21 @@ table 73090 "Spy Journal Line"
         exit(true);
     end;
 
-    local procedure AddIncommingDoc(var Base64EncodedFileData: BigText, var FileName: Text[250])
+    local procedure AddIncommingDoc(var Base64EncodedFileData: Text; var FileName: Text[250])
     var
         IncomingDocumentAttachment: Record "Incoming Document Attachment";
         IncomingDocument: Record "Incoming Document";
         ImpAtt: Codeunit "Import Attachment - Inc. Doc.";
         TempBlob: Codeunit "Temp Blob";
+        Base64Convert: Codeunit "Base64 Convert";
         MainRecordRef: RecordRef;
         TempOutStream: OutStream;
+        TempInsStream: InStream;
+        TempText: Text;
     begin
         TempBlob.CreateOutStream(TempOutStream);
+        //Base64EncodedFileData.Read(TempInsStream);
+        //TempInsStream.ReadText(TempText);
         Base64Convert.FromBase64(Base64EncodedFileData, TempOutStream);
 
         MainRecordRef.GetTable(GenJournalLine);
