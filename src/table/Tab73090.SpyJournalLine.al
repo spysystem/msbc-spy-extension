@@ -430,6 +430,7 @@ table 73090 "Spy Journal Line"
             end;
 
             GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)"; //LCY must be set AFTER amount and AFTER validation of Currency
+            GenJournalLine."Balance (LCY)" := Rec."Amount (LCY)"; // 06-06-2024 KL
 
             ValidateTaxTitle();
             SetPostingGroups();
