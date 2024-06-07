@@ -50,14 +50,6 @@ page 73002 "SpyCreateJournalLineAPI"
                     EntitySetName = 'spyDimensions';
                     SubPageLink = "Spy Journal System Id" = field(SystemId);
                 }
-                field(attachment; Rec.Attachment)
-                {
-                    Caption = 'attachment', Locked = true;
-                }
-                field(attachmentName; Rec."Attachment Name")
-                {
-                    Caption = 'attachmentName', Locked = true;
-                }
                 field(systemCreatedAt; Rec.SystemCreatedAt)
                 {
                     Caption = 'SystemCreatedAt';

@@ -17,6 +17,7 @@ codeunit 73006 SpyCreateJournalLine
         exit(Implementation.commitToJournalLine('', TempText, TempText2));
     end;
 
+    /*
     [ServiceEnabled]
     procedure committoJournalLineWithBatch(BatchId: Code[20]): Text
     var
@@ -25,7 +26,7 @@ codeunit 73006 SpyCreateJournalLine
     begin
         exit(Implementation.commitToJournalLine(BatchId, TempText, TempText2));
     end;
-
+    */
     [ServiceEnabled]
     procedure commitToJournalLineWithFileData(BatchId: Code[20]; Base64EncodedFileData: Text; FileName: Text[250]): Text
     var
@@ -49,10 +50,12 @@ codeunit 73006 SpyCreateJournalLine
         exit(Implementation.ExportJournalLine(spyXmlCreateJournalLine));
     end;
 
+    /*
     procedure uploadDocument(DocumentType: text; DocNo: Text; Data: Text): Text
     begin
         exit(Implementation.uploadDocument(DocumentType, DocNo, Data));
     end;
+    */
 
     procedure ping(): Text
     var

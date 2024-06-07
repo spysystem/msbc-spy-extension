@@ -162,14 +162,6 @@ table 73090 "Spy Journal Line"
         {
             Caption = 'Ready To Post', comment = 'DAN="Klar til bogf."';
         }
-        field(2000; Attachment; Blob)
-        {
-            Caption = 'Attachment', Comment = 'Bilag';
-        }
-        field(2001; "Attachment Name"; Text[250])
-        {
-            Caption = 'Attachment Name', Comment = 'Bilagsnavn';
-        }
         field(73000; "Spy Batch Id"; Code[20])
         {
             Caption = 'Spy Batch Id', Locked = true;
@@ -377,7 +369,7 @@ table 73090 "Spy Journal Line"
     /// </summary>
     /// <returns>Return value of type Boolean.</returns>
     [ServiceEnabled]
-    procedure PostTempSpyJournalLines(var Base64EncodedFileData: Text; var FileName: Text[250]): Boolean
+    procedure PostTempSpyJournalLines(var Base64EncodedFileData: Text; var FileName: Text[250]; AddFile: Boolean): Boolean
     var
         GeneralLedgerSetup: record "General Ledger Setup";
         SpyLog: Record SpyLog;
@@ -448,7 +440,7 @@ table 73090 "Spy Journal Line"
         ApllyCustVendDimensions();
         UpdateGlobalDimensions();
 
-        if FileName <> '' then
+        if (FileName <> '') and (AddFile = true) then
             AddIncommingDoc(Base64EncodedFileData, FileName);
 
         if Rec.CreateSypErrorRecords() then begin

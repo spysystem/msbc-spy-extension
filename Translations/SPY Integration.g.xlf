@@ -233,16 +233,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Amount (LCY) - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 3833745087 - Field 1159403147 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Attachment</source>
-          <note from="Developer" annotates="general" priority="2">Bilag</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Attachment - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Table 3833745087 - Field 1024873738 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Attachment Name</source>
-          <note from="Developer" annotates="general" priority="2">Bilagsnavn</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Field Attachment Name - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Table 3833745087 - Field 2996033180 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Pmt. Discount Date</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1582,16 +1572,6 @@
           <source>Clean Up</source>
           <note from="Developer" annotates="general" priority="2">DAN="Ryd kladde"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action Clean Up - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 39425386 - Action 1190981817 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Download Attachment</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action EDKDownloadAttachment - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 39425386 - Action 2618750580 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Upload Attachment</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal Lines - Action EDKUploadAttachment - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 39425386 - Action 2282416948 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Post SPY Lines</source>
