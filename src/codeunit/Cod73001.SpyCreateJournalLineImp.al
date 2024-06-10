@@ -101,7 +101,9 @@ codeunit 73001 "Spy Create Journal Line Imp"
         CollectedErrors: Text;
     begin
         //Return Error Text from Blob
-        SpyErrors.SetRange("Spy Jnl Line Description", SpyJournalLine.Description);
+        SpyErrors.SetRange("Document No.", SpyJournalLine."Document No.");
+        SpyErrors.SetRange("Spy Batch Id", SpyJournalLine."Spy Batch Id");
+
         if SpyErrors.FindFirst() then
             repeat
                 SpyErrors.CalcFields("Error Description");

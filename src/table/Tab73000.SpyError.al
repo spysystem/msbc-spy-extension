@@ -33,10 +33,21 @@ table 73000 "Spy Error"
             Caption = 'Line No.';
         }
 
+        field(37; "Document No."; Code[20])
+        {
+            Caption = 'Document No.';
+            DataClassification = CustomerContent;
+        }
+
         field(100; "Error Description"; Blob)
         {
             Caption = 'Error Description';
             DataClassification = CustomerContent;
+        }
+
+        field(73000; "Spy Batch Id"; Code[20])
+        {
+            Caption = 'Spy Batch Id', Locked = true;
         }
     }
 

@@ -303,6 +303,8 @@ table 73090 "Spy Journal Line"
         if Errors <> '' then begin
             SpyErrors.Init();
             SpyErrors."Entry No." := Rec."Entry No.";
+            SpyErrors."Document No." := Rec."Document No.";
+            SpyErrors."Spy Batch Id" := Rec."Spy Batch Id";
             SpyErrors."Journal Template Name" := Rec."Journal Template Name";
             SpyErrors."Journal Batch Name" := Rec."Journal Batch Name";
             SpyErrors."Spy Jnl Line Description" := Rec.Description;
