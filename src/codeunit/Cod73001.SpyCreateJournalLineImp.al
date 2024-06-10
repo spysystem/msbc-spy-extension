@@ -225,7 +225,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
         SpyDimensions: record "Spy Dimension";
         SpyError: Record "Spy Error";
     begin
-        SpyJournalLine.SetFilter("Spy Status", '<>%1', SpyJournalLine."Spy Status"::Deleted);
+        SpyJournalLine.SetFilter("Spy Status", '%1', SpyJournalLine."Spy Status"::New);
         SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Deleted);
         /*
         SpyDimensions.Reset();
