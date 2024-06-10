@@ -47,7 +47,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
         //SpyErrors.DeleteAll();
         SpyJournalLine.SetRange("Spy Status", SpyJournalLine."Spy Status"::New);
         if BatchId <> '' then
-            SpyJournalLine.setrange("Spy Batch Id", BatchId);
+            SpyJournalLine.SetRange("Spy Batch Id", BatchId);
 
         NewCount := SpyJournalLine.Count;
 
@@ -124,23 +124,22 @@ codeunit 73001 "Spy Create Journal Line Imp"
         SpyError: Record "Spy Error";
         PostedMessageLbl: label 'Posted %1 lines to Journal: %2 with Description: %3', comment = '%1, %2, %3';
     begin
+        GenJournalLine.SetRange("Document No.", SpyJournalLine."Document No.");
+        GenJournalLine.SetRange("Journal Batch Name", SpyJournalLine."Journal Batch Name");
+
         if ReadyToPost then begin
-            //GenJournalLine.SetRange(Description, SpyJournalLine.Description);
-            GenJournalLine.SetRange("Document No.", SpyJournalLine."Document No.");
             if GenJournalLine.FindSet() then
-                //PostMessage := StrSubstNo(PostedMessageLbl, GenJournalLine.Count(), GenJournalLine."Journal Template Name", GenJournalLine.Description);
                 PostMessage := StrSubstNo(PostedMessageLbl, GenJournalLine.Count(), GenJournalLine."Journal Batch Name", GenJournalLine.Description);
         end
         else begin
-            GenJournalLine.SetFilter(Description, '%1', SpyJournalLine.Description);
             if GenJournalLine.FindSet() then
                 repeat
                     GenJournalLine.Delete(true);
                 until GenJournalLine.Next() = 0;
-            SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Deleted);
+
+            SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Error);
         end;
 
-        //SpyJournalLine.ModifyAll("Spy Status", SpyJournalLine."Spy Status"::Deleted);
         /*
         //Delete Temp Spy Journal Lines
         if SpyJournalLine.FindSet() then begin
@@ -176,8 +175,8 @@ codeunit 73001 "Spy Create Journal Line Imp"
     begin
         //For Manual Debugging
         //Delete if any exists in GenJournalLine
-        GenJournalLine.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
-        GenJournalLine.SetRange(Description, SpyJournalLine.Description);
+        GenJournalLine.SetRange("Document No.", SpyJournalLine."Document No.");
+        GenJournalLine.SetRange("Journal Batch Name", SpyJournalLine."Journal Batch Name");
 
         if GenJournalLine.FindSet() then
             repeat
@@ -187,7 +186,9 @@ codeunit 73001 "Spy Create Journal Line Imp"
             until GenJournalLine.Next() = 0;
 
         //Delete Temp Spy Journal Lines
-        SpyJournalLine.SetRange(Description, SpyJournalLine.Description);
+        SpyJournalLine.SetRange("Document No.", SpyJournalLine."Document No.");
+        SpyJournalLine.SetRange("Journal Batch Name", SpyJournalLine."Journal Batch Name");
+
         if SpyJournalLine.FindSet() then
             repeat
                 //SpyJournalLine.Delete();
