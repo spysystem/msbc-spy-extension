@@ -83,6 +83,11 @@
           <note from="Developer" annotates="general" priority="2">DAN="Spy Fejl"</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1931873846 - Field 486908828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Document No. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1931873846 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Entry No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
