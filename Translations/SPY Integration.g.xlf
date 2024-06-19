@@ -2533,6 +2533,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyPostedGenJnlLines - Control Gen. Prod. Posting Group - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 856941822 - Control 1235035632 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the IC Account No. field.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPostedGenJnlLines - Control IC Account No. - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 856941822 - Control 3880270913 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the IC Direction field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2542,11 +2547,6 @@
           <source>Specifies the value of the IC Partner Code field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyPostedGenJnlLines - Control IC Partner Code - Property ToolTip</note>
-        </trans-unit>
-        <trans-unit id="Page 856941822 - Control 1660715876 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Specifies the value of the IC Partner G/L Acc. No. field.</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPostedGenJnlLines - Control IC Partner G/L Acc. No. - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 856941822 - Control 477601569 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the value of the IC Partner Transaction No. field.</source>

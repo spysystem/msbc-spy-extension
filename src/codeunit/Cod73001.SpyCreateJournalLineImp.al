@@ -251,12 +251,13 @@ codeunit 73001 "Spy Create Journal Line Imp"
         IncomingDocumentAttachment: Record "Incoming Document Attachment";
     begin
         IncomingDocument.SetRange("Entry No.", GenJournalLine."Incoming Document Entry No.");
+        IncomingDocument.SetRange(Posted, false);
         if IncomingDocument.FindSet(true) then
             repeat
-                IncomingDocument.TestField(Posted, false);
                 IncomingDocumentAttachment.SetRange("Incoming Document Entry No.", IncomingDocument."Entry No.");
                 if not IncomingDocumentAttachment.IsEmpty() then
                     IncomingDocumentAttachment.DeleteAll();
+                IncomingDocument.Delete();
             until IncomingDocument.Next() = 0;
     end;
 
