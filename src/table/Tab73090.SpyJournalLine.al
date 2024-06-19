@@ -465,9 +465,16 @@ table 73090 "Spy Journal Line"
         TempInsStream: InStream;
         TempText: Text;
     begin
+
+        IncomingDocument.SetRange("Document No.", GenJournalLine."Document No.");
+        IncomingDocument.SetRange("Posting Date", GenJournalLine."Posting Date");
+        IncomingDocument.SetRange(Posted, true);
+
+        if (IncomingDocument.FindFirst()) then
+            exit;
+
         TempBlob.CreateOutStream(TempOutStream);
-        //Base64EncodedFileData.Read(TempInsStream);
-        //TempInsStream.ReadText(TempText);
+
         Base64Convert.FromBase64(Base64EncodedFileData, TempOutStream);
 
         MainRecordRef.GetTable(GenJournalLine);
