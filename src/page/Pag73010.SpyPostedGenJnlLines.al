@@ -427,10 +427,17 @@ page 73010 "SpyPostedGenJnlLines"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the IC Partner Code field.';
                 }
+                /*
                 field("IC Partner G/L Acc. No."; Rec."IC Partner G/L Acc. No.")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the IC Partner G/L Acc. No. field.';
+                }
+                */
+                field("IC Account No."; Rec."IC Account No.")
+                {
+                    ApplicationArea = all;
+                    ToolTip = 'Specifies the value of the IC Account No. field.';
                 }
                 field("IC Partner Transaction No."; Rec."IC Partner Transaction No.")
                 {
