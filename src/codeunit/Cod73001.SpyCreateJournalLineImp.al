@@ -123,13 +123,19 @@ codeunit 73001 "Spy Create Journal Line Imp"
         SpyDimensions: Record "Spy Dimension";
         SpyError: Record "Spy Error";
         PostedMessageLbl: label 'Posted %1 lines to Journal: %2 with Description: %3', comment = '%1, %2, %3';
+        PostedCount: Integer;
     begin
         GenJournalLine.SetRange("Document No.", SpyJournalLine."Document No.");
         GenJournalLine.SetRange("Journal Batch Name", SpyJournalLine."Journal Batch Name");
+        GenJournalLine.SetRange("Journal Template Name", SpyJournalLine."Journal Template Name");
 
         if ReadyToPost then begin
+            PostedCount := GenJournalLine.Count();
+            GenJournalLine.SetFilter(Description, '<>%1', '');
             if GenJournalLine.FindSet() then
-                PostMessage := StrSubstNo(PostedMessageLbl, GenJournalLine.Count(), GenJournalLine."Journal Batch Name", GenJournalLine.Description);
+                PostMessage := StrSubstNo(PostedMessageLbl, GenJournalLine.Count(), GenJournalLine."Journal Batch Name", GenJournalLine.Description)
+            else
+                PostMessage := StrSubstNo(PostedMessageLbl, PostedCount, SpyJournalLine."Journal Batch Name", '');
         end
         else begin
             if GenJournalLine.FindSet() then
@@ -236,6 +242,22 @@ codeunit 73001 "Spy Create Journal Line Imp"
         SpyError.Reset();
         SpyError.DeleteAll();
         */
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Gen. Journal Line", 'OnDeleteOnBeforeClearCustVendApplnEntry', '', false, false)]
+    local procedure OnDeleteOnBeforeClearCustVendApplnEntry(var GenJournalLine: Record "Gen. Journal Line"; GenJournalBatch: Record "Gen. Journal Batch"; GenJnlAlloc: Record "Gen. Jnl. Allocation"; var IsHandled: Boolean)
+    var
+        IncomingDocument: Record "Incoming Document";
+        IncomingDocumentAttachment: Record "Incoming Document Attachment";
+    begin
+        IncomingDocument.SetRange("Entry No.", GenJournalLine."Incoming Document Entry No.");
+        if IncomingDocument.FindSet(true) then
+            repeat
+                IncomingDocument.TestField(Posted, false);
+                IncomingDocumentAttachment.SetRange("Incoming Document Entry No.", IncomingDocument."Entry No.");
+                if not IncomingDocumentAttachment.IsEmpty() then
+                    IncomingDocumentAttachment.DeleteAll();
+            until IncomingDocument.Next() = 0;
     end;
 
 }
