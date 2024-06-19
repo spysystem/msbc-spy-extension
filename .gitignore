@@ -2,3 +2,10 @@
 .vscode/.alcache/*.*
 .alpackages/
 .vscode/rad.json
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/msbc-spy-extension.iml
+/.idea/php.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
