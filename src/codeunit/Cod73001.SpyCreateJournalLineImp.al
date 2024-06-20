@@ -249,9 +249,17 @@ codeunit 73001 "Spy Create Journal Line Imp"
     var
         IncomingDocument: Record "Incoming Document";
         IncomingDocumentAttachment: Record "Incoming Document Attachment";
+        JournalBatchName: Text;
     begin
+
+        // Only delete Incoming Documents from Journals that starts with "SPY-"
+        JournalBatchName := LOWERCASE(GenJournalLine."Journal Batch Name");
+        if (not JournalBatchName.StartsWith('spy-')) then
+            exit;
+
         IncomingDocument.SetRange("Entry No.", GenJournalLine."Incoming Document Entry No.");
         IncomingDocument.SetRange(Posted, false);
+
         if IncomingDocument.FindSet(true) then
             repeat
                 IncomingDocumentAttachment.SetRange("Incoming Document Entry No.", IncomingDocument."Entry No.");
