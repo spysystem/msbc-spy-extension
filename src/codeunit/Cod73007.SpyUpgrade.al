@@ -31,6 +31,8 @@ codeunit 73007 "SpyUpgrade"
         InsertWebservice('SpyFieldsPage', 73092, 'page');
         InsertWebservice('SpyApplyCustomerTemplates', 73009, 'codeunit');
         InsertWebservice('SpyInsertPostCode', 73010, 'codeunit');
+        InsertWebservice('SpyExtensionInfo', 73099, 'page');
+        InsertWebservice('SpyAccountingPeriods', 73013, 'page');
 
 
         // Slet eventuelle CVR format records

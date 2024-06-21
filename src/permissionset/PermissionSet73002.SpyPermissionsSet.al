@@ -41,5 +41,7 @@ permissionset 73002 "SpyPermissionsSet"
         page SpyVATPostingSetup = X,
         tabledata SpyLog = RIMD,
         table SpyLog = X,
-        page SpyPostedGenJnlLines = X;
+        page SpyPostedGenJnlLines = X,
+        page "Spy Extension Info" = X,
+        table "Spy Extension Info Temp" = X;
 }

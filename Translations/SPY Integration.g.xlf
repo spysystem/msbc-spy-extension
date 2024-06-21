@@ -118,6 +118,61 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Error - Field Spy Jnl Line Description - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 4290356087 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>BC Application Build</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field BCApplicationBuild - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 1690595539 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>BC Application Version</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field BCApplicationVersion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 1345303829 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>BC Build Branch</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field BCBuildBranch - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 3770837189 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>BC Build File Version</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field BCBuildFileVersion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 370823316 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>BC Original Application Version</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field BCOriginalApplicationVersion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 1975834174 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>BC Platform File Version</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field BCPlatformFileVersion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 271399857 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>BC Platform Product Version</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field BCPlatformProductVersion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 1612124100 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Extension App Version</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field SpyExtensionAppVersion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 629609395 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Extension Data Version</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field SpyExtensionDataVersion - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 2651786944 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Extension Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field SpyExtensionName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3195984379 - Field 1788826223 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Spy Extension Publisher</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field SpyExtensionPubliser - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Spy Journal Line</source>
           <note from="Developer" annotates="general" priority="2">DAN="Spy kladdelinje</note>
@@ -692,6 +747,46 @@
           <source>VAT %</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page EDK Gen. Journal Line - Control vat - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SpyAccountingPeriodAPI</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 245570718 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>closed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control closed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 2475235959 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SystemCreatedAt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control createdAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 1570954664 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SystemModifiedAt</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control modifiedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 1563494139 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>New Fiscal Year</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control newFiscalYear - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 1778122118 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Period Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control periodName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 3818733960 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Starting Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control startDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 3092263724 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SystemId</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control systemId - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3926563785 - Control 636392376 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
@@ -1277,6 +1372,16 @@
           <source>Specifies the value of the SystemModifiedBy field.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Errors - Control SystemModifiedBy - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2448864327 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>SpyExtensionInfoAPI</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Extension Info - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2448864327 - Control 1547757869 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Microsoft BC Application Build</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Extension Info - Control msbcApplicationBuild - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3832004445 - Control 166597695 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>

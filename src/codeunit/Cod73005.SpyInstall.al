@@ -30,6 +30,8 @@ codeunit 73005 "Spy Install"
         InsertWebservice('SpyPostedGenJnlLines', 73010, 'page');
         InsertWebservice('SpyApplyCustomerTemplates', 73009, 'codeunit');
         InsertWebservice('SpyInsertPostCode', 73010, 'codeunit');
+        InsertWebservice('SpyExtensionInfo', 73099, 'page');
+        InsertWebservice('SpyAccountingPeriods', 73013, 'page');
 
 
         // Slet eventuelle CVR format records TODO: Perhaps move to Guided Setup, so the customer will know they're deleting this data?
@@ -62,6 +64,7 @@ codeunit 73005 "Spy Install"
             TenantWebService.Insert(true);
         end;
     end;
+
 
     /// <summary>
     /// CreateDefaultSetup.
