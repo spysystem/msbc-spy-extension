@@ -15,6 +15,10 @@ codeunit 73008 "SpyCalcCustomerBalance"
         Customer: record Customer;
     begin
 
+        // Calculate the balance fields if there is any Customers present
+        if not Customer.FindSet() then
+            exit;
+
         Customer.CalcFields("Balance (LCY)", "Balance Due (LCY)");
         Customer.FindSet(); //TODO: TEST IF IS EMPTY Can be used, or this can be removed.
 
