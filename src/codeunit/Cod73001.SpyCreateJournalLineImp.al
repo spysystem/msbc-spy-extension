@@ -33,6 +33,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
     procedure commitToJournalLine(BatchId: Code[20]; var Base64EncodedFileData: Text; var FileName: Text[250]): Text
     var
         SpyJournalLine: Record "Spy Journal Line";
+        CleanGenJournalLine: Record "Gen. Journal Line";
         SpyErrors: Record "Spy Error";
         CurrentCount: Integer;
         PostedCount: Integer;
@@ -50,6 +51,21 @@ codeunit 73001 "Spy Create Journal Line Imp"
             SpyJournalLine.SetRange("Spy Batch Id", BatchId);
 
         NewCount := SpyJournalLine.Count;
+
+        // Delete GenJournalLines that matches the Document No. and Journal Batch Name which has empty Description nor Account No
+        if SpyJournalLine.FindSet() then begin
+            CleanGenJournalLine.SetRange("Document No.", SpyJournalLine."Document No.");
+            CleanGenJournalLine.SetRange("Journal Batch Name", SpyJournalLine."Journal Batch Name");
+            CleanGenJournalLine.SetRange(Description, '');
+            CleanGenJournalLine.SetRange("Account No.", '');
+            CleanGenJournalLine.SetRange(Amount, 0);
+
+            if CleanGenJournalLine.FindSet() then begin
+                repeat
+                    CleanGenJournalLine.Delete(true);
+                until CleanGenJournalLine.Next() = 0;
+            end;
+        end;
 
         if SpyJournalLine.FindSet(true) then
             repeat
