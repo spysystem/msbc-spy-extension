@@ -438,7 +438,7 @@ table 73090 "Spy Journal Line"
             GlobalErrorTextList.Add(StrSubstNo(InsertGenJnlLineErr, Rec."External Document No." + ' ' + Format(Rec."Entry No.")));
 
         ApplySpyDimensions(GenJournalLine);
-        SetSalesPurchExclVAT();
+        //SetSalesPurchExclVAT();
         ApllyCustVendDimensions();
         UpdateGlobalDimensions();
 
