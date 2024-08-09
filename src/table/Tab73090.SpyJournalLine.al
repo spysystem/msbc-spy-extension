@@ -323,25 +323,34 @@ table 73090 "Spy Journal Line"
     /// GetBankAccount.
     /// </summary>
     procedure GetBankAccount()
+    var
+        BankAccountingPostingGroup: Record "Bank Account Posting Group";
+        BankAccount: Record "Bank Account";
+        RecordRefBank: RecordRef;
+        FieldRefBank: FieldRef;
     begin
-        if (Rec.entryType = 'payment_offset') and (Rec.postType = 'ledger') then begin
-            RecordRefBank.Open(Database::"Bank Account Posting Group");
-            if RecordRefBank.FieldExist(3) then
-                FieldRefBank := RecordRefBank.Field(3)
-            else
-                FieldRefBank := RecordRefBank.Field(2);
 
-            FieldRefBank.SetFilter("Account No.");
-            if RecordRefBank.FindSet() THEN begin
-                BankAccount.SetFilter("Bank Acc. Posting Group", RecordRefBank.field(1).Value);
-                BankAccount.SetFilter("Currency Code", "Currency Code");
-                if BankAccount.FindFirst() then begin
-                    Rec."Account Type" := "Account Type"::"Bank Account";
-                    Rec."Account No." := BankAccount."No.";
-                    Rec.validate("Account No.");
-                end;
-            end;
-        end;
+        // Check if entry type is payment_offset and post type is ledger
+        if (Rec.entryType <> 'payment_offset') or (Rec.postType <> 'ledger') then
+            exit;
+
+        // Find the bank accounting posting group based on the account number
+        BankAccountingPostingGroup.SetFilter("G/L Account No.", Rec."Account No.");
+        if not BankAccountingPostingGroup.FindFirst() then
+            exit;
+
+        // Find the bank account based on the bank account posting group and currency code
+        BankAccount.SetFilter("Bank Acc. Posting Group", BankAccountingPostingGroup.Code);
+        BankAccount.SetFilter("Currency Code", Rec."Currency Code");
+        if not BankAccount.FindFirst() then
+            exit;
+
+        // Set the account type and account number in the general journal line
+        GenJournalLine."Account Type" := "Account Type"::"Bank Account";
+        GenJournalLine."Account No." := BankAccount."No.";
+
+        // Validate the account number
+        GenJournalLine.Validate("Account No.", BankAccount."No.");
     end;
 
     /// <summary>
@@ -385,7 +394,6 @@ table 73090 "Spy Journal Line"
         // TODO: Reenable maybe....
 
         Clear(GlobalErrorTextList);
-        Clear(BankAccount);
         Clear(TempDimensionBuffer);
         SPYSetup.Get();
         GeneralLedgerSetup.Get();
@@ -1149,7 +1157,6 @@ table 73090 "Spy Journal Line"
     end;
 
     var
-        BankAccount: record "Bank Account";
         GenJournalLine: Record "Gen. Journal Line";
         GenJournalLine2: Record "Gen. Journal Line";
         gCustomer: record Customer;
@@ -1163,8 +1170,7 @@ table 73090 "Spy Journal Line"
         gDefaultDimension: record "Default Dimension";
         SPYSetup: Record "Spy Setup";
         DimensionManagement: Codeunit DimensionManagement;
-        RecordRefBank: RecordRef;
-        FieldRefBank: FieldRef;
+
         StateTax: Text[20];
         PostingType: text;
         //day: integer;
