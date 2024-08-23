@@ -380,7 +380,7 @@ table 73090 "Spy Journal Line"
     /// </summary>
     /// <returns>Return value of type Boolean.</returns>
     [ServiceEnabled]
-    procedure PostTempSpyJournalLines(var Base64EncodedFileData: Text; var FileName: Text[250]; AddFile: Boolean): Boolean
+    procedure PostTempSpyJournalLines(var Base64EncodedFileData: Text; var FileName: Text[250]): Boolean
     var
         GeneralLedgerSetup: record "General Ledger Setup";
         SpyLog: Record SpyLog;
@@ -450,7 +450,7 @@ table 73090 "Spy Journal Line"
         ApllyCustVendDimensions();
         UpdateGlobalDimensions();
 
-        if (FileName <> '') and (AddFile = true) then
+        if (FileName <> '') then
             AddIncommingDoc(Base64EncodedFileData, FileName);
 
         if Rec.CreateSypErrorRecords() then begin
@@ -473,13 +473,6 @@ table 73090 "Spy Journal Line"
         TempInsStream: InStream;
         TempText: Text;
     begin
-
-        IncomingDocument.SetRange("Document No.", GenJournalLine."Document No.");
-        IncomingDocument.SetRange("Posting Date", GenJournalLine."Posting Date");
-        IncomingDocument.SetRange(Posted, true);
-
-        if (IncomingDocument.FindFirst()) then
-            exit;
 
         TempBlob.CreateOutStream(TempOutStream);
 

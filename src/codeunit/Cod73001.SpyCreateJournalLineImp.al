@@ -40,7 +40,6 @@ codeunit 73001 "Spy Create Journal Line Imp"
         NewCount: Integer;
         ErrorsCollectedTxt: Text;
         ErrorFoundLbl: label 'Erorrs found %1. Continue and delete SPY data?', comment = '%1 = Errors';
-        AttachFile: Boolean;
     begin
         Clear(CurrentCount);
         Clear(PostedCount);
@@ -71,12 +70,7 @@ codeunit 73001 "Spy Create Journal Line Imp"
             repeat
                 CurrentCount += 1;
 
-                if CurrentCount = 1 then
-                    AttachFile := true
-                else
-                    AttachFile := false;
-
-                if SpyJournalLine.PostTempSpyJournalLines(Base64EncodedFileData, FileName, AttachFile) then begin //THIS IS MOVING sypJournalLines to General Journal.
+                if SpyJournalLine.PostTempSpyJournalLines(Base64EncodedFileData, FileName) then begin //THIS IS MOVING sypJournalLines to General Journal.
                     PostedCount += 1;
                     SpyJournalLine."Spy Status" := SpyJournalLine."Spy Status"::Committed;
                 end else begin
