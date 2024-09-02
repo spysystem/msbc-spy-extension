@@ -431,12 +431,17 @@ table 73090 "Spy Journal Line"
                 GenJournalLine.Validate("Currency Code");
             end;
 
+            /* 
+             * Check if we should change PaymentOffset to Bank Account if present, do this before setting Local Currency Amount.
+             * As changing the Account Type will fetch the currency rate from BC which might differ from the one from Spy.
+             */
+            GetBankAccount();
+
             GenJournalLine."Amount (LCY)" := Rec."Amount (LCY)"; //LCY must be set AFTER amount and AFTER validation of Currency
             GenJournalLine."Balance (LCY)" := Rec."Amount (LCY)"; // 06-06-2024 KL
 
             ValidateTaxTitle();
             SetPostingGroups();
-            GetBankAccount();
             IsolateSpyPaymentId();
             ValidatePaymentTerms();
             //ValidateDueDate();
