@@ -5,8 +5,8 @@ page 73013 "Spy Accounting Periods"
     APIVersion = 'v1.0';
     Caption = 'SpyAccountingPeriodAPI';
     DelayedInsert = true;
-    EntityName = 'spyAccontingPeriod';
-    EntitySetName = 'spyAccontingPeriods';
+    EntityName = 'SpyAccountingPeriod';
+    EntitySetName = 'SpyAccountingPeriods';
     PageType = API;
     SourceTable = "Accounting Period";
     ODataKeyFields = SystemId;
@@ -21,29 +21,45 @@ page 73013 "Spy Accounting Periods"
                 {
                     Caption = 'SystemId';
                 }
+
                 field(startDate; Rec."Starting Date")
                 {
                     Caption = 'Starting Date';
                 }
+
                 field(periodName; Rec."Name")
                 {
                     Caption = 'Period Name';
                 }
+
                 field(closed; Rec."Closed")
                 {
                     Caption = 'closed';
                 }
+
                 field(newFiscalYear; Rec."New Fiscal Year")
                 {
                     Caption = 'New Fiscal Year';
                 }
-                field(createdAt; Rec.SystemCreatedAt)
+
+                field("systemCreatedAt"; Rec.SystemCreatedAt)
                 {
-                    Caption = 'SystemCreatedAt';
+                    Caption = 'System Created At';
                 }
-                field(modifiedAt; Rec.SystemModifiedAt)
+
+                field("systemCreatedBy"; Rec.SystemCreatedBy)
                 {
-                    Caption = 'SystemModifiedAt';
+                    Caption = 'System Created By';
+                }
+
+                field("systemModifiedAt"; Rec.systemModifiedAt)
+                {
+                    Caption = 'System Modified At';
+                }
+
+                field("systemModifiedBy"; Rec.systemModifiedBy)
+                {
+                    Caption = 'System Modified By';
                 }
             }
         }

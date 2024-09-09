@@ -758,16 +758,6 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control closed - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Page 2105951495 - Control 2475235959 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>SystemCreatedAt</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control createdAt - Property Caption</note>
-        </trans-unit>
-        <trans-unit id="Page 2105951495 - Control 1570954664 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>SystemModifiedAt</source>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control modifiedAt - Property Caption</note>
-        </trans-unit>
         <trans-unit id="Page 2105951495 - Control 1563494139 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>New Fiscal Year</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -783,10 +773,30 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control startDate - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 1421298788 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Created At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control systemCreatedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 591346850 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Created By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control systemCreatedBy - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2105951495 - Control 3092263724 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>SystemId</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control systemId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 4098519211 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Modified At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control systemModifiedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2105951495 - Control 1436117145 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Modified By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Accounting Periods - Control systemModifiedBy - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3926563785 - Control 636392376 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
