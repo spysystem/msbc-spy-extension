@@ -55,7 +55,7 @@ table 73099 "Spy Extension Info Temp"
             DataClassification = CustomerContent;
             Caption = 'Spy Extension Name';
         }
-        field(11; SpyExtensionPubliser; Text[250])
+        field(11; SpyExtensionPublisher; Text[250])
         {
             DataClassification = CustomerContent;
             Caption = 'Spy Extension Publisher';

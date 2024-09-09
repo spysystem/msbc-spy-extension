@@ -168,10 +168,10 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field SpyExtensionName - Property Caption</note>
         </trans-unit>
-        <trans-unit id="Table 3195984379 - Field 1788826223 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+        <trans-unit id="Table 3195984379 - Field 159918575 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Spy Extension Publisher</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field SpyExtensionPubliser - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Extension Info Temp - Field SpyExtensionPublisher - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3833745087 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Spy Journal Line</source>

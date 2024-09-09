@@ -6,7 +6,7 @@ page 73099 "Spy Extension Info"
     Caption = 'SpyExtensionInfoAPI';
     DelayedInsert = true;
     EntityName = 'SpyExtensionInfo';
-    EntitySetName = 'SpyExtensionInfoSet';
+    EntitySetName = 'SpyExtensionInfo';
     PageType = API;
     SourceTableTemporary = true;
     SourceTable = "Spy Extension Info Temp";
@@ -57,7 +57,7 @@ page 73099 "Spy Extension Info"
                 {
 
                 }
-                field(spyExtensionPubliser; Rec.SpyExtensionPubliser)
+                field(spyExtensionPublisher; Rec.SpyExtensionPublisher)
                 {
 
                 }
@@ -83,7 +83,7 @@ page 73099 "Spy Extension Info"
         Rec.SpyExtensionAppVersion := Format(Info.AppVersion);
         Rec.SpyExtensionDataVersion := Format(info.DataVersion);
         Rec.SpyExtensionName := Info.Name;
-        Rec.SpyExtensionPubliser := Info.Publisher;
+        Rec.SpyExtensionPublisher := Info.Publisher;
         Rec.Insert(true)
     end;
 }
