@@ -2,6 +2,8 @@
 .vscode/.alcache/*.*
 .alpackages/
 .vscode/rad.json
+.vscode/launch.json
+.vscode/settings.json
 /.idea/.gitignore
 /.idea/misc.xml
 /.idea/modules.xml
