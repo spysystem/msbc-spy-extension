@@ -33,7 +33,7 @@ codeunit 73007 "SpyUpgrade"
         InsertWebservice('SpyInsertPostCode', 73010, 'codeunit');
         InsertWebservice('SpyExtensionInfo', 73099, 'page');
         InsertWebservice('SpyAccountingPeriods', 73013, 'page');
-
+        InsertWebservice('SpyPaymentTermV2', 73014, 'page');
 
         // Slet eventuelle CVR format records
         if VatRegFormat.FindSet() then

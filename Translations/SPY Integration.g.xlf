@@ -2228,6 +2228,66 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyListJournalBatches - Control Template Type - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 4013523726 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payment Terms API</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 3008859914 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Calculate Discount On Credit Notes</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control calculateDiscountOnCreditNotes - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 707985127 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 4232699882 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 1715655612 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Discount Date Calculation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control discountDateCalculation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 2481243543 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Discount %</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control discountPercentage - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 3652386003 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Due Date Calculation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control dueDateCalculation - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 1421298788 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Created At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control systemCreatedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 591346850 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Created By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control systemCreatedBy - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 3092263724 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control systemId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 4098519211 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Modified At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control systemModifiedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4013523726 - Control 1436117145 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Modified By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyPaymentTermV2 - Control systemModifiedBy - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 856941822 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>SpyPostedGenJnlLines</source>
           <note from="Developer" annotates="general" priority="2"></note>
