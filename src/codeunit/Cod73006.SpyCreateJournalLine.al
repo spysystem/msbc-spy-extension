@@ -17,18 +17,16 @@ codeunit 73006 SpyCreateJournalLine
         exit(Implementation.commitToJournalLine('', TempText, TempText2));
     end;
 
-    /*
-    [ServiceEnabled]
-    procedure committoJournalLineWithBatch(BatchId: Code[20]): Text
-    var
-        TempText: Text;
-        TempText2: Text;
-    begin
-        exit(Implementation.commitToJournalLine(BatchId, TempText, TempText2));
-    end;
-    */
     [ServiceEnabled]
     procedure commitToJournalLineWithFileData(BatchId: Code[20]; Base64EncodedFileData: Text; FileName: Text[250]): Text
+    var
+    begin
+        exit(Implementation.commitToJournalLine(BatchId, Base64EncodedFileData, FileName));
+    end;
+
+    [ServiceEnabled]
+    [CommitBehavior(CommitBehavior::Ignore)]
+    procedure commitToJournalLineWithFileDataV2(BatchId: Code[20]; Base64EncodedFileData: Text; FileName: Text[250]): Text
     var
     begin
         exit(Implementation.commitToJournalLine(BatchId, Base64EncodedFileData, FileName));
