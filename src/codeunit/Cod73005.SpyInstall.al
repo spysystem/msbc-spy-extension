@@ -34,6 +34,7 @@ codeunit 73005 "Spy Install"
         InsertWebservice('SpyAccountingPeriods', 73013, 'page');
         InsertWebservice('SpyPaymentTermV2', 73014, 'page');
 
+        CreateDefaultSetup();
 
         // Slet eventuelle CVR format records TODO: Perhaps move to Guided Setup, so the customer will know they're deleting this data?
         //if VatRegFormat.FindSet() then
@@ -73,8 +74,27 @@ codeunit 73005 "Spy Install"
     procedure CreateDefaultSetup()
     var
         SpySetup: Record "Spy Setup";
+        GenJournalTemplate: Record "Gen. Journal Template";
+        VATProdPostingGroup: Record "VAT Product Posting Group";
     begin
+
+        if SpySetup.FindFirst() then
+            exit;
+
         SpySetup.Init();
+        // First look for a Gen. Journal Template with the name 'KASSE' then 'GENERAL'
+        GenJournalTemplate.SetFilter("Name", 'KASSE');
+        if GenJournalTemplate.FindSet() then begin
+            SpySetup."Default Journal Template Name" := 'KASSE';
+        end
+        else begin
+            GenJournalTemplate.SetFilter("Name", 'GENERAL');
+            if GenJournalTemplate.FindSet() then
+                SpySetup."Default Journal Template Name" := 'GENERAL';
+        end;
+
+        SpySetup."VAT Prod. Posting Group" := 'SPY';
+        SpySetup.Insert();
     end;
 }
 
