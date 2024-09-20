@@ -3373,6 +3373,51 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control VAT Prod. Posting Group - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 1795018630 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>VAT Registratio No. Format API</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATRegistrationNoFormat - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1795018630 - Control 2715004511 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Country Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATRegistrationNoFormat - Control countryCode - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1795018630 - Control 3922916869 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Format</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATRegistrationNoFormat - Control format - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1795018630 - Control 1294919425 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Line No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATRegistrationNoFormat - Control lineNo - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1795018630 - Control 1421298788 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Created At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATRegistrationNoFormat - Control systemCreatedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1795018630 - Control 591346850 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Created By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATRegistrationNoFormat - Control systemCreatedBy - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1795018630 - Control 3092263724 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATRegistrationNoFormat - Control systemId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1795018630 - Control 4098519211 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Modified At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATRegistrationNoFormat - Control systemModifiedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1795018630 - Control 1436117145 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Modified By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATRegistrationNoFormat - Control systemModifiedBy - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 3990914254 - Control 1303377601 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 523354100">
           <source> </source>
           <note from="Developer" annotates="general" priority="2"></note>

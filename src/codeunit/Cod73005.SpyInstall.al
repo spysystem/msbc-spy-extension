@@ -33,6 +33,7 @@ codeunit 73005 "Spy Install"
         InsertWebservice('SpyExtensionInfo', 73099, 'page');
         InsertWebservice('SpyAccountingPeriods', 73013, 'page');
         InsertWebservice('SpyPaymentTermV2', 73014, 'page');
+        InsertWebservice('SpyVATRegistrationNoFormat', 73015, 'page');
 
         CreateDefaultSetup();
 
