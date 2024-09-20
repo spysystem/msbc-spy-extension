@@ -52,12 +52,12 @@ codeunit 73005 "Spy Install"
     var
         TenantWebService: record "Tenant Web Service";
     begin
-        TenantWebService.setfilter("Service Name", Name);
+        TenantWebService.SetFilter("Service Name", Name);
         if TenantWebService.FindSet() then
             TenantWebService.Delete();
 
-        TenantWebService.setfilter("Service Name", Name);
-        if not TenantWebService.findset() then begin
+        TenantWebService.SetFilter("Service Name", Name);
+        if not TenantWebService.FindSet() then begin
             TenantWebService.Init();
             TenantWebService."Object ID" := Id;
             TenantWebService.Published := true;
