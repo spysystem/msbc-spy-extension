@@ -43,7 +43,32 @@ page 73084 "Spy Journal"
                     ApplicationArea = All;
                     ToolTip = ' ';
                 }
+                field("Debit Amount"; Rec."Debit Amount")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("Credit Amount"; Rec."Credit Amount")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("VAT Amount"; Rec."VAT Amount")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("VAT Base Amount"; Rec."VAT Base Amount")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
                 field("Currency Code"; Rec."Currency Code")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("Currency Factor"; Rec."Currency Factor")
                 {
                     ApplicationArea = All;
                     ToolTip = ' ';
@@ -53,6 +78,57 @@ page 73084 "Spy Journal"
                     ApplicationArea = All;
                     ToolTip = ' ';
                 }
+                field("VAT Amount (LCY)"; Rec."VAT Amount (LCY)")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("VAT Base Amount (LCY)"; Rec."VAT Base Amount (LCY)")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("Balance (LCY)"; Rec."Balance (LCY)")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("Sales/Purch. (LCY)"; Rec."Sales/Purch. (LCY)")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("Source Currency Code"; Rec."Source Currency Code")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("Source Currency Amount"; Rec."Source Currency Amount")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("Source Currency VAT Base Amount"; Rec."Source Curr. VAT Base Amount")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("Source Currency VAT Amount"; Rec."Source Curr. VAT Amount")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("VAT %"; Rec."VAT %")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("VAT Base Discount %"; Rec."VAT Base Discount %")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+
                 field("Document Type"; Rec."Document Type")
                 {
                     ApplicationArea = All;
@@ -84,6 +160,11 @@ page 73084 "Spy Journal"
                     ToolTip = ' ';
                 }
                 field("Pmt. Discount Date"; Rec."Pmt. Discount Date")
+                {
+                    ApplicationArea = All;
+                    ToolTip = ' ';
+                }
+                field("Payment Discount %"; Rec."Payment Discount %")
                 {
                     ApplicationArea = All;
                     ToolTip = ' ';

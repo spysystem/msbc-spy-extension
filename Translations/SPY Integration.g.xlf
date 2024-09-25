@@ -1443,10 +1443,30 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Amount (LCY) - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 2178647059 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Balance (LCY) - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 2556136339 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Credit Amount - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 2823081533 - Control 4198939294 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Currency Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 2324056710 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Currency Factor - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 2796346326 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Debit Amount - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2823081533 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
@@ -1498,6 +1518,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Journal Template Name - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 235293238 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Payment Discount % - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 2823081533 - Control 966740350 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1512,6 +1537,61 @@
           <source> </source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Posting Date - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 3393883294 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Sales/Purch. (LCY) - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 3024871146 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Source Currency Amount - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 2377325305 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Source Currency Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 2328035487 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Source Currency VAT Amount - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 1592511644 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control Source Currency VAT Base Amount - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 1246077090 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control VAT % - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 1108276017 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control VAT Amount - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 2911518948 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control VAT Amount (LCY) - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 904390814 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control VAT Base Amount - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 953833239 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control VAT Base Amount (LCY) - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2823081533 - Control 3063361898 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Spy Journal - Control VAT Base Discount % - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 2823081533 - Control 1844012642 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source> </source>
