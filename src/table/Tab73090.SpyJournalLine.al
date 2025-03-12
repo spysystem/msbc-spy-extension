@@ -431,7 +431,7 @@ table 73090 "Spy Journal Line"
                 GenJournalLine.Validate("Currency Code");
             end;
 
-            /* 
+            /*
              * Check if we should change PaymentOffset to Bank Account if present, do this before setting Local Currency Amount.
              * As changing the Account Type will fetch the currency rate from BC which might differ from the one from Spy.
              */
@@ -444,7 +444,8 @@ table 73090 "Spy Journal Line"
             SetPostingGroups();
             IsolateSpyPaymentId();
             ValidatePaymentTerms();
-            //ValidateDueDate();
+            ValidateDueDate();
+            ValidateCashDiscountDate();
         end;
 
         if not GenJournalLine.Insert(true) then
@@ -865,41 +866,58 @@ table 73090 "Spy Journal Line"
         day: integer;
         month: Integer;
         year: Integer;
-        dayText, monthText, yearText : Text;
         DueDate: Date;
     begin
-        dayText := CopyStr(Rec."Due Date", 9, 2);
-        monthText := CopyStr(Rec."Due Date", 6, 2);
-        yearText := CopyStr(Rec."Due Date", 1, 4);
-        /*
-        if not evaluate(day, CopyStr(Format(Rec."Due Date"), 9, 2)) then
-            GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, CopyStr(Format(Rec."Due Date"), 9, 2)));
-        if not evaluate(month, CopyStr(Format(Rec."Due Date"), 6, 2)) then
-            GlobalErrorTextList.Add(StrSubstNo(MonthConvFailedLbl, CopyStr(Format(Rec."Due Date"), 6, 2)));
-        if not evaluate(year, CopyStr(Format(Rec."Due Date"), 1, 4)) then
-            GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Due Date"), 1, 4)));
-        */
-        if dayText <> '' then
-            if not evaluate(day, dayText) then
-                GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, dayText));
+        clear(DueDate);
+        if Rec."Due Date" <> '' then begin
+            if not evaluate(day, CopyStr(Format(Rec."Due Date"), 9, 2)) then
+                GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, CopyStr(Format(Rec."Due Date"), 9, 2)));
+            if not evaluate(month, CopyStr(Format(Rec."Due Date"), 6, 2)) then
+                GlobalErrorTextList.Add(StrSubstNo(MonthConvFailedLbl, CopyStr(Format(Rec."Due Date"), 6, 2)));
+            if not evaluate(year, CopyStr(Format(Rec."Due Date"), 1, 4)) then
+                GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Due Date"), 1, 4)));
 
-        if monthText <> '' then
-            if not evaluate(month, monthText) then
-                GlobalErrorTextList.Add(StrSubstNo(MonthConvFailedLbl, monthText));
+            if (day > 0) and (month > 0) and (year > 0) then begin
+                DueDate := DMY2Date(day, month, year);
+                GenJournalLine.Validate("Due Date", DueDate);
+            end;
 
-        if yearText <> '' then
-            if not evaluate(year, yearText) then
-                GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, yearText));
-
-        if (day > 0) and (month > 0) and (year > 0) then begin
-            DueDate := DMY2Date(day, month, year);
-            GenJournalLine.Validate("Due Date", DueDate);
+            if ErrorFoundInErrorTextList('[ValidateDueDate]') then
+                exit(false)
+            else
+                exit(true);
         end;
+    end;
 
-        if ErrorFoundInErrorTextList('[ValidateDueDate]') then
-            exit(false)
-        else
-            exit(true);
+    procedure ValidateCashDiscountDate(): Boolean
+    var
+        DayConvFailedLbl: Label '[ValidateCashDiscountDate] Day convertion failed: %1', Comment = '%1 = Day sent from SPY';
+        MonthConvFailedLbl: Label '[ValidateCashDiscountDate] Month convertion failed: %1', Comment = '%1 = Month sent from SPY';
+        YearConvFailedLbl: Label '[ValidateCashDiscountDate] Year convertion failed: %1', Comment = '%1 = Year sent from SPY';
+        day: integer;
+        month: Integer;
+        year: Integer;
+        CashDiscountDate: Date;
+    begin
+        clear(CashDiscountDate);
+        if Rec."Cash Discount Date" <> '' then begin
+            if not evaluate(day, CopyStr(Format(Rec."Cash Discount Date"), 9, 2)) then
+                GlobalErrorTextList.Add(StrSubstNo(DayConvFailedLbl, CopyStr(Format(Rec."Cash Discount Date"), 9, 2)));
+            if not evaluate(month, CopyStr(Format(Rec."Cash Discount Date"), 6, 2)) then
+                GlobalErrorTextList.Add(StrSubstNo(MonthConvFailedLbl, CopyStr(Format(Rec."Cash Discount Date"), 6, 2)));
+            if not evaluate(year, CopyStr(Format(Rec."Cash Discount Date"), 1, 4)) then
+                GlobalErrorTextList.Add(StrSubstNo(YearConvFailedLbl, CopyStr(Format(Rec."Cash Discount Date"), 1, 4)));
+
+            if (day > 0) and (month > 0) and (year > 0) then begin
+                CashDiscountDate := DMY2Date(day, month, year);
+                GenJournalLine.Validate("Pmt. Discount Date", CashDiscountDate);
+            end;
+
+            if ErrorFoundInErrorTextList('[ValidateCashDiscountDate]') then
+                exit(false)
+            else
+                exit(true);
+        end;
     end;
 
     /// <summary>

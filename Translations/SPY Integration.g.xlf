@@ -218,6 +218,21 @@
           <note from="Developer" annotates="general" priority="2">%1,%2,%3,%5 = postType</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateAccountTypeAndNo - NamedType InvalidPostTypeLbl</note>
         </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 1653436690 - NamedType 4249219403" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[ValidateCashDiscountDate] Day convertion failed: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Day sent from SPY</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateCashDiscountDate - NamedType DayConvFailedLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 1653436690 - NamedType 2403073583" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[ValidateCashDiscountDate] Month convertion failed: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Month sent from SPY</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateCashDiscountDate - NamedType MonthConvFailedLbl</note>
+        </trans-unit>
+        <trans-unit id="Table 3833745087 - Method 1653436690 - NamedType 3582577230" size-unit="char" translate="yes" xml:space="preserve">
+          <source>[ValidateCashDiscountDate] Year convertion failed: %1</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Year sent from SPY</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Spy Journal Line - Method ValidateCashDiscountDate - NamedType YearConvFailedLbl</note>
+        </trans-unit>
         <trans-unit id="Table 3833745087 - Method 1959661362 - NamedType 4249219403" size-unit="char" translate="yes" xml:space="preserve">
           <source>[ValidateDueDate] Day convertion failed: %1</source>
           <note from="Developer" annotates="general" priority="2">%1 = Day sent from SPY</note>
