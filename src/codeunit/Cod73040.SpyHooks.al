@@ -9,17 +9,25 @@ codeunit 73040 "SpyHooks"
         if GuiAllowed then
             exit;
 
-        // Make sure that we are allowed to set the number series manually and that a number series is set
+        // Make sure that if we have a number series configured for Suppliers, that it exists and is allowing manual numbers
+        if not PurchaseSetup.Get() then
+            exit;
 
-        if PurchaseSetup.Get() then begin
-            if PurchaseSetup."Vendor Nos." <> '' then begin
-                VendorNoSeries.Get(PurchaseSetup."Vendor Nos.");
-                if not VendorNoSeries."Manual Nos." then begin
-                    VendorNoSeries."Manual Nos." := true;
-                    VendorNoSeries.Modify();
-                end;
+        if PurchaseSetup."Vendor Nos." = '' then
+            exit;
+
+        if VendorNoSeries.Get(PurchaseSetup."Vendor Nos.") then begin
+            if not VendorNoSeries."Manual Nos." then begin
+                VendorNoSeries."Manual Nos." := true;
+                VendorNoSeries.Modify();
             end;
+
+            exit;
         end;
+
+        // If we reach this point, then the No. series does not exist and we clear it from the setup
+        PurchaseSetup."Vendor Nos." := '';
+        PurchaseSetup.Modify();
 
     end;
 
@@ -33,16 +41,27 @@ codeunit 73040 "SpyHooks"
         if GuiAllowed then
             exit;
 
-        // Make sure that we are allowed to set the number series manually and that a number series is set
-        if SalesSetup.Get() then begin
-            if SalesSetup."Customer Nos." <> '' then begin
-                CustomerNoSeries.Get(SalesSetup."Customer Nos.");
-                if not CustomerNoSeries."Manual Nos." then begin
-                    CustomerNoSeries."Manual Nos." := true;
-                    CustomerNoSeries.Modify();
-                end;
+        #region validate number series for customers
+        // Make sure that if we have a number series configured for Customers, that it exists and is allowing manual numbers
+        if not SalesSetup.Get() then
+            exit;
+
+        if SalesSetup."Customer Nos." = '' then
+            exit;
+
+        if CustomerNoSeries.Get(SalesSetup."Customer Nos.") then begin
+            if not CustomerNoSeries."Manual Nos." then begin
+                CustomerNoSeries."Manual Nos." := true;
+                CustomerNoSeries.Modify();
             end;
+
+            exit;
         end;
+
+        // If we reach this point, then the No. series does not exist and we clear it from the setup
+        SalesSetup."Customer Nos." := '';
+        SalesSetup.Modify();
+        #endregion
     end;
 
 }
