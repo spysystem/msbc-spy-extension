@@ -3,7 +3,7 @@ page 73015 "SpyVATRegistrationNoFormat"
     APIGroup = 'integration';
     APIPublisher = 'spy';
     APIVersion = 'v1.0';
-    Caption = 'VAT Registratio No. Format API';
+    Caption = 'VAT Registration No. Format API';
     DelayedInsert = true;
     EntityName = 'SpyVATRegistrationNoFormat';
     EntitySetName = 'SpyVATRegistrationNoFormats';
