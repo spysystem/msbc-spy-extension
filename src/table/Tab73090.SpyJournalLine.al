@@ -330,8 +330,11 @@ table 73090 "Spy Journal Line"
         FieldRefBank: FieldRef;
     begin
 
-        // Check if entry type is payment_offset and post type is ledger
-        if (Rec.entryType <> 'payment_offset') or (Rec.postType <> 'ledger') then
+        // The postType has to be 'ledger' and the entryType must be either 'payment_offset' or 'creditor_offset'
+        if (postType <> 'ledger') then
+            exit;
+
+        if (entryType <> 'payment_offset') and (entryType <> 'creditor_offset') then
             exit;
 
         // Find the bank accounting posting group based on the account number
