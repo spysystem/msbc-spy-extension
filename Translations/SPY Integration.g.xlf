@@ -2128,6 +2128,46 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyCreateJournalLineAPI - Control vatCode - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2378340530 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General Ledger Setup API</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGeneralLedgerSetup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2378340530 - Control 1145980781 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Posting From Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGeneralLedgerSetup - Control allowPostingFromDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2378340530 - Control 4292125954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Posting To Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGeneralLedgerSetup - Control allowPostingToDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2378340530 - Control 1421298788 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Created At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGeneralLedgerSetup - Control systemCreatedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2378340530 - Control 591346850 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Created By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGeneralLedgerSetup - Control systemCreatedBy - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2378340530 - Control 3092263724 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Id</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGeneralLedgerSetup - Control systemId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2378340530 - Control 4098519211 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Modified At</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGeneralLedgerSetup - Control systemModifiedAt - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2378340530 - Control 1436117145 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>System Modified By</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page SpyGeneralLedgerSetup - Control systemModifiedBy - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 3618512546 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>SpyGenJnlTemplate</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3469,7 +3509,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATPostingSetup - Control VAT Prod. Posting Group - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1795018630 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>VAT Registratio No. Format API</source>
+          <source>VAT Registration No. Format API</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page SpyVATRegistrationNoFormat - Property Caption</note>
         </trans-unit>

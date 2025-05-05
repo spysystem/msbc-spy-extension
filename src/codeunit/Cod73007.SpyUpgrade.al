@@ -35,6 +35,8 @@ codeunit 73007 "SpyUpgrade"
         InsertWebservice('SpyAccountingPeriods', 73013, 'page');
         InsertWebservice('SpyPaymentTermV2', 73014, 'page');
         InsertWebservice('SpyVATRegistrationNoFormat', 73015, 'page');
+        InsertWebservice('SpyGeneralLedgerSetup', 73016, 'page');
+
 
         // Slet eventuelle CVR format records
         if VatRegFormat.FindSet() then
