@@ -449,6 +449,7 @@ table 73090 "Spy Journal Line"
             ValidatePaymentTerms();
             ValidateDueDate();
             ValidateCashDiscountDate();
+            GenJournalLine."Sales/Purch. (LCY)" := 0;
         end;
 
         if not GenJournalLine.Insert(true) then
