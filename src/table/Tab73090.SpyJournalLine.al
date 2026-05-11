@@ -433,8 +433,10 @@ table 73090 "Spy Journal Line"
             GenJournalLine.Amount := Rec.Amount;
             GenJournalLine."Source Currency Amount" := Rec.Amount;
 
-            if GeneralLedgerSetup."LCY Code" = Rec."Currency Code" then
-                GenJournalLine."Currency Code" := ''
+            if (Rec."Currency Code" = '') or (GeneralLedgerSetup."LCY Code" = Rec."Currency Code") then begin
+                GenJournalLine."Currency Code" := '';
+                GenJournalLine."Source Currency Code" := '';
+            end
             else begin
                 GenJournalLine."Currency Code" := Rec."Currency Code";
                 GenJournalLine."Source Currency Code" := Rec."Currency Code";
