@@ -174,6 +174,11 @@ table 73090 "Spy Journal Line"
         {
             Caption = 'Created', Locked = true;
         }
+        field(73003; "Currency Factor"; Decimal)
+        {
+            Caption = 'Currency Factor';
+            DecimalPlaces = 0 : 15;
+        }
     }
     keys
     {
@@ -426,11 +431,21 @@ table 73090 "Spy Journal Line"
             GenJournalLine.Validate(Description, Rec.Description);
 
             GenJournalLine.Amount := Rec.Amount;
+            GenJournalLine."Source Currency Amount" := Rec.Amount;
 
             if GeneralLedgerSetup."LCY Code" = Rec."Currency Code" then
                 GenJournalLine."Currency Code" := ''
             else begin
                 GenJournalLine."Currency Code" := Rec."Currency Code";
+                GenJournalLine."Source Currency Code" := Rec."Currency Code";
+
+                // If the currency factor received from Spy is 0, then we need to calculate the currency factor based on the amount and the amount in LCY.
+                // If the currency factor received from Spy is not 0, then we can use it directly.
+                if (Rec."Currency Factor" <= 0) then
+                    GenJournalLine."Currency Factor" := Rec.Amount / Rec."Amount (LCY)"
+                else
+                    GenJournalLine."Currency Factor" := Rec."Currency Factor";
+
                 GenJournalLine.Validate("Currency Code");
             end;
 

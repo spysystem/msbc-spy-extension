@@ -16,6 +16,11 @@ page 73004 "Spy Journal Lines"
         {
             repeater(General)
             {
+                field("Currency Factor"; Rec."Currency Factor")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Currency Factor field.';
+                }
                 field("Spy Batch Id"; Rec."Spy Batch Id") { }
                 field("Spy Status"; Rec."Spy Status") { }
                 field("Account No."; Rec."Account No.")

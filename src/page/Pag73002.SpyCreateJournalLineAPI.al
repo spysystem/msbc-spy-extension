@@ -23,7 +23,7 @@ page 73002 "SpyCreateJournalLineAPI"
                 field(documentNumber; Rec."Document No.") { Caption = 'Document No.'; }
                 field(documentType; Rec.documentTypeAsText) { Caption = 'Document Type'; }
                 field(countryType; gcountryType) { Caption = 'countryType'; } //TODO: Thomas told me to change this since 10 was not long enough - yet you're not using this in the old XML.
-                //Please confirm what to do here. 
+                //Please confirm what to do here.
                 field(account; Rec."Account No.") { Caption = 'Account No.'; }
                 field(description; Rec.Description) { Caption = 'Description'; }
                 field(amount; Rec.Amount) { Caption = 'Amount'; }
@@ -34,6 +34,7 @@ page 73002 "SpyCreateJournalLineAPI"
                 field(invoiceNo; Rec."External Document No.") { Caption = 'External Document No.'; }
                 field(currency; Rec."Currency Code") { Caption = 'Currency Code'; }
                 field(amountBaseCurrency; Rec."Amount (LCY)") { Caption = 'Amount (LCY)'; }
+                field(currencyFactor; Rec."Currency Factor") { Caption = 'Currency Factor'; }
                 field(countyUSTaxAccount; Rec."County US Tax Account") { Caption = 'County US Tax Account'; }
                 field(stateUSTaxAccount; Rec."State US Tax Account") { Caption = 'State US Tax Account'; }
                 field(vatCode; Rec."VAT Code") { Caption = 'VAT Code'; }
