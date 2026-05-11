@@ -174,6 +174,11 @@ table 73090 "Spy Journal Line"
         {
             Caption = 'Created', Locked = true;
         }
+        field(73003; "Currency Factor"; Decimal)
+        {
+            Caption = 'Currency Factor';
+            DecimalPlaces = 0 : 15;
+        }
     }
     keys
     {
@@ -426,12 +431,27 @@ table 73090 "Spy Journal Line"
             GenJournalLine.Validate(Description, Rec.Description);
 
             GenJournalLine.Amount := Rec.Amount;
+            GenJournalLine."Source Currency Amount" := Rec.Amount;
 
-            if GeneralLedgerSetup."LCY Code" = Rec."Currency Code" then
-                GenJournalLine."Currency Code" := ''
+            // Blank Currency means that it is in the BC local currency, in that case we should not set currency code and currency factor on the journal line, otherwise we set it based on the value from Spy
+            if (Rec."Currency Code" = '') or (GeneralLedgerSetup."LCY Code" = Rec."Currency Code") then begin
+                GenJournalLine."Currency Code" := '';
+                GenJournalLine."Source Currency Code" := '';
+            end
             else begin
                 GenJournalLine."Currency Code" := Rec."Currency Code";
+                GenJournalLine."Source Currency Code" := Rec."Currency Code";
+
+                // If the currency factor received from Spy is 0, then we need to calculate the currency factor based on the amount and the amount in LCY.
+                // If the currency factor received from Spy is not 0, then we can use it directly.
                 GenJournalLine.Validate("Currency Code");
+                if Rec."Currency Factor" > 0 then
+                    GenJournalLine.Validate("Currency Factor", Rec."Currency Factor")
+                else
+                    if Rec."Amount (LCY)" <> 0 then
+                        GenJournalLine.Validate("Currency Factor", Rec.Amount / Rec."Amount (LCY)")
+                    else
+                        GlobalErrorTextList.Add('[ValidateCurrencyFactor] Amount (LCY) must be non-zero when Currency Factor is not provided.');
             end;
 
             /*
