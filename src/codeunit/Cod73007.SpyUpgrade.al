@@ -39,8 +39,8 @@ codeunit 73007 "SpyUpgrade"
 
 
         // Slet eventuelle CVR format records
-        if VatRegFormat.FindSet() then
-            VatRegFormat.DeleteAll();
+        //if VatRegFormat.FindSet() then
+        //    VatRegFormat.DeleteAll();
     end;
 
     /// <summary>
